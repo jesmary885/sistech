@@ -3,16 +3,27 @@
 namespace App\Http\Livewire\Productos;
 
 use App\Models\Categoria;
+use App\Models\Compra;
 use App\Models\Marca;
 use App\Models\Modelo;
+use App\Models\Movimiento;
 use App\Models\Producto;
+use App\Models\Producto_cod_barra_serial;
+use App\Models\Producto_sucursal;
 use App\Models\Proveedor;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\TemporaryUploadedFile;
+
 
 class ProductosCreate extends Component
 {
 
-    public $nombre, $serial, $cantidad, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $percepcion, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores;
+    use WithFileUploads;
+
+    public $nombre, $fecha_actual, $serial, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $percepcion, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores;
     public $modelos = [];
     public $marca_id = "", $modelo_id = "", $categoria_id = "", $proveedor_id ="";
 
@@ -41,40 +52,87 @@ class ProductosCreate extends Component
         $marca_select = Marca::find($value);
         $this->modelos = $marca_select->modelos;
     }
+    public function updatedFile()
+    {
+        $this->validate([
+            'file' => 'image|max:1024',
+        ]);
+    }
 
     public function save()
     {
         // $rules = $this->rules;
         // $this->validate($rules);
 
-        return 'hola';
+        $this->fecha_actual = date('Y-m-d');
+        $usuario_auth = Auth::id();
+        $total_compra = ($this->precio_entrada * $this->cantidad);
 
-        // $producto = new Producto();
-        // $producto->nombre = $this->nombre;
-        // $producto->serial = $this->serial;
-        // $producto->cantidad = $this->cantidad;
-        // $producto->cod_barra = $this->cod_barra;
-        // $producto->inventario_min = $this->inventario_min;
-        // $producto->presentacion = $this->presentacion;
-        // $producto->precio_entrada = $this->precio_entrada;
-        // $producto->precio_letal = $this->precio_letal;
-        // $producto->precio_mayor = $this->precio_mayor;
-        // $producto->percepcion = $this->percepcion;
-        // $producto->modelo_id = $this->modelo_id;
-        // $producto->categoria_id = $this->categoria_id;
-        // $producto->observaciones = $this->observaciones;
-        // $producto->tipo_garantia = $this->tipo_garantia;
-        // $producto->garantia = $this->garantia;
-        // $producto->estado = $this->estado;
-        // $producto->save();
+        $movimientos = new Movimiento();
+        $producto_sucursal = new Producto_sucursal();
+        $compras = new Compra();
+        $producto = new Producto();
+        
+        $producto->nombre = $this->nombre;
+        $producto->serial = $this->serial;
+        $producto->cantidad = $this->cantidad;
+        $producto->cod_barra = $this->cod_barra;
+        $producto->inventario_min = $this->inventario_min;
+        $producto->presentacion = $this->presentacion;
+        $producto->precio_entrada = $this->precio_entrada;
+        $producto->precio_letal = $this->precio_letal;
+        $producto->precio_mayor = $this->precio_mayor;
+        $producto->percepcion = $this->percepcion;
+        $producto->modelo_id = $this->modelo_id;
+        $producto->categoria_id = $this->categoria_id;
+        $producto->observaciones = $this->observaciones;
+        $producto->tipo_garantia = $this->tipo_garantia;
+        $producto->garantia = $this->garantia;
+        $producto->estado = $this->estado;
+        $producto->save();
 
+        if ($this->file){
 
-        // return redirect()->route('admin.productos.index');
+            $producto->imagen()->create([
+                'url' => $this->file
+            ]);
+    
+        }
+      
+        if($this->serial == '1'){
+            $producto_con_serial = new Producto_cod_barra_serial();
+            for ($i=0; $i < $this->cantidad; $i++) {
+                $producto_con_serial->serial = '';
+                $producto_con_serial->producto_id = $producto->id;
+                $$producto_con_serial->sucursal_id = '1';
+                $producto_con_serial->save();
+            }
+        }
 
-        // $this->reset(['nombre','apellido','cedula','division_id','negocio_id','region_id','email','telefono','indicador']);
+        $movimientos->fecha = $this->fecha_actual;
+        $movimientos->tipo_movimiento = 'registro y compra de producto';
+        $movimientos->cantidad = $this->cantidad;
+        $movimientos->precio = $this->precio_letal;
+        $movimientos->observacion = 'registro de producto';
+        $movimientos->producto_id = $producto ->id;
+        $movimientos->user_id = $usuario_auth;
+        $movimientos->save();
+        
+        $producto_sucursal->producto_id = $producto->id;
+        $producto_sucursal->sucursal_id = '1';
+        $producto_sucursal->cantidad = $this->cantidad;
+        $producto_sucursal->save();
 
-        // $this->emitTo('user-index','render');
-        // $this->emit('alert','Usuario registrado correctamente');
+        $compras->fecha = $this->fecha_actual;
+        $compras->total= $total_compra;
+        $compras->cantidad = $this->cantidad;
+        $compras->proveedor_id = $this->proveedor_id;
+        $compras->producto_id = $producto->id;
+        $compras->user_id = $usuario_auth;
+        $compras->save();
+
+        $this->reset(['nombre','serial','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','percepcion','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','file','marca_id']);
+        $this->emit('alert');
         
     }
 

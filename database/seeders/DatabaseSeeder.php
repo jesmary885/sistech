@@ -27,5 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SucursalSeeder::class);
         $this->call(ProductoCodBarraSerialSeeder::class);
         $this->call(ProductoSucursalSeeder::class);
+        $this->call(ProveedorSeeder::class);
     }
 }

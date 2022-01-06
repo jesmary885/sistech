@@ -54,6 +54,7 @@
         @endif
     @endif
 
+
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
 
@@ -79,6 +80,8 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -109,6 +112,16 @@
             <livewire:scripts />
         @endif
     @endif
+
+    <script>
+        livewire.on('alert', function(){
+        Swal.fire(
+            'Producto creado correctamente!',
+            '',
+            'success')
+        })
+    </script>
+
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')

@@ -40,7 +40,7 @@ class Producto extends Model
 
     //relacion 1 a 1 polimorfica
     public function imagen(){
-        return $this->morphOne('App\Models\Imagen','imageable');
+        return $this->morphMany(Imagen::class,'imageable');
     }
 
     

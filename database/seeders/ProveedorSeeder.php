@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Proveedor;
 use Illuminate\Database\Seeder;
 
 class ProveedorSeeder extends Seeder
@@ -13,6 +14,17 @@ class ProveedorSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Proveedor::create([
+            'nombre_encargado' => 'Juan Perez',
+            'nombre_proveedor' => 'v&j c.a',
+            'tipo_documento' => 'ci',
+            'nro_documento' => '444444',
+            'email' => 'vj@gmail.com',
+            'telefono' => '555555',
+            'direccion' => 'av. siempre vivas',
+            'pais_id' => '1',
+            'ciudad_id' => '1',
+            'estado_id' => '1',
+        ]);
     }
 }
