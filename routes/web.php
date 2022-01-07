@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\ModelosController;
 use App\Http\Controllers\Admin\ProveedoresController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SucursalesController;
-use App\Http\Controllers\Admin\UsuarioController;
+
 use App\Http\Controllers\Productos\ProductosController;
 
 use Illuminate\Support\Facades\Route;
@@ -40,7 +40,8 @@ Auth::routes();
 
 
 
-//Route::resource('usuarios', UsuarioController::class)->only('index')->names('admin.usuarios');
+
+
 Route::resource('roles', RoleController::class)->only('index','edit','update')->names('admin.role');
 Route::resource('clientes', ClientesController::class)->only('index','edit','update')->names('admin.clientes');
 Route::resource('proveedores', ProveedoresController::class)->only('index','edit','update')->names('admin.proveedores');

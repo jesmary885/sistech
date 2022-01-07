@@ -9,7 +9,7 @@
 
 @section('content')
     
-    @livewire('admin.usuariosCreate')
+    @livewire('admin.usuarios-create')
 @stop
 
 @section('css')
