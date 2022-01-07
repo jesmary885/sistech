@@ -191,7 +191,7 @@
             </div>
             <div class="py-12">
                 <button type="submit" class="btn btn-primary" wire:click="save">
-                    Guardar
+                    <i class="fas fa-file-download"></i> Guardar
                 </button>
             </div>
         </div>

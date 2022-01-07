@@ -24,7 +24,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.usuarios.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -57,7 +57,7 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+      
     }
 
     /**

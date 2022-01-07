@@ -23,7 +23,13 @@
                         <tbody>
                             @foreach ($productos as $producto)
                                 <tr>
-                                    <td><img class="img-rounded" width="30" height="30" src="{{$producto->imagen}}" alt=""></td>
+                                    <td>
+                                        @if ($producto->imagen)
+                                            <img class="img-rounded" width="30" height="30"  src="{{Storage::url($producto->imagen->url)}}" alt="">
+                                        @else
+                                            <img class="img-rounded" width="30" height="30"  src="https://cdn.pixabay.com/photo/2020/12/13/16/21/stork-5828727_960_720.jpg" alt="">
+                                        @endif
+                                    </td>
                                     <td>{{$producto->cod_barra}}</td>
                                     <td>{{$producto->nombre}}</td>
                                     <td>{{$producto->categoria->nombre}}</td>
@@ -31,15 +37,14 @@
                                     <td>{{$producto->precio_entrada}}</td>
                                     <td>{{$producto->precio_letal}}</td>
                                     <td width="10px">
-                                        <a href="#" class="btn btn-primary btn-sm">Agregar</a>
+                                        <a href="#" class="btn btn-info btn-sm"><i class="fas fa-plus-square"></i></a>
                                     </td>
                                     <td width="10px">
-                                        <a href="#" class="btn btn-primary btn-sm">Editar</a>
+                                        <a href="#" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
                                     </td>
                                     <td width="10px">
-                                        <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
+                                        <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                                     </td>
-                                    
                                 </tr>
                             @endforeach
                         </tbody>

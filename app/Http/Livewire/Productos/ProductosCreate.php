@@ -67,10 +67,6 @@ class ProductosCreate extends Component
         $this->fecha_actual = date('Y-m-d');
         $usuario_auth = Auth::id();
         $total_compra = ($this->precio_entrada * $this->cantidad);
-
-        $movimientos = new Movimiento();
-        $producto_sucursal = new Producto_sucursal();
-        $compras = new Compra();
         $producto = new Producto();
         
         $producto->nombre = $this->nombre;
@@ -92,50 +88,43 @@ class ProductosCreate extends Component
         $producto->save();
 
         if ($this->file){
-
+            $url = Storage::put('public/productos', $this->file);
             $producto->imagen()->create([
-                'url' => $this->file
+                'url' => $url
             ]);
-    
         }
-      
         if($this->serial == '1'){
-            $producto_con_serial = new Producto_cod_barra_serial();
             for ($i=0; $i < $this->cantidad; $i++) {
-                $producto_con_serial->serial = '';
-                $producto_con_serial->producto_id = $producto->id;
-                $$producto_con_serial->sucursal_id = '1';
-                $producto_con_serial->save();
+                $producto->producto_cod_barra_serials()->create([
+                    'serial' => '',
+                    'sucursal_id' => '1'
+                ]);
             }
         }
-
-        $movimientos->fecha = $this->fecha_actual;
-        $movimientos->tipo_movimiento = 'registro y compra de producto';
-        $movimientos->cantidad = $this->cantidad;
-        $movimientos->precio = $this->precio_letal;
-        $movimientos->observacion = 'registro de producto';
-        $movimientos->producto_id = $producto ->id;
-        $movimientos->user_id = $usuario_auth;
-        $movimientos->save();
-        
-        $producto_sucursal->producto_id = $producto->id;
-        $producto_sucursal->sucursal_id = '1';
-        $producto_sucursal->cantidad = $this->cantidad;
-        $producto_sucursal->save();
-
-        $compras->fecha = $this->fecha_actual;
-        $compras->total= $total_compra;
-        $compras->cantidad = $this->cantidad;
-        $compras->proveedor_id = $this->proveedor_id;
-        $compras->producto_id = $producto->id;
-        $compras->user_id = $usuario_auth;
-        $compras->save();
-
+        $producto->movimientos()->create([
+            'fecha' => $this->fecha_actual,
+            'tipo_movimiento' => 'registro y compra de producto',
+            'cantidad' => $this->cantidad,
+            'precio' => $this->precio_letal,
+            'observacion' => 'registro de producto',
+            'user_id' => $usuario_auth
+        ]);
+        $producto->compras()->create([
+            'fecha' => $this->fecha_actual,
+            'total' => $total_compra,
+            'cantidad' => $this->cantidad,
+            'proveedor_id' => $this->proveedor_id,
+            'user_id' => $usuario_auth
+        ]);
+        $producto->sucursals()->attach([
+            '1' => [
+                'cantidad' => $this->cantidad
+            ]
+        ]);
         $this->reset(['nombre','serial','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','percepcion','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','file','marca_id']);
         $this->emit('alert');
-        
+        return redirect()->route('productos.productos.index');
     }
-
     public function render()
     {
         return view('livewire.productos.productos-create');

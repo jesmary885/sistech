@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
             'nro_documento' => '17591985',
             'ciudad_id' => '1',
             'estado_id' => '1',
-        ]);
+        ])->assignRole('Admin');
+        
     }
 }
