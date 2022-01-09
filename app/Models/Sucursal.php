@@ -24,4 +24,8 @@ class Sucursal extends Model
     public function producto_cod_barra_serials(){
         return $this->hasMany(Producto_cod_barra_serial::class);
     }
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
 }

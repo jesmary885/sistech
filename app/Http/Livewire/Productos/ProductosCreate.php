@@ -11,6 +11,7 @@ use App\Models\Producto;
 use App\Models\Producto_cod_barra_serial;
 use App\Models\Producto_sucursal;
 use App\Models\Proveedor;
+use App\Models\Sucursal;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -25,7 +26,7 @@ class ProductosCreate extends Component
 
     public $nombre, $fecha_actual, $serial, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $percepcion, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores;
     public $modelos = [];
-    public $marca_id = "", $modelo_id = "", $categoria_id = "", $proveedor_id ="";
+    public $marca_id = "", $sucursal_id = "" ,$modelo_id = "", $categoria_id = "", $proveedor_id ="";
 
 
     // protected $rules = [
@@ -42,9 +43,12 @@ class ProductosCreate extends Component
 
  
     public function mount(){
+
+    
         $this->marcas=Marca::all();
         $this->categorias=Categoria::all();
         $this->proveedores=Proveedor::all();
+        $this->sucursals=Sucursal::all();
     }
 
     public function updatedMarcaId($value)
@@ -97,7 +101,7 @@ class ProductosCreate extends Component
             for ($i=0; $i < $this->cantidad; $i++) {
                 $producto->producto_cod_barra_serials()->create([
                     'serial' => '',
-                    'sucursal_id' => '1'
+                    'sucursal_id' => $this->sucursal_id
                 ]);
             }
         }
@@ -117,13 +121,13 @@ class ProductosCreate extends Component
             'user_id' => $usuario_auth
         ]);
         $producto->sucursals()->attach([
-            '1' => [
+            $this->sucursal_id => [
                 'cantidad' => $this->cantidad
             ]
         ]);
         $this->reset(['nombre','serial','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','percepcion','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','file','marca_id']);
-        $this->emit('alert');
-        return redirect()->route('productos.productos.index');
+        $this->emit('alert','Producto creado correctamente');
+  
     }
     public function render()
     {

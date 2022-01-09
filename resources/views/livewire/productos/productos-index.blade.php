@@ -36,8 +36,12 @@
                                     <td>{{$producto->cantidad}}</td>
                                     <td>{{$producto->precio_entrada}}</td>
                                     <td>{{$producto->precio_letal}}</td>
+                                   
                                     <td width="10px">
                                         <a href="#" class="btn btn-info btn-sm"><i class="fas fa-plus-square"></i></a>
+                                    </td>
+                                    <td width="10px">
+                                        <a href="#" class="btn btn-info btn-sm"> <i class="fas fa-sitemap"></i></a>
                                     </td>
                                     <td width="10px">
                                         <a href="#" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>

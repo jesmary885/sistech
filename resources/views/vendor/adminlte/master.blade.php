@@ -114,9 +114,9 @@
     @endif
 
     <script>
-        livewire.on('alert', function(){
+        livewire.on('alert', function(ms){
         Swal.fire(
-            'Producto creado correctamente!',
+            ms,
             '',
             'success')
         })

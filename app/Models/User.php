@@ -28,7 +28,10 @@ class User extends Authenticatable
         'tipo_documento',
         'nro_documento',
         'ciudad_id',
-        'estado_id'
+        'estado_id',
+        'estado',
+        'sucursal_id',
+        'limitacion'
     ];
 
     /**
@@ -57,6 +60,9 @@ class User extends Authenticatable
 
     public function estado(){
         return $this->belongsTo(Estado::class);
+    }
+    public function sucursal(){
+        return $this->belongsTo(sucursal::class);
     }
 
 

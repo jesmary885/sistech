@@ -25,11 +25,6 @@
                                     <td width="10px">
                                         <a href="#" class="btn btn-info btn-sm"><i class="fas fa-user-edit"></i></a>
                                     </td>
-                                    <td width="10px">
-                                        <a href="#" class="btn btn-success btn-sm"><i class="fas fa-user-lock"></i></a>
-                                    </td>
-
-                                    
                                 </tr>
                             @endforeach
                         </tbody>

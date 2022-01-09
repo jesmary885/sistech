@@ -4,8 +4,8 @@
 
 @section('content_header')
     
-    <a href="{{route('productos.productos.create')}}" class="btn btn-primary float-right">Crear producto</a>
-    <h1>Listado de productos</h1>
+    <a href="{{route('productos.productos.create')}}" class="btn btn-primary float-right">Nuevo producto</a>
+    <h1 class="text-lg ml-2"> <i class="fas fa-clipboard-list"></i> Listado de productos</h1>
 @stop
 
 @section('content')
