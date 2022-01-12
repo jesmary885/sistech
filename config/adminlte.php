@@ -277,7 +277,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Nueva venta',
-                    'url'  => '#',
+                    'route'  => 'ventas.ventas.index',
                 ],
                 [
                     'text'    => 'Ventas realizadas',

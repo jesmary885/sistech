@@ -78,15 +78,7 @@ class ProductosAdd extends Component
                         ->first();
         $pivot->cantidad = $cantidad_nueva_sucursal;
         $pivot->save();
-    
-                // $tabla_pivote = $this->producto->sucursals->find($this->sucursal_id)->pivot->id;
-               
-                // $seleccion = $this->producto->sucursals::where('id',$tabla_pivote);
-
-                // $seleccion->update([
-                //         'cantidad' => $cantidad_nueva_sucursal
-                // ]);
-    
+        
         //agregando compra
             $this->producto->compras()->create([
             'fecha' => $this->fecha_actual,

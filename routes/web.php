@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SucursalesController;
 
 use App\Http\Controllers\Productos\ProductosController;
-
+use App\Http\Controllers\Ventas\VentasController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -49,6 +49,7 @@ Route::resource('sucursales', SucursalesController::class)->only('index','edit',
 Route::resource('categorias', CategoriasController::class)->only('index','edit','update')->names('admin.categorias');
 Route::resource('marcas', MarcasController::class)->only('index','edit','update')->names('admin.marcas');
 Route::resource('modelos', ModelosController::class)->only('index','edit','update')->names('admin.modelos');
-Route::resource('productos', ProductosController::class)->only('index','create')->names('productos.productos');
+Route::resource('productos', ProductosController::class)->only('index','create','edit')->names('productos.productos');
+Route::resource('Ventas', VentasController::class)->only('index','edit','update')->names('ventas.ventas');
 
 

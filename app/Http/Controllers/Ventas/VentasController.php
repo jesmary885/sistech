@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Productos;
+namespace App\Http\Controllers\Ventas;
 
 use App\Http\Controllers\Controller;
-use App\Models\Producto;
 use Illuminate\Http\Request;
 
-class ProductosController extends Controller
+class VentasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        return view('productos.index');
+        return view('ventas.index');
     }
 
     /**
@@ -25,7 +24,7 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        return view('productos.create');
+        //
     }
 
     /**
@@ -56,9 +55,9 @@ class ProductosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit($id)
     {
-        return view('productos.serial',compact('producto'));
+        //
     }
 
     /**
