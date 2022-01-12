@@ -18,6 +18,9 @@ class CreateVentasTable extends Migration
             $table->timestamps();
             $table->date('fecha');
             $table->string('tipo_pago');
+            $table->string('metodo_pago');
+            $table->string('estado_entrega');
+            $table->float('descuento');
             $table->float('subtotal');
             $table->float('total');
             $table->float('devuelto_cliente');

@@ -149,15 +149,20 @@
                     <x-input-error for="categoria_id" />
                 </div>
                 <div class="w-1/4 mr-2">
-                    <select wire:model="sucursal_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value="" selected>Seleccione el almacen</option>
-                        @foreach ($sucursals as $sucursal)
-                            <option value="{{$sucursal->id}}">{{$sucursal->nombre}}</option>
-                        @endforeach
-                    </select>
+                    @if ($limitacion_sucursal)
+                        <select wire:model="sucursal_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                            <option value="" selected>Seleccione el almacen</option>
+                            @foreach ($sucursales as $sucursal)
+                                <option value="{{$sucursal->id}}">{{$sucursal->nombre}}</option>
+                            @endforeach
+                        </select>
+                    @else
+                        <input type="text" readonly value="Sucursal {{$sucursal_nombre}}" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
+                    @endif   
                     <x-input-error for="sucursal_id" />
                 </div>
                 <div class="w-1/4">
+                  
                     <select id="estado" wire:model="estado" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="estado">
                         <option value="" selected>Estado del producto</option>
                         <option value="1" selected>Habilitado</option>

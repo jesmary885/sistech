@@ -12,6 +12,7 @@ use App\Models\Producto_cod_barra_serial;
 use App\Models\Producto_sucursal;
 use App\Models\Proveedor;
 use App\Models\Sucursal;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -24,10 +25,10 @@ class ProductosCreate extends Component
 
     use WithFileUploads;
 
-    public $nombre, $fecha_actual, $serial, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $percepcion, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores;
+    public $nombre, $fecha_actual, $sucursal_nombre, $serial, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $percepcion, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores, $sucursales;
     public $modelos = [];
     public $marca_id = "", $sucursal_id = "" ,$modelo_id = "", $categoria_id = "", $proveedor_id ="";
-
+    public $limitacion_sucursal = true;
 
     // protected $rules = [
     //     'region_id' => 'required',
@@ -43,12 +44,19 @@ class ProductosCreate extends Component
 
  
     public function mount(){
-
-    
+       // $usuario_auth = Auth::id();
+        $usuario_au = User::where('id',Auth::id())->first();
+        if($usuario_au->limitacion == '1'){
+            $this->sucursales=Sucursal::all();
+        }else{
+            $this->limitacion_sucursal = false;
+            $this->sucursal_id = $usuario_au->sucursal_id;
+            $sucursal_usuario = Sucursal::where('id',$this->sucursal_id)->first();
+            $this->sucursal_nombre = $sucursal_usuario->nombre;
+        }
         $this->marcas=Marca::all();
         $this->categorias=Categoria::all();
         $this->proveedores=Proveedor::all();
-        $this->sucursals=Sucursal::all();
     }
 
     public function updatedMarcaId($value)
@@ -68,11 +76,14 @@ class ProductosCreate extends Component
         // $rules = $this->rules;
         // $this->validate($rules);
 
+        $sucursales = Sucursal::all();
+
         $this->fecha_actual = date('Y-m-d');
         $usuario_auth = Auth::id();
         $total_compra = ($this->precio_entrada * $this->cantidad);
+
+        //agregando producto en tabla productos
         $producto = new Producto();
-        
         $producto->nombre = $this->nombre;
         $producto->serial = $this->serial;
         $producto->cantidad = $this->cantidad;
@@ -90,13 +101,14 @@ class ProductosCreate extends Component
         $producto->garantia = $this->garantia;
         $producto->estado = $this->estado;
         $producto->save();
-
+        //agregando imagen de producto en tabla imagenes
         if ($this->file){
             $url = Storage::put('public/productos', $this->file);
             $producto->imagen()->create([
                 'url' => $url
             ]);
         }
+        //agregando productos si contienen serial en tabla producto_cod_barra_serials
         if($this->serial == '1'){
             for ($i=0; $i < $this->cantidad; $i++) {
                 $producto->producto_cod_barra_serials()->create([
@@ -105,6 +117,8 @@ class ProductosCreate extends Component
                 ]);
             }
         }
+
+        //registrando moviemientos en tabla movimientos
         $producto->movimientos()->create([
             'fecha' => $this->fecha_actual,
             'tipo_movimiento' => 'registro y compra de producto',
@@ -113,6 +127,8 @@ class ProductosCreate extends Component
             'observacion' => 'registro de producto',
             'user_id' => $usuario_auth
         ]);
+
+        //registrando compra en tabla compras
         $producto->compras()->create([
             'fecha' => $this->fecha_actual,
             'total' => $total_compra,
@@ -120,14 +136,26 @@ class ProductosCreate extends Component
             'proveedor_id' => $this->proveedor_id,
             'user_id' => $usuario_auth
         ]);
-        $producto->sucursals()->attach([
-            $this->sucursal_id => [
-                'cantidad' => $this->cantidad
-            ]
-        ]);
+
+        //guardando cantidades en tabla pivote entre sucursal y productos
+        foreach($sucursales as $sucursal){
+            if($sucursal->id == $this->sucursal_id){
+                $producto->sucursals()->attach([
+                    $this->sucursal_id => [
+                        'cantidad' => $this->cantidad
+                    ]
+                ]);
+            }else{
+                $producto->sucursals()->attach([
+                    $sucursal->id => [
+                        'cantidad' => 0
+                    ]
+                ]);
+            }
+        }
+        
         $this->reset(['nombre','serial','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','percepcion','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','file','marca_id']);
         $this->emit('alert','Producto creado correctamente');
-  
     }
     public function render()
     {

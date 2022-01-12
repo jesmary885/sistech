@@ -24,7 +24,7 @@ class ProductoSeeder extends Seeder
             'tipo_garantia' => 'anual',
             'garantia' => '1',
             'cantidad' => '6',
-            'serial' => 'si',
+            'serial' => '1',
             'cod_barra' => '656222',
             'estado' => 'activo',
             'percepcion' => '5',

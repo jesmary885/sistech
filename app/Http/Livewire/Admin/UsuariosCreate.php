@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Role;
 
 class UsuariosCreate extends Component
@@ -62,17 +63,18 @@ class UsuariosCreate extends Component
     {
         $rules = $this->rules;
         $this->validate($rules);
-        $nombre_concatenado = $this->name." ".$this->apellido;
 
         if($this->password == $this->password_confirm){
             $usuario = new User();
-            $usuario->name = $nombre_concatenado;
+            $usuario->name = $this->name;
+            $usuario->apellido = $this->apellido;
             $usuario->email = $this->email;
             $usuario->nro_documento = $this->documento;
             $usuario->tipo_documento = $this->tipo_documento;
             $usuario->direccion= $this->direccion;
             $usuario->telefono = $this->telefono;
             $usuario->password = Hash::make($this->password);
+            $usuario->password_cifrada = Crypt::encryptString($this->password);
             $usuario->ciudad_id = $this->ciudad_id;
             $usuario->estado_id = $this->estado_id;
             $usuario->estado = $this->estado;

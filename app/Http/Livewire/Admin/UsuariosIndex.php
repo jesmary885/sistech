@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\User;
+use Illuminate\Queue\Listener;
 Use Livewire\WithPagination;
 
 use Livewire\Component;
@@ -12,6 +13,8 @@ class UsuariosIndex extends Component
 
     use WithPagination;
     protected $paginationTheme = "bootstrap";
+
+    protected $listeners = ['render' => 'render'];
 
     public $search;
 

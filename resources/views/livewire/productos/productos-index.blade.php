@@ -6,39 +6,38 @@
             </div>
             @if ($productos->count())
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Imagen</th>
-                                <th>Codigo de Barra</th>
-                                <th>Descripcion</th>
-                                <th>Categoria</th>
-                                <th>Stock</th>
-                                <th>Precio de compra</th>
-                                <th>Precio de venta</th>
-                                <th></th>
-                                <th></th>
+                                <th class="text-center">Imagen</th>
+                                <th class="text-center">Codigo de Barra</th>
+                                <th class="text-center">Descripcion</th>
+                                <th class="text-center">Stock general</th>
+                                <th class="text-center">Precio</th>
+                         
+                  
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($productos as $producto)
                                 <tr>
-                                    <td>
+                                    <td align="center">
                                         @if ($producto->imagen)
                                             <img class="img-rounded" width="30" height="30"  src="{{Storage::url($producto->imagen->url)}}" alt="">
                                         @else
                                             <img class="img-rounded" width="30" height="30"  src="https://cdn.pixabay.com/photo/2020/12/13/16/21/stork-5828727_960_720.jpg" alt="">
                                         @endif
                                     </td>
-                                    <td>{{$producto->cod_barra}}</td>
-                                    <td>{{$producto->nombre}}</td>
-                                    <td>{{$producto->categoria->nombre}}</td>
-                                    <td>{{$producto->cantidad}}</td>
-                                    <td>{{$producto->precio_entrada}}</td>
-                                    <td>{{$producto->precio_letal}}</td>
+                                    <td class="text-center">{{$producto->cod_barra}}</td>
+                                    <td class="text-center">{{$producto->nombre}}</td>
+                                    <td class="text-center">@foreach ($sucursales as $sucursal)
+                                        {{$sucursal->nombre}} = {{$producto->sucursals->find($sucursal)->pivot->cantidad}} <br>
+                                        @endforeach</td>
+                                    <td class="text-center">{{$producto->precio_letal}}</td>
                                    
                                     <td width="10px">
-                                        <a href="#" class="btn btn-info btn-sm"><i class="fas fa-plus-square"></i></a>
+                                        @livewire('productos.productos-add', ['producto' => $producto],key($producto->id))
+        
                                     </td>
                                     <td width="10px">
                                         <a href="#" class="btn btn-info btn-sm"> <i class="fas fa-sitemap"></i></a>

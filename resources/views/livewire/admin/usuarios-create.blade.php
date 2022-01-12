@@ -81,11 +81,11 @@
    
                <div class="flex justify-between w-full mt-3 mr-2">
                     <div class="w-full mr-2">
-                        <input wire:model="password" type="password" id="password" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Contraseña">
+                        <input wire:model="password" type="text" id="password" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Contraseña">
                         <x-input-error for="password" />
                     </div>
                     <div class="w-full mr-2">
-                        <input wire:model="password_confirm" id="password_confirm" name="password_confirmation" type="password" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Repetir contraseña">
+                        <input wire:model="password_confirm" id="password_confirm" name="password_confirmation" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Repetir contraseña">
                         <x-input-error for="password_confirm" />
                     </div>
                     <div class="w-full mr-2">

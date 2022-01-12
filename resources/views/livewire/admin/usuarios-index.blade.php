@@ -23,7 +23,8 @@
                                     <td>{{$user->telefono}}</td>
                                     <td>{{$user->roles->first()->name}}</td>
                                     <td width="10px">
-                                        <a href="#" class="btn btn-info btn-sm"><i class="fas fa-user-edit"></i></a>
+                                        @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id))
+                                        {{-- <a href="#" class="btn btn-info btn-sm"><i class="fas fa-user-edit"></i></a> --}}
                                     </td>
                                 </tr>
                             @endforeach

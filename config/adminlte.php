@@ -263,6 +263,10 @@ return [
                     'text' => 'Modelos',
                     'url'  => '#',
                 ],
+                [
+                    'text' => 'Servicios',
+                    'url'  => '#',
+                ],
             ],
             
         ],
@@ -301,6 +305,10 @@ return [
                 ],
                 [
                     'text'    => 'Devolucion',
+                    'url'     => '#',
+                ],
+                [
+                    'text'    => 'Traslado',
                     'url'     => '#',
                 ],
             ],
