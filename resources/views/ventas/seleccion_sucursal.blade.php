@@ -7,8 +7,7 @@
 @stop
 
 @section('content')
-    
-    @livewire('ventas.ventas-new')
+    @livewire('ventas.ventas-seleccion-sucursal')
 @stop
 
 @section('css')
@@ -16,6 +15,5 @@
 @stop
 
 @section('js')
-
 
 @stop

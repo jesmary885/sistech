@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Ventas;
 
+use App\Models\Cliente;
 use App\Models\Producto;
 use App\Models\Sucursal;
 Use Livewire\WithPagination;
@@ -19,12 +20,18 @@ class VentasNew extends Component
     public function updatingSearch(){
         $this->resetPage();
     }
+
+
     public function render()
     {
+
+        $sucursales = Sucursal::all();
+
         $productos = Producto::where('nombre', 'LIKE', '%' . $this->search . '%')
                    ->orwhere('Cod_barra', 'LIKE', '%' . $this->search . '%')
-                    ->paginate(5);
+                    ->paginate(2);
+   
         
-        return view('livewire.ventas.ventas-new', compact('productos'));
+        return view('livewire.ventas.ventas-new', compact('productos','sucursales'));
     }
 }

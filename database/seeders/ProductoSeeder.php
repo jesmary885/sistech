@@ -26,7 +26,7 @@ class ProductoSeeder extends Seeder
             'cantidad' => '6',
             'serial' => '1',
             'cod_barra' => '656222',
-            'estado' => 'activo',
+            'estado' => '1',
             'percepcion' => '5',
             'presentacion' => 'unidad',
             'observaciones' => 'sin observaciones',

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Ventas;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sucursal;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VentasController extends Controller
 {
@@ -14,7 +17,12 @@ class VentasController extends Controller
      */
     public function index()
     {
-        return view('ventas.index');
+
+        $usuario_auth = User::where('id',Auth::id())->first();
+        $sucursal = $usuario_auth->sucursal_id;
+
+        if($usuario_auth->limitacion == '1') return view('ventas.seleccion_sucursal');
+        else return view('ventas.seleccion_producto',compact('sucursal'));
     }
 
     /**
@@ -24,7 +32,7 @@ class VentasController extends Controller
      */
     public function create()
     {
-        //
+        return view('ventas.Cart');
     }
 
     /**
@@ -55,9 +63,12 @@ class VentasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+
+
+    public function edit($sucursal)
     {
-        //
+
+        return view('ventas.seleccion_producto',compact('sucursal'));
     }
 
     /**
