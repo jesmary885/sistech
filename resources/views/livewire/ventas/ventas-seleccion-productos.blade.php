@@ -28,7 +28,7 @@
                                     ?>
                                     {{ $cantidad }}</td>
                                 <td width="10px">
-                                    @livewire('ventas.ventas-seleccion-cantidades', ['producto' => $producto,'cantidad' => $cantidad],key($producto->id))
+                                    @livewire('ventas.ventas-seleccion-cantidades', ['producto' => $producto,'sucursal' => $sucursal],key($producto->id))
                                     {{-- <a href="#" class="btn btn-info btn-sm {{$estado}}"><i class="fas fa-check"></i></a> --}}
                                 </td>
                             </tr>
@@ -40,7 +40,7 @@
                 {{ $productos->links()}}
 
                 <div class="ml-4">
-                    <a href="{{route('ventas.ventas.create')}}" class="btn btn-info">Continuar</a>
+                    <a href="{{route('ventas.ventas.show',$sucursal)}}" class="btn btn-info">Continuar</a>
                 </div>
 
             </div>

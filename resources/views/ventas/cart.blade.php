@@ -7,7 +7,8 @@
 @stop
 
 @section('content')
- @livewire('ventas.ventas-cart') 
+
+ @livewire('ventas.ventas-cart',['sucursal' => $sucursal])
 @stop
 
 @section('css')

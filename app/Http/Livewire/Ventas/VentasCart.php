@@ -8,6 +8,8 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 class VentasCart extends Component
 {
 
+    public $sucursal,$producto;
+
     protected $listeners = ['render'];
 
     public function destroy(){
@@ -23,6 +25,9 @@ class VentasCart extends Component
 
     public function render()
     {
-        return view('livewire.ventas.ventas-cart');
+
+        $sucursal = $this->sucursal;
+        $producto = $this->producto;
+        return view('livewire.ventas.ventas-cart',compact('sucursal','producto'));
     }
 }

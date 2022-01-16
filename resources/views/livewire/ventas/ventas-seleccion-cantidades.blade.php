@@ -15,6 +15,7 @@
                             <div class="flex">
                                 <div class="mr-4">
                                     <x-secondary-button 
+                                        disabled
                                         x-bind:disabled="$wire.qty <= 1"
                                         wire:loading.attr="disabled"
                                         wire:target="decrement"
@@ -37,7 +38,7 @@
                         <div class="modal-footer flex">
                             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" wire:click="close" >Cerrar</button>
                             <x-button
-                                x-bind:disabled="$wire.qty > $wire.quantity"
+                                x-bind:disabled="$wire.qty > $wire.cantidad"
                                 wire:click="addItem"
                                 wire:loading.attr="disabled"
                                 wire:target="addItem">

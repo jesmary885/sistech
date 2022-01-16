@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Ventas;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Producto_sucursal as Pivot;
 
 use Livewire\Component;
 
@@ -10,7 +11,7 @@ class VentasSeleccionCantidades extends Component
 {
 
     public $isopen = false;
-    public $producto, $cantidad;
+    public $producto, $sucursal;
     public $qty = 1;
 
     public function decrement(){
@@ -21,6 +22,12 @@ class VentasSeleccionCantidades extends Component
         $this->qty = $this->qty + 1;
     }
 
+    public function mount(){
+
+        $this->cantidad = qty_available($this->producto->id,$this->sucursal);
+    }
+
+
     public function addItem(){
         Cart::add([ 'id' => $this->producto->id, 
                     'name' => $this->producto->nombre, 
@@ -29,11 +36,12 @@ class VentasSeleccionCantidades extends Component
                     'weight' => 0,
                 ]);
 
-         $this->cantidad = qty_available($this->producto->id);
+         $this->cantidad = qty_available($this->producto->id,$this->sucursal);
 
         $this->reset('qty');
+        $this->isopen = false;
 
-        $this->emitTo('ventas.ventas-seleccion-cantidades', 'render');
+    
     }
 
     public function open()
@@ -49,6 +57,8 @@ class VentasSeleccionCantidades extends Component
 
     public function render()
     {
+
+        
         return view('livewire.ventas.ventas-seleccion-cantidades');
     }
 }

@@ -1,16 +1,17 @@
 <div class="container py-8">
     <section class="bg-white rounded-lg shadow-lg p-6 text-gray-700">
-        <h1 class="text-lg font-semibold mb-6">CARRO DE COMPRAS</h1>
+        <h1 class="text-lg font-semibold mb-6">CARRO DE VENTA</h1>
 
         @if (Cart::count())
         
             <table class="table-auto w-full">
                 <thead>
                     <tr>
+                        <th class="text-center">Precio</th>
                         <th></th>
-                        <th>Precio</th>
-                        <th>Cant</th>
-                        <th>Total</th>
+                        <th class="text-center">Cantidad</th>
+                       
+                        <th class="text-center">Total</th>
                     </tr>
                 </thead>
 
@@ -19,31 +20,21 @@
                     @foreach (Cart::content() as $item)
                         
                         <tr>
-                            <td>
-                                <div class="flex">
-                                    {{-- <img class="h-15 w-20 object-cover mr-4" src="{{ $item->options->image }}" alt=""> --}}
-                                    <div>
-                                        <p class="font-bold">{{$item->name}}</p>
-                                    </div>
-                                </div>
-                            </td>
-
                             <td class="text-center">
                                 <span> {{ $item->price }}</span>
-                                <a class="ml-6 cursor-pointer hover:text-red-600"
+                            </td>
+                            <td class="text-center">
+                                <a class="ml-12 cursor-pointer hover:text-red-600"
                                     wire:click="delete('{{$item->rowId}}')"
                                     wire:loading.class="text-red-600 opacity-25"
                                     wire:target="delete('{{$item->rowId}}')">
                                     <i class="fas fa-trash"></i>  
                                 </a>
                             </td>
-
                             <td>
                                 <div class="flex justify-center">
                                 
-                                        {{-- @livewire('update-cart-item', ['rowId' => $item->rowId], key($item->rowId)) --}}
-
-               
+                                        @livewire('ventas.update-cart-item', ['rowId' => $item->rowId, 'sucursal' => $sucursal, 'producto' => $item->id], key($item->rowId))
                                 </div>
                             </td>
 
@@ -60,7 +51,7 @@
             <a class="text-sm cursor-pointer hover:underline mt-3 inline-block" 
                 wire:click="destroy">
                 <i class="fas fa-trash"></i>
-                Borrar carrito de compras
+                Borrar venta entera
             </a>
 
         @else
