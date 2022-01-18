@@ -8,13 +8,12 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 class UpdateCartItem extends Component
 {
 
-    public $rowId, $qty, $quantity, $sucursal,$producto;
+    public $rowId, $qty, $quantity, $sucursal,$producto, $quantityt;
 
     public function mount(){
         $item = Cart::get($this->rowId);
         $this->qty = $item->qty;
-
-        $this->quantity = qty_available($this->producto,$this->sucursal);
+        $this->quantity = quantity($this->producto,$this->sucursal);
     }
 
     public function decrement(){

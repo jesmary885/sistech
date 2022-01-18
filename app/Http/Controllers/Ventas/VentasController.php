@@ -41,9 +41,14 @@ class VentasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+      
+    }
+
+    public function facturacion($sucursal)
+    {
+        return view('ventas.facturacion',compact('sucursal'));
     }
 
     /**
@@ -78,9 +83,8 @@ class VentasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update($id){
+
     }
 
     /**

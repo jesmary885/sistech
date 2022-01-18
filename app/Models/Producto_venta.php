@@ -16,7 +16,7 @@ class Producto_venta extends Model
         return $this->belongsTo(Venta::class);
     }
 
-    public function producto_cod_barra_serial(){
-        return $this->belongsTo(Producto_cod_barra_serial::class);
+    public function producto(){
+        return $this->belongsTo(Producto::class);
     }
 }

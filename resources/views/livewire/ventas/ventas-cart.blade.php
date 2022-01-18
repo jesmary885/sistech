@@ -1,25 +1,27 @@
-<div class="container py-8">
+<div class="container py-4">
     <section class="bg-white rounded-lg shadow-lg p-6 text-gray-700">
-        <h1 class="text-lg font-semibold mb-6">CARRO DE VENTA</h1>
+        <h1 class="text-lg text-gray-600 font-semibold mb-6">DETALLES DE LA VENTA</h1>
 
         @if (Cart::count())
         
             <table class="table-auto w-full">
                 <thead>
                     <tr>
+                        <th class="text-center">Producto</th>
                         <th class="text-center">Precio</th>
                         <th></th>
                         <th class="text-center">Cantidad</th>
-                       
                         <th class="text-center">Total</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-                    @foreach (Cart::content() as $item)
-                        
+                    @foreach (Cart::content() as $item)  
                         <tr>
+                            <td class="text-center">
+                                <span> {{ $item->name }}</span>
+                            </td>
                             <td class="text-center">
                                 <span> {{ $item->price }}</span>
                             </td>
@@ -33,25 +35,21 @@
                             </td>
                             <td>
                                 <div class="flex justify-center">
-                                
-                                        @livewire('ventas.update-cart-item', ['rowId' => $item->rowId, 'sucursal' => $sucursal, 'producto' => $item->id], key($item->rowId))
+                                    @livewire('ventas.update-cart-item', ['rowId' => $item->rowId, 'sucursal' => $sucursal, 'producto' => $item->id], key($item->rowId))
                                 </div>
                             </td>
-
                             <td class="text-center">
                              {{$item->price * $item->qty}}
                             </td>
                         </tr>
-
                     @endforeach
-
                 </tbody>
             </table>
 
             <a class="text-sm cursor-pointer hover:underline mt-3 inline-block" 
                 wire:click="destroy">
                 <i class="fas fa-trash"></i>
-                Borrar venta entera
+                Borrar todos los productos
             </a>
 
         @else
@@ -71,18 +69,26 @@
         
         <div class="bg-white rounded-lg shadow-lg px-6 py-4 mt-4">
             <div class="flex justify-between items-center">
+                <div class="flex">
+
+                    <div>
+                        <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn mr-2 btn-primary"><i class="fas fa-undo-alt"></i> Regresar</a>
+                    </div>
+
+                    <x-button-enlace href="{{route('facturacion',$sucursal)}}">
+                        Continuar
+                    </x-button-enlace>
+
+                    
+                </div>
                 <div>
                     <p class="text-gray-700">
                         <span class="font-bold text-lg">Total:</span>
-                        USD {{Cart::subTotal()}}
+                        S/ {{Cart::subTotal()}}
                     </p>
                 </div>
 
-                <div>
-                    <x-button-enlace href="#">
-                        Continuar
-                    </x-button-enlace>
-                </div>
+                
             </div>
         </div>
 

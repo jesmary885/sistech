@@ -39,8 +39,8 @@
             <div class="flex card-footer">
                 {{ $productos->links()}}
 
-                <div class="ml-4">
-                    <a href="{{route('ventas.ventas.show',$sucursal)}}" class="btn btn-info">Continuar</a>
+                <div class="ml-2">
+                    <a href="{{route('ventas.ventas.show',$sucursal)}}" class="btn btn-primary">Continuar</a>
                 </div>
 
             </div>

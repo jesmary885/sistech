@@ -33,6 +33,11 @@ class Producto extends Model
         return $this->hasMany(Movimiento::class);
     }
 
+    public function producto_ventas(){
+        return $this->hasMany(Producto_venta::class);
+    }
+
+
     //Relacion muchos a muchos
     public function sucursals(){
         return $this->belongsToMany(Sucursal::class)->withPivot('cantidad', 'id', 'producto_id');;

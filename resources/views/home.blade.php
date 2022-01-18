@@ -8,9 +8,18 @@
 
 @section('content')
 
+{{-- <div class="flex bg-indigo-500 ">
+  <h1 class="text-xl text-sky-600 font-bold mt-6">
+    <i class="fas fa-columns"></i> Tablero 
+  </h1>
+  <p class="text-sm text-gray-600 font-semibold mt-10 ml-2">
+    Panel de control
+  </p>
+
+</div> --}}
 
 
-<div class="row">
+<div class="row mt-4">
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-info">

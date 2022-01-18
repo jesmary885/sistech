@@ -9,7 +9,7 @@
                      <i class="far fa-address-card mt-3 mr-1"></i>
                    <h2 class="text-lg inline mt-2 underline decoration-gray-400"> Información personal</h2>
                </div>
-               <div class="flex mt-2 ustify-between w-full">
+               <div class="flex mt-2 justify-between w-full">
                    <div class="w-full mr-2">
                      <select wire:model="tipo_documento" id="tipo_documento" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_documento">
                             <option value="" selected>Tipo de documento</option>

@@ -26,6 +26,32 @@ class ClienteSeeder extends Seeder
             'ciudad_id' => '1',
             'estado_id' => '1',
         ]);
+
+        Cliente::create([
+            'nombre' => 'Patria',
+            'apellido' => 'Perez',
+            'email' => 'patricia@gmail.com',
+            'nro_documento' => '12345855',
+            'tipo_documento' => '1',
+            'telefono' => '0415266877',
+            'direccion' => 'Avenida francisco de miranda calle 8',
+            'pais_id' => '1',
+            'ciudad_id' => '1',
+            'estado_id' => '1',
+        ]);
+
+        Cliente::create([
+            'nombre' => 'Pedro',
+            'apellido' => 'Perez',
+            'email' => 'pedro@gmail.com',
+            'nro_documento' => '12345',
+            'tipo_documento' => '1',
+            'telefono' => '041526687447',
+            'direccion' => 'Avenida francisco de miranda calle 8',
+            'pais_id' => '1',
+            'ciudad_id' => '1',
+            'estado_id' => '1',
+        ]);
         
     }
 }
