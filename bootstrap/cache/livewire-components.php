@@ -1,0 +1,17 @@
+<?php return array (
+  'admin.usuarios-create' => 'App\\Http\\Livewire\\Admin\\UsuariosCreate',
+  'admin.usuarios-edit' => 'App\\Http\\Livewire\\Admin\\UsuariosEdit',
+  'admin.usuarios-index' => 'App\\Http\\Livewire\\Admin\\UsuariosIndex',
+  'productos.productos-add' => 'App\\Http\\Livewire\\Productos\\ProductosAdd',
+  'productos.productos-add-serial' => 'App\\Http\\Livewire\\Productos\\ProductosAddSerial',
+  'productos.productos-create' => 'App\\Http\\Livewire\\Productos\\ProductosCreate',
+  'productos.productos-index' => 'App\\Http\\Livewire\\Productos\\ProductosIndex',
+  'productos.productos-serial' => 'App\\Http\\Livewire\\Productos\\ProductosSerial',
+  'ventas.update-cart-item' => 'App\\Http\\Livewire\\Ventas\\UpdateCartItem',
+  'ventas.venta-facturacion' => 'App\\Http\\Livewire\\Ventas\\VentaFacturacion',
+  'ventas.ventas-cart' => 'App\\Http\\Livewire\\Ventas\\VentasCart',
+  'ventas.ventas-new' => 'App\\Http\\Livewire\\Ventas\\VentasNew',
+  'ventas.ventas-seleccion-cantidades' => 'App\\Http\\Livewire\\Ventas\\VentasSeleccionCantidades',
+  'ventas.ventas-seleccion-productos' => 'App\\Http\\Livewire\\Ventas\\VentasSeleccionProductos',
+  'ventas.ventas-seleccion-sucursal' => 'App\\Http\\Livewire\\Ventas\\VentasSeleccionSucursal',
+);

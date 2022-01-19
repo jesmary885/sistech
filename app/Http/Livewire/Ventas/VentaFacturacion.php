@@ -8,6 +8,12 @@ use App\Models\Venta;
 use Facade\FlareClient\Http\Client;
 use Gloudemans\Shoppingcart\Facades\Cart;
 Use Livewire\WithPagination;
+use Barryvdh\DomPDF\Facade;
+use Barryvdh\DomPDF\ServiceProvider;
+use PDF;
+
+use Illuminate\Http\Request;
+
 
 use Livewire\Component;
 
@@ -87,6 +93,28 @@ class VentaFacturacion extends Component
             $movimiento->save();
             discount($item,$this->sucursal);
         }
-        cart::destroy();
+      
+        $data = [
+              'cliente_nombre' => $this->client->nombre." ".$this->client->apellido,
+              'cliente_documento' =>$this->client->nro_documento,
+              'cliente_telefono' =>$this->client->telefono,
+              'usuario' => auth()->user()->name." ".auth()->user()->apellido,
+              'fecha_actual' => $fecha_actual,
+              'venta_nro' => $venta->id,
+              'collection' => Cart::content(),
+              'subtotal' => Cart::subtotal()
+          ];
+    
+         $pdf = PDF::loadView('ventas.FacturaContado',$data)->output();
+          
+         cart::destroy();
+       
+       return response()->streamDownload(
+        fn () => print($pdf),
+        "filename.pdf"
+        );
+
+       
+        
     }
 }
