@@ -25,7 +25,7 @@ class ProductosCreate extends Component
 
     use WithFileUploads;
 
-    public $nombre, $fecha_actual, $sucursal_nombre, $serial, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $percepcion, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores, $sucursales;
+    public $nombre, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores, $sucursales;
     public $modelos = [];
     public $marca_id = "", $sucursal_id = "" ,$modelo_id = "", $categoria_id = "", $proveedor_id ="";
     public $limitacion_sucursal = true;
@@ -85,7 +85,6 @@ class ProductosCreate extends Component
         //agregando producto en tabla productos
         $producto = new Producto();
         $producto->nombre = $this->nombre;
-        $producto->serial = $this->serial;
         $producto->cantidad = $this->cantidad;
         $producto->cod_barra = $this->cod_barra;
         $producto->inventario_min = $this->inventario_min;
@@ -93,7 +92,6 @@ class ProductosCreate extends Component
         $producto->precio_entrada = $this->precio_entrada;
         $producto->precio_letal = $this->precio_letal;
         $producto->precio_mayor = $this->precio_mayor;
-        $producto->percepcion = $this->percepcion;
         $producto->modelo_id = $this->modelo_id;
         $producto->categoria_id = $this->categoria_id;
         $producto->observaciones = $this->observaciones;
@@ -109,14 +107,14 @@ class ProductosCreate extends Component
             ]);
         }
         //agregando productos si contienen serial en tabla producto_cod_barra_serials
-        if($this->serial == '1'){
-            for ($i=0; $i < $this->cantidad; $i++) {
-                $producto->producto_cod_barra_serials()->create([
-                    'serial' => '',
-                    'sucursal_id' => $this->sucursal_id
-                ]);
-            }
-        }
+        // if($this->serial == '1'){
+        //     for ($i=0; $i < $this->cantidad; $i++) {
+        //         $producto->producto_cod_barra_serials()->create([
+        //             'serial' => '',
+        //             'sucursal_id' => $this->sucursal_id
+        //         ]);
+        //     }
+        // }
 
         //registrando moviemientos en tabla movimientos
         $producto->movimientos()->create([
@@ -154,7 +152,7 @@ class ProductosCreate extends Component
             }
         }
         
-        $this->reset(['nombre','serial','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','percepcion','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','file','marca_id']);
+        $this->reset(['nombre','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','file','marca_id']);
         $this->emit('alert','Producto creado correctamente');
     }
     public function render()

@@ -1,4 +1,4 @@
-<div class="container py-8 grid grid-cols-5 gap-6">
+<div x-data="{ tipo_pago: @entangle('siguiente_venta'), tipo_pago: @entangle('siguiente_venta')  }" class="container py-8 grid grid-cols-5 gap-6">
     <div class="col-span-3">
 
         <div class="bg-white rounded-lg shadow mb-2 pb-2">
@@ -45,8 +45,27 @@
            
         </div>
 
-        <div class="bg-white rounded-lg shadow mt-2 w-full py-4">
+            
+        <div  class="bg-white rounded-lg shadow mt-2 w-full py-4">
+
             <div class="flex justify-between w-full h-full">
+                <div class="ml-2 mr-2 w-full">
+                    <select id="estado_entrega" wire:model="estado_entrega" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
+                        <option value="" selected>Seleccione el estado de entrega</option>
+                        <option value="1">Entregado</option>
+                        <option value="2">Por entregar</option>
+                    </select>
+                    <x-input-error for="estado_entrega" />
+                </div>
+                <div class="mr-2 w-full">
+                    <div class="w-full mr-2">
+                        <input wire:model="descuento" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Descuento en venta %">
+                        <x-input-error for="descuento" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between w-full h-full mt-2">
                 <div class="ml-2 mr-2 w-full">
                     <select id="metodo_pago" wire:model="metodo_pago" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
                         <option value="" selected>Seleccione el metodo de pago</option>
@@ -65,6 +84,15 @@
                     <x-input-error for="tipo_pago" />
                 </div>
             </div>
+
+            <div class="w-full hidden" :class="{'hidden': tipo_pago != 2}">
+                    <div class="w-1/4 m-2">
+                        <input wire:model="pago_cliente" type="text" class="w-full px-4 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Total pagado">
+                        <x-input-error for="pago_cliente" />
+                    </div>
+            </div>
+
+
         </div>
 
         <div class="flex">
@@ -74,10 +102,28 @@
             <x-button
                 wire:loading.attr="disabled"
                 wire:target="save"
-                class="mt-6 mb-4" 
+                class="mt-6 mb-4 mr-2" 
                 wire:click="save">
                 Facturar
             </x-button>
+            <div :class="{'hidden': siguiente_venta != 1}">
+                <x-button
+                wire:target="save"
+                class="mt-6 mb-4 mr-2 hidden" 
+                wire:click="nueva_venta">
+                Nueva venta
+            </x-button>
+
+            <x-button
+             
+                wire:target="save"
+                class="mt-6 mb-4 hidden" 
+                wire:click="inicio">
+                Inicio
+            </x-button>
+
+            </div>
+            
             
         </div>
 
@@ -123,19 +169,44 @@
 
             <div class="text-gray-700">
                 <p class="flex justify-between items-center">
-                    Subtotal
+                    Total parcial
                     <span class="font-semibold">S/ {{Cart::subtotal()}}</span>
+                </p>
+                <p class="flex justify-between items-center">
+                    Descuento
+                    {{$descuento_total = (Cart::subtotal() * $this->descuento) / 100}}
+                    <span class="font-semibold">S/ {{$descuento_total}}</span>
+                </p>
+                <p class="flex justify-between items-center">
+                    Subtotal menos descuento
+                    <span class="font-semibold">S/ {{Cart::subtotal() - $descuento_total}}</span>
                 </p>
                 <p class="flex justify-between items-center">
                     IVA (15%)
                     <span class="font-semibold">
-                    S/ {{Cart::subtotal() * (0.15)}}
+                    S/ {{(Cart::subtotal() - $descuento_total) * (0.15)}}
                     </span>
                 </p>
+                <div class="hidden" :class="{'hidden': tipo_pago != 2}">
+                    <hr class="mt-4 mb-3">
+                    <p class="flex justify-between items-center">
+                        Total pagado por el cliente
+                        <span class="font-semibold">
+                        S/ {{$pago_cliente}}
+                        </span>
+                    </p>
+                    <p class="flex justify-between items-center">
+                        Pendiente por pagar
+                        <span class="font-semibold">
+                        S/ {{((Cart::subtotal() - $descuento_total) + ((Cart::subtotal() - $descuento_total) * (0.15))) - $pago_cliente}}
+                        </span>
+                    </p>
+                </div>
+                
                 <hr class="mt-4 mb-3">
                 <p class="flex justify-between items-center font-semibold">
-                    <span class="text-lg">Total</span>
-                    S/ {{(Cart::subtotal()) + (Cart::subtotal() * (0.15))}}
+                    <span class="text-lg">Total a pagar</span>
+                    S/ {{(Cart::subtotal() - $descuento_total) + ((Cart::subtotal() - $descuento_total) * (0.15))}}
                 </p>
             </div>
         </div>

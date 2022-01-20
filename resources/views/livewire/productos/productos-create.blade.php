@@ -46,21 +46,8 @@
                     <x-input-error for="inventario_min" />
                 </div>
                 <div class="w-full">
-                    <input wire:model="percepcion" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="percepcion">
-                    <x-input-error for="percepcion" />
-                </div>
-
-            </div>
-
-            <div class="flex justify-between w-full mt-3">
-                <div class="w-1/4 mr-2">
-                    <select id="serial" wire:model="serial" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="serial">
-                        <option value="1" selected>Con seriales</option>
-                        <option value="2">Sin seriales</option>
-                    </select>
-                    <x-input-error for="serial" />
-                </div>
-                <div class="w-1/4 mr-2">
+                    {{-- <input wire:model="percepcion" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="percepcion">
+                    <x-input-error for="percepcion" /> --}}
                     <select wire:model="presentacion" id="presentacion" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="presentacion">
                         <option value="" selected>Seleccione la presentación</option>
                         <option value="1">Unidades</option>
@@ -72,8 +59,27 @@
                         <option value="7">Atados</option>
                     </select>
                     <x-input-error for="presentacion" />
-                </div> 
-                <div class="w-1/4 mr-2">
+                </div>
+
+            </div>
+
+            <div class="flex justify-between w-full mt-3">
+                <div class="w-full mr-2">
+                    {{-- <select id="serial" wire:model="serial" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="serial">
+                        <option value="1" selected>Con seriales</option>
+                        <option value="2">Sin seriales</option>
+                    </select>
+                    <x-input-error for="serial" /> --}}
+
+                    <select wire:model="categoria_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <option value="" selected>Seleccione la categoría</option>
+                        @foreach ($categorias as $categoria)
+                            <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error for="categoria_id" />
+                </div>
+                <div class="w-full mr-2">
                         <select wire:model="marca_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                             <option value="" selected>Seleccione la marca</option>
                             @foreach ($marcas as $marca)
@@ -82,7 +88,7 @@
                         </select>
                         <x-input-error for="marca_id" />
                 </div>
-                <div class="w-1/4">
+                <div class="w-full">
                         <select wire:model="modelo_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                             <option value="" selected>Seleccione el modelo</option>
                             @foreach ($modelos as $modelo)
@@ -117,20 +123,15 @@
                     <x-input-error for="garantia" />
 
                 </div>
-
-                
-
-
             </div>
       
-
             <div class="flex mt-4">
                 <i class="fas fa-truck-loading mt-3 mr-2"></i>
-                <h2 class="text-lg inline mt-2 underline decoration-gray-400">Proveedor, categoría e información de almacenamiento</h2>
+                <h2 class="text-lg inline mt-2 underline decoration-gray-400">Proveedor e información de almacenamiento</h2>
             </div>
 
             <div class="flex justify-start w-full mt-3">
-                <div class="w-1/4 mr-2">
+                <div class="w-full mr-2">
                     <select wire:model="proveedor_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                         <option value="" selected>Seleccione el proveedor</option>
                         @foreach ($proveedores as $proveedor)
@@ -139,7 +140,7 @@
                     </select>
                     <x-input-error for="proveedor_id" />
                 </div> 
-                <div class="w-1/4 mr-2">
+                {{-- <div class="w-1/4 mr-2">
                     <select wire:model="categoria_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                         <option value="" selected>Seleccione la categoría</option>
                         @foreach ($categorias as $categoria)
@@ -147,8 +148,8 @@
                         @endforeach
                     </select>
                     <x-input-error for="categoria_id" />
-                </div>
-                <div class="w-1/4 mr-2">
+                </div> --}}
+                <div class="w-full mr-2">
                     @if ($limitacion_sucursal)
                         <select wire:model="sucursal_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                             <option value="" selected>Seleccione el almacen</option>
@@ -161,7 +162,7 @@
                     @endif   
                     <x-input-error for="sucursal_id" />
                 </div>
-                <div class="w-1/4">
+                <div class="w-full">
                   
                     <select id="estado" wire:model="estado" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="estado">
                         <option value="" selected>Estado del producto</option>

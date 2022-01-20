@@ -37,9 +37,9 @@
                                         @livewire('productos.productos-add', ['producto' => $producto],key($producto->id))
         
                                     </td>
-                                    <td width="10px">
+                                    {{-- <td width="10px">
                                         <a href="{{route('productos.productos.edit',$producto)}}" class="btn btn-info btn-sm"> <i class="fas fa-sitemap"></i></a>
-                                    </td>
+                                    </td> --}}
                                     <td width="10px">
                                         <a href="#" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
                                     </td>

@@ -20,8 +20,10 @@ use Livewire\Component;
 class VentaFacturacion extends Component
 {
 
-    public $tipo_pago, $metodo_pago, $total, $decuda_cliente, $client;
-    public $sucursal,$cliente_select;
+    public $tipo_pago = 1;
+    public $metodo_pago, $total, $client;
+    public $sucursal,$cliente_select, $pago_cliente, $deuda_cliente, $descuento, $estado_entrega;
+    public $siguiente_venta = 0;
 
     use WithPagination;
     protected $paginationTheme = "bootstrap";
@@ -36,6 +38,14 @@ class VentaFacturacion extends Component
     public function updatingSearch(){
         $this->resetPage();
     }
+
+    public function updatedTipoPago($value){
+        if ($value == 1) {
+            $this->resetValidation([
+                'deuda_cliente', 'pago_cliente'
+            ]);
+        }
+    } 
 
     public function render()
     {
@@ -62,7 +72,8 @@ class VentaFacturacion extends Component
         $rules = $this->rules;
         $this->validate($rules);
         $user_auth =  auth()->user()->id;
-        $total_venta = (Cart::subtotal() * 0.15) + Cart::subtotal();
+        $descuento_total = (Cart::subtotal() * $this->descuento) / 100;
+        $total_venta = ((Cart::subtotal() * 0.15) + Cart::subtotal()) - $descuento_total;
         $fecha_actual = date('Y-m-d');
 
         $venta = new Venta();
@@ -71,9 +82,19 @@ class VentaFacturacion extends Component
         $venta->fecha = $fecha_actual;
         $venta->tipo_pago = $this->tipo_pago;
         $venta->metodo_pago = $this->metodo_pago;
+        if ($this->tipo_pago == "2"){
+            $venta->total_pagado_cliente = $this->pago_cliente;
+            $venta->deuda_cliente = $total_venta - $this->pago_cliente;
+        }
+        else{
+            $venta->total_pagado_cliente = $total_venta;
+            $venta->deuda_cliente = "0";
+        }
         $venta->subtotal = Cart::subtotal();
         $venta->total = $total_venta;
         $venta->sucursal_id = $this->sucursal;
+        $venta->estado_entrega = $this->estado_entrega;
+        $venta->descuento = $this->descuento;
         $venta->save();
 
         foreach (Cart::content() as $item) {
@@ -102,6 +123,8 @@ class VentaFacturacion extends Component
               'fecha_actual' => $fecha_actual,
               'venta_nro' => $venta->id,
               'collection' => Cart::content(),
+              'estado_entrega' => $this->estado_entrega,
+              'descuento' => $this->descuento,
               'subtotal' => Cart::subtotal()
           ];
     
@@ -109,12 +132,19 @@ class VentaFacturacion extends Component
           
          cart::destroy();
        
-       return response()->streamDownload(
-        fn () => print($pdf),
+        return response()->streamDownload(
+         fn () => print($pdf),
         "filename.pdf"
-        );
+         );
 
-       
+         $this->siguiente_venta = '1';
+    }
+
+    public function nueva_venta(){
+        return redirect()->route('ventas.ventas.index');
+    }
+
+    public function inicio(){
         
     }
 }
