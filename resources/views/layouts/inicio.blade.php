@@ -26,6 +26,76 @@
     {{--JQuery--}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script>
+        * {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+.login {
+  width: 320px;
+  height: 450px;
+  border: 1px solid #CCC;
+  background: url(https://images.pexels.com/photos/957061/milky-way-starry-sky-night-sky-star-957061.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) center center no-repeat;
+  background-size: cover;
+  margin: 30px auto;
+  border-radius: 20px;
+}
+.login .form {
+  width: 100%;
+  height: 100%;
+  padding: 15px 25px;
+}
+.login .form h2 {
+  color: #FFF;
+  text-align: center;
+  font-weight: normal;
+  font-size: 18px;
+  margin-top: 60px;
+  margin-bottom: 80px;
+}
+
+.login .form img{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    border: solid 3px white;
+    overflow:hidden;
+    margin-left: auto; 
+
+margin-right: auto;
+
+  opacity:0.4;
+
+ 
+}
+.login .form input {
+  width: 100%;
+  height: 40px;
+  margin-top: 20px;
+  background: rgba(255,255,255,.5);
+  border: 1px solid rgba(255,255,255,.1);
+  padding: 0 15px;
+  color: #FFF;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.login .form input:focus {
+  border: 1px solid rgba(255,255,255,.8);
+  outline: none;
+}
+::-webkit-input-placeholder {
+    color: #aa2828;
+}
+.login .form input.submit {
+  background: rgba(255,255,255,.9);
+  color: #444;
+  font-size: 15px;
+  margin-top: 40px;
+  font-weight: bold;
+}
+
+    </script>
+
 </head>
 <body class="w-full">
 <div id="app">

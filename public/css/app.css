@@ -474,6 +474,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .m-0 {
   margin: 0px;
 }
+.m-2 {
+  margin: 0.5rem;
+}
 .m-auto {
   margin: auto;
 }

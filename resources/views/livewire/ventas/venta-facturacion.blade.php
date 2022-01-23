@@ -1,4 +1,4 @@
-<div x-data="{ tipo_pago: @entangle('siguiente_venta'), tipo_pago: @entangle('siguiente_venta')  }" class="container py-8 grid grid-cols-5 gap-6">
+<div x-data="{ tipo_pago: @entangle('tipo_pago'),siguiente_venta: @entangle('siguiente_venta')}" class="container py-8 grid grid-cols-5 gap-6">
     <div class="col-span-3">
 
         <div class="bg-white rounded-lg shadow mb-2 pb-2">
@@ -12,7 +12,7 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Documento</th>
-                                <th> <a href="#" class="btn btn-primary btn-sm float-right"><i class="fas fa-user-plus"></i></a> </th>
+                                <th>@livewire('admin.clientes.clientes-create',['vista' => "ventas"])</th>
         
                             </tr>
                         </thead>
@@ -95,7 +95,7 @@
 
         </div>
 
-        <div class="flex">
+        <div class="flex" :class="{'hidden': siguiente_venta != 0}">
             <div class="mr-2">
                 <a href="{{route('ventas.ventas.show',$sucursal)}}" class="btn mt-6 mb-4 btn-primary"><i class="fas fa-undo-alt"></i> Regresar</a>
             </div>
@@ -104,27 +104,24 @@
                 wire:target="save"
                 class="mt-6 mb-4 mr-2" 
                 wire:click="save">
+                <i class="fas fa-file-invoice mr-1"></i>
                 Facturar
             </x-button>
-            <div :class="{'hidden': siguiente_venta != 1}">
-                <x-button
-                wire:target="save"
-                class="mt-6 mb-4 mr-2 hidden" 
-                wire:click="nueva_venta">
-                Nueva venta
-            </x-button>
-
+        </div>
+    
+        <div :class="{'hidden': siguiente_venta != 1}">
             <x-button
-             
-                wire:target="save"
-                class="mt-6 mb-4 hidden" 
+            class="btn btn-primary mt-6 mb-4 mr-2" 
+            wire:click="nueva_venta">
+            <i class="fas fa-cart-plus"></i>
+            Nueva Venta
+        </x-button>
+            <x-button
+                class="btn btn-primary mt-6 mb-4 mr-2" 
                 wire:click="inicio">
-                Inicio
+                <i class="fas fa-fast-backward"></i>
+                Ir a inicio
             </x-button>
-
-            </div>
-            
-            
         </div>
 
     </div>
@@ -187,6 +184,8 @@
                     S/ {{(Cart::subtotal() - $descuento_total) * (0.15)}}
                     </span>
                 </p>
+
+
                 <div class="hidden" :class="{'hidden': tipo_pago != 2}">
                     <hr class="mt-4 mb-3">
                     <p class="flex justify-between items-center">

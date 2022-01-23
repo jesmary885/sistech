@@ -231,6 +231,23 @@
                             <p align="center">S/ {{number_format((($subtotal)+(($subtotal)*(0.16)) - $descuento),2)}}</p>
                         </td>
                     </tr>
+
+                    <tr>
+                        <th colspan="3">
+                            <p align="right">TOTAL PAGADO: </p>
+                        </th>
+                        <td>
+                            <p align="center">S/ {{number_format(($pagado),2)}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="3">
+                            <p align="right">PENDIENTE POR PAGAR: </p>
+                        </th>
+                        <td>
+                            <p align="center">S/ {{number_format(($deuda),2)}}</p>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
@@ -238,8 +255,6 @@
     <br>
     <br>
     <footer id="fo">
-
-      
         <p>
             ***Precios de productos incluyen impuestos. Para poder realizar un reclamo o devolucion debe presentar esta factura***
         </p>

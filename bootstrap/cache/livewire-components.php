@@ -1,4 +1,6 @@
 <?php return array (
+  'admin.clientes.clientes-create' => 'App\\Http\\Livewire\\Admin\\Clientes\\ClientesCreate',
+  'admin.clientes.clientes-index' => 'App\\Http\\Livewire\\Admin\\Clientes\\ClientesIndex',
   'admin.usuarios-create' => 'App\\Http\\Livewire\\Admin\\UsuariosCreate',
   'admin.usuarios-edit' => 'App\\Http\\Livewire\\Admin\\UsuariosEdit',
   'admin.usuarios-index' => 'App\\Http\\Livewire\\Admin\\UsuariosIndex',
@@ -10,6 +12,8 @@
   'ventas.update-cart-item' => 'App\\Http\\Livewire\\Ventas\\UpdateCartItem',
   'ventas.venta-facturacion' => 'App\\Http\\Livewire\\Ventas\\VentaFacturacion',
   'ventas.ventas-cart' => 'App\\Http\\Livewire\\Ventas\\VentasCart',
+  'ventas.ventas-contado' => 'App\\Http\\Livewire\\Ventas\\VentasContado',
+  'ventas.ventas-credito' => 'App\\Http\\Livewire\\Ventas\\VentasCredito',
   'ventas.ventas-new' => 'App\\Http\\Livewire\\Ventas\\VentasNew',
   'ventas.ventas-seleccion-cantidades' => 'App\\Http\\Livewire\\Ventas\\VentasSeleccionCantidades',
   'ventas.ventas-seleccion-productos' => 'App\\Http\\Livewire\\Ventas\\VentasSeleccionProductos',

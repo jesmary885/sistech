@@ -1,32 +1,99 @@
-@extends('layouts.inicio')
 
-@section('content')
-<x-authentication-card>
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+<html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Tailwind CSS Login Form</title>
+      <link 
+        rel="stylesheet" 
+        href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" /> 
+        
+        <style>
+           * {
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  .login {
+    width: 320px;
+    height: 450px;
+    border: 1px solid #CCC;
+    background: url(https://images.pexels.com/photos/957061/milky-way-starry-sky-night-sky-star-957061.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) center center no-repeat;
+    background-size: cover;
+    margin: 30px auto;
+    border-radius: 20px;
+  }
+  .login .form {
+    width: 100%;
+    height: 100%;
+    padding: 15px 25px;
+  }
+  .login .form h2 {
+    color: #FFF;
+    text-align: center;
+    font-weight: normal;
+    font-size: 18px;
+    margin-top: 60px;
+    margin-bottom: 80px;
+  }
+  
+  .login .form img{
+      width:150px;
+      height:150px;
+      border-radius:50%;
+      border: solid 3px white;
+      overflow:hidden;
+      margin-left: auto; 
+  
+  margin-right: auto;
+  
+    opacity:0.4;
+  
+   
+  }
+  .login .form input {
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    background: rgba(255,255,255,.5);
+    border: 1px solid rgba(255,255,255,.1);
+    padding: 0 15px;
+    color: #FFF;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  .login .form input:focus {
+    border: 1px solid rgba(255,255,255,.8);
+    outline: none;
+  }
+  ::-webkit-input-placeholder {
+      color: #aa2828;
+  }
+  .login .form input.submit {
+    background: rgba(255,255,255,.9);
+    color: #444;
+    font-size: 15px;
+    margin-top: 40px;
+    font-weight: bold;
+  }
+  
+        </style>
+    </head>
+    <body>   
+      <div class="login">
+          <div class="form">
+              <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <img src="vendor/adminlte/dist/img/logotech_2.jpg" class="mb-4" alt="">
+              <input type="email" name="email"  id="email" placeholder="Email" required>
+              <input type="password" id="password" name="password" required placeholder="Contrasena">
+              <x-button class="mt-6 w-full">
+                {{ __('Ingresar') }}
+            </x-button>
 
-                        <div class="pt-2 px-12">
-                            <div class="flex">
-                                <x-label class="pr-8 pt-2" for="email" value="{{ __('Indicador') }}" />
-                                <x-input id="email" class="mt-1 w-full text-gray-300 outline-none px-2" type="email" name="email" :value="old('email')" required/>
-                            </div>
-                                <div class="mt-4 flex">
-                                <x-label class="pr-8 pt-2" for="password" value="{{ __('Password') }}" />
-                                <x-input id="password" class="block mt-1 w-full outline-none px-2" type="password" name="password" required />
-                            </div>
-                        </div>       
-                        <div class="flex pt-6 w-full px-12">
-                            <div class="block mt-2">
-                                <label for="remember_me" class="flex items-center">
-                                    <x-checkbox id="remember_me" name="remember" />
-                                    <span class="ml-2 text-sm text-gray-600">{{ __('Recordarme') }}</span>
-                                </label>
-                            </div>
-                            <x-button class="ml-44">
-                                {{ __('Ingresar') }}
-                            </x-button>
-                        </div>
-                    </form>
-           
-</x-authentication-card>
-@endsection
+              </form>
+              
+          </div>
+        </div>
+      
+    </body>
+  

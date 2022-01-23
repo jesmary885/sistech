@@ -237,11 +237,11 @@ return [
                 ],
                 [
                     'text'    => 'Roles y permisos',
-                    'url'     => '#',
+                    'route'     => 'admin.roles.index',
                 ],
                 [
                     'text'    => 'Clientes',
-                    'url'     => '#',
+                    'route'     => 'admin.clientes.index',
                 ],
                 [
                     'text' => 'Proveedores',
@@ -280,16 +280,12 @@ return [
                     'route'  => 'ventas.ventas.index',
                 ],
                 [
-                    'text'    => 'Ventas realizadas',
-                    'url'     => '#',
+                    'text'    => 'Ventas al contado',
+                    'route'     => 'ventas.mostrar_ventas.index',
                 ],
                 [
-                    'text' => 'Ventas pendientes',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'Buscar ventas',
-                    'url'  => '#',
+                    'text' => 'Ventas a credito',
+                    'route'  => 'ventas.mostrar_ventas.create',
                 ],
             ],
             

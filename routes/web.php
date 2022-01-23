@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SucursalesController;
 
 use App\Http\Controllers\Productos\ProductosController;
 use App\Http\Controllers\Ventas\FacturacionController;
+use App\Http\Controllers\Ventas\MostrarVentasController;
 use App\Http\Controllers\Ventas\VentasController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +34,7 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('home');
-})->middleware('auth');
+})->middleware('auth')->name('home');
 
 Auth::routes();
 
@@ -43,7 +44,7 @@ Auth::routes();
 
 
 
-Route::resource('roles', RoleController::class)->only('index','edit','update')->names('admin.role');
+Route::resource('roles', RoleController::class)->only('index','edit','update','destroy')->names('admin.roles');
 Route::resource('clientes', ClientesController::class)->only('index','edit','update')->names('admin.clientes');
 Route::resource('proveedores', ProveedoresController::class)->only('index','edit','update')->names('admin.proveedores');
 Route::resource('sucursales', SucursalesController::class)->only('index','edit','update')->names('admin.sucursales');
@@ -52,6 +53,7 @@ Route::resource('marcas', MarcasController::class)->only('index','edit','update'
 Route::resource('modelos', ModelosController::class)->only('index','edit','update')->names('admin.modelos');
 Route::resource('productos', ProductosController::class)->only('index','create','edit')->names('productos.productos');
 Route::resource('Ventas', VentasController::class)->only('create','index','edit','update','show')->names('ventas.ventas');
+Route::resource('Mostrar_ventas', MostrarVentasController::class)->only('create','index','edit','update','show')->names('ventas.mostrar_ventas');
 
 Route::get('facturacion/{sucursal}',[FacturacionController::class,'facturacion'])->name('facturacion');
 

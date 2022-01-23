@@ -20,19 +20,20 @@ use Livewire\Component;
 class VentaFacturacion extends Component
 {
 
+    use WithPagination;
     public $tipo_pago = 1;
-    public $metodo_pago, $total, $client;
+    public $metodo_pago, $total, $client, $search;
     public $sucursal,$cliente_select, $pago_cliente, $deuda_cliente, $descuento, $estado_entrega;
     public $siguiente_venta = 0;
-
-    use WithPagination;
+ 
     protected $paginationTheme = "bootstrap";
 
-    public $search;
-
+    protected $listeners = ['render' => 'render'];
+    
     public $rules = [
         'tipo_pago' => 'required',
         'metodo_pago' => 'required',
+        'cliente_select' => 'required',
     ];
 
     public function updatingSearch(){
@@ -52,8 +53,8 @@ class VentaFacturacion extends Component
 
         $clientes = Cliente::where('nombre', 'LIKE', '%' . $this->search . '%')
         ->orwhere('nro_documento', 'LIKE', '%' . $this->search . '%')
+        ->latest('id')
         ->paginate(2);
-
         return view('livewire.ventas.venta-facturacion',compact('clientes'));
     }
 
@@ -76,6 +77,9 @@ class VentaFacturacion extends Component
         $total_venta = ((Cart::subtotal() * 0.15) + Cart::subtotal()) - $descuento_total;
         $fecha_actual = date('Y-m-d');
 
+        if($this->estado_entrega == "1") $entrega = 'Entregado'; else
+        $entrega = 'Por entregar';
+
         $venta = new Venta();
         $venta->user_id = $user_auth;
         $venta->cliente_id = $this->client->id;
@@ -93,8 +97,8 @@ class VentaFacturacion extends Component
         $venta->subtotal = Cart::subtotal();
         $venta->total = $total_venta;
         $venta->sucursal_id = $this->sucursal;
-        $venta->estado_entrega = $this->estado_entrega;
-        $venta->descuento = $this->descuento;
+        $venta->estado_entrega = $entrega;
+        $venta->descuento = $descuento_total;
         $venta->save();
 
         foreach (Cart::content() as $item) {
@@ -114,30 +118,48 @@ class VentaFacturacion extends Component
             $movimiento->save();
             discount($item,$this->sucursal);
         }
-      
-        $data = [
-              'cliente_nombre' => $this->client->nombre." ".$this->client->apellido,
-              'cliente_documento' =>$this->client->nro_documento,
-              'cliente_telefono' =>$this->client->telefono,
-              'usuario' => auth()->user()->name." ".auth()->user()->apellido,
-              'fecha_actual' => $fecha_actual,
-              'venta_nro' => $venta->id,
-              'collection' => Cart::content(),
-              'estado_entrega' => $this->estado_entrega,
-              'descuento' => $this->descuento,
-              'subtotal' => Cart::subtotal()
-          ];
-    
-         $pdf = PDF::loadView('ventas.FacturaContado',$data)->output();
-          
+
+        if ($this->tipo_pago == "1"){
+            $data = [
+                'cliente_nombre' => $this->client->nombre." ".$this->client->apellido,
+                'cliente_documento' =>$this->client->nro_documento,
+                'cliente_telefono' =>$this->client->telefono,
+                'usuario' => auth()->user()->name." ".auth()->user()->apellido,
+                'fecha_actual' => $fecha_actual,
+                'venta_nro' => $venta->id,
+                'collection' => Cart::content(),
+                'estado_entrega' => $entrega,
+                'descuento' => $descuento_total,
+                'subtotal' => Cart::subtotal()
+            ];
+           $pdf = PDF::loadView('ventas.FacturaContado',$data)->output();
+        }
+        else{
+            $data = [
+                'cliente_nombre' => $this->client->nombre." ".$this->client->apellido,
+                'cliente_documento' =>$this->client->nro_documento,
+                'cliente_telefono' =>$this->client->telefono,
+                'usuario' => auth()->user()->name." ".auth()->user()->apellido,
+                'fecha_actual' => $fecha_actual,
+                'venta_nro' => $venta->id,
+                'collection' => Cart::content(),
+                'estado_entrega' => $entrega,
+                'descuento' => $descuento_total,
+                'pagado' => $this->pago_cliente,
+                'deuda' => $total_venta - $this->pago_cliente,
+                'subtotal' => Cart::subtotal()
+            ];
+           $pdf = PDF::loadView('ventas.FacturaCredito',$data)->output();
+        }
          cart::destroy();
+         $this->siguiente_venta = '1';
+         $this->reset(['cliente_select','pago_cliente','descuento']);
        
         return response()->streamDownload(
          fn () => print($pdf),
         "filename.pdf"
          );
-
-         $this->siguiente_venta = '1';
+         
     }
 
     public function nueva_venta(){
@@ -145,6 +167,6 @@ class VentaFacturacion extends Component
     }
 
     public function inicio(){
-        
+        return redirect()->route('home');
     }
 }
