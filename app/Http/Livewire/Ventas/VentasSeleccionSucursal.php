@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class VentasSeleccionSucursal extends Component
 {
+    public $vista;
     public function render()
     {
 

@@ -12,7 +12,12 @@
  <!-- Tempusdominus Bootstrap 4 -->
  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 
-    {{-- Base Meta Tags --}}
+  {{-- datetimepicker --}}
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">   
+    <script src="https://unpkg.com/moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+ {{-- Base Meta Tags --}}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -126,6 +131,16 @@
             'success')
         })
     </script>
+ <script>
+    Livewire.on('errorSize', mensaje => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: mensaje,
+        }) /*  */
+    });
+</script>
+
 
 
     {{-- Custom Scripts --}}

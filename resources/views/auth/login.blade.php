@@ -3,12 +3,15 @@
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Tailwind CSS Login Form</title>
+      <title>TechPeru</title>
       <link 
         rel="stylesheet" 
         href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" /> 
         
         <style>
+          body{
+            background: darkgray;
+          }
            * {
     box-sizing: border-box;
     font-family: sans-serif;
@@ -17,7 +20,8 @@
     width: 320px;
     height: 450px;
     border: 1px solid #CCC;
-    background: url(https://images.pexels.com/photos/957061/milky-way-starry-sky-night-sky-star-957061.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) center center no-repeat;
+    box-shadow: 10px 5px 5px gray;
+    background: url(https://images.pexels.com/photos/3473569/pexels-photo-3473569.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) center center no-repeat;
     background-size: cover;
     margin: 30px auto;
     border-radius: 20px;
@@ -71,6 +75,7 @@
   .login .form input.submit {
     background: rgba(255,255,255,.9);
     color: #444;
+    font-weight: bold;
     font-size: 15px;
     margin-top: 40px;
     font-weight: bold;
@@ -85,7 +90,7 @@
                 @csrf
                 <img src="vendor/adminlte/dist/img/logotech_2.jpg" class="mb-4" alt="">
               <input type="email" name="email"  id="email" placeholder="Email" required>
-              <input type="password" id="password" name="password" required placeholder="Contrasena">
+              <input type="password" id="password" name="password" required placeholder="Contraseña">
               <x-button class="mt-6 w-full">
                 {{ __('Ingresar') }}
             </x-button>

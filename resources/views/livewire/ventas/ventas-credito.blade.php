@@ -3,6 +3,7 @@
         <div class="card-header">
             <input wire:model="search" placeholder="Ingrese la fecha de la venta a buscar" class="form-control">
         </div>
+ 
         @if ($ventas->count())
             <div class="card-body">
                 <table class="table table-striped">
@@ -27,17 +28,16 @@
                                 <td>{{$venta->total_pagado_cliente}}</td>
                                 <td>{{$venta->deuda_cliente}}</td>
                                 <td width="10px">
-                                    {{-- @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id)) --}}
-                                     <a href="#" class="btn btn-info btn-sm"><i class="fas fa-plus-square"></i></a>
+                                      @livewire('ventas.ventas-credito-abono', ['venta' => $venta],key($venta->id)) 
+                                     {{-- <a href="#" class="btn btn-info btn-sm"><i class="fas fa-plus-square"></i></a> --}}
                                 </td>
                                 <td width="10px">
-                                    {{-- @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id)) --}}
-                                     <a href="#" class="btn btn-info btn-sm"><i class="fas fa-file-invoice"></i></a>
+                                    @livewire('ventas.ventas-view', ['venta' => $venta]) 
                                 </td>
-                                <td width="10px">
-                                    {{-- @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id)) --}}
+                                 <td width="10px">
+                                     {{-- @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id))  --}}
                                     <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                                </td>
+                                </td> 
                             </tr>
                         @endforeach
                     </tbody>

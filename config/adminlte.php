@@ -301,11 +301,15 @@ return [
                 ],
                 [
                     'text'    => 'Devolucion',
-                    'url'     => '#',
+                    'route'     => 'devolucion.index',
                 ],
                 [
                     'text'    => 'Traslado',
-                    'url'     => '#',
+                    'route'     => 'traslado.index',
+                ],
+                [
+                    'text'    => 'Historial',
+                    'route'     => 'movimientos.historial',
                 ],
             ],
             

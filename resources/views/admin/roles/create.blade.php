@@ -4,8 +4,7 @@
 
 @section('content_header')
     
-<a href="{{route('admin.usuarios.create')}}" class="btn btn-primary float-right"><i class="fas fa-user-plus"></i> Nuevo usuario</a>
-    <h1 class="text-lg ml-2"><i class="far fa-address-book"></i> Listado de usuarios</h1>
+    <h1 class="text-lg ml-2"><i class="fas fa-shield-alt"></i> Nuevo rol</h1>
 @stop
 
 @section('content')
@@ -18,7 +17,8 @@
 <div class="card-body">
     {!! Form::open(['route' => 'admin.roles.store']) !!}
         @include('admin.roles.partials.form')
-    {!! Form::submit('Crear Rol', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-4'])!!}
+    <a href="{{route('admin.roles.index')}}" class="btn btn-primary mt-4 ml-2"><i class="fas fa-undo-alt"></i> Regresar</a>
     {!! Form::close() !!}
 </div>
 </div>

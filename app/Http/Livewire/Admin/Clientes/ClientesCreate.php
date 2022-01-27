@@ -111,9 +111,9 @@ class ClientesCreate extends Component
 
         
             $this->reset(['nombre','apellido','email','telefono','documento','tipo_documento','direccion','ciudad_id','estado_id','isopen']);
-            /*if($this->vista == "ventas")*/ $this->emitTo('ventas.venta-facturacion','render');
-            //else
-           // $this->emitTo('admin.clientes.clientes-index','render');
+            if($this->vista == "ventas") $this->emitTo('ventas.venta-facturacion','render');
+            else
+           $this->emitTo('admin.clientes.clientes-index','render');
             $this->emit('alert','Cliente creado correctamente');
     }
 

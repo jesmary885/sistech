@@ -105,7 +105,8 @@ class VentaFacturacion extends Component
             $venta->producto_ventas()->create([
                 'venta_id' => $venta->id,
                 'producto_id'=> $item->id,
-                'cantidad' => $item->qty
+                'cantidad' => $item->qty,
+                'precio' => $item->price
             ]);
             $movimiento = new Movimiento();
             $movimiento->fecha = $fecha_actual;

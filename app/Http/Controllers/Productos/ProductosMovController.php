@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Ventas;
+namespace App\Http\Controllers\Productos;
 
 use App\Http\Controllers\Controller;
-use App\Models\Sucursal;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class VentasController extends Controller
+class ProductosMovController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +14,9 @@ class VentasController extends Controller
      */
     public function index()
     {
-        $vista = 'ventas';
-        $usuario_auth = User::where('id',Auth::id())->first();
-        $sucursal = $usuario_auth->sucursal_id;
 
-        if($usuario_auth->limitacion == '1') return view('ventas.seleccion_sucursal',compact('vista'));
-        else return view('ventas.seleccion_producto',compact('sucursal'));
+        $vista = 'productos';
+        return view('ventas.seleccion_sucursal',compact('vista'));
     }
 
     /**
@@ -32,7 +26,7 @@ class VentasController extends Controller
      */
     public function create()
     {
-     
+        return view('productos.historial');
     }
 
     /**
@@ -41,14 +35,14 @@ class VentasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function historial($producto)
     {
-      
+        return view('productos.historial_detalle',compact('producto'));
     }
 
-    public function facturacion($sucursal)
+    public function store()
     {
-        return view('ventas.facturacion',compact('sucursal'));
+
     }
 
     /**
@@ -59,7 +53,7 @@ class VentasController extends Controller
      */
     public function show($sucursal)
     {
-        return view('ventas.Cart',compact('sucursal'));
+        return view('productos.traslado',compact('sucursal'));
     }
 
     /**
@@ -68,12 +62,9 @@ class VentasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-
-    public function edit($sucursal)
+    public function edit($producto)
     {
-
-        return view('ventas.seleccion_producto',compact('sucursal'));
+        
     }
 
     /**
@@ -83,8 +74,9 @@ class VentasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id){
-
+    public function update(Request $request, $id)
+    {
+        //
     }
 
     /**
@@ -93,8 +85,8 @@ class VentasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($producto)
     {
-        //
+        
     }
 }

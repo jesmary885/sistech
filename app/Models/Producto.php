@@ -37,6 +37,10 @@ class Producto extends Model
         return $this->hasMany(Producto_venta::class);
     }
 
+    public function devolucions(){
+        return $this->hasMany(Devolucion::class);
+    }
+
 
     //Relacion muchos a muchos
     public function sucursals(){

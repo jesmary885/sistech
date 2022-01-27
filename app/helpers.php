@@ -27,6 +27,8 @@ function qty_added($producto_id){
 
 }
 
+
+
 function qty_available($producto_id,$sucursal_id){
 
     $pivot = Pivot::where('sucursal_id',$sucursal_id)

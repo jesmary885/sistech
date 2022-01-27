@@ -10,7 +10,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center">Imagen</th>
-                                <th class="text-center">Codigo de Barra</th>
+                                <th class="text-center">Código de Barra</th>
                                 <th class="text-center">Descripcion</th>
                                 <th class="text-center">Stock general</th>
                                 <th class="text-center">Precio</th>
@@ -40,7 +40,7 @@
                                     {{-- <td width="10px">
                                         <a href="{{route('productos.productos.edit',$producto)}}" class="btn btn-info btn-sm"> <i class="fas fa-sitemap"></i></a>
                                     </td> --}}
-                                    <td width="10px">
+                                    <td width="2px">
                                         <a href="#" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
                                     </td>
                                     <td width="10px">

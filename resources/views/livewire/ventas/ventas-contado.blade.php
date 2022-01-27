@@ -23,8 +23,7 @@
                                 <td>{{$venta->estado_entrega}}</td>
                                 <td>{{$venta->total}}</td>
                                 <td width="10px">
-                                    {{-- @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id)) --}}
-                                     <a href="#" class="btn btn-info btn-sm"><i class="fas fa-file-invoice"></i></i></a>
+                                    @livewire('ventas.ventas-view', ['venta' => $venta],key($venta->id)) 
                                 </td>
                                 <td width="10px">
                                     {{-- @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id)) --}}

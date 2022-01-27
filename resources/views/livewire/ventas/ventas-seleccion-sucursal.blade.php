@@ -1,7 +1,12 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <h2 class="text-lg text-gray-600">Seleccione la sucursal en donde realizara la venta</h2>
+            @if ($vista == 'ventas')
+                <h2 class="text-lg text-gray-600">Seleccione la sucursal en donde realizara la venta</h2>
+            @else
+            <h2 class="text-lg text-gray-600">Seleccione la sucursal donde esta el producto a trasladar</h2>
+            @endif
+            
         </div>
         @if ($sucursales->count())
             <div class="card-body">
@@ -18,7 +23,11 @@
                                 <td class="text-center">{{ $sucursal->id }}</td>
                                 <td class="text-center">{{ $sucursal->nombre}}</td>
                                 <td width="10px">
-                                    <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn btn-info btn-sm"><i class="fas fa-check"></i></a>
+                                    @if ($vista == 'ventas')
+                                        <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn btn-info btn-sm"><i class="fas fa-check"></i></a>
+                                    @else
+                                        <a href="{{route('productos.traslado.select',$sucursal)}}" class="btn btn-info btn-sm"><i class="fas fa-check"></i></a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
