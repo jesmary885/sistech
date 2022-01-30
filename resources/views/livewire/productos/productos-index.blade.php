@@ -2,7 +2,7 @@
     <div>
         <div class="card">
             <div class="card-header">
-                <input wire:model="search" placeholder="Ingrese el nombre del producto a buscar" class="form-control">
+                <input wire:model="search" placeholder="Ingrese el nombre o código de barra del producto a buscar" class="form-control">
             </div>
             @if ($productos->count())
                 <div class="card-body">
@@ -35,13 +35,9 @@
                                    
                                     <td width="10px">
                                         @livewire('productos.productos-add', ['producto' => $producto],key($producto->id))
-        
                                     </td>
-                                    {{-- <td width="10px">
-                                        <a href="{{route('productos.productos.edit',$producto)}}" class="btn btn-info btn-sm"> <i class="fas fa-sitemap"></i></a>
-                                    </td> --}}
-                                    <td width="2px">
-                                        <a href="#" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                    <td width="10px">
+                                        @livewire('productos.producto-edit', ['producto' => $producto])
                                     </td>
                                     <td width="10px">
                                         <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>

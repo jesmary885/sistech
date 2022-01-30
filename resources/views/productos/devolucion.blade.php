@@ -19,25 +19,4 @@
 
 @section('js')
     
-<script>
-   /* Livewire.on('confirm', DevolucionProductoId => {
-        Swal.fire({
-            title: ¿Esta seguro que desea regresar el producto a inventario?,
-            text: "¡No podrás revertir esto!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, estoy seguro'
-        }).then((result) => {
-        if (result.isConfirmed) {
-            Livewire.emitTo('productos.productos-devolucion', 'confirmacion', DevolucionProductoId)
-            Swal.fire(
-            'Acción realizada!',
-            'success'
-            )}
-        })
-    });*/
-   
-</script>
 @stop

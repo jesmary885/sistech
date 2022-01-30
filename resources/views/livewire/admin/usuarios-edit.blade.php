@@ -14,7 +14,7 @@
             </div>
             <div class="modal-body">
 
-                <div class="flex mt-2 ustify-between w-full">
+                <div class="flex mt-2 justify-between w-full">
                     <div class="w-full mr-2">
                       <select wire:model="tipo_documento" id="tipo_documento" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_documento">
                              <option value="" selected>Tipo de doc.</option>
@@ -43,7 +43,7 @@
                         <x-input-error for="name" />
                     </div>
                     <div class="w-full mr-2">
-                        <input wire:model="apellido" type="apellido" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Apellidos">
+                        <input wire:model="apellido" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Apellidos">
                         <x-input-error for="apellido" />
                     </div>
                 </div>

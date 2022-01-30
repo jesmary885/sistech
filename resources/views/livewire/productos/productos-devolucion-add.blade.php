@@ -16,13 +16,21 @@
                         </div>
                         <div :class="{'hidden': factura != 0}">
                             <div class="flex justify-between w-full mt-2">
-                                <select wire:model="producto_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mr-2">
+                                <select wire:model="producto_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                     <option value="" selected>Seleccione el producto</option>
                                     @foreach ($productos as $producto)
                                         <option value="{{$producto->producto->id}}">{{$producto->producto->nombre}}</option>
                                     @endforeach
                                 </select>
                                 <x-input-error for="producto_id" />
+
+                                <select id="accion" wire:model="accion" class="ml-2 block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="accion">
+                                    <option value="" selected>Acción</option>
+                                    <option value="1">Reintegro del dinero</option>
+                                    <option value="2">Entrega de otro producto igual</option>
+                                    <option value="3">Entrega de otro producto distinto</option>
+                                </select>
+                                <x-input-error for="accion" />
                             </div>
                             <div>
                                 <textarea wire:model="observaciones" class="mt-2 resize-none rounded-md outline-none w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="observaciones" cols="80" rows="2" required placeholder="Observaciones"></textarea>  

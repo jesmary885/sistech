@@ -31,7 +31,7 @@ class ProductosDetalleTraslado extends Component
     }
 
     public function mount(){
-             $this->sucursales=Sucursal::all();
+             $this->sucursales=Sucursal::where('id','!=',$this->sucursal)->get();
      }
     public function render()
     {

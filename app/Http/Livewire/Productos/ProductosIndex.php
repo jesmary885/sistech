@@ -25,7 +25,7 @@ class ProductosIndex extends Component
         $sucursales = Sucursal::all();
 
         $productos = Producto::where('nombre', 'LIKE', '%' . $this->search . '%')
-                  //  ->orwhere('marca', 'LIKE', '%' . $this->search . '%')
+                    ->orwhere('cod_barra', 'LIKE', '%' . $this->search . '%')
                     ->paginate(5);
         
         return view('livewire.productos.productos-index',compact('productos','sucursales'));

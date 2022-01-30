@@ -4,6 +4,7 @@
   'admin.usuarios-create' => 'App\\Http\\Livewire\\Admin\\UsuariosCreate',
   'admin.usuarios-edit' => 'App\\Http\\Livewire\\Admin\\UsuariosEdit',
   'admin.usuarios-index' => 'App\\Http\\Livewire\\Admin\\UsuariosIndex',
+  'productos.producto-edit' => 'App\\Http\\Livewire\\Productos\\ProductoEdit',
   'productos.productos-add' => 'App\\Http\\Livewire\\Productos\\ProductosAdd',
   'productos.productos-add-serial' => 'App\\Http\\Livewire\\Productos\\ProductosAddSerial',
   'productos.productos-create' => 'App\\Http\\Livewire\\Productos\\ProductosCreate',
