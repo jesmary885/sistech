@@ -1,5 +1,4 @@
 <div>
-    <div>
         <div class="card">
             <div class="card-header">
                 <input wire:model="search" placeholder="Ingrese la fecha de la devolución a buscar" class="form-control">
@@ -24,9 +23,13 @@
                                     <td class="text-center">{{$devolucion->venta->id}}</td>
                                     <td class="text-center">{{$devolucion->user->name}} {{$devolucion->user->apellido}}</td>
                                     <td class="text-center"><p>Cantidad devuelto:</p> {{$devolucion->cantidad}} {{$devolucion->observaciones}}</td>
-                                    {{-- <td width="10px">
-                                        @livewire('productos.productos-devolucion-edit', ['movimiento' => $movimiento],key($movimiento->id))
-                                    </td> --}}
+                                    <td width="10px">
+                                        <button
+                                            class="ml-4 btn btn-primary btn-sm" 
+                                            wire:click="inventariar('{{$devolucion->producto_id}}','{{ $devolucion->id}}','{{$devolucion->venta->id}}')">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button> 
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -42,6 +45,6 @@
             @endif
                 
         </div>
-    </div>
+
 </div>
 

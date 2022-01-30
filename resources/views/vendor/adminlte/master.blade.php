@@ -4,7 +4,7 @@
 <head>
 
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-
+ 
      <!-- Font Awesome -->
  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
  <!-- Ionicons -->
@@ -86,6 +86,9 @@
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
 
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <script defer src="https://unpkg.com/alpinejs@3.2.4/dist/cdn.min.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -98,6 +101,7 @@
     @yield('body')
 
     {{-- Base Scripts --}}
+    <script src="{{ mix('js/app.js') }}" defer></script>
     @if(!config('adminlte.enabled_laravel_mix'))
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -111,8 +115,6 @@
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     {{-- Livewire Script --}}
     @if(config('adminlte.livewire'))
@@ -123,6 +125,9 @@
         @endif
     @endif
 
+    @stack('script')
+
+
     <script>
         livewire.on('alert', function(ms){
         Swal.fire(
@@ -131,21 +136,43 @@
             'success')
         })
     </script>
- <script>
-    Livewire.on('errorSize', mensaje => {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: mensaje,
-        }) /*  */
-    });
-</script>
-
+    <script>
+        Livewire.on('errorSize', mensaje => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: mensaje,
+            }) /*  */
+        });
+    </script>
+    <script>
+        livewire.on('confirm', function(ms){
+            Swal.fire({
+            title: ms,
+            text: "No podrá revertir esto",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, seguro'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                livewire.emitTo('productos.productos-devolucion', 'confirmacion')
+                Swal.fire(
+                'Listo',
+                'Acción realizada.',
+                'success'
+                )
+                }
+            })
+        })
+    </script>
 
 
     {{-- Custom Scripts --}}
-    @yield('adminlte_js')
-
+  
+     {{-- @yield('adminlte_js') --}}
+   
 </body>
 
 </html>

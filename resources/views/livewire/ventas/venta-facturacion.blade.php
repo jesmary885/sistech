@@ -27,6 +27,7 @@
                                         wire:click="select_u('{{$cliente->id}}}')">
                                         <i class="fas fa-check"></i>
                                     </button>
+                                    
                                     </td>
                                 </tr>
                             @endforeach
