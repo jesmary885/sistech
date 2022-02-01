@@ -26,10 +26,11 @@ class DatabaseSeeder extends Seeder
         $this->call(MarcaSeeder::class);
         $this->call(ModeloSeeder::class);
         $this->call(ProductoSeeder::class);
-        $this->call(ProductoCodBarraSerialSeeder::class);
+       // $this->call(ProductoCodBarraSerialSeeder::class);
         $this->call(ProductoSucursalSeeder::class);
         $this->call(ProveedorSeeder::class);
         $this->call(ClienteSeeder::class);
         $this->call(EmpresaSeeder::class);
+        //$this->call(CompraSeeder::class);
     }
 }

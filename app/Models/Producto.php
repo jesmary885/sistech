@@ -20,6 +20,10 @@ class Producto extends Model
         return $this->belongsTo(Modelo::class);
     }
 
+    public function marca(){
+        return $this->belongsTo(Marca::class);
+    }
+
     //Relacion uno a muchos
    
     public function producto_cod_barra_serials(){

@@ -21,15 +21,15 @@ class ProductoSeeder extends Seeder
             'precio_entrada' => '5',
             'precio_letal' => '8',
             'precio_mayor' => '7',
-            'tipo_garantia' => 'anual',
+            'tipo_garantia' => '1',
             'garantia' => '1',
-            'cantidad' => '6',
             'cod_barra' => '656222',
             'estado' => '1',
-            'presentacion' => 'unidad',
+            'presentacion' => '1',
             'observaciones' => 'sin observaciones',
             'categoria_id' => '1',
             'modelo_id' => '1',
+            'marca_id' => '1',
         ]);
 
         Imagen::factory(1)->create([

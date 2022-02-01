@@ -21,9 +21,9 @@
                                 <tr>
                                     <td align="center">
                                         @if ($producto->imagen)
-                                            <img class="img-rounded" width="30" height="30"  src="{{Storage::url($producto->imagen->url)}}" alt="">
+                                            <img class="img-rounded m-0" width="90" height="90"  src="{{Storage::url($producto->imagen->url)}}" alt="">
                                         @else
-                                            <img class="img-rounded" width="30" height="30"  src="https://cdn.pixabay.com/photo/2020/12/13/16/21/stork-5828727_960_720.jpg" alt="">
+                                            <img class="img-rounded m-0" width="90" height="90"  src="https://cdn.pixabay.com/photo/2020/12/13/16/21/stork-5828727_960_720.jpg" alt="">
                                         @endif
                                     </td>
                                     <td class="text-center">{{$producto->cod_barra}}</td>
@@ -37,7 +37,7 @@
                                         @livewire('productos.productos-add', ['producto' => $producto],key($producto->id))
                                     </td>
                                     <td width="10px">
-                                        @livewire('productos.producto-edit', ['producto' => $producto])
+                                         @livewire('productos.producto-edit', ['producto' => $producto],key($producto->nombre))
                                     </td>
                                     <td width="10px">
                                         <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>

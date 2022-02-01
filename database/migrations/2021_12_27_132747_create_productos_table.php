@@ -27,13 +27,14 @@ class CreateProductosTable extends Migration
             $table->string('estado');
             $table->string('presentacion');
             $table->string('garantia');
-            $table->string('cantidad');
             //$table->string('percepcion');
             $table->string('observaciones');
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->unsignedBigInteger('modelo_id');
             $table->foreign('modelo_id')->references('id')->on('modelos');
+            $table->unsignedBigInteger('marca_id');
+            $table->foreign('marca_id')->references('id')->on('marcas');
         });
     }
 

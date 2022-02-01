@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Compra;
 use Illuminate\Database\Seeder;
 
 class CompraSeeder extends Seeder
@@ -13,6 +14,13 @@ class CompraSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Compra::create([
+            'fecha' => date('Y-m-d'),
+            'total' => '30',
+            'proveedor_id' => '1',
+            'producto_id' => '1',
+            'cantidad' => '6',
+            'user_id' => '1',
+        ]);
     }
 }

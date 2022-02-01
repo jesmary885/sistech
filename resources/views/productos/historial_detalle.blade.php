@@ -7,9 +7,7 @@
 
 @section('content')
      @livewire('productos.productos-detalle-historial',['producto' => $producto, 'fecha_inicio' => $fecha_inicio, 'fecha_fin' => $fecha_fin])
-
-   
-    @stop
+@stop
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">

@@ -89,7 +89,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <script defer src="https://unpkg.com/alpinejs@3.2.4/dist/cdn.min.js"></script>
+    {{-- <script defer src="https://unpkg.com/alpinejs@3.2.4/dist/cdn.min.js"></script> --}}
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -124,9 +124,6 @@
             <livewire:scripts />
         @endif
     @endif
-
-    @stack('script')
-
 
     <script>
         livewire.on('alert', function(ms){
@@ -171,7 +168,7 @@
 
     {{-- Custom Scripts --}}
   
-     {{-- @yield('adminlte_js') --}}
+      @yield('adminlte_js') 
    
 </body>
 

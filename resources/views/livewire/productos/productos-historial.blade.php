@@ -35,7 +35,7 @@
                                 <tr>
                                     <td class="text-center">{{$producto->cod_barra}}</td>
                                     <td class="text-center">{{$producto->nombre}}</td>
-                                    <td class="text-center">{{$producto->cantidad}}</td>
+                                    <td class="text-center">{{$producto->precio_letal}}</td>
                                     <td width="10px">
                                         <button
                                         class="ml-4 btn btn-primary btn-sm" 

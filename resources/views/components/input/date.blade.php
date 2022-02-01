@@ -2,7 +2,7 @@
 x-data
 x-init="new Pikaday({ field: $refs.input, format: 'MM/DD/YYYY' })"
 @change="$dispatch('input', $event.target.value)"
-class="flex rounded-md shadow-md"
+class="flex rounded-md shadow-sm"
 >
 <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-white bg-gray-50 text-gray-500 sm:text-sm">
     <svg class="h-6 w-5 text-gray-400 ml-2" fill="currentColor" viewBox="0 0 20 20">

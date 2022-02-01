@@ -32,15 +32,15 @@ class ProductosCreate extends Component
 
     // protected $rules = [
     //     'region_id' => 'required',
-    //     'division_id' => 'required',
-    //     'negocio_id' => 'required',
+    //      'division_id' => 'required',
+    //      'negocio_id' => 'required',
     //     'nombre' => 'required|max:50',
-    //     'apellido' => 'required|max:50',
-    //     'cedula' => 'required|numeric|min:7',
-    //     'indicador' => 'required',
-    //     'telefono' => 'required|numeric|min:11',
-    //     'email' => 'required|max:50|unique:users',
-    // ];
+    //      'apellido' => 'required|max:50',
+    //      'cedula' => 'required|numeric|min:7',
+    //      'indicador' => 'required',
+    //      'telefono' => 'required|numeric|min:11',
+    //      'email' => 'required|max:50|unique:users',
+    //  ];
 
  
     public function mount(){
@@ -85,7 +85,7 @@ class ProductosCreate extends Component
         //agregando producto en tabla productos
         $producto = new Producto();
         $producto->nombre = $this->nombre;
-        $producto->cantidad = $this->cantidad;
+     
         $producto->cod_barra = $this->cod_barra;
         $producto->inventario_min = $this->inventario_min;
         $producto->presentacion = $this->presentacion;
@@ -93,6 +93,7 @@ class ProductosCreate extends Component
         $producto->precio_letal = $this->precio_letal;
         $producto->precio_mayor = $this->precio_mayor;
         $producto->modelo_id = $this->modelo_id;
+        $producto->marca_id = $this->marca_id;
         $producto->categoria_id = $this->categoria_id;
         $producto->observaciones = $this->observaciones;
         $producto->tipo_garantia = $this->tipo_garantia;

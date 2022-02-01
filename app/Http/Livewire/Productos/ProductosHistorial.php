@@ -11,9 +11,10 @@ use Carbon\Carbon;
 class ProductosHistorial extends Component
 {
     use WithPagination;
-    protected $paginationTheme = "bootstrap";
-    public $search, $fecha_inicio, $fecha_fin;
 
+    protected $paginationTheme = "bootstrap";
+
+    public $search, $fecha_inicio, $fecha_fin;
 
     protected $rules = [
         'fecha_inicio' => 'required',
