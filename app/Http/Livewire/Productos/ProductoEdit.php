@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Productos;
 
 use App\Models\Categoria;
+use App\Models\Imagen;
 use App\Models\Marca;
 use App\Models\Modelo;
 use App\Models\Proveedor;
@@ -61,6 +62,8 @@ class ProductoEdit extends Component
              $sucursal_usuario = Sucursal::where('id',$this->sucursal_id)->first();
              $this->sucursal_nombre = $sucursal_usuario->nombre;
          }
+
+         
         
          $this->nombre = $this->producto->nombre;
          $this->cod_barra = $this->producto->cod_barra;
@@ -77,8 +80,6 @@ class ProductoEdit extends Component
          $this->presentacion = $this->producto->presentacion;
          $this->observaciones = $this->producto->observaciones;
          $this->estado = $this->producto->estado;
-        //$this->file =  Storage::put('public/productos', $this->producto->file);
-       if($this->producto->imagen) $this->file= Storage::url($this->producto->imagen->first()->url);
          $this->modelos=Modelo::all();
          $this->marcas=Marca::all();
          $this->categorias=Categoria::all();
@@ -133,10 +134,10 @@ class ProductoEdit extends Component
         ]);
 
     if ($this->file){
+            $imagen = Imagen::where('imageable_id',$this->producto->id)->first();
             $url = Storage::put('public/productos', $this->file);
-            $this->producto->imagen()->update([
-                'url' => $url
-            ]);
+            if($imagen) $this->producto->imagen()->update(['url' => $url]);
+            else $this->producto->imagen()->create(['url' => $url]);
          }
 
         $this->producto->movimientos()->create([

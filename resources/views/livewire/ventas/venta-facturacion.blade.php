@@ -12,8 +12,7 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Documento</th>
-                                <th>@livewire('admin.clientes.clientes-create',['vista' => "ventas"])</th>
-        
+                                <th>@livewire('admin.clientes.clientes-create',['vista' => "ventas",'accion' => 'create'])</th>
                             </tr>
                         </thead>
                         <tbody>

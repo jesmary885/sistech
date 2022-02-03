@@ -327,11 +327,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Productos',
-                    'url'  => '#',
+                    'route'     => 'reportes.index.productos',
                 ],
                 [
                     'text'    => 'ventas',
-                    'url'     => '#',
+                    'route'     => 'reportes.index.ventas',
                 ],
             ],
             

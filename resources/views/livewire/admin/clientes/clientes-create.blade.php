@@ -1,6 +1,10 @@
 <div>
     <button type="submit" class="btn btn-primary btn-sm float-right" wire:click="open">
+        @if ($accion == 'create')
         <i class="fas fa-user-plus"></i>
+        @else
+        <i class="fas fa-user-edit"></i>
+        @endif
     </button>
 
     @if ($isopen)
@@ -100,8 +104,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            wire:click="close">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="close">Cerrar</button>
                         <button type="button" class="btn btn-primary" wire:click="save">Guardar</button>
                     </div>
                 </div>

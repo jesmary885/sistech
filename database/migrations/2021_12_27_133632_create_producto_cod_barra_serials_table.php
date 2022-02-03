@@ -18,7 +18,7 @@ class CreateProductoCodBarraSerialsTable extends Migration
             $table->timestamps();
             $table->string('serial');
             $table->unsignedBigInteger('producto_id');
-            $table->foreign('producto_id')->references('id')->on('productos');
+            $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');;
             $table->unsignedBigInteger('sucursal_id');
             $table->foreign('sucursal_id')->references('id')->on('sucursals');
         });

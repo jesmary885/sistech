@@ -189,12 +189,12 @@
           0 => 
           array (
             'text' => 'Productos',
-            'url' => '#',
+            'route' => 'reportes.index.productos',
           ),
           1 => 
           array (
             'text' => 'ventas',
-            'url' => '#',
+            'route' => 'reportes.index.ventas',
           ),
         ),
       ),

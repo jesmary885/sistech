@@ -93,6 +93,13 @@
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -125,6 +132,9 @@
         @endif
     @endif
 
+
+    @stack('script')
+
     <script>
         livewire.on('alert', function(ms){
         Swal.fire(
@@ -142,8 +152,9 @@
             }) /*  */
         });
     </script>
+    
     <script>
-        livewire.on('confirm', function(ms){
+        livewire.on('confirm', (ms,item1,item2,ms2) => {
             Swal.fire({
             title: ms,
             text: "No podrá revertir esto",
@@ -154,16 +165,17 @@
             confirmButtonText: 'Si, seguro'
             }).then((result) => {
             if (result.isConfirmed) {
-                livewire.emitTo('productos.productos-devolucion', 'confirmacion')
-                Swal.fire(
-                'Listo',
-                'Acción realizada.',
-                'success'
-                )
+                        livewire.emitTo(item1,item2)
+                        Swal.fire(
+                        'Listo',
+                        ms2,
+                        'success'
+                        )
                 }
             })
         })
     </script>
+    
 
 
     {{-- Custom Scripts --}}

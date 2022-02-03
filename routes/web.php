@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SucursalesController;
 use App\Http\Controllers\Productos\MovimientosController;
 use App\Http\Controllers\Productos\ProductosController;
 use App\Http\Controllers\Productos\ProductosMovController;
+use App\Http\Controllers\Reportes\ReportesController;
 use App\Http\Controllers\Ventas\FacturacionController;
 use App\Http\Controllers\Ventas\MostrarVentasController;
 use App\Http\Controllers\Ventas\VentasController;
@@ -66,6 +67,11 @@ Route::get('devolucion',[MovimientosController::class,'devolucion'])->name('devo
 Route::get('devolucion_registro',[MovimientosController::class,'devolucion_create'])->name('devolucion.create');
 Route::get('traslado/{sucursal}',[MovimientosController::class,'select'])->name('productos.traslado.select');
 Route::get('historial/{producto}/{fecha_inicio}/{fecha_fin}',[MovimientosController::class,'historial_detalle'])->name('movimientos.historial.detalle');
+
+Route::get('reportes_productos/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'productos'])->name('productos.reportes');
+Route::get('reportes_ventas/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'ventas'])->name('ventas.reportes');
+Route::get('reporte_poducto',[ReportesController::class,'index_producto'])->name('reportes.index.productos');
+Route::get('reporte_venta',[ReportesController::class,'index_venta'])->name('reportes.index.ventas');
 
 // livewire
 

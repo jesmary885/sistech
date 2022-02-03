@@ -21,7 +21,7 @@ class CreateComprasTable extends Migration
             $table->unsignedBigInteger('proveedor_id');
             $table->foreign('proveedor_id')->references('id')->on('proveedors');
             $table->unsignedBigInteger('producto_id');
-            $table->foreign('producto_id')->references('id')->on('productos');
+            $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');
             $table->string('cantidad');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

@@ -10,6 +10,8 @@ class Producto_sucursal extends Model
     use HasFactory;
 
     protected $table = "producto_sucursal";
+    
+    protected $guarded = ['id','created_at','updated_at'];
 
     //Relacion uno a mucos inversa
 

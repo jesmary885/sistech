@@ -11,7 +11,7 @@
                             <th>Nombre</th>
                             <th>Nro de documento</th>
                             <th>Telefono</th>
-                            <th>@livewire('admin.clientes.clientes-create',['vista' => 'clientes'])</th>
+                            <th>@livewire('admin.clientes.clientes-create',['vista' => 'clientes','accion' => 'create'])</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,8 +21,14 @@
                                 <td>{{$cliente->nro_documento}}</td>
                                 <td>{{$cliente->telefono}}</td>
                                 <td width="10px">
-                                    {{-- @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id)) --}}
-                                     <a href="#" class="btn btn-success btn-sm"><i class="fas fa-user-edit"></i></a>
+                                    @livewire('admin.clientes.clientes-create',['vista' => 'clientes','accion' => 'edit', 'cliente' => $cliente->id],key($cliente->id))
+                                </td>
+                                <td width="10px">
+                                    <button
+                                        class="btn btn-danger btn-sm" 
+                                        wire:click="delete('{{$cliente->id}}')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach

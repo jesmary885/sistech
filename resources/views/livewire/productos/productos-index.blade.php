@@ -40,7 +40,11 @@
                                          @livewire('productos.producto-edit', ['producto' => $producto],key($producto->nombre))
                                     </td>
                                     <td width="10px">
-                                        <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                        <button
+                                            class="btn btn-danger btn-sm" 
+                                            wire:click="delete('{{$producto->id}}')">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -58,4 +62,5 @@
                 
         </div>
     </div>
+
 </div>

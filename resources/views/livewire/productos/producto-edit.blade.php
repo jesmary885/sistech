@@ -130,7 +130,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <input type="file" wire:model="file" id="file" class="block w-full py-1.5 text-base text-sm font-normal text-gray-400 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" accept="image/*">
+                                        <input type="file" value="file" wire:model="file" id="file" class="block w-full py-1.5 text-sm font-normal text-gray-400 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" accept="image/*">
                                         @error('file')
                                         <small class="text-danger">{{$message}}</small>
                                         @enderror
