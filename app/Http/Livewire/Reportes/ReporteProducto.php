@@ -6,6 +6,7 @@ use App\Models\Producto;
 use App\Models\Producto_venta;
 use App\Models\Venta;
 use COM;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ReporteProducto extends Component
@@ -16,7 +17,7 @@ class ReporteProducto extends Component
 
     public function render()
     {
-        $cantidad = [];
+        /*$cantidad = [];
         $produc = [];
         $ventas = Venta::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])->get();
         $productos = Producto::all();
@@ -30,14 +31,36 @@ class ReporteProducto extends Component
                         $cantidad[$producto->id] = $venta_producto->cantidad + $cantidad[$producto->id];
                     } 
                 }
+            }*/
+
+             /*$productos = DB::select('SELECT p.cod_barra, p.nombre, p.id, sum(dv.cantidad) as quantity from productos p
+             inner join producto_ventas dv on p.id=dv.producto_id
+             inner join ventas v on dv.venta_id = v.id where year(v.fecha)=year(curdate())
+             group by p.cod_barra, p.nombre, p.id order by sum(dv.cantidad) desc limit 5');*/
+
+             $fecha_inicio = $this->fecha_inicio;
+             $fecha_fin = $this->fecha_fin;
+
+             $productos = DB::select('SELECT p.cod_barra, p.nombre, p.id, sum(dv.cantidad) as quantity from productos p
+             inner join producto_ventas dv on p.id=dv.producto_id
+             inner join ventas v on dv.venta_id = v.id where v.fecha BETWEEN "2022-02-01" AND "2022-02-03"
+             group by p.cod_barra, p.nombre, p.id order by sum(dv.cantidad) desc limit 5');
+
+
+            $data=json_encode($productos);
+            $array = json_decode($data, true);
+
+            foreach($array as $arrays){
+                $puntos[]=['name' => $arrays['nombre'] , 'y' => $arrays['quantity']];
+                $data2 = json_encode($puntos);
             }
 
 
-
-
-
-
+        //  foreach($array as $value){
+        //      $hola = "esto es asi " . $value['nombre']. "hola";
+        //      print ($hola);
+        //  }
         
-        return view('livewire.reportes.reporte-producto',compact('cantidad','productos'));
+        return view('livewire.reportes.reporte-producto',compact('array','data2'));
     }
 }

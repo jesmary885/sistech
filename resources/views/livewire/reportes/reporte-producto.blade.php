@@ -1,5 +1,4 @@
 <div>
-
     <table class="table table-striped">
         <thead>
             <tr>
@@ -9,27 +8,35 @@
             </tr>
         </thead>
         <tbody>
-      
-            @foreach ($productos as $producto)
+
+        
+
+       
+        @foreach ($array as $value)
                 <tr>
-                    <td>{{$producto->nombre}}</td>
-                    <td>{{$cantidad[$producto->id]}}</td>
+                    <td>{{$value['nombre']}}</td>
+                    <td>{{$value['quantity']}}</td>
                 </tr>
-            @endforeach
+            @endforeach     
         </tbody>
     </table>
 
 
    
-    {{-- <figure class="highcharts-figure pt-4">
+    <figure class="highcharts-figure">
         <div id="container"></div>
-    </figure> --}}
+        <p class="highcharts-description">
+            All color options in Highcharts can be defined as gradients or patterns.
+            In this chart, a gradient fill is used for decorative effect in a pie
+            chart.
+        </p>
+    </figure>
 
-    {{-- <style>
+      <style>
         .highcharts-figure,
 .highcharts-data-table table {
     min-width: 320px;
-    max-width: 800px;
+    max-width: 660px;
     margin: 1em auto;
 }
 
@@ -69,13 +76,29 @@
     background: #f1f7ff;
 }
 
-input[type="number"] {
-    min-width: 50px;
-}
     </style>
 
-    <script>
-        Highcharts.chart('container', {
+   
+
+<script>
+   Highcharts.setOptions({
+    colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        return {
+            radialGradient: {
+                cx: 0.5,
+                cy: 0.3,
+                r: 0.7
+            },
+            stops: [
+                [0, color],
+                [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
+            ]
+        };
+    })
+});
+
+// Build the chart
+Highcharts.chart('container', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -99,15 +122,19 @@ input[type="number"] {
             cursor: 'pointer',
             dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                connectorColor: 'silver'
             }
         }
     },
-    series: [{
+    series: [
+        {
         name: "Producto",
         colorByPoint: true,
-        data: <?= $data ?>
+        data: <?= $data2 ?> 
     }]
 });
-    </script> --}}
+</script> 
+
+
 </div>
