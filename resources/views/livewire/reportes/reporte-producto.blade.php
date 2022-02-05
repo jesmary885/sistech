@@ -1,25 +1,33 @@
 <div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>cantidad</th>
-       
-            </tr>
-        </thead>
-        <tbody>
 
-        
-
-       
-        @foreach ($array as $value)
-                <tr>
-                    <td>{{$value['nombre']}}</td>
-                    <td>{{$value['quantity']}}</td>
-                </tr>
-            @endforeach     
-        </tbody>
-    </table>
+    <div class="card">
+        @if ($array)
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Producto</th>
+                            <th class="text-center">Cód de barra</th>
+                            <th class="text-center">Cantidad vendidos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($array as $value)
+                        <tr>
+                            <td class="text-center">{{$value['nombre']}}</td>
+                            <td class="text-center">{{$value['cod_barra']}}</td>
+                            <td class="text-center">{{$value['quantity']}}</td>
+                        </tr>
+                    @endforeach    
+                    </tbody>
+                </table>
+            </div>
+        @else
+             <div class="card-body">
+                <strong>No hay registros</strong>
+            </div>
+        @endif
+    </div>
 
 
    
@@ -106,7 +114,7 @@ Highcharts.chart('container', {
         type: 'pie'
     },
     title: {
-        text: 'Browser market shares in January, 2018'
+        text: 'Productos mas vendidos'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -134,7 +142,7 @@ Highcharts.chart('container', {
         data: <?= $data2 ?> 
     }]
 });
-</script> 
+</script>  
 
 
 </div>
