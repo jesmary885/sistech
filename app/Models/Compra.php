@@ -25,5 +25,9 @@ class Compra extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function sucursal(){
+        return $this->belongsTo(Sucursal::class);
+    }
+
 
 }

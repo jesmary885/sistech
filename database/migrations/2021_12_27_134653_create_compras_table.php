@@ -25,6 +25,8 @@ class CreateComprasTable extends Migration
             $table->string('cantidad');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('sucursal_id');
+            $table->foreign('sucursal_id')->references('id')->on('sucursals');
         });
     }
 

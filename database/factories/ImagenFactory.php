@@ -13,12 +13,12 @@ class ImagenFactory extends Factory
      * @return array
      */
 
-    protected $model = Imagen::class;
+    //protected $model = Imagen::class;
 
     public function definition()
     {
         return [
-            'url' =>'productos/' . $this->faker->Image('public/storage/productos', 640, 480, null, false)
+           // 'url' =>'productos/' . $this->faker->Image('productos', 640, 480, null, false)
         ];
     }
 }

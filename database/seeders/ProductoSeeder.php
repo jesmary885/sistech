@@ -32,9 +32,9 @@ class ProductoSeeder extends Seeder
             'marca_id' => '1',
         ]);
 
-        Imagen::factory(1)->create([
-            'imageable_id'=> '1',
-            'imageable_type'=>Producto::class
-        ]);
+        // Imagen::factory(1)->create([
+        //     'imageable_id'=> '1',
+        //     'imageable_type'=>Producto::class
+        // ]);
     }
 }
