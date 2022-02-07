@@ -23,8 +23,6 @@ class CreateProveedorsTable extends Migration
             $table->string('email')->unique();
             $table->string('telefono');
             $table->string('direccion');
-            $table->unsignedBigInteger('pais_id');
-            $table->foreign('pais_id')->references('id')->on('pais');
             $table->unsignedBigInteger('ciudad_id');
             $table->foreign('ciudad_id')->references('id')->on('ciudads');
             $table->unsignedBigInteger('estado_id');

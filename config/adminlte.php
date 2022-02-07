@@ -245,7 +245,7 @@ return [
                 ],
                 [
                     'text' => 'Proveedores',
-                    'url'  => '#',
+                    'route'     => 'admin.proveedores.index',
                 ],
                 [
                     'text' => 'Sucursales',

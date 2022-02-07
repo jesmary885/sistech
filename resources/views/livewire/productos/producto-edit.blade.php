@@ -1,5 +1,5 @@
 <div>
-    <button type="submit" class="btn btn-success btn-sm" wire:click="open">
+    <button type="submit" class="btn btn-success btn-sm" wire:click="open" title="Editar producto">
         <i class="fas fa-edit"></i>
    </button> 
 

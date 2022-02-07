@@ -40,9 +40,13 @@
                                          @livewire('productos.producto-edit', ['producto' => $producto],key($producto->nombre))
                                     </td>
                                     <td width="10px">
+                                        @livewire('productos.productos-barcode', ['producto' => $producto],key($producto->cod_barra))
+                                   </td>
+                                    <td width="10px">
                                         <button
                                             class="btn btn-danger btn-sm" 
-                                            wire:click="delete('{{$producto->id}}')">
+                                            wire:click="delete('{{$producto->id}}')"
+                                            title="Eliminar producto">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>

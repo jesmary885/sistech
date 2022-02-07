@@ -13,7 +13,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Registro de clientes</h5>
+                        <h5 class="modal-title">Registro de proveedores</h5>
                     </div>
                     <div class="modal-body">
 
@@ -33,10 +33,10 @@
                                 <x-input-error for="tipo_documento" />
                             </div>
                             <div class="w-full mr-2">
-                                <input wire:model.defer="documento" name="documento" type="text"
+                                <input wire:model.defer="nro_documento" name="nro_documento" type="text"
                                     class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     placeholder="Nro de documento">
-                                <x-input-error for="documento" />
+                                <x-input-error for="nro_documento" />
                             </div>
                             <div class="w-full mr-2">
                                 <input wire:model="telefono" type="text"
@@ -48,16 +48,16 @@
 
                         <div class="flex justify-between w-full mt-2 mr-2">
                             <div class="w-full mr-2">
-                                <input wire:model="nombre" type="text"
+                                <input wire:model="nombre_encargado" type="text"
                                     class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    placeholder="Nombres">
+                                    placeholder="Nombre del encargado">
                                 <x-input-error for="nombre" />
                             </div>
                             <div class="w-full mr-2">
-                                <input wire:model="apellido" type="text"
+                                <input wire:model="nombre_proveedor" type="text"
                                     class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    placeholder="Apellidos">
-                                <x-input-error for="apellido" />
+                                    placeholder="Nombre del proveedor">
+                                <x-input-error for="nombre_proveedor" />
                             </div>
                         </div>
 

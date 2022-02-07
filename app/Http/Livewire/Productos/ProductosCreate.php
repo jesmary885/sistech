@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\TemporaryUploadedFile;
+use Illuminate\Support\Str;
 
 
 class ProductosCreate extends Component
@@ -40,6 +41,7 @@ class ProductosCreate extends Component
     //      'indicador' => 'required',
     //      'telefono' => 'required|numeric|min:11',
     //      'email' => 'required|max:50|unique:users',
+    //        'cod_barra'=>'nullabe|string|max:13|min:6'
     //  ];
 
  
@@ -85,8 +87,8 @@ class ProductosCreate extends Component
         //agregando producto en tabla productos
         $producto = new Producto();
         $producto->nombre = $this->nombre;
-     
-        $producto->cod_barra = $this->cod_barra;
+        if($this->cod_barra) $producto->cod_barra = $this->cod_barra;
+        else $producto->cod_barra = Str::random(8);
         $producto->inventario_min = $this->inventario_min;
         $producto->presentacion = $this->presentacion;
         $producto->precio_entrada = $this->precio_entrada;
@@ -133,7 +135,8 @@ class ProductosCreate extends Component
             'total' => $total_compra,
             'cantidad' => $this->cantidad,
             'proveedor_id' => $this->proveedor_id,
-            'user_id' => $usuario_auth
+            'user_id' => $usuario_auth,
+            'sucursal_id' => $this->sucursal_id
         ]);
 
         //guardando cantidades en tabla pivote entre sucursal y productos

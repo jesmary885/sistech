@@ -22,7 +22,6 @@ class ProveedorSeeder extends Seeder
             'email' => 'vj@gmail.com',
             'telefono' => '555555',
             'direccion' => 'av. siempre vivas',
-            'pais_id' => '1',
             'ciudad_id' => '1',
             'estado_id' => '1',
         ]);

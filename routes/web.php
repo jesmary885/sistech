@@ -48,8 +48,8 @@ Auth::routes();
 
 
 Route::resource('roles', RoleController::class)->only('index','edit','update','destroy','create','store')->names('admin.roles');
-Route::resource('clientes', ClientesController::class)->only('index','edit','update')->names('admin.clientes');
-Route::resource('proveedores', ProveedoresController::class)->only('index','edit','update')->names('admin.proveedores');
+Route::resource('clientes', ClientesController::class)->only('index')->names('admin.clientes');
+Route::resource('proveedores', ProveedoresController::class)->only('index')->names('admin.proveedores');
 Route::resource('sucursales', SucursalesController::class)->only('index','edit','update')->names('admin.sucursales');
 Route::resource('categorias', CategoriasController::class)->only('index','edit','update')->names('admin.categorias');
 Route::resource('marcas', MarcasController::class)->only('index','edit','update')->names('admin.marcas');

@@ -12,10 +12,7 @@ class Proveedor extends Model
     protected $guarded = ['id','created_at','updated_at'];
 
     //Relaion uno a muhos inversa
-    public function pais(){
-        return $this->belongsTo(Pais::class);
-    }
-
+  
     public function ciudad(){
         return $this->belongsTo(Ciudad::class);
     }
