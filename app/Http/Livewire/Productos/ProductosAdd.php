@@ -64,12 +64,6 @@ class ProductosAdd extends Component
         $rules = $this->rules;
         $this->validate($rules);
 
-        //modificando cantidad en tabla productos
-
-        $producto_select->update([
-            'cantidad' => $cantidad_nueva_general
-        ]);
-
         //modificando cantidad en tabla pivote producto_sucursal
 
         $cantidad_nueva_sucursal = $this->producto->sucursals->find($this->sucursal_id)->pivot->cantidad + $this->cantidad;
@@ -83,8 +77,10 @@ class ProductosAdd extends Component
             $this->producto->compras()->create([
             'fecha' => $this->fecha_actual,
             'total' => $total_compra,
+            'precio_compra' => $this->precio_compra,
             'cantidad' => $this->cantidad,
             'proveedor_id' => $this->proveedor_id,
+            'sucursal_id' => $this->sucursal_id,
             'user_id' => $usuario_auth
         ]);
 

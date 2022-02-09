@@ -14,7 +14,7 @@ class ProveedorIndex extends Component
 
     protected $listeners = ['render' => 'render','confirmacion' => 'confirmacion'];
 
-    public $search,$cliente;
+    public $search,$proveedor;
 
     public function updatingSearch(){
         $this->resetPage();

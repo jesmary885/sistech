@@ -240,6 +240,10 @@ return [
                     'route'     => 'admin.roles.index',
                 ],
                 [
+                    'text' => 'compras',
+                    'route'     => 'admin.compras.index',
+                ],
+                [
                     'text'    => 'Clientes',
                     'route'     => 'admin.clientes.index',
                 ],
@@ -249,19 +253,19 @@ return [
                 ],
                 [
                     'text' => 'Sucursales',
-                    'url'  => '#',
+                    'route'     => 'admin.sucursales.index',
                 ],
                 [
                     'text' => 'Categorias',
-                    'url'  => '#',
+                    'route'     => 'admin.categorias.index',
                 ],
                 [
                     'text' => 'Marcas',
-                    'url'  => '#',
+                    'route'     => 'admin.marcas.index',
                 ],
                 [
                     'text' => 'Modelos',
-                    'url'  => '#',
+                    'route'     => 'admin.modelos.index',
                 ],
                 [
                     'text' => 'Servicios',
@@ -314,13 +318,6 @@ return [
             ],
             
         ],
-
-        [
-            'text'    => 'COMPRAS',
-            'icon'    => 'fas fa-shopping-bag fa-fw',
-            'url'  => '#',
-        ],
-
         [
             'text'    => 'REPORTES',
             'icon'    => 'fas fa-chart-bar fa-fw',
