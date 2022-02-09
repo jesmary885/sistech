@@ -25,6 +25,7 @@
   'productos.productos-detalle-traslado' => 'App\\Http\\Livewire\\Productos\\ProductosDetalleTraslado',
   'productos.productos-devolucion' => 'App\\Http\\Livewire\\Productos\\ProductosDevolucion',
   'productos.productos-devolucion-add' => 'App\\Http\\Livewire\\Productos\\ProductosDevolucionAdd',
+  'productos.productos-export' => 'App\\Http\\Livewire\\Productos\\ProductosExport',
   'productos.productos-historial' => 'App\\Http\\Livewire\\Productos\\ProductosHistorial',
   'productos.productos-index' => 'App\\Http\\Livewire\\Productos\\ProductosIndex',
   'productos.productos-serial' => 'App\\Http\\Livewire\\Productos\\ProductosSerial',

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Ventas;
 
 use App\Models\Producto_venta;
 use App\Models\Venta;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -31,6 +32,10 @@ class VentasCredito extends Component
 
         $ventas = Venta::where('fecha', 'LIKE', '%' . $this->search . '%')
                     ->where('tipo_pago', 2)
+                    ->orwhereHas('cliente',function(Builder $query){
+                        $query->where('nro_documento','LIKE', '%' . $this->search . '%');
+                    })
+                    ->latest('id')
                     ->paginate(5);
         return view('livewire.ventas.ventas-credito',compact('ventas'));
     }

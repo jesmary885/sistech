@@ -6,6 +6,7 @@ use App\Http\Livewire\Compras\ComprasIndex;
 use App\Models\Compra;
 use App\Models\Producto;
 use App\Models\Producto_sucursal;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 Use Livewire\WithPagination;
@@ -27,8 +28,11 @@ class CompraIndex extends Component
     {
 
         $compras = Compra::where('fecha', 'LIKE', '%' . $this->search . '%')
-        ->latest('id')
-        ->paginate(5);
+                                ->orwhereHas('producto',function(Builder $query){
+                                    $query->where('nombre','LIKE', '%' . $this->search . '%');
+                                })
+                                ->latest('id')
+                                ->paginate(5);
 
         return view('livewire.admin.compras.compra-index',compact('compras'));
     }

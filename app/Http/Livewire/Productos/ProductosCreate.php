@@ -134,7 +134,7 @@ class ProductosCreate extends Component
             'fecha' => $this->fecha_actual,
             'total' => $total_compra,
             'cantidad' => $this->cantidad,
-            'precio_compra' => $this->precio_compra,
+            'precio_compra' => $this->precio_entrada,
             'proveedor_id' => $this->proveedor_id,
             'user_id' => $usuario_auth,
             'sucursal_id' => $this->sucursal_id

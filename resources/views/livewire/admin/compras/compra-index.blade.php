@@ -1,7 +1,7 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <input wire:model="search" placeholder="Ingrese la fecha de la compra realizada a buscar" class="form-control">
+            <input wire:model="search" placeholder="Ingrese la fecha de la compra realizada o nombre del producto a buscar" class="form-control">
         </div>
         @if ($compras->count())
             <div class="card-body">

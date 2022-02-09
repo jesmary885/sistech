@@ -1,7 +1,7 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <input wire:model="search" placeholder="Ingrese la fecha de la venta a buscar" class="form-control">
+            <input wire:model="search" placeholder="Ingrese la fecha de la venta o nro de documento del cliente a buscar" class="form-control">
         </div>
  
         @if ($ventas->count())
@@ -11,6 +11,7 @@
                         <tr>
                             <th>Fecha</th>
                             <th>Cliente</th>
+                            <th>Cliente - Documento</th>
                             <th>Estado de entrega</th>
                             <th>Total de venta</th>
                             <th>Total pagado</th>
@@ -23,6 +24,7 @@
                             <tr>
                                 <td>{{$venta->fecha}}</td>
                                 <td>{{$venta->cliente->nombre}} {{$venta->cliente->apellido}}</td>
+                                <td>{{$venta->cliente->nro_documento}}</td>
                                 <td>{{$venta->estado_entrega}}</td>
                                 <td>{{$venta->total}}</td>
                                 <td>{{$venta->total_pagado_cliente}}</td>
