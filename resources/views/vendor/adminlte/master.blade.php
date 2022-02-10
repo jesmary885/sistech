@@ -175,6 +175,31 @@
             })
         })
     </script>
+
+    
+<script>
+    livewire.on('confirm_img', function(ms){
+        Swal.fire({
+        title: ms,
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'SI',
+        denyButtonText: `NO`,
+        }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            livewire.emitTo('productos.producto-create-img','render')
+        } else if (result.isDenied) {
+            livewire.emitTo('productos.productos-index','render')
+            Swal.fire(
+                    'Producto creado satisfactoriamente',
+                    '',
+                    'success'
+                    )
+        }
+        })
+    })
+</script>
     
 
 

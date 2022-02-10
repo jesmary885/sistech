@@ -181,11 +181,11 @@
             </div>
                     
          
-            <div class="flex mt-4 mb-2">
+            {{-- <div class="flex mt-4 mb-2">
                 <i class="far fa-image mt-3 mr-2"></i>
                 <h2 class="text-lg inline mt-2 underline decoration-gray-400">Foto o imagen del producto</h2>
-            </div>
-            <div class="row">
+            </div> --}}
+            {{-- <div class="row">
                 <div class="col">
                     <div class="w-50 h-50">         
                         @if ($file)
@@ -203,7 +203,9 @@
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere repudiandae eius obcaecati ipsam error quas? Explicabo maiores sapiente recusandae, odio accusamus amet saepe error, deleniti doloribus expedita et natus consequuntur.</p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
+       
             <div class="py-12">
                 <button type="submit" class="btn btn-primary" wire:click="save">
                     <i class="fas fa-file-download"></i> Guardar
@@ -212,7 +214,13 @@
             </div>
         </div>
     </div>
+
+
+
+
 </div>
+
+
 
         
 

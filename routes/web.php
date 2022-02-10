@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ModelosController;
 use App\Http\Controllers\Admin\ProveedoresController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SucursalesController;
+use App\Http\Controllers\Productos\FilesController;
 use App\Http\Controllers\Productos\MovimientosController;
 use App\Http\Controllers\Productos\ProductosController;
 use App\Http\Controllers\Productos\ProductosMovController;
@@ -73,6 +74,10 @@ Route::get('reporte_venta',[ReportesController::class,'index_venta'])->name('rep
 // livewire
 
 Route::get('productos/{sucursal}/traslado', ProductosTraslado::class)->name('producto.traslado.view');
+
+//Cargar imagen de producto
+
+Route::post('productos/{product}/files', [FilesController::class, 'files'])->name('productos.files');
 
 
 

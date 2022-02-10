@@ -9,18 +9,19 @@ use Illuminate\Contracts\View\View;
 
 class ProductoExport implements FromView
 {
- protected $array,$relacion,$sucursal;
+ protected $array,$relacion,$sucursal,$fecha_actual;
     
      public function __construct($array,$relacion,$sucursal)
      {
          $this->array = $array;
          $this->relacion = $relacion;
          $this->sucursal = $sucursal;
+         $this->fecha_actual = date('d-m-Y');
      }
 
     public function view(): View
 	{
         
-		return view('exportexcel.productos', ['productos'=> $this->array,'relacion' => $this->relacion,'sucursal' => $this->sucursal]);
+		return view('exportexcel.productos', ['productos'=> $this->array,'relacion' => $this->relacion,'sucursal' => $this->sucursal,'fecha_actual' => $this->fecha_actual]);
 	}
 }
