@@ -12,23 +12,23 @@
                     </div>
                     <div class="modal-body">
                         <div class="flex justify-between">
-                            <p class="text-lg"><b>Fecha:</b> {{$fecha_creacion}}</p>
-                            <h2 class="text-lg"><b>Factura Nro. {{$factura_nro}}</b></h2>
+                            <p class="text-lg text-gray-600"><b>Fecha:</b> {{$fecha_creacion}}</p>
+                            <h2 class="text-lg text-gray-600"><b>Factura Nro. {{$factura_nro}}</b></h2>
                         </div>
                         <hr class="mt-2 mb-2">
-                        <h3 class="text-lg">Datos del cliente</h3>
+                        <h3 class="text-lg text-gray-600">Datos del cliente</h3>
                         <div class="flex justify-between">
                             <p>Nombre: {{$nombre_cliente}} {{$apellido_cliente}}</p>
                             <p>Documento: {{$tipo_doc_cliente}} - {{$doc_cliente}}</p>
                         </div>
                         <hr class="mt-2 mb-2">
-                        <h3 class="text-lg">Datos de atencion</h3>
+                        <h3 class="text-lg text-gray-600">Datos de atención</h3>
                         <div class="flex justify-between">
                             <p>Nombre del cajero: {{$nombre_usuario}} {{$apellido_usuario}}</p>
                             <p>Sucursal: {{$sucursal}}</p>
                         </div>
                         <hr class="mt-2 mb-2">
-                        <h3 class="text-lg ml-4"><b>Datos de la venta</b></h3>
+                        <h3 class="text-lg ml-4 text-gray-600"><b>Datos de la venta</b></h3>
                         <div class="card">
                             @if ($productos->count())
                                 <div class="card-body">
@@ -87,7 +87,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="close" >Cerrar</button>
-                        <button type="button" class="btn btn-primary" wire:click="update">Imprimir</button>
+                        <button type="button" class="btn btn-primary" wire:click="export_pdf"><i class="far fa-file-pdf"></i> Exportar a PDF</button>
                     </div>
                 </div>
             </div>

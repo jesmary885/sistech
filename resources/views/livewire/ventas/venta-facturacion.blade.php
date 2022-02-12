@@ -171,17 +171,17 @@
                 </p>
                 <p class="flex justify-between items-center">
                     Descuento
-                    {{$descuento_total = (Cart::subtotal() * $this->descuento) / 100}}
-                    <span class="font-semibold">S/ {{$descuento_total}}</span>
+                    
+                    <span class="font-semibold">S/ {{$descuento_total = Cart::subtotal() * ($this->descuento / 100)}}</span>
                 </p>
                 <p class="flex justify-between items-center">
                     Subtotal menos descuento
                     <span class="font-semibold">S/ {{Cart::subtotal() - $descuento_total}}</span>
                 </p>
                 <p class="flex justify-between items-center">
-                    IVA (15%)
+                    IVA {{$iva*100}} %
                     <span class="font-semibold">
-                    S/ {{(Cart::subtotal() - $descuento_total) * (0.15)}}
+                    S/ {{Cart::subtotal() * $this->iva}}
                     </span>
                 </p>
 
@@ -197,7 +197,7 @@
                     <p class="flex justify-between items-center">
                         Pendiente por pagar
                         <span class="font-semibold">
-                        S/ {{((Cart::subtotal() - $descuento_total) + ((Cart::subtotal() - $descuento_total) * (0.15))) - $pago_cliente}}
+                        S/ {{((Cart::subtotal() - $descuento_total) + ((Cart::subtotal() - $descuento_total) * ($iva))) - $pago_cliente}}
                         </span>
                     </p>
                 </div>
@@ -205,7 +205,7 @@
                 <hr class="mt-4 mb-3">
                 <p class="flex justify-between items-center font-semibold">
                     <span class="text-lg">Total a pagar</span>
-                    S/ {{(Cart::subtotal() - $descuento_total) + ((Cart::subtotal() - $descuento_total) * (0.15))}}
+                    S/ {{( (Cart::subtotal() * $this->iva) + Cart::subtotal() ) - ($descuento_total)}}
                 </p>
             </div>
         </div>

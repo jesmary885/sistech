@@ -26,6 +26,14 @@
            
         }
 
+        
+        #fact p{
+         
+         margin-left: 5px;
+         margin-right: 5px;
+       
+     }
+
         #fo{
             text-align: center;
             font-size: 10px;
@@ -42,19 +50,12 @@
             float: right;
             text-align: center;
             margin-top: 2%;
-            margin-left: 2px;
-            margin-right: 2px;
+            margin-left: 2%;
+            margin-right: 2%;
             font-size: 20px;
             background: #33afff;
             border-radius: 8px;
             font-weight: bold;
-        }
-
-        #fact p{
-         
-            margin-left: 5px;
-            margin-right: 5px;
-          
         }
 
         #cliente{
@@ -196,12 +197,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($collection as $item)
+                    @foreach ($productos as $producto)
                         <tr>
-                            <td>{{$item->qty}}</td>
-                            <td>{{$item->name}}</td>
-                            <td>S/ {{$item->price}}</td>
-                            <td>S/ {{($item->qty)*($item->price)}}</td>
+                            <td>{{$producto->cantidad}}</td>
+                            <td>{{$producto->producto->nombre}}</td>
+                            <td>S/ {{$producto->precio}}</td>
+                            <td>S/ {{($producto->cantidad)*($producto->precio)}}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -227,7 +228,7 @@
                             <p align="right">IMPUESTO ({{$iva * 100}} %): </p>
                         </th>
                         <td>
-                            <p align="center">S/ {{$impuesto}}</p>
+                            <p align="center">S/  {{$impuesto}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -238,6 +239,23 @@
                             <p align="center">S/ {{$total}}</p>
                         </td>
                     </tr>
+
+                    <tr>
+                        <th colspan="3">
+                            <p align="right">TOTAL PAGADO: </p>
+                        </th>
+                        <td>
+                            <p align="center">S/ {{$pagado}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="3">
+                            <p align="right">PENDIENTE POR PAGAR: </p>
+                        </th>
+                        <td>
+                            <p align="center">S/ {{$deuda}}</p>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
@@ -245,8 +263,6 @@
     <br>
     <br>
     <footer id="fo">
-
-      
         <p>
             ***Precios de productos incluyen impuestos. Para poder realizar un reclamo o devolucion debe presentar esta factura***
         </p>

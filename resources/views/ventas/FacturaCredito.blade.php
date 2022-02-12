@@ -26,6 +26,14 @@
            
         }
 
+        
+        #fact p{
+         
+         margin-left: 5px;
+         margin-right: 5px;
+       
+     }
+
         #fo{
             text-align: center;
             font-size: 10px;
@@ -204,7 +212,7 @@
                             <p align="right">SUBTOTAL: </p>
                         </th>
                         <td>
-                            <p align="center">S/ {{number_format($subtotal,2)}}</p>
+                            <p align="center">S/ {{$subtotal}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -212,15 +220,15 @@
                             <p align="right">DESCUENTO: </p>
                         </th>
                         <td>
-                            <p align="center">S/ {{number_format($descuento,2)}}</p>
+                            <p align="center">S/ {{$descuento}}</p>
                         </td>
                     </tr>
                     <tr>
                         <th colspan="3">
-                            <p align="right">IMPUESTO (16%): </p>
+                            <p align="right">IMPUESTO ({{$iva * 100}} %): </p>
                         </th>
                         <td>
-                            <p align="center">S/ {{number_format(($subtotal)*(0.16),2)}}</p>
+                            <p align="center">S/  {{$impuesto}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -228,7 +236,7 @@
                             <p align="right">TOTAL A PAGAR: </p>
                         </th>
                         <td>
-                            <p align="center">S/ {{number_format((($subtotal)+(($subtotal)*(0.16)) - $descuento),2)}}</p>
+                            <p align="center">S/ {{{{$total}}}}</p>
                         </td>
                     </tr>
 
@@ -237,7 +245,7 @@
                             <p align="right">TOTAL PAGADO: </p>
                         </th>
                         <td>
-                            <p align="center">S/ {{number_format(($pagado),2)}}</p>
+                            <p align="center">S/ {{$pagado}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -245,7 +253,7 @@
                             <p align="right">PENDIENTE POR PAGAR: </p>
                         </th>
                         <td>
-                            <p align="center">S/ {{number_format(($deuda),2)}}</p>
+                            <p align="center">S/ {{$deuda}}</p>
                         </td>
                     </tr>
                 </tfoot>

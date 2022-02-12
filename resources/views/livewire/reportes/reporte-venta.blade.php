@@ -1,4 +1,5 @@
 <div>
+
     <div class="card">
         @if ($cantidad_venta)
             <div class="card-body">
@@ -12,17 +13,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                      
                         <tr>
                             <td class="text-center">{{$cantidad_venta[0]->cantidad}}</td>
                             <td class="text-center">S/ {{$total_venta[0]->quantity}}</td>
                             <td class="text-center">S/ {{$costo_venta[0]->quantity}}</td>
                             <td class="text-center">S/ {{($total_venta[0]->quantity)-($costo_venta[0]->quantity)}}</td>
-
                         </tr>
-             
                     </tbody>
                 </table>
+                <div class="flex">
+                    <button class="btn btn-success btn-sm mt-2" wire:click="export_excel" title="Eliminar producto"> <i class="far fa-file-excel"></i> Exportar a excel</button>
+                    <button class="btn btn-info btn-sm mt-2 ml-2" wire:click="export_pdf" title="Eliminar producto"> <i class="far fa-file-pdf"></i> Exportar a PDF</button>
+                </div>
             </div>
         @else
              <div class="card-body">

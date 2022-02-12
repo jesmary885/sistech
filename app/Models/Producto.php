@@ -56,8 +56,8 @@ class Producto extends Model
         return $this->morphOne(Imagen::class,"imageable");
     }*/
 
-    public function images(){
-        return $this->morphMany(Imagen::class, "imageable");
+    public function imagen(){
+        return $this->morphOne(Imagen::class, "imageable");
     }
 
     

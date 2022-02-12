@@ -20,7 +20,7 @@ class ProductoEdit extends Component
 {
     use WithFileUploads;
     public $isopen = false;
-    public $pivot, $nombre, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $modelos, $proveedores, $sucursales,$producto;
+    public $pivot, $nombre, $p, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $modelos, $proveedores, $sucursales,$producto;
     public $marca_id = "", $sucursal_id = "" ,$modelo_id = "", $categoria_id = "", $proveedor_id ="";
     public $limitacion_sucursal = true;
 
@@ -51,7 +51,9 @@ class ProductoEdit extends Component
     }
  
 
-    public function mount(){
+    public function mount($producto){
+        $this->p = $producto;
+
          $usuario_au = User::where('id',Auth::id())->first();
          if($usuario_au->limitacion == '1'){
              $this->sucursales=Sucursal::all();

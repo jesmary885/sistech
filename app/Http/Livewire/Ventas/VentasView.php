@@ -4,12 +4,13 @@ namespace App\Http\Livewire\Ventas;
 
 use App\Models\Producto_venta;
 use Livewire\Component;
+use PDF;
 
 class VentasView extends Component
 {
 
-    public $venta, $fecha_creacion, $factura_nro, $nombre_cliente, $apellido_cliente, $tipo_doc_cliente, $doc_cliente, $nombre_usuario, $apellido_usuario, $sucursal, $subtotal, $descuento, $impuesto, $total;
-
+    public $venta, $deuda_cliente, $pago_cliente, $estado_entrega, $telefono_cliente, $fecha_creacion, $tipo_pago, $factura_nro, $nombre_cliente, $apellido_cliente, $tipo_doc_cliente, $doc_cliente, $nombre_usuario, $apellido_usuario, $sucursal, $subtotal, $descuento, $impuesto, $total;
+    public $iva = 0.15;
 
     public $isopen = false;
 
@@ -33,12 +34,69 @@ class VentasView extends Component
         $this->sucursal = $this->venta->sucursal->nombre;
         $this->subtotal = $this->venta->subtotal;
         $this->descuento = $this->venta->descuento;
-        $this->impuesto = '0';
+        $this->impuesto = $this->venta->impuesto;
         $this->total = $this->venta->total;
+        $this->tipo_pago = $this->venta->tipo_pago;
+        $this->telefono_cliente = $this->venta->cliente->telefono;
+        $this->estado_entrega = $this->venta->estado_entrega;
+        $this->pago_cliente= $this->venta->pagado_cliente - $this->venta->deuda_cliente;
+        $this->deuda_cliente= $this->venta->deuda_cliente;
     }
     public function render()
     {
         $productos = Producto_venta::where('venta_id',$this->venta->id)->get();
         return view('livewire.ventas.ventas-view',compact('productos'));
+    }
+
+
+    public function export_pdf(){
+
+        $productos = Producto_venta::where('venta_id',$this->venta->id)->get();
+        
+        if ($this->tipo_pago == "1"){
+            $data = [
+                'cliente_nombre' => $this->nombre_cliente." ".$this->apellido_cliente,
+                'cliente_documento' =>$this->doc_cliente,
+                'cliente_telefono' =>$this->telefono_cliente,
+                'usuario' => $this->nombre_usuario." ".$this->apellido_usuario,
+                'fecha_actual' => $this->fecha_creacion,
+                'venta_nro' => $this->factura_nro,
+                'collection' => $productos,
+                'estado_entrega' => $this->estado_entrega,
+                'descuento' => $this->descuento,
+                'subtotal' => $this->subtotal,
+                'impuesto' => $this->impuesto,
+                'total' => $this->total,
+                'productos' => $productos,
+                'iva' => $this->iva,
+            ];
+           $pdf = PDF::loadView('ventas.view_FacturacionContado',$data)->output();
+        }
+        else{
+            $data = [
+                'cliente_nombre' => $this->nombre_cliente." ".$this->apellido_cliente,
+                'cliente_documento' =>$this->doc_cliente,
+                'cliente_telefono' =>$this->telefono_cliente,
+                'usuario' => $this->nombre_usuario." ".$this->apellido_usuario,
+                'fecha_actual' => $this->fecha_creacion,
+                'venta_nro' => $this->factura_nro,
+                'collection' => $productos,
+                'estado_entrega' => $this->estado_entrega,
+                'descuento' => $this->descuento,
+                'subtotal' => $this->subtotal,
+                'pagado' => $this->pago_cliente,
+                'impuesto' => $this->impuesto,
+                'total' => $this->total,
+                'productos' => $productos,
+                'deuda' => $this->deuda_cliente,
+            ];
+           $pdf = PDF::loadView('ventas.view_FacturacionCredito',$data)->output();
+        }
+
+        return response()->streamDownload(
+            fn () => print($pdf),
+           "Factura.pdf"
+            );
+
     }
 }

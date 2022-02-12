@@ -176,7 +176,7 @@
         })
     </script>
 
-    
+{{--     
 <script>
     livewire.on('confirm_img', function(ms){
         Swal.fire({
@@ -199,7 +199,7 @@
         }
         })
     })
-</script>
+</script> --}}
     
 
 

@@ -26,12 +26,15 @@ class ProductosCreate extends Component
 
     use WithFileUploads;
 
-    protected $listeners = ['goindex'];
+  
 
     public $nombre, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores, $sucursales;
     public $modelos = [];
     public $marca_id = "", $sucursal_id = "" ,$modelo_id = "", $categoria_id = "", $proveedor_id ="";
     public $limitacion_sucursal = true;
+    public $ff;
+
+    protected $listeners = ['refreshimg'];
 
     // protected $rules = [
     //     'region_id' => 'required',
@@ -75,8 +78,17 @@ class ProductosCreate extends Component
         ]);
     }*/
 
+    public function refreshimg($f)
+    {
+        $this->ff = $f;
+
+        //dd($this->file);
+    }
+
     public function save()
     {
+
+       
         // $rules = $this->rules;
         // $this->validate($rules);
 
@@ -105,12 +117,14 @@ class ProductosCreate extends Component
         $producto->estado = $this->estado;
         $producto->save();
         //agregando imagen de producto en tabla imagenes
-       /* if ($this->file){
+
+       if ($this->file){
             $url = Storage::put('public/productos', $this->file);
             $producto->imagen()->create([
                 'url' => $url
             ]);
-        }*/
+        }
+        
         //agregando productos si contienen serial en tabla producto_cod_barra_serials
         // if($this->serial == '1'){
         //     for ($i=0; $i < $this->cantidad; $i++) {
@@ -160,16 +174,11 @@ class ProductosCreate extends Component
         }
 
         $this->reset(['nombre','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','marca_id']);
-
-        $this->emit('confirm_img','Prodddfgfdgfd');
+       $this->emit('alert','Producto creado correctamente');
+        $this->emitTo('productos.productos-index','render');
     
     }
 
-    public function goindex(){
-     
-        $this->emit('alert','Producto creado correctamente');
-        $this->emitTo('productos.productos-index','render');
-    }
 
     public function render()
     {

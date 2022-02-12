@@ -15,6 +15,7 @@ class ProductosIndex extends Component
 
     protected $listeners = ['render' => 'render','confirmacion' => 'confirmacion'];
 
+
     public $search, $producto;
 
     public function updatingSearch(){
@@ -27,6 +28,7 @@ class ProductosIndex extends Component
 
         $productos = Producto::where('nombre', 'LIKE', '%' . $this->search . '%')
                     ->orwhere('cod_barra', 'LIKE', '%' . $this->search . '%')
+                    ->latest('id')
                     ->paginate(5);
         
         return view('livewire.productos.productos-index',compact('productos','sucursales'));

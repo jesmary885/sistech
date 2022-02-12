@@ -25,6 +25,7 @@ class VentaFacturacion extends Component
     public $metodo_pago, $total, $client, $search;
     public $sucursal,$cliente_select, $pago_cliente, $deuda_cliente, $descuento, $estado_entrega;
     public $siguiente_venta = 0;
+    public $iva = 0.15;
  
     protected $paginationTheme = "bootstrap";
 
@@ -70,11 +71,20 @@ class VentaFacturacion extends Component
 
     public function save(){
 
+       
+
         $rules = $this->rules;
         $this->validate($rules);
         $user_auth =  auth()->user()->id;
-        $descuento_total = (Cart::subtotal() * $this->descuento) / 100;
-        $total_venta = ((Cart::subtotal() * 0.15) + Cart::subtotal()) - $descuento_total;
+
+        //$descuento_total = (Cart::subtotal() * $this->descuento) / 100;
+
+        $descuento_total = Cart::subtotal() * ($this->descuento / 100);
+        $impuesto= Cart::subtotal() * $this->iva;
+
+        $total_venta = ($impuesto + Cart::subtotal()) - $descuento_total;
+
+        
         $fecha_actual = date('Y-m-d');
 
         if($this->estado_entrega == "1") $entrega = 'Entregado'; else
@@ -99,6 +109,7 @@ class VentaFacturacion extends Component
         $venta->sucursal_id = $this->sucursal;
         $venta->estado_entrega = $entrega;
         $venta->descuento = $descuento_total;
+        $venta->impuesto=$impuesto;
         $venta->save();
 
         foreach (Cart::content() as $item) {
@@ -120,6 +131,8 @@ class VentaFacturacion extends Component
             discount($item,$this->sucursal);
         }
 
+      
+
         if ($this->tipo_pago == "1"){
             $data = [
                 'cliente_nombre' => $this->client->nombre." ".$this->client->apellido,
@@ -131,7 +144,13 @@ class VentaFacturacion extends Component
                 'collection' => Cart::content(),
                 'estado_entrega' => $entrega,
                 'descuento' => $descuento_total,
-                'subtotal' => Cart::subtotal()
+                'subtotal' => Cart::subtotal(),
+                'subtotal_menos_descuento' => Cart::subtotal() - ($descuento_total),
+                'impuesto' => $impuesto,
+                'total' => $total_venta,
+                'iva' => $this->iva,
+
+                
             ];
            $pdf = PDF::loadView('ventas.FacturaContado',$data)->output();
         }
@@ -148,7 +167,11 @@ class VentaFacturacion extends Component
                 'descuento' => $descuento_total,
                 'pagado' => $this->pago_cliente,
                 'deuda' => $total_venta - $this->pago_cliente,
-                'subtotal' => Cart::subtotal()
+                'impuesto' => $impuesto,
+                'subtotal' => Cart::subtotal(),
+                'total' => $total_venta,
+                'iva' => $this->iva,
+
             ];
            $pdf = PDF::loadView('ventas.FacturaCredito',$data)->output();
         }
@@ -158,7 +181,7 @@ class VentaFacturacion extends Component
        
         return response()->streamDownload(
          fn () => print($pdf),
-        "filename.pdf"
+        "Factura.pdf"
          );
          
     }

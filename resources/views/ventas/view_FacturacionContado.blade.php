@@ -196,12 +196,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($collection as $item)
+                    @foreach ($productos as $producto)
                         <tr>
-                            <td>{{$item->qty}}</td>
-                            <td>{{$item->name}}</td>
-                            <td>S/ {{$item->price}}</td>
-                            <td>S/ {{($item->qty)*($item->price)}}</td>
+                            <td>{{$producto->cantidad}}</td>
+                            <td>{{$producto->producto->nombre}}</td>
+                            <td>S/ {{$producto->precio}}</td>
+                            <td>S/ {{($producto->cantidad)*($producto->precio)}}</td>
                         </tr>
                     @endforeach
                 </tbody>

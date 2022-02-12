@@ -122,9 +122,15 @@
 
                         <div class="row ml-3 mr-3">
                                 <div class="col">
-                                    <div class="w-50 h-50">         
+                                    <div class="w-50 h-50">
+                                        @if ($p->imagen)
+                                        <img width="75%" height="75%"  src="{{Storage::url($p->imagen->url)}}" alt="">
+                                        @else
+                                        <img width="75%" height="75%"  src="https://cdn.pixabay.com/photo/2016/07/23/12/54/box-1536798_960_720.png" alt="">
+                                        @endif         
                                         @if ($file)
-                                        <img src="{{$file}}" width="75%" height="75%">
+                                        <p class="text-sm inline underline decoration-gray-400 mt-2"> Nueva imagen</p>
+                                        <img src="{{ $file->temporaryUrl() }}" width="75%" height="75%">
                                         @endif
                                     </div>
                                 </div>

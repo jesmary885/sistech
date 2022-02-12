@@ -2,14 +2,17 @@
 
 namespace App\Http\Livewire\Reportes;
 
+use App\Exports\ReporteVentaExport;
 use App\Models\Sucursal;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class ReporteVenta extends Component
 {
-    public $fecha_inicio, $fecha_fin, $sucursal_id;
-    
+    public $fecha_inicio, $fecha_fin, $sucursal_id, $ventas_realizadas_e, $total_ventas_e, $total_costos_e, $total_ganancias_e;
+
     public function render()
     {
         $ano=date("Y");
@@ -84,10 +87,46 @@ class ReporteVenta extends Component
         
         $costo_vent=json_encode($costo_ventas);
         $costo_venta=json_decode($costo_vent);
-            
 
-      
-
+        $this->ventas_realizadas_e = $cantidad_venta[0]->cantidad;
+        $this->total_ventas_e = $total_venta[0]->quantity;
+        $this->total_costos_e = $costo_venta[0]->quantity;
+        $this->total_ganancias_e = ($total_venta[0]->quantity)-($costo_venta[0]->quantity);
+   
         return view('livewire.reportes.reporte-venta',compact('cantidad_venta','total_venta','costo_venta','data2'));
+    }
+
+    public function export_excel(){
+
+        $ventas_realizadas = $this->ventas_realizadas_e;
+        $total_ventas = $this->total_ventas_e;
+        $total_costos = $this->total_costos_e;
+        $total_ganancias = $this->total_ganancias_e;
+        $fecha_inicio = date("d-m-Y",strtotime($this->fecha_inicio));
+        $fecha_fin = date("d-m-Y",strtotime($this->fecha_fin));
+
+        return Excel::download(new ReporteVentaExport($ventas_realizadas,$total_ventas,$total_costos,$total_ganancias,$fecha_inicio,$fecha_fin), 'ReporteVentas.xlsx');
+
+    }
+
+    public function export_pdf(){
+
+        $data = [
+            'ventas_realizadas' => $this->ventas_realizadas_e,
+            'total_ventas' => $this->total_ventas_e,
+            'total_costos' => $this->total_costos_e,
+            'total_ganancia' => $this->total_ganancias_e,
+            'fecha_inicio' => date("d-m-Y",strtotime($this->fecha_inicio)),
+            'fecha_fin' => date("d-m-Y",strtotime($this->fecha_fin)),
+        
+        ];
+
+       $pdf = PDF::loadView('ventas.reporte_export_pdf',$data)->output();
+
+       return response()->streamDownload(
+        fn () => print($pdf),
+       "Reporte_venta.pdf"
+        );
+
     }
 }
