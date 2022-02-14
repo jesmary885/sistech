@@ -28,11 +28,10 @@ class VentasContado extends Component
 
         $ventas = Venta::where('fecha', 'LIKE', '%' . $this->search . '%')
                     ->where('tipo_pago', 1)
-                    // ->orwhereHas('cliente',function(Builder $query){
-                    //     $query->where('nro_documento','LIKE', '%' . $this->search . '%');
-                    // })
                     ->latest('id')
                     ->paginate(5);
+
+
         return view('livewire.ventas.ventas-contado',compact('ventas'));
     }
 

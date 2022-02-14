@@ -9,6 +9,7 @@ class VentasCreditoAbono extends Component
     
     public $venta,$total_pagado_cliente;
     public $isopen = false;
+    public $vista;
 
       
     protected $rules = [
@@ -44,11 +45,14 @@ class VentasCreditoAbono extends Component
             ]);
 
             $this->reset(['isopen']);
-            $this->emitTo('ventas.ventas-credito','render');
+            if($this->vista==1){
+                $this->emitTo('ventas.ventas-por-cliente','render');
+
+            }else{
+                $this->emitTo('ventas.ventas-credito','render');
+            }
+            
             $this->emit('alert','Pago registrado correctamente');
     }
-
-   
-
 
 }

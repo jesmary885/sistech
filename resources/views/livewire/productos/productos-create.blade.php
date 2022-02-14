@@ -171,15 +171,12 @@
                     </select>
                     <x-input-error for="estado" />
                 </div>
-
-                
             </div>
 
             <div>
                 <textarea wire:model="observaciones" class="mt-2 resize-none rounded-md outline-none w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="observaciones" cols="80" rows="2" required placeholder="Observaciones"></textarea>
-             
+                <x-input-error for="observaciones" />
             </div>
-                    
          
              <div class="flex mt-4 mb-2">
                 <i class="far fa-image mt-3 mr-2"></i>

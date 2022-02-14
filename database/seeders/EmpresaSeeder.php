@@ -19,7 +19,7 @@ class EmpresaSeeder extends Seeder
             'email' => 'techperu@gmail.com',
             'telefono' => '015017327',
             'direccion' => 'av. argentina n 428   galeria mesa redonda stand g112',
-            'tipo_documento' => 'RUC',
+            'tipo_documento' => '2',
             'nro_documento' => '20603739176',
             'nombre_impuesto' => 'IVA',
             'impuesto' => '15',

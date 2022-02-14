@@ -39,7 +39,7 @@ class VentasView extends Component
         $this->tipo_pago = $this->venta->tipo_pago;
         $this->telefono_cliente = $this->venta->cliente->telefono;
         $this->estado_entrega = $this->venta->estado_entrega;
-        $this->pago_cliente= $this->venta->pagado_cliente - $this->venta->deuda_cliente;
+        $this->pago_cliente= $this->venta->total_pagado_cliente;
         $this->deuda_cliente= $this->venta->deuda_cliente;
     }
     public function render()
@@ -89,6 +89,7 @@ class VentasView extends Component
                 'total' => $this->total,
                 'productos' => $productos,
                 'deuda' => $this->deuda_cliente,
+                'iva' => $this->iva,
             ];
            $pdf = PDF::loadView('ventas.view_FacturacionCredito',$data)->output();
         }

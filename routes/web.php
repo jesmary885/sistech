@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ModelosController;
 use App\Http\Controllers\Admin\ProveedoresController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SucursalesController;
+use App\Http\Controllers\AjustesController;
 use App\Http\Controllers\Productos\FilesController;
 use App\Http\Controllers\Productos\MovimientosController;
 use App\Http\Controllers\Productos\ProductosController;
@@ -16,7 +17,9 @@ use App\Http\Controllers\Reportes\ReportesController;
 use App\Http\Controllers\Ventas\FacturacionController;
 use App\Http\Controllers\Ventas\MostrarVentasController;
 use App\Http\Controllers\Ventas\VentasController;
+use App\Http\Controllers\Ventas\VentasViewController;
 use App\Http\Livewire\Productos\ProductosTraslado;
+use App\Http\Livewire\Ventas\VentasPorCliente;
 use Illuminate\Support\Facades\Route;
 
 
@@ -70,6 +73,7 @@ Route::get('reportes_productos/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[Report
 Route::get('reportes_ventas/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'ventas'])->name('ventas.reportes');
 Route::get('reporte_poducto',[ReportesController::class,'index_producto'])->name('reportes.index.productos');
 Route::get('reporte_venta',[ReportesController::class,'index_venta'])->name('reportes.index.ventas');
+Route::get('ventas_clientes',[VentasViewController::class,'index'])->name('ventas.clientes');
 
 // livewire
 
@@ -79,6 +83,9 @@ Route::get('productos/{sucursal}/traslado', ProductosTraslado::class)->name('pro
 
 Route::post('productos/{product}/files', [FilesController::class, 'files'])->name('productos.files');
 
+
+Route::get('cambiar_contrasena',[AjustesController::class,'ccontrasena'])->name('ajustes.ccontrasena');
+Route::get('sobre_empresa',[AjustesController::class,'empresa'])->name('ajustes.empresa');
 
 
 

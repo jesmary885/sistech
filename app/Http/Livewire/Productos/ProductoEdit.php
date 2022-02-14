@@ -24,17 +24,26 @@ class ProductoEdit extends Component
     public $marca_id = "", $sucursal_id = "" ,$modelo_id = "", $categoria_id = "", $proveedor_id ="";
     public $limitacion_sucursal = true;
 
-     // protected $rules = [
-    //     'region_id' => 'required',
-    //      'division_id' => 'required',
-    //      'negocio_id' => 'required',
-    //     'nombre' => 'required|max:50',
-    //      'apellido' => 'required|max:50',
-    //      'cedula' => 'required|numeric|min:7',
-    //      'indicador' => 'required',
-    //      'telefono' => 'required|numeric|min:11',
-    //      'email' => 'required|max:50|unique:users',
-    //  ];
+    protected $rules = [
+        'nombre' => 'required|unique',
+        'cod_barra'=>'nullabe|string|max:13|min:6|unique:productos',
+        'precio_entrada' => 'required|regex:/^\d{1,3}(?:\.\d\d\d)*(?:,\d{1,2})?$/',
+        'precio_letal' => 'required|regex:/^\d{1,3}(?:\.\d\d\d)*(?:,\d{1,2})?$/',
+        'precio_mayor' => 'required|regex:/^\d{1,3}(?:\.\d\d\d)*(?:,\d{1,2})?$/',
+        'cantidad' => 'required|numeric|min:1|max:8',
+        'inventario_min' => 'required|numeric|min:1|max:8',
+        'presentacion' => 'required',
+        'categoria_id' => 'required',
+        'marca_id' => 'required',
+        'modelo_id' => 'required',
+        'tipo_garantia' => 'required',
+        'garantia' => 'required|numeric|min:1|max:5',
+        'proveedor_id' => 'required',
+        'sucursal_id' => 'required',
+        'estado' => 'required',
+        'observaciones' => 'required',
+        'file' => 'image|max:1024',
+     ];
 
 
     public function updatedMarcaId($value)
@@ -106,8 +115,8 @@ class ProductoEdit extends Component
     }
 
     public function update(){
-        // $rules = $this->rules;
-        // $this->validate($rules);
+        $rules = $this->rules;
+        $this->validate($rules);
 
         $this->fecha_actual = date('Y-m-d');
 
@@ -123,7 +132,6 @@ class ProductoEdit extends Component
             'precio_entrada' => $this->precio_entrada,
             'precio_letal' => $this->precio_letal,
             'precio_mayor' => $this->precio_mayor,
-           // cantidad = $this->producto->sucursals->find($this->sucursal_id)->pivot->cantidad;
             'inventario_min' => $this->inventario_min,
             'modelo_id' => $this->modelo_id,
             'categoria_id' => $this->categoria_id,

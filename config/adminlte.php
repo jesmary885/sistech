@@ -291,6 +291,10 @@ return [
                     'text' => 'Ventas a credito',
                     'route'  => 'ventas.mostrar_ventas.create',
                 ],
+                [
+                    'text' => 'Ventas por cliente',
+                    'route'  => 'ventas.clientes',
+                ],
             ],
             
         ],
@@ -340,11 +344,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Cambiar contrasena',
-                    'url'  => '#',
+                    'route'     => 'ajustes.ccontrasena',
                 ],
                 [
                     'text'    => 'Sobre la empresa',
-                    'url'     => '#',
+                    'route'     => 'ajustes.empresa',
                 ],
             ],
         ],

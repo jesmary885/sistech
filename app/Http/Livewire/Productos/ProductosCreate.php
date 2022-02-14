@@ -36,22 +36,30 @@ class ProductosCreate extends Component
 
     protected $listeners = ['refreshimg'];
 
-    // protected $rules = [
-    //     'region_id' => 'required',
-    //      'division_id' => 'required',
-    //      'negocio_id' => 'required',
-    //     'nombre' => 'required|max:50',
-    //      'apellido' => 'required|max:50',
-    //      'cedula' => 'required|numeric|min:7',
-    //      'indicador' => 'required',
-    //      'telefono' => 'required|numeric|min:11',
-    //      'email' => 'required|max:50|unique:users',
-    //        'cod_barra'=>'nullabe|string|max:13|min:6'
-    //  ];
+     protected $rules = [
+         'nombre' => 'required||min:3|unique:productos',
+         'cod_barra'=>'nullable|string|max:13|min:6|unique:productos',
+         'precio_entrada' => 'required|numeric',
+         'precio_letal' => 'required|numeric',
+         'precio_mayor' => 'required|numeric',
+         'cantidad' => 'required|numeric',
+         'inventario_min' => 'required|numeric',
+         'presentacion' => 'required',
+         'categoria_id' => 'required',
+         'marca_id' => 'required',
+         'modelo_id' => 'required',
+         'tipo_garantia' => 'required',
+         'garantia' => 'required|numeric',
+         'proveedor_id' => 'required',
+         'sucursal_id' => 'required',
+         'estado' => 'required',
+         'observaciones' => 'required',
+         'file' => 'image|max:1024',
+      ];
 
  
     public function mount(){
-       // $usuario_auth = Auth::id();
+ 
         $usuario_au = User::where('id',Auth::id())->first();
         if($usuario_au->limitacion == '1'){
             $this->sucursales=Sucursal::all();
@@ -71,32 +79,26 @@ class ProductosCreate extends Component
         $marca_select = Marca::find($value);
         $this->modelos = $marca_select->modelos;
     }
-  /*  public function updatedFile()
+
+    public function updatedFile()
     {
         $this->validate([
             'file' => 'image|max:1024',
         ]);
-    }*/
-
-    public function refreshimg($f)
-    {
-        $this->ff = $f;
-
-        //dd($this->file);
     }
 
     public function save()
     {
 
        
-        // $rules = $this->rules;
-        // $this->validate($rules);
+        $rules = $this->rules;
+        $this->validate($rules);
 
         $sucursales = Sucursal::all();
 
         $this->fecha_actual = date('Y-m-d');
         $usuario_auth = Auth::id();
-        $total_compra = ($this->precio_entrada * $this->cantidad);
+        $total_compra = (round($this->precio_entrada,2)) * $this->cantidad;
 
         //agregando producto en tabla productos
         $producto = new Producto();

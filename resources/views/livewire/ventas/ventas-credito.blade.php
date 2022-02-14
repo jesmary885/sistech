@@ -30,11 +30,11 @@
                                 <td>{{$venta->total_pagado_cliente}}</td>
                                 <td>{{$venta->deuda_cliente}}</td>
                                 <td width="10px">
-                                      @livewire('ventas.ventas-credito-abono', ['venta' => $venta],key($venta->id)) 
+                                      @livewire('ventas.ventas-credito-abono', ['venta' => $venta,'vista' => '2'],key($venta->id)) 
                                      {{-- <a href="#" class="btn btn-info btn-sm"><i class="fas fa-plus-square"></i></a> --}}
                                 </td>
                                 <td width="10px">
-                                    @livewire('ventas.ventas-view', ['venta' => $venta]) 
+                                    @livewire('ventas.ventas-view', ['venta' => $venta],key($venta->id + 1)) 
                                 </td>
                                  <td width="10px">
                                      {{-- @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id))  --}}
