@@ -24,14 +24,20 @@ class SucursalCreate extends Component
         'telefono' => 'required|numeric|min:11',
     ];
 
-    public function updatedCiudadId($value)
+   /* public function updatedCiudadId($value)
     {
         $ciudad_select = Ciudad::find($value);
         $this->estados = $ciudad_select->estados;
-    }
+    }*/
 
     public function mount(Sucursal $sucursal){
         $this->sucursal = $sucursal ;
+        if($this->accion=='create'){
+            $this->ciudades=[];
+        }else{
+            $this->ciudades=Ciudad::all();
+        }
+
         if($sucursal){
             $this->telefono = $this->sucursal->telefono;
             $this->nombre = $this->sucursal->nombre;
@@ -39,7 +45,7 @@ class SucursalCreate extends Component
             $this->ciudad_id = $this->sucursal->ciudad_id;
             $this->estado_id = $this->sucursal->estado_id;
         }
-        $this->ciudades=Ciudad::all();
+       
         $this->estados=Estado::all();
     }
 

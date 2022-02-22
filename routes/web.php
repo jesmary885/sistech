@@ -9,10 +9,12 @@ use App\Http\Controllers\Admin\ProveedoresController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SucursalesController;
 use App\Http\Controllers\AjustesController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Productos\FilesController;
 use App\Http\Controllers\Productos\MovimientosController;
 use App\Http\Controllers\Productos\ProductosController;
 use App\Http\Controllers\Productos\ProductosMovController;
+use App\Http\Controllers\Productos\ProductosSerialController;
 use App\Http\Controllers\Reportes\ReportesController;
 use App\Http\Controllers\Ventas\FacturacionController;
 use App\Http\Controllers\Ventas\MostrarVentasController;
@@ -44,9 +46,17 @@ Route::get('/home', function () {
     return view('home');
 })->middleware('auth')->name('home');
 
+Route::get('/home',[HomeController::class,'index'])->name('home');
+
+
+
+
+
 Auth::routes();
 
 //Gestion administrativa
+Route::middleware(['auth'])->group(function()
+{
 
 Route::resource('roles', RoleController::class)->only('index','edit','update','destroy','create','store')->names('admin.roles');
 Route::resource('clientes', ClientesController::class)->only('index')->names('admin.clientes');
@@ -83,9 +93,15 @@ Route::get('productos/{sucursal}/traslado', ProductosTraslado::class)->name('pro
 
 Route::post('productos/{product}/files', [FilesController::class, 'files'])->name('productos.files');
 
+//productos por serial
+
+Route::get('productos_serial',[ProductosSerialController::class,'index'])->name('productos.serial.index');
+Route::get('productos_serial/{sucursal}',[ProductosSerialController::class,'view'])->name('productos.serial.view');
+
+//Ajustes
 
 Route::get('cambiar_contrasena',[AjustesController::class,'ccontrasena'])->name('ajustes.ccontrasena');
 Route::get('sobre_empresa',[AjustesController::class,'empresa'])->name('ajustes.empresa');
 
-
+});
 

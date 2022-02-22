@@ -1,7 +1,7 @@
 <div>
     <button type="submit" class="btn btn-primary btn-sm float-right" wire:click="open">
         @if ($accion == 'create')
-        <i class="fas fa-user-plus"></i>
+        Nuevo proveedor <i class="fas fa-user-plus"></i>
         @else
         <i class="fas fa-user-edit"></i>
         @endif
@@ -81,17 +81,6 @@
 
                         <div class="flex justify-between w-full mt-2">
                             <div class="w-full mr-2">
-                                <select wire:model="ciudad_id"
-                                    class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                    <option value="" selected>Seleccione la ciudad</option>
-                                    @foreach ($ciudades as $ciudad)
-                                        <option value="{{ $ciudad->id }}">{{ $ciudad->nombre }}</option>
-                                    @endforeach
-                                </select>
-                                <x-input-error for="ciudad_id" />
-                            </div>
-
-                            <div class="w-full mr-2">
                                 <select wire:model="estado_id"
                                     class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                     <option value="" selected>Estado/provincia/region</option>
@@ -100,6 +89,18 @@
                                     @endforeach
                                 </select>
                                 <x-input-error for="estado_id" />
+                               
+                            </div>
+
+                            <div class="w-full mr-2">
+                                <select wire:model="ciudad_id"
+                                class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                <option value="" selected>Seleccione la ciudad</option>
+                                @foreach ($ciudades as $ciudad)
+                                    <option value="{{ $ciudad->id }}">{{ $ciudad->nombre }}</option>
+                                @endforeach
+                            </select>
+                            <x-input-error for="ciudad_id" />
                             </div>
                         </div>
                     </div>

@@ -49,7 +49,7 @@ return [
 
     'logo' => null,
     'logo_img' => 'vendor/adminlte/dist/img/logotech_2.jpg',
-    'logo_img_class' => 'img-circle w-50 ml-4',
+    'logo_img_class' => 'img-circle w-50 m-auto',
     'logo_img_xl' => null,
     'logo_img_xl_class' => null,
     'logo_img_alt' => null,
@@ -267,10 +267,10 @@ return [
                     'text' => 'Modelos',
                     'route'     => 'admin.modelos.index',
                 ],
-                [
-                    'text' => 'Servicios',
-                    'url'  => '#',
-                ],
+                // [
+                //     'text' => 'Servicios',
+                //     'url'  => '#',
+                // ],
             ],
             
         ],
@@ -308,6 +308,10 @@ return [
                     'route'  => 'productos.productos.index',
                 ],
                 [
+                    'text' => 'Productos por serial',
+                    'route'  => 'productos.serial.index',
+                ],
+                [
                     'text'    => 'Devolucion',
                     'route'     => 'devolucion.index',
                 ],
@@ -327,8 +331,12 @@ return [
             'icon'    => 'fas fa-chart-bar fa-fw',
             'submenu' => [
                 [
-                    'text' => 'Productos',
+                    'text' => 'Productos más vendidos',
                     'route'     => 'reportes.index.productos',
+                ],
+                [
+                    'text' => 'Historial de productos',
+                    'url'     => '#',
                 ],
                 [
                     'text'    => 'ventas',

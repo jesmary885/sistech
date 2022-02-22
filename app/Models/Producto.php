@@ -26,8 +26,8 @@ class Producto extends Model
 
     //Relacion uno a muchos
    
-    public function producto_cod_barra_serials(){
-        return $this->hasMany(Producto_cod_barra_serial::class);
+    public function productoSerialSucursals(){
+        return $this->hasMany(ProductoSerialSucursal::class);
     }
     public function compras(){
         return $this->hasMany(Compra::class);

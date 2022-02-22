@@ -28,7 +28,7 @@ class ProductosCreate extends Component
 
   
 
-    public $nombre, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores, $sucursales;
+    public $nombre, $puntos, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores, $sucursales;
     public $modelos = [];
     public $marca_id = "", $sucursal_id = "" ,$modelo_id = "", $categoria_id = "", $proveedor_id ="";
     public $limitacion_sucursal = true;
@@ -37,19 +37,20 @@ class ProductosCreate extends Component
     protected $listeners = ['refreshimg'];
 
      protected $rules = [
-         'nombre' => 'required||min:3|unique:productos',
-         'cod_barra'=>'nullable|string|max:13|min:6|unique:productos',
+         'nombre' => 'required|min:3|unique:productos',
+         'cod_barra'=>'nullable|unique:productos',
          'precio_entrada' => 'required|numeric',
          'precio_letal' => 'required|numeric',
          'precio_mayor' => 'required|numeric',
          'cantidad' => 'required|numeric',
-         'inventario_min' => 'required|numeric',
-         'presentacion' => 'required',
+         'puntos' => 'required|numeric',
+       //  'inventario_min' => 'required|numeric',
+        // 'presentacion' => 'required',
          'categoria_id' => 'required',
          'marca_id' => 'required',
          'modelo_id' => 'required',
-         'tipo_garantia' => 'required',
-         'garantia' => 'required|numeric',
+        // 'tipo_garantia' => 'required',
+        // 'garantia' => 'required|numeric',
          'proveedor_id' => 'required',
          'sucursal_id' => 'required',
          'estado' => 'required',
@@ -105,17 +106,15 @@ class ProductosCreate extends Component
         $producto->nombre = $this->nombre;
         if($this->cod_barra) $producto->cod_barra = $this->cod_barra;
         else $producto->cod_barra = Str::random(8);
-        $producto->inventario_min = $this->inventario_min;
-        $producto->presentacion = $this->presentacion;
+       // $producto->presentacion = $this->presentacion;
         $producto->precio_entrada = $this->precio_entrada;
         $producto->precio_letal = $this->precio_letal;
+        $producto->puntos = $this->puntos;
         $producto->precio_mayor = $this->precio_mayor;
         $producto->modelo_id = $this->modelo_id;
         $producto->marca_id = $this->marca_id;
         $producto->categoria_id = $this->categoria_id;
         $producto->observaciones = $this->observaciones;
-        $producto->tipo_garantia = $this->tipo_garantia;
-        $producto->garantia = $this->garantia;
         $producto->estado = $this->estado;
         $producto->save();
         //agregando imagen de producto en tabla imagenes
@@ -126,16 +125,40 @@ class ProductosCreate extends Component
                 'url' => $url
             ]);
         }
+
+        //registrando compra en tabla compras
+        $compra = new Compra();
+        $compra->fecha = $this->fecha_actual;
+        $compra->total = $total_compra;
+        $compra->cantidad = $this->cantidad;
+        $compra->precio_compra = $this->precio_entrada;
+        $compra->proveedor_id = $this->proveedor_id;
+        $compra->user_id = $usuario_auth;
+        $compra->sucursal_id = $this->sucursal_id;
+        $compra->producto_id = $producto->id;
+        $compra->save();
         
+        /*  $producto->compras()->create([
+            'fecha' => $this->fecha_actual,
+            'total' => $total_compra,
+            'cantidad' => $this->cantidad,
+            'precio_compra' => $this->precio_entrada,
+            'proveedor_id' => $this->proveedor_id,
+            'user_id' => $usuario_auth,
+            'sucursal_id' => $this->sucursal_id
+        ]);*/
+
         //agregando productos si contienen serial en tabla producto_cod_barra_serials
-        // if($this->serial == '1'){
-        //     for ($i=0; $i < $this->cantidad; $i++) {
-        //         $producto->producto_cod_barra_serials()->create([
-        //             'serial' => '',
-        //             'sucursal_id' => $this->sucursal_id
-        //         ]);
-        //     }
-        // }
+ 
+             for ($i=0; $i < $this->cantidad; $i++) {
+                 $producto->productoSerialSucursals()->create([
+                     'serial' => '',
+                     'sucursal_id' => $this->sucursal_id,
+                     'cod_barra' => $producto->cod_barra,
+                     'compra_id' => $compra->id,
+                     'fecha_compra' => $compra->fecha
+                 ]);
+             }
 
         //registrando moviemientos en tabla movimientos
         $producto->movimientos()->create([
@@ -147,16 +170,7 @@ class ProductosCreate extends Component
             'user_id' => $usuario_auth
         ]);
 
-        //registrando compra en tabla compras
-        $producto->compras()->create([
-            'fecha' => $this->fecha_actual,
-            'total' => $total_compra,
-            'cantidad' => $this->cantidad,
-            'precio_compra' => $this->precio_entrada,
-            'proveedor_id' => $this->proveedor_id,
-            'user_id' => $usuario_auth,
-            'sucursal_id' => $this->sucursal_id
-        ]);
+      
 
         //guardando cantidades en tabla pivote entre sucursal y productos
         foreach($sucursales as $sucursal){
@@ -175,7 +189,7 @@ class ProductosCreate extends Component
             }
         }
 
-        $this->reset(['nombre','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','marca_id']);
+        $this->reset(['nombre','puntos','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','marca_id']);
        $this->emit('alert','Producto creado correctamente');
         $this->emitTo('productos.productos-index','render');
     

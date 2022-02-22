@@ -3,7 +3,7 @@
 @section('title', 'TechPeru')
 
 @section('content_header')
-
+    @livewire('admin.sucursales.sucursal-create',['accion' => 'create'])
     <h1 class="text-lg ml-2"><i class="fas fa-warehouse"></i> Listado de sucursales</h1>
 @stop
 

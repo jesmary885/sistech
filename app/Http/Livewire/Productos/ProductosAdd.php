@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Productos;
 
+use App\Models\Compra;
 use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\Sucursal;
@@ -74,7 +75,7 @@ class ProductosAdd extends Component
         $pivot->save();
         
         //agregando compra
-            $this->producto->compras()->create([
+        /*    $this->producto->compras()->create([
             'fecha' => $this->fecha_actual,
             'total' => $total_compra,
             'precio_compra' => $this->precio_compra,
@@ -82,16 +83,39 @@ class ProductosAdd extends Component
             'proveedor_id' => $this->proveedor_id,
             'sucursal_id' => $this->sucursal_id,
             'user_id' => $usuario_auth
-        ]);
+        ]);*/
+
+        $compra = new Compra();
+        $compra->fecha = $this->fecha_actual;
+        $compra->total = $total_compra;
+        $compra->cantidad = $this->cantidad;
+        $compra->precio_compra = $this->precio_entrada;
+        $compra->proveedor_id = $this->proveedor_id;
+        $compra->user_id = $usuario_auth;
+        $compra->sucursal_id = $this->sucursal_id;
+        $compra->producto_id = $producto_select->id;
+        $compra->save();
 
         //agregando productos si contienen serial en tabla producto_cod_barra_serials
-        if($producto_select->serial == '1'){
+      /*  if($producto_select->serial == '1'){
             for ($i=0; $i < $this->cantidad; $i++) {
                 $producto_select->producto_cod_barra_serials()->create([
                     'serial' => '',
                     'sucursal_id' => $this->sucursal_id
                 ]);
             }
+        }*/
+
+        //agregando productos a la tabla productosSerialSucursal
+ 
+        for ($i=0; $i < $this->cantidad; $i++) {
+            $producto_select->productoSerialSucursals()->create([
+                'serial' => '',
+                'sucursal_id' => $this->sucursal_id,
+                'cod_barra' => $producto_select->cod_barra,
+                'compra_id' => $compra->id,
+                'fecha_compra' => $compra->fecha
+            ]);
         }
 
           //registrando moviemientos en tabla movimientos

@@ -11,9 +11,10 @@ class Estado extends Model
 
     protected $fillable = ['nombre'];
 
-    //Relaion uno a muhos inversa
-    public function ciudad(){
-        return $this->belongsTo(Ciudad::class);
+    
+    //Relacion uno a muchos
+    public function ciudades(){
+        return $this->hasMany(Ciudad::class);
     }
 
     //Relacion uno a muchos

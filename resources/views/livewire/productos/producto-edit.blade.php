@@ -23,14 +23,13 @@
                             <x-input-error for="cod_barra" />
                         </div>
                         <div class="flex mt-2 justify-between w-full">
-                            <input wire:model.defer="precio_entrada" name="precio_entrada" title="Precio de entrada" type="text" class="mr-2 px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio de compra">
-                            <x-input-error for="precio_entrada" />
+            
                             <input wire:model.defer="precio_letal" name="precio_letal" title="Precio al letal" type="text" class="mr-2 px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio al detal">
                             <x-input-error for="precio_letal" />
                             <input wire:model="precio_mayor" type="text" title="Precio al mayor" class="w-full px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio al mayor">
                             <x-input-error for="precio_mayor" />
                         </div>
-                        <div class="flex mt-2 justify-between w-full">
+                        {{-- <div class="flex mt-2 justify-between w-full">
                             <input wire:model.defer="cantidad" name="cantidad" type="text" title="Cantidad" class="mr-2 px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cantidad">
                             <x-input-error for="cantidad" />
                             <input wire:model.defer="inventario_min" name="inventario_min" title="Stock minimo" type="text" class="mr-2 px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Stock minimo">
@@ -46,7 +45,7 @@
                                 <option value="7">Atados</option>
                             </select>
                             <x-input-error for="presentacion" />
-                        </div>
+                        </div> --}}
                         <div class="flex mt-2 justify-between w-full">
                             <select wire:model="categoria_id" title="Categoría" class="mr-1 block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                 <option value="" selected>Seleccione la categoría</option>
@@ -72,23 +71,16 @@
                             <x-input-error for="modelo_id" />
                         </div>
                         <div class="flex mt-3">
-                            <i class="fas fa-history mr-2"></i>
-                            <h2 class="text-sm inline underline decoration-gray-400">Garantia de fabrica</h2>
+                            <i class="fas fa-luggage-cart mr-2"></i>
+                            <h2 class="text-sm inline underline decoration-gray-400">Valor en puntos</h2>
                         </div>
-                        <div class="flex mt-2 justify-between w-full">
-                            <select id="tipo_garantia" title="Tipo de garantia" wire:model="tipo_garantia" class="mr-2 block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
-                                <option value="" selected>Unidad de tiempo</option>
-                                <option value="1">N/A</option>
-                                <option value="2">Semanas</option>
-                                <option value="3">Mes</option>
-                                <option value="4">Meses</option>
-                                <option value="5">Ano</option>
-                                <option value="6">Anos</option>
-                            </select>
-                            <x-input-error for="tipo_garantia" />
-                            <input title="Garantia" wire:model="garantia" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Tiempo de garantia">
-                                <x-input-error for="garantia" />
+                        <div class="w-1/4">
+                            <input title="Puntos" wire:model="puntos" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Tiempo de garantia">
+                            <x-input-error for="puntos" />
+
                         </div>
+                            
+                      
                         <div class="flex mt-3">
                             <i class="fas fa-truck-loading mr-2"></i>
                             <h2 class="text-sm inline underline decoration-gray-400">Información de almacenamiento</h2>

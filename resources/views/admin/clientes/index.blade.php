@@ -3,12 +3,7 @@
 @section('title', 'TechPeru')
 
 @section('content_header')
-
-
-    
-
-
-{{-- <a href="{{route('admin.usuarios.create')}}" class="btn btn-primary float-right"><i class="fas fa-user-plus"></i> Nuevo usuario</a> --}}
+    @livewire('admin.clientes.clientes-create',['vista' => 'clientes','accion' => 'create'])    
     <h1 class="text-lg ml-2"><i class="far fa-address-book"></i> Listado de Clientes</h1>
 @stop
 

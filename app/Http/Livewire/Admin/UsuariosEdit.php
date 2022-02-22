@@ -42,13 +42,21 @@ class UsuariosEdit extends Component
         'password' => 'required|confirmed',
     ];
 
-    public function updatedCiudadId($value)
+  /*  public function updatedCiudadId($value)
     {
         $ciudad_select = Ciudad::find($value);
         $this->estados = $ciudad_select->estados;
+    }*/
+
+    public function updatedEstadoId($value)
+    {
+        $estado_select = Estado::find($value);
+        $this->ciudades = $estado_select->ciudades;
     }
 
     public function mount(){
+
+
         $this->tipo_documento = $this->usuario->tipo_documento;
         $this->documento = $this->usuario->nro_documento;
         $this->telefono = $this->usuario->telefono;
@@ -64,10 +72,10 @@ class UsuariosEdit extends Component
         $this->limitacion = $this->usuario->limitacion;
         $this->sucursales_id = $this->usuario->sucursal_id;
         $this->roles_id = $this->usuario->roles->first()->id;
-        $this->ciudades=Ciudad::all();
         $this->estados=Estado::all();
         $this->roles=Role::all();
         $this->sucursales=Sucursal::all();
+        $this->ciudades=Ciudad::all();
     }
 
     public function render()

@@ -17,15 +17,14 @@ class ProductoSeeder extends Seeder
     {
         Producto::create([
             'nombre' => 'Glass',
-            'inventario_min' => '5',
+          //  'inventario_min' => '5',
             'precio_entrada' => '5',
             'precio_letal' => '8',
             'precio_mayor' => '7',
-            'tipo_garantia' => '1',
-            'garantia' => '1',
+            'puntos' => '10',
             'cod_barra' => '656222',
             'estado' => '1',
-            'presentacion' => '1',
+          //  'presentacion' => '1',
             'observaciones' => 'sin observaciones',
             'categoria_id' => '1',
             'modelo_id' => '1',

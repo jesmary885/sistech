@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Producto_cod_barra_serial extends Model
+class ProductoSerialSucursal extends Model
 {
     use HasFactory;
 
@@ -20,9 +20,14 @@ class Producto_cod_barra_serial extends Model
         return $this->belongsTo(Sucursal::class);
     }
 
+    public function compra(){
+        return $this->belongsTo(Sucursal::class);
+    }
+
     //Relacion uno a muchos
    
-    public function producto_ventas(){
+    /*public function producto_ventas(){
         return $this->hasMany(Producto_venta::class);
-    }
+    }*/
+
 }

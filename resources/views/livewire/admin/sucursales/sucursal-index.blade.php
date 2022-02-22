@@ -11,7 +11,7 @@
                             <th>Sucursal</th>
                             <th>Dirección</th>
                             <th>Telefono</th>
-                            <th>@livewire('admin.sucursales.sucursal-create',['accion' => 'create'])</th>
+                            <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>

@@ -13,7 +13,9 @@
                                 <th class="text-center">Código de Barra</th>
                                 <th class="text-center">Descripcion</th>
                                 <th class="text-center">Stock general</th>
-                                <th class="text-center">Precio</th>
+                                <th class="text-center">Precio letal</th>
+                                <th class="text-center">Precio mayor</th>
+                                <th class="text-center">Puntos</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,7 +34,10 @@
                                         {{$sucursal->nombre}} = {{$producto->sucursals->find($sucursal)->pivot->cantidad}} <br>
                                         @endforeach</td>
                                     <td class="text-center">{{$producto->precio_letal}}</td>
-                                   
+                                    <td class="text-center">{{$producto->precio_mayor}}</td>
+                                    <td class="text-center">{{$producto->puntos}}</td>
+                                    
+                                        
                                     <td width="10px">
                                         @livewire('productos.productos-add', ['producto' => $producto],key($producto->id))
                                     </td>

@@ -11,8 +11,12 @@ class VentasSeleccionCantidades extends Component
 {
 
     public $isopen = false;
-    public $producto, $sucursal;
+    public $producto, $sucursal, $precios;
     public $qty = 1;
+
+    public $options = [
+        'puntos' => null,
+    ];
 
     public function decrement(){
         $this->qty = $this->qty - 1;
@@ -25,15 +29,21 @@ class VentasSeleccionCantidades extends Component
     public function mount(){
 
         $this->cantidad = qty_available($this->producto->id,$this->sucursal);
+
     }
 
 
     public function addItem(){
+        if($this->precios == '1') $precio_venta = $this->producto->precio_letal;
+        else $precio_venta = $this->producto->precio_mayor;
+        $this->options['puntos'] = $this->producto->puntos;
+
         Cart::add([ 'id' => $this->producto->id, 
                     'name' => $this->producto->nombre, 
                     'qty' => $this->qty, 
-                    'price' => $this->producto->precio_letal, 
+                    'price' => $precio_venta, 
                     'weight' => 0,
+                    'options' => $this->options,
                 ]);
 
          $this->cantidad = qty_available($this->producto->id,$this->sucursal);

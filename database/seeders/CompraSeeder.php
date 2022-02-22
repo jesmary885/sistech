@@ -17,10 +17,12 @@ class CompraSeeder extends Seeder
         Compra::create([
             'fecha' => date('Y-m-d'),
             'total' => '30',
+            'precio_compra' => '5',
             'proveedor_id' => '1',
             'producto_id' => '1',
             'cantidad' => '6',
             'user_id' => '1',
+            'sucursal_id' => '1',
         ]);
     }
 }

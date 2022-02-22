@@ -22,8 +22,8 @@
                     </tbody>
                 </table>
                 <div class="flex">
-                    <button class="btn btn-success btn-sm mt-2" wire:click="export_excel" title="Eliminar producto"> <i class="far fa-file-excel"></i> Exportar a excel</button>
-                    <button class="btn btn-info btn-sm mt-2 ml-2" wire:click="export_pdf" title="Eliminar producto"> <i class="far fa-file-pdf"></i> Exportar a PDF</button>
+                    <button class="btn btn-success btn-sm mt-2" wire:click="export_excel" title="Exportar a excel"> <i class="far fa-file-excel"></i> Exportar a excel</button>
+                    <button class="btn btn-info btn-sm mt-2 ml-2" wire:click="export_pdf" title="Exportar a PDF"> <i class="far fa-file-pdf"></i> Exportar a PDF</button>
                 </div>
             </div>
         @else

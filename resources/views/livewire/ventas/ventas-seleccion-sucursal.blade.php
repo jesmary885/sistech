@@ -3,8 +3,9 @@
         <div class="card-header">
             @if ($vista == 'ventas')
                 <h2 class="text-lg text-gray-600">Seleccione la sucursal en donde realizara la venta</h2>
-            @else
+            @elseif($vista == 'productos')
             <h2 class="text-lg text-gray-600">Seleccione la sucursal donde esta el producto a trasladar</h2>
+            @else <h2 class="text-lg text-gray-600">Seleccione el almacen</h2>
             @endif
             
         </div>
@@ -25,8 +26,10 @@
                                 <td width="10px">
                                     @if ($vista == 'ventas')
                                         <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn btn-info btn-sm"><i class="fas fa-check"></i></a>
-                                    @else
+                                    @elseif($vista == 'productos')
                                         <a href="{{route('productos.traslado.select',$sucursal)}}" class="btn btn-info btn-sm"><i class="fas fa-check"></i></a>
+                                    @else
+                                        <a href="{{route('productos.serial.view',$sucursal)}}" class="btn btn-info btn-sm"><i class="fas fa-check"></i></a>
                                     @endif
                                 </td>
                             </tr>

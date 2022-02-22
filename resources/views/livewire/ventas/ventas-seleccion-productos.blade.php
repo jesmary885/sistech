@@ -11,7 +11,8 @@
                         <tr>
                             <th class="text-center">Codigo de Barra</th>
                             <th class="text-center">Descripcion</th>
-                            <th class="text-center">Precio</th>
+                            <th class="text-center">Precio letal</th>
+                            <th class="text-center">Precio mayor</th>
                             <th class="text-center">Stock</th>
                         </tr>
                     </thead>
@@ -21,6 +22,7 @@
                                 <td class="text-center">{{ $producto->cod_barra }}</td>
                                 <td class="text-center">{{ $producto->nombre }}</td>
                                 <td class="text-center">{{ $producto->precio_letal}}</td>
+                                <td class="text-center">{{ $producto->precio_mayor}}</td>
                                 <td class="text-center"><?php 
                                     $cantidad= $producto->sucursals->find($sucursal)->pivot->cantidad;
                                     if ($cantidad==0) $estado = 'disabled';

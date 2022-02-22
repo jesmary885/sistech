@@ -24,14 +24,14 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>150</h3>
+          <h3>{{$ventas_totales_dia}} - S/{{$total_ganancias_dia}}</h3>
 
           <p>Ventas del dia</p>
         </div>
         <div class="icon">
           <i class="ion ion-bag"></i>
         </div>
-        <a href="#" class="small-box-footer">Nueva venta <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{route('ventas.ventas.index')}}" class="small-box-footer">Nueva venta <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -39,14 +39,14 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>53</h3>
+          <h3>{{$productos_cant}}</h3>
 
           <p>Productos Registrados</p>
         </div>
         <div class="icon">
           <i class="ion ion-filing"></i>
         </div>
-        <a href="#" class="small-box-footer">Nuevo producto<i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{route('productos.productos.create')}}" class="small-box-footer">Nuevo producto<i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -54,14 +54,14 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>44</h3>
+          <h3>{{$clientes_cant}}</h3>
 
           <p>Clientes registrados</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
         </div>
-        <a href="#" class="small-box-footer">Nuevo cliente <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{route('admin.clientes.index')}}" class="small-box-footer">Nuevo cliente <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -76,7 +76,7 @@
         <div class="icon">
           <i class="ion ion-pie-graph"></i>
         </div>
-        <a href="#" class="small-box-footer">Ver reportes<i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{route('reportes.index.productos')}}" class="small-box-footer">Ver reportes<i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->

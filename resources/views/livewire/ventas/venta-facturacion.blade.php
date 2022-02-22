@@ -10,16 +10,18 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Documento</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Documento</th>
+                                <th class="text-center">Ptos acumulados</th>
                                 <th>@livewire('admin.clientes.clientes-create',['vista' => "ventas",'accion' => 'create'])</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($clientes as $cliente)
                                 <tr>
-                                    <td>{{$cliente->nombre}} {{$cliente->apellido}}</td>
-                                    <td>{{$cliente->nro_documento}}</td>
+                                    <td class="text-center">{{$cliente->nombre}} {{$cliente->apellido}}</td>
+                                    <td class="text-center">{{$cliente->nro_documento}}</td>
+                                    <td class="text-center">{{$cliente->puntos}}</td>
                                     <td width="10px">
                                     <button
                                         class="ml-4 btn btn-primary btn-sm" 
@@ -99,6 +101,7 @@
             <div class="mr-2">
                 <a href="{{route('ventas.ventas.show',$sucursal)}}" class="btn mt-6 mb-4 btn-primary"><i class="fas fa-undo-alt"></i> Regresar</a>
             </div>
+            
             <x-button
                 wire:loading.attr="disabled"
                 wire:target="save"
@@ -137,10 +140,18 @@
                             <h1 class="font-bold mr-4 text-lg text-gray-600">{{$item->name}}</h1>
                             <div class="flex">
                                 <p class="mr-2 text-sm font-semibold">Cantidad: {{$item->qty}}</p>
-                                <p class="text-sm"> - Precio: S/ {{$item->price}}</p>   
-
+                                <p class="text-sm"> - Precio: S/ {{$item->price}} - </p> 
+                                <p class="text-sm font-semibold text-red-600 ml-2"> Puntos: {{$item->options['puntos']}}</p> 
+                                @if ($puntos_canjeo >  $item->options['puntos'])
+                                    <x-button
+                                    wire:loading.attr="disabled"
+                                    wire:target="canjear"
+                                    class=" btn-sm mb-2 ml-2" 
+                                    wire:click="canjeo('{{$item->id}}}')">
+                                    <i class="fas fa-file-invoice"></i>
+                                    </x-button>  
+                                @endif
                             </div>
-                           
                         </article>
                     </li>
                 @empty
@@ -171,8 +182,9 @@
                 </p>
                 <p class="flex justify-between items-center">
                     Descuento
+                    <span class="font-semibold">S/ {{$this->descuento_total)}}</span>
                     
-                    <span class="font-semibold">S/ {{$descuento_total = Cart::subtotal() * ($this->descuento / 100)}}</span>
+                    {{-- <span class="font-semibold">S/ {{$descuento_total = Cart::subtotal() * ($this->descuento / 100)}}</span> --}}
                 </p>
                 <p class="flex justify-between items-center">
                     Subtotal menos descuento

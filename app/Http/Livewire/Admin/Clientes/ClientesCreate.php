@@ -35,6 +35,12 @@ class ClientesCreate extends Component
     }
 
     public function mount(Cliente $cliente){
+        if($this->accion=='create'){
+            $this->ciudades=[];
+        }else{
+            $this->ciudades=Ciudad::all();
+        }
+        
         $this->cliente = $cliente;
         if($cliente){
             $this->tipo_documento = $this->cliente->tipo_documento;
@@ -47,7 +53,7 @@ class ClientesCreate extends Component
             $this->ciudad_id = $this->cliente->ciudad_id;
             $this->estado_id = $this->cliente->estado_id;
         }
-        $this->ciudades=Ciudad::all();
+     
         $this->estados=Estado::all();
     }
 

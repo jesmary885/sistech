@@ -8,16 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Ciudad extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'estado_id'];
 
-    //Relaion uno a muhos inversa
-    public function pais(){
-        return $this->belongsTo(Pais::class);
-    }
-
-    //Relacion uno a muchos
-    public function estados(){
-        return $this->hasMany(Estado::class);
+    //Relacion uno a muchos inversa
+    public function estado(){
+        return $this->belongsTo(Estado::class);
     }
 
     public function clientes(){

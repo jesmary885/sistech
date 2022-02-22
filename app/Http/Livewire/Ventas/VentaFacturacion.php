@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Ventas;
 
 use App\Models\Cliente;
 use App\Models\Movimiento;
+use App\Models\Producto;
 use App\Models\Venta;
 use Facade\FlareClient\Http\Client;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -26,6 +27,7 @@ class VentaFacturacion extends Component
     public $sucursal,$cliente_select, $pago_cliente, $deuda_cliente, $descuento, $estado_entrega;
     public $siguiente_venta = 0;
     public $iva = 0.15;
+    public $puntos_canjeo, $canjeo, $puntos_canjeados, $descuento_total;
  
     protected $paginationTheme = "bootstrap";
 
@@ -62,11 +64,18 @@ class VentaFacturacion extends Component
     public function mount()
     {
         $this->cliente_select = "";
+        $this->puntos_canjeo = "0";
+        $this->canjeo = false;
+        $this->puntos_canjeados = 0;
+        $this->descuento_total = 0;
     }
 
     public function select_u($cliente_id){
         $this->client = Cliente::where('id',$cliente_id)->first();
         $this->cliente_select = $this->client->nombre." ".$this->client->apellido;
+        $this->puntos_canjeo = $this->client->puntos;
+      
+       // $this->puntos_canjeo = "1";
     }
 
     public function save(){
@@ -111,6 +120,25 @@ class VentaFacturacion extends Component
         $venta->descuento = $descuento_total;
         $venta->impuesto=$impuesto;
         $venta->save();
+
+        //PROCESO DE SUMAR O RESTAR PUNTOS EN TABLA DE CLIENTES
+
+        if($this->canjeo==false){
+            $nuevos_puntos = $this->client->puntos + $total_venta;
+
+            $this->client->update([
+                'puntos' => round($nuevos_puntos),
+            ]);
+        }else{
+
+            $nuevos_puntos = ($this->client->puntos + $total_venta) - $this->puntos_canjeados;
+
+            $this->client->update([
+                'puntos' => round($nuevos_puntos),
+            ]);
+        }
+
+        //FIN DE PROCESO
 
         foreach (Cart::content() as $item) {
             $venta->producto_ventas()->create([
@@ -184,6 +212,20 @@ class VentaFacturacion extends Component
         "Factura.pdf"
          );
          
+    }
+
+    public function canjear($producto_id){
+
+        $product_canje = Producto::where('id',$producto_id)->first()->puntos;
+
+        $this->puntos_canjeados = $product_canje;
+
+
+        //aqui vas a buscar una variable publica que tenga el otal de la venta para que le restes el porcentaje segun lo que elija la empresa con lo que va a hacer con los puntos canjeados
+      //  $this->descuento_total=
+        
+       
+
     }
 
     public function nueva_venta(){

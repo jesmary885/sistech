@@ -14,7 +14,7 @@ class SucursalIndex extends Component
 
     protected $listeners = ['render' => 'render','confirmacion' => 'confirmacion'];
 
-    public $search,$cliente;
+    public $search,$sucursal;
 
     public function updatingSearch(){
         $this->resetPage();

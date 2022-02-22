@@ -23,6 +23,7 @@ class CreateClientesTable extends Migration
             $table->string('nro_documento');
             $table->string('telefono');
             $table->string('direccion');
+            $table->string('puntos');
             $table->unsignedBigInteger('ciudad_id');
             $table->foreign('ciudad_id')->references('id')->on('ciudads');
             $table->unsignedBigInteger('estado_id');

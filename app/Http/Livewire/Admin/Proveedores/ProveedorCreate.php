@@ -27,13 +27,25 @@ class ProveedorCreate extends Component
         'email' => 'required|max:50'
     ];
 
-    public function updatedCiudadId($value)
+   /* public function updatedCiudadId($value)
     {
         $ciudad_select = Ciudad::find($value);
         $this->estados = $ciudad_select->estados;
+    }*/
+
+    public function updatedEstadoId($value)
+    {
+        $estado_select = Estado::find($value);
+        $this->ciudades = $estado_select->ciudades;
     }
 
     public function mount(Proveedor $proveedor){
+        if($this->accion=='create'){
+            $this->ciudades=[];
+        }else{
+            $this->ciudades=Ciudad::all();
+        }
+
         $this->proveedor = $proveedor;
         if($proveedor){
             $this->tipo_documento = $this->proveedor->tipo_documento;
@@ -46,7 +58,6 @@ class ProveedorCreate extends Component
             $this->ciudad_id = $this->proveedor->ciudad_id;
             $this->estado_id = $this->proveedor->estado_id;
         }
-        $this->ciudades=Ciudad::all();
         $this->estados=Estado::all();
     }
 
@@ -105,5 +116,5 @@ class ProveedorCreate extends Component
             $this->emitTo('admin.proveedores.proveedor-index','render');
             $this->emit('alert','Datos modificados correctamente');
         }
-}
+    }
 }

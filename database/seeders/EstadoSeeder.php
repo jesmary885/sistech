@@ -17,7 +17,27 @@ class EstadoSeeder extends Seeder
         $estados = [
             [
                 'nombre' => 'Barranca',
-                'ciudad_id' => '1',
+            ],
+            [
+                'nombre' => 'Cajatambo',
+            ],
+            [
+                'nombre' => 'Canta',
+            ],
+            [
+                'nombre' => 'Cañete',
+            ],
+            [
+                'nombre' => 'Huaral',
+            ],
+            [
+                'nombre' => 'Huarochirí',
+            ],
+            [
+                'nombre' => 'Huaura',
+            ],
+            [
+                'nombre' => 'Lima',
             ],
             
         ];

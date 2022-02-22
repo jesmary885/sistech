@@ -23,44 +23,17 @@
 
             <div class="flex justify-between w-full mt-3 mr-2">
                 <div class="w-full mr-2">
-                    <input wire:model="precio_entrada" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio de compra">
+                    <input wire:model="precio_entrada" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio de compra">
                     <x-input-error for="precio_entrada" />
                 </div>
                 <div class="w-full mr-2">
-                    <input wire:model="precio_letal" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio de venta">
+                    <input wire:model="precio_letal" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio de venta al detal">
                     <x-input-error for="precio_letal" />
                 </div>
                 <div class="w-full">
-                    <input wire:model="precio_mayor" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio de venta por mayoreo">
+                    <input wire:model="precio_mayor" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio de venta por mayoreo">
                     <x-input-error for="precio_mayor" />
                 </div>
-            </div>
-
-            <div class="flex justify-between w-full mt-3 mr-2">
-                <div class="w-full mr-2">
-                    <input wire:model="cantidad" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Ingrese la cantidad a registrar">
-                    <x-input-error for="cantidad" />
-                </div>
-                <div class="w-full mr-2">
-                    <input wire:model="inventario_min" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Stock minimo">
-                    <x-input-error for="inventario_min" />
-                </div>
-                <div class="w-full">
-                    {{-- <input wire:model="percepcion" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="percepcion">
-                    <x-input-error for="percepcion" /> --}}
-                    <select wire:model.lazy="presentacion" id="presentacion" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="presentacion">
-                        <option value="" selected>Seleccione la presentación</option>
-                        <option value="1">Unidades</option>
-                        <option value="2">Juegos</option>
-                        <option value="3">Kilogramos</option>
-                        <option value="4">Gramos</option>
-                        <option value="5">Litros</option>
-                        <option value="6">Metros</option>
-                        <option value="7">Atados</option>
-                    </select>
-                    <x-input-error for="presentacion" />
-                </div>
-
             </div>
 
             <div class="flex justify-between w-full mt-3">
@@ -98,10 +71,53 @@
                         <x-input-error for="modelo_id" />
                 </div>
             </div>
-         
+
+            
             <div class="flex mt-4">
+                <i class="fas fa-luggage-cart mt-3 mr-2"></i>
+                <h2 class="text-lg inline mt-2 underline decoration-gray-400">Cantidad a registrar y valor en puntos</h2>
+            </div>
+
+            <div class="flex w-full mt-3 mr-2">
+                <div class="w-1/4 mr-2">
+                    <input wire:model="cantidad" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cantidad">
+                    <x-input-error for="cantidad" />
+                </div>
+                {{-- <div class="w-full mr-2">
+                    <input wire:model="inventario_min" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Stock minimo">
+                    <x-input-error for="inventario_min" />
+                </div> --}}
+                {{-- <div class="w-full"> --}}
+                    {{-- <input wire:model="percepcion" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="percepcion">
+                    <x-input-error for="percepcion" /> --}}
+                    {{-- <select wire:model.lazy="presentacion" id="presentacion" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="presentacion">
+                        <option value="" selected>Seleccione la presentación</option>
+                        <option value="1">Unidades</option>
+                        <option value="2">Juegos</option>
+                        <option value="3">Kilogramos</option>
+                        <option value="4">Gramos</option>
+                        <option value="5">Litros</option>
+                        <option value="6">Metros</option>
+                        <option value="7">Atados</option>
+                    </select>
+                    <x-input-error for="presentacion" />
+                </div> --}}
+                <div class="w-1/4">
+                    <input wire:model="puntos" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Puntos">
+                <x-input-error for="puntos" />
+                </div>
+
+            </div>
+
+            
+
+
+          
+
+         
+            {{-- <div class="flex mt-4">
                 <i class="fas fa-history mt-3 mr-2"></i>
-                <h2 class="text-lg inline mt-2 underline decoration-gray-400">Garantia de fabrica</h2>
+                <h2 class="text-lg inline mt-2 underline decoration-gray-400">Garantia de fabrica y puntos</h2>
             </div>
 
             <div class="flex justify-start w-full mt-3">
@@ -118,12 +134,14 @@
                     <x-input-error for="tipo_garantia" />
                 </div>
 
-                <div>
-                    <input wire:model="garantia" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Tiempo de garantia">
+                <div class="W-1/4 mr-2">
+                    <input wire:model="garantia" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Tiempo de garantia">
                     <x-input-error for="garantia" />
 
                 </div>
-            </div>
+
+             
+            </div> --}}
       
             <div class="flex mt-4">
                 <i class="fas fa-truck-loading mt-3 mr-2"></i>

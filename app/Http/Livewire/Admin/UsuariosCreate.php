@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Ciudad;
+use App\Models\Estado;
 use App\Models\Sucursal;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -16,8 +17,8 @@ class UsuariosCreate extends Component
     use WithPagination;
 
     public $estado_id ="",$ciudad_id ="", $roles_id, $sucursales_id = "";
-    public $estados = [];
-    public $name, $apellido, $sucursales, $limitacion, $roles, $tipo_documento, $documento, $telefono, $email, $ciudades, $estado, $password, $direccion, $password_confirm;
+    public $ciudades = [];
+    public $name, $apellido, $sucursales, $limitacion, $roles, $tipo_documento, $documento, $telefono, $email, $estado, $password, $direccion, $password_confirm, $estados;
     
     protected $rules = [
         'estado_id' => 'required',
@@ -41,15 +42,22 @@ class UsuariosCreate extends Component
     ];
 
     public function mount(){
-        $this->ciudades=Ciudad::all();
+
+        $this->estados=Estado::all();
         $this->roles=Role::all();
         $this->sucursales=Sucursal::all();
     }
 
-    public function updatedCiudadId($value)
+   /* public function updatedCiudadId($value)
     {
         $ciudad_select = Ciudad::find($value);
         $this->estados = $ciudad_select->estados;
+    }*/
+
+    public function updatedEstadoId($value)
+    {
+        $estado_select = Estado::find($value);
+        $this->ciudades = $estado_select->ciudades;
     }
  
     public function render()

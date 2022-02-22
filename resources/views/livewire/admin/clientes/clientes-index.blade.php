@@ -8,18 +8,20 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Nro de documento</th>
-                            <th>Telefono</th>
-                            <th>@livewire('admin.clientes.clientes-create',['vista' => 'clientes','accion' => 'create'])</th>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Nro de documento</th>
+                            <th class="text-center">Telefono</th>
+                            <th class="text-center">Ptos acumulados</th>
+                            <th colspan="2"></th>  
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($clientes as $cliente)
                             <tr>
-                                <td>{{$cliente->nombre}} {{$cliente->apellido}}</td>
-                                <td>{{$cliente->nro_documento}}</td>
-                                <td>{{$cliente->telefono}}</td>
+                                <td class="text-center">{{$cliente->nombre}} {{$cliente->apellido}}</td>
+                                <td class="text-center">{{$cliente->nro_documento}}</td>
+                                <td class="text-center">{{$cliente->telefono}}</td>
+                                <td class="text-center">{{$cliente->puntos}}</td>
                                 <td width="10px">
                                     @livewire('admin.clientes.clientes-create',['vista' => 'clientes','accion' => 'edit', 'cliente' => $cliente->id],key($cliente->id))
                                 </td>

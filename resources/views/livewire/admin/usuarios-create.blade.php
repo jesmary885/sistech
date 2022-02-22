@@ -54,6 +54,16 @@
                        <x-input-error for="direccion" />
                    </div>
                    <div class="w-full mr-2">
+                    <select wire:model="estado_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <option value="" selected>Estado/provincia/region</option>
+                        @foreach ($estados as $estado)
+                            <option value="{{$estado->id}}">{{$estado->nombre}}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error for="estado_id" />
+                </div>
+
+                   <div class="w-full">
                     <select wire:model="ciudad_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                         <option value="" selected>Seleccione la ciudad</option>
                         @foreach ($ciudades as $ciudad)
@@ -62,15 +72,8 @@
                     </select>
                     <x-input-error for="ciudad_id" />
                    </div>
-                   <div class="w-full">
-                    <select wire:model="estado_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value="" selected>Estado/provincia/region</option>
-                        @foreach ($estados as $estado)
-                            <option value="{{$estado->id}}">{{$estado->nombre}}</option>
-                        @endforeach
-                    </select>
-                    <x-input-error for="estado_id" />
-                   </div>
+                    
+                   
                </div>
    
             

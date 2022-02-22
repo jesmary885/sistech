@@ -20,27 +20,26 @@ class ProductoEdit extends Component
 {
     use WithFileUploads;
     public $isopen = false;
-    public $pivot, $nombre, $p, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $modelos, $proveedores, $sucursales,$producto;
+    public $pivot, $nombre, $p, $puntos, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $modelos, $proveedores, $sucursales,$producto;
     public $marca_id = "", $sucursal_id = "" ,$modelo_id = "", $categoria_id = "", $proveedor_id ="";
     public $limitacion_sucursal = true;
 
     protected $rules = [
-        'nombre' => 'required|unique',
-        'cod_barra'=>'nullabe|string|max:13|min:6|unique:productos',
-        'precio_entrada' => 'required|regex:/^\d{1,3}(?:\.\d\d\d)*(?:,\d{1,2})?$/',
-        'precio_letal' => 'required|regex:/^\d{1,3}(?:\.\d\d\d)*(?:,\d{1,2})?$/',
-        'precio_mayor' => 'required|regex:/^\d{1,3}(?:\.\d\d\d)*(?:,\d{1,2})?$/',
-        'cantidad' => 'required|numeric|min:1|max:8',
-        'inventario_min' => 'required|numeric|min:1|max:8',
+        'nombre' => 'required|min:3|unique:productos',
+        'cod_barra'=>'required|unique:productos',
+       // 'precio_entrada' => 'required|regex:/^\d{1,3}(?:\.\d\d\d)*(?:,\d{1,2})?$/',
+        //'precio_entrada' => 'required',
+        'precio_letal' => 'required',
+        'precio_mayor' => 'required',
+        'cantidad' => 'required|numeric',
         'presentacion' => 'required',
         'categoria_id' => 'required',
         'marca_id' => 'required',
         'modelo_id' => 'required',
-        'tipo_garantia' => 'required',
-        'garantia' => 'required|numeric|min:1|max:5',
         'proveedor_id' => 'required',
         'sucursal_id' => 'required',
         'estado' => 'required',
+        'puntos' => 'required',
         'observaciones' => 'required',
         'file' => 'image|max:1024',
      ];
@@ -52,14 +51,7 @@ class ProductoEdit extends Component
         $this->modelos = $marca_select->modelos;
     }
 
-    public function updatedFile()
-    {
-        $this->validate([
-            'file' => 'image|max:1024',
-        ]);
-    }
- 
-
+   
     public function mount($producto){
         $this->p = $producto;
 
@@ -73,22 +65,19 @@ class ProductoEdit extends Component
              $sucursal_usuario = Sucursal::where('id',$this->sucursal_id)->first();
              $this->sucursal_nombre = $sucursal_usuario->nombre;
          }
-
-         
-        
          $this->nombre = $this->producto->nombre;
          $this->cod_barra = $this->producto->cod_barra;
-         $this->precio_entrada = $this->producto->precio_entrada;
          $this->precio_letal = $this->producto->precio_letal;
          $this->precio_mayor = $this->producto->precio_mayor;
          $this->cantidad = $this->producto->sucursals->find($this->sucursal_id)->pivot->cantidad;
-         $this->inventario_min = $this->producto->inventario_min;
+      //   $this->inventario_min = $this->producto->inventario_min;
          $this->modelo_id = $this->producto->modelo_id;
          $this->categoria_id = $this->producto->categoria_id;
-         $this->tipo_garantia = $this->producto->tipo_garantia;
-         $this->garantia = $this->producto->garantia;
+     //    $this->tipo_garantia = $this->producto->tipo_garantia;
+    //     $this->garantia = $this->producto->garantia;
         $this->marca_id = $this->producto->marca_id;
-         $this->presentacion = $this->producto->presentacion;
+        $this->puntos = $this->producto->puntos;
+     //    $this->presentacion = $this->producto->presentacion;
          $this->observaciones = $this->producto->observaciones;
          $this->estado = $this->producto->estado;
          $this->modelos=Modelo::all();
@@ -115,30 +104,31 @@ class ProductoEdit extends Component
     }
 
     public function update(){
-        $rules = $this->rules;
-        $this->validate($rules);
+      //  $rules = $this->rules;
+       // $this->validate($rules);
 
         $this->fecha_actual = date('Y-m-d');
 
         $usuario_auth = Auth::id();
         
-        $this->pivot = Pivot::where('sucursal_id',$this->sucursal_id)
+       /* $this->pivot = Pivot::where('sucursal_id',$this->sucursal_id)
                             ->where('producto_id',$this->producto->id)
-                            ->first();
+                            ->first();*/
 
         $this->producto->update([
             'nombre' => $this->nombre,
             'cod_barra' => $this->cod_barra,
-            'precio_entrada' => $this->precio_entrada,
+            //'precio_entrada' => $this->precio_entrada,
             'precio_letal' => $this->precio_letal,
             'precio_mayor' => $this->precio_mayor,
-            'inventario_min' => $this->inventario_min,
+         //   'inventario_min' => $this->inventario_min,
             'modelo_id' => $this->modelo_id,
             'categoria_id' => $this->categoria_id,
-            'tipo_garantia' => $this->tipo_garantia,
-            'garantia' => $this->garantia,
+        //    'tipo_garantia' => $this->tipo_garantia,
+        //    'garantia' => $this->garantia,
+            'puntos' => $this->puntos,
             'marca_id' => $this->marca_id,
-            'presentacion' => $this->presentacion,
+         //   'presentacion' => $this->presentacion,
             'observaciones' => $this->observaciones,
             'estado' => $this->estado
         ]);
@@ -159,8 +149,8 @@ class ProductoEdit extends Component
             'user_id' => $usuario_auth
         ]);
 
-         $this->pivot->cantidad = $this->cantidad;
-         $this->pivot->save();
+       /*  $this->pivot->cantidad = $this->cantidad;
+         $this->pivot->save();*/
 
         $this->reset(['isopen']);
        $this->emitTo('productos.productos-index','render');

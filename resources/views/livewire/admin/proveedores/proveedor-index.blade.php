@@ -12,7 +12,7 @@
                             <th>Encargado</th>
                             <th>Telefono</th>
                             <th>Email</th>
-                            <th>@livewire('admin.proveedores.proveedor-create',['accion' => 'create'])</th>
+                            <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>

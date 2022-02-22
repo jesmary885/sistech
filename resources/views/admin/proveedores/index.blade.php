@@ -3,7 +3,7 @@
 @section('title', 'TechPeru')
 
 @section('content_header')
-
+    @livewire('admin.proveedores.proveedor-create',['accion' => 'create'])
     <h1 class="text-lg ml-2"><i class="far fa-address-book"></i> Listado de Proveedores</h1>
 @stop
 

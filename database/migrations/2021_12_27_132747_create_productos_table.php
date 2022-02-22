@@ -17,16 +17,14 @@ class CreateProductosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nombre');
-            $table->string('inventario_min');
             $table->string('precio_entrada');
             $table->string('precio_letal');
             $table->string('precio_mayor');
            // $table->string('serial');
-            $table->string('tipo_garantia');
             $table->string('cod_barra');
             $table->string('estado');
-            $table->string('presentacion');
-            $table->string('garantia');
+           // $table->string('presentacion');
+            $table->string('puntos');
             //$table->string('percepcion');
             $table->string('observaciones');
             $table->unsignedBigInteger('categoria_id');

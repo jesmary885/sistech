@@ -33,8 +33,21 @@
                                         +
                                     </x-secondary-button>
                                 </div>
+
+                                <div>
+                                    <select id="precios" wire:model="precios" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
+                                        <option value="" selected>Precio de venta</option>
+                                        <option value="1">Precio letal</option>
+                                        <option value="2">Precio al mayor</option>
+                                    </select>
+                                    <x-input-error for="precios" />
+
+                                </div>
+
                             </div>
                         </div>
+
+
                         <div class="modal-footer flex">
                             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" wire:click="close" >Cerrar</button>
                             <x-button
