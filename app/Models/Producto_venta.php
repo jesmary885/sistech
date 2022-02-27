@@ -16,7 +16,7 @@ class Producto_venta extends Model
         return $this->belongsTo(Venta::class);
     }
 
-    public function producto(){
-        return $this->belongsTo(Producto::class);
+    public function productoSerialSucursal(){
+        return $this->belongsTo(ProductoSerialSucursal::class);
     }
 }

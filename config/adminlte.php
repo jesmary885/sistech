@@ -319,10 +319,6 @@ return [
                     'text'    => 'Traslado',
                     'route'     => 'traslado.index',
                 ],
-                [
-                    'text'    => 'Historial',
-                    'route'     => 'movimientos.historial',
-                ],
             ],
             
         ],
@@ -336,7 +332,7 @@ return [
                 ],
                 [
                     'text' => 'Historial de productos',
-                    'url'     => '#',
+                    'route' => 'movimientos.modalidad',
                 ],
                 [
                     'text'    => 'ventas',

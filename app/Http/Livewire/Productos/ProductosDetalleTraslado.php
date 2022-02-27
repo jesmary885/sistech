@@ -3,53 +3,72 @@
 namespace App\Http\Livewire\Productos;
 
 use App\Models\Movimiento;
+use App\Models\Producto;
 use App\Models\Sucursal;
 use Livewire\Component;
 use App\Models\Producto_sucursal as Pivot;
+use App\Models\ProductoSerialSucursal;
+use Livewire\WithPagination;
 
 class ProductosDetalleTraslado extends Component
 {
 
-    public $isopen = false;
-    public $sucursal, $cantidad, $sucursal_id = "", $sucursales, $producto;
+    use WithPagination;
+    protected $paginationTheme = "bootstrap";
 
+    public $isopen = false;
+    public $sucursal, $cantidad, $sucursal_id = "", $sucursales, $producto,$prod;
     
- 
-      
+    public $search;
+
+    public function updatingSearch(){
+        $this->resetPage();
+    }
+          
     protected $rules = [
-        'cantidad' => 'required',
+
         'sucursal_id' => 'required',
     ];
 
-    public function open()
-    {
-        $this->isopen = true;  
-    }
-    public function close()
-    {
-        $this->isopen = false;  
-    }
-
-    public function mount(){
+    public function mount(Producto $producto,$sucursal){
+        $this->producto = $producto;
+        $this->sucursal = $sucursal;
              $this->sucursales=Sucursal::where('id','!=',$this->sucursal)->get();
      }
     public function render()
     {
-        return view('livewire.productos.productos-detalle-traslado');
+        $productos = ProductoSerialSucursal::where('serial', 'LIKE', '%' . $this->search . '%')
+            ->where('sucursal_id',$this->sucursal)
+            ->where('cod_barra',$this->producto->cod_barra)
+            ->paginate(5);
+
+        return view('livewire.productos.productos-detalle-traslado',compact('productos'));
     }
 
     public  function save()
     {
+       
         $rules = $this->rules;
         $this->validate($rules);
+        $cont = 0;
         $fecha_actual = date('Y-m-d');
         $user_auth =  auth()->user()->id;
 
+
+       foreach($this->prod as $p){
+            $produc=ProductoSerialSucursal::where('id',$p[0])->first();
+            $produc->update([
+                'sucursal_id' => $this->sucursal_id
+            ]);
+            $cont++;
+        }
+
         $pivot_increment = Pivot::where('sucursal_id',$this->sucursal_id)->where('producto_id',$this->producto->id)->first();
         $pivot_decrement = Pivot::where('sucursal_id',$this->sucursal)->where('producto_id',$this->producto->id)->first(); 
-        if($this->cantidad < $pivot_decrement->cantidad){
-            $pivot_increment->cantidad = $pivot_increment->cantidad + $this->cantidad;
-        $pivot_decrement->cantidad = $pivot_decrement->cantidad - $this->cantidad;
+
+    
+        $pivot_increment->cantidad = $pivot_increment->cantidad + $cont;
+        $pivot_decrement->cantidad = $pivot_decrement->cantidad - $cont;
 
         $pivot_increment->save();
         $pivot_decrement->save();
@@ -60,19 +79,16 @@ class ProductosDetalleTraslado extends Component
         $movimiento = new Movimiento();
             $movimiento->fecha = $fecha_actual;
             $movimiento->tipo_movimiento = 'Traslado';
-            $movimiento->cantidad = $this->cantidad;
+            $movimiento->cantidad = $cont;
             $movimiento->precio = $this->producto->precio_letal;
             $movimiento->observacion = 'Traslado desde almacen '. $sucursal_inicial .' hasta almacen '. $sucursal_final;
             $movimiento->producto_id = $this->producto->id;
             $movimiento->user_id = $user_auth;
             $movimiento->save();
 
-            $this->reset(['isopen','sucursal_id','cantidad']);
             $this->emitTo('productos.productos-traslado','render');
             $this->emit('alert','Datos registrados correctamente');
-        } else{
-            $this->emit('errorSize','La cantidad ingresada supera la disponible en inventario');
-        }
+        
         
     }
 }

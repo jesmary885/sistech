@@ -87,7 +87,7 @@
                 </div>
             </div>
 
-            <div class="w-full hidden" :class="{'hidden': tipo_pago != 2}">
+            <div class="w-z">
                     <div class="w-1/4 m-2">
                         <input wire:model="pago_cliente" type="text" class="w-full px-4 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Total pagado">
                         <x-input-error for="pago_cliente" />

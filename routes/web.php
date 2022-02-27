@@ -49,9 +49,6 @@ Route::get('/home', function () {
 Route::get('/home',[HomeController::class,'index'])->name('home');
 
 
-
-
-
 Auth::routes();
 
 //Gestion administrativa
@@ -73,16 +70,28 @@ Route::get('compras',[ComprasController::class,'index'])->name('admin.compras.in
 Route::get('facturacion/{sucursal}',[FacturacionController::class,'facturacion'])->name('facturacion');
 
 Route::get('traslado',[MovimientosController::class,'index'])->name('traslado.index');
-Route::get('historial',[MovimientosController::class,'historial'])->name('movimientos.historial');
+Route::get('traslado/{sucursal}',[MovimientosController::class,'select'])->name('productos.traslado.select');
+Route::get('traslado/{sucursal}/{producto}',[MovimientosController::class,'select_serial'])->name('productos.traslado.serial');
+
+
 Route::get('devolucion',[MovimientosController::class,'devolucion'])->name('devolucion.index');
 Route::get('devolucion_registro',[MovimientosController::class,'devolucion_create'])->name('devolucion.create');
-Route::get('traslado/{sucursal}',[MovimientosController::class,'select'])->name('productos.traslado.select');
-Route::get('historial/{producto}/{fecha_inicio}/{fecha_fin}',[MovimientosController::class,'historial_detalle'])->name('movimientos.historial.detalle');
 
-Route::get('reportes_productos/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'productos'])->name('productos.reportes');
-Route::get('reportes_ventas/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'ventas'])->name('ventas.reportes');
+//Reportes
+
+//reportes de historial de productos
+Route::get('historial_modalidad',[MovimientosController::class,'select_modalidad'])->name('movimientos.modalidad');
+Route::post('historial_modalidad',[MovimientosController::class,'buscar'])->name('movimientos.buscar');
+Route::get('historial_modalidad/productos_cod_barra',[MovimientosController::class,'historial'])->name('movimientos.historial');
+Route::get('historial_modalidad/productos_serial',[MovimientosController::class,'historial_prod_serial'])->name('movimientos.historial_prod_serial');
+Route::get('historial_modalidad/{vista}/{producto}/{fecha_inicio}/{fecha_fin}',[MovimientosController::class,'historial_detalle'])->name('movimientos.historial.detalle');
+
+//reporte de productos mas vendidos
 Route::get('reporte_poducto',[ReportesController::class,'index_producto'])->name('reportes.index.productos');
+Route::get('reportes_productos/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'productos'])->name('productos.reportes');
+//reporte de ventas
 Route::get('reporte_venta',[ReportesController::class,'index_venta'])->name('reportes.index.ventas');
+Route::get('reportes_ventas/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'ventas'])->name('ventas.reportes');
 Route::get('ventas_clientes',[VentasViewController::class,'index'])->name('ventas.clientes');
 
 // livewire
@@ -90,7 +99,6 @@ Route::get('ventas_clientes',[VentasViewController::class,'index'])->name('venta
 Route::get('productos/{sucursal}/traslado', ProductosTraslado::class)->name('producto.traslado.view');
 
 //Cargar imagen de producto
-
 Route::post('productos/{product}/files', [FilesController::class, 'files'])->name('productos.files');
 
 //productos por serial

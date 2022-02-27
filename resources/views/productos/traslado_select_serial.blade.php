@@ -6,7 +6,7 @@
 @stop
 
 @section('content')
-     @livewire('productos.productos-detalle-historial',[ 'vista' => $vista,'producto' => $producto, 'fecha_inicio' => $fecha_inicio, 'fecha_fin' => $fecha_fin])
+    @livewire('productos.productos-detalle-traslado',['sucursal' => $sucursal,'producto' => $producto])
 @stop
 
 @section('css')

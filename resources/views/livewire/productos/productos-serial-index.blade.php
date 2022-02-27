@@ -37,6 +37,14 @@
                                     <td width="10px">
                                         @livewire('productos.productos-add-serial', ['producto' => $producto],key($producto->id))
                                     </td>
+                                    <td width="10px">
+                                        <button
+                                            class="btn btn-danger btn-sm" 
+                                            wire:click="delete('{{$producto->id}}')"
+                                            title="Eliminar producto">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
                             
                                 </tr>
                             @endforeach

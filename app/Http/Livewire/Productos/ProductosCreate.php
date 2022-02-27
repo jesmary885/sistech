@@ -152,7 +152,7 @@ class ProductosCreate extends Component
  
              for ($i=0; $i < $this->cantidad; $i++) {
                  $producto->productoSerialSucursals()->create([
-                     'serial' => '',
+                     'serial' => 'S/S',
                      'sucursal_id' => $this->sucursal_id,
                      'cod_barra' => $producto->cod_barra,
                      'compra_id' => $compra->id,

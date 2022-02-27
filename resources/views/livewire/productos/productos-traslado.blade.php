@@ -22,7 +22,8 @@
                                     <td class="text-center">{{$producto->nombre}}</td>
                                     <td class="text-center">{{$producto->sucursals->find($sucursal)->pivot->cantidad}}</td>                             
                                     <td width="10px">  
-                                        @livewire('productos.productos-detalle-traslado', ['producto' => $producto, 'sucursal' => $sucursal],key($producto->id))
+                                        <a href="{{route('productos.traslado.serial',['producto'=>$producto,'sucursal'=>$sucursal])}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
+                                        {{-- @livewire('productos.productos-detalle-traslado', ['producto' => $producto, 'sucursal' => $sucursal],key($producto->id)) --}}
                                     </td>
                                 </tr>
                             @endforeach

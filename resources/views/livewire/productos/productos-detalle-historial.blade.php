@@ -35,10 +35,15 @@
                 </div>
             @endif
             <div class="flex justify-start">
-                <div class="mt-2 ml-4 mb-2">
-                    <a href="{{route('movimientos.historial')}}" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Regresar</a>
-                </div>
-    
+                @if ($vista == 'cod_barra')
+                    <div class="mt-2 ml-4 mb-2">
+                        <a href="{{route('movimientos.historial')}}" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Regresar</a>
+                    </div>
+                @else
+                    <div class="mt-2 ml-4 mb-2">
+                        <a href="{{route('movimientos.historial_prod_serial')}}" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Regresar</a>
+                    </div>
+                @endif
                 <div>
                     <button class="btn btn-success mt-2 ml-2 mb-2" wire:click="export" title="Eliminar producto"> <i class="far fa-file-excel"></i> Exportar historial</button>
                 </div>

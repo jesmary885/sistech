@@ -89,7 +89,7 @@ class ProductosAdd extends Component
         $compra->fecha = $this->fecha_actual;
         $compra->total = $total_compra;
         $compra->cantidad = $this->cantidad;
-        $compra->precio_compra = $this->precio_entrada;
+        $compra->precio_compra = $this->precio_compra;
         $compra->proveedor_id = $this->proveedor_id;
         $compra->user_id = $usuario_auth;
         $compra->sucursal_id = $this->sucursal_id;
@@ -110,7 +110,7 @@ class ProductosAdd extends Component
  
         for ($i=0; $i < $this->cantidad; $i++) {
             $producto_select->productoSerialSucursals()->create([
-                'serial' => '',
+                'serial' => 'S/S',
                 'sucursal_id' => $this->sucursal_id,
                 'cod_barra' => $producto_select->cod_barra,
                 'compra_id' => $compra->id,

@@ -48,7 +48,7 @@ class Producto extends Model
 
     //Relacion muchos a muchos
     public function sucursals(){
-        return $this->belongsToMany(Sucursal::class)->withPivot('cantidad', 'id', 'producto_id');;
+        return $this->belongsToMany(Sucursal::class)->withPivot('cantidad', 'id', 'producto_id');
     }
 
     //relacion 1 a 1 polimorfica
