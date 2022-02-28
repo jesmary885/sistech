@@ -28,6 +28,7 @@
                             <tbody>
                                 @foreach ($productos as $producto)
                                     <tr>
+                                        <td>{{$producto->id}}</td>
                                         <td>{{$producto->serial}}</td>
                                         <td width="10px">
                                             <input type="checkbox" wire:model="prod.{{$producto->id}}" value="{{$producto->id}}">

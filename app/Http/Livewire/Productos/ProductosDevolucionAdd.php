@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Productos;
 
 use App\Models\Devolucion;
 use App\Models\Movimiento;
+use App\Models\Movimiento_product_serial;
 use App\Models\Producto_venta;
 use App\Models\Venta;
 use Livewire\Component;
@@ -37,8 +38,9 @@ class ProductosDevolucionAdd extends Component
     }
 
     public function buscar($nro_factura){
+        $nro_factura = $this->nro_factura;
         $this->factura = 0;
-        $this->productos = Producto_venta::where('venta_id',$this->nro_factura)
+        $this->productos = Producto_venta::where('venta_id',$nro_factura)
                                             ->where('cantidad','>',0)
                                             ->get();
     }
@@ -50,7 +52,7 @@ class ProductosDevolucionAdd extends Component
         $user_auth = auth()->user()->id;
         $fecha_actual = date('Y-m-d');
 
-        $producto_venta = Producto_venta::where('producto_id',$this->producto_id)
+        $producto_venta = Producto_venta::where('producto_serial_sucursal_id',$this->producto_id)
                                     ->where('venta_id',$this->nro_factura)               
                                     ->first();
 
@@ -58,7 +60,7 @@ class ProductosDevolucionAdd extends Component
         $devolucion->fecha = $fecha_actual;
         $devolucion->user_id = $user_auth;
         $devolucion->venta_id = $this->nro_factura;
-        $devolucion->producto_id = $this->producto_id;
+        $devolucion->producto_id = $producto_venta->productoSerialSucursal->producto->id;
         $devolucion->cantidad = '1';
         $devolucion->observaciones = $this->observaciones;
         $devolucion->save();
@@ -68,10 +70,19 @@ class ProductosDevolucionAdd extends Component
         $movimiento->tipo_movimiento = 'Devolución de producto';
         $movimiento->cantidad = '1';
         $movimiento->precio = $producto_venta->precio;
-        $movimiento->producto_id = $this->producto_id;
+        $movimiento->producto_id = $producto_venta->productoSerialSucursal->producto->id;
         $movimiento->user_id = $user_auth;
         $movimiento->observacion = $this->observaciones;
         $movimiento->save();
+
+        $movimiento_serial = new Movimiento_product_serial();
+        $movimiento_serial->fecha = $fecha_actual;
+        $movimiento_serial->tipo_movimiento = 'Devolución de producto';
+        $movimiento_serial->precio = $producto_venta->precio;
+        $movimiento_serial->producto_serial_sucursal_id = $producto_venta->productoSerialSucursal->producto->id;
+        $movimiento_serial->user_id = $user_auth;
+        $movimiento_serial->observacion = $this->observaciones;
+        $movimiento_serial->save();
         
         if($this->accion == '1' || $this->accion == '3'){ //Reintegro del dinero o entrega de otro producto distinto
             $venta= Venta::where('id',$this->nro_factura)->first(); 
@@ -86,9 +97,10 @@ class ProductosDevolucionAdd extends Component
                 'total' => $nueva_total_venta,
                 'total_pagado_cliente' => $nueva_total_paga_cliente
             ]);
-            $cantidad_nueva_producto_venta = $producto_venta->cantidad - 1;
+
+            //$cantidad_nueva_producto_venta = $producto_venta->cantidad - 1;
             $producto_venta->update([
-                 'cantidad' => $cantidad_nueva_producto_venta
+                 'cantidad' => 0
              ]);
              $movimiento->observacion = $this->observaciones .' '. 'Se ha realizado reintegro del dinero al cliente por el monto de '.$producto_venta->precio;
         }

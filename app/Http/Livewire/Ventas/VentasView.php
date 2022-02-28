@@ -69,6 +69,7 @@ class VentasView extends Component
                 'total' => $this->total,
                 'productos' => $productos,
                 'iva' => $this->iva,
+
             ];
            $pdf = PDF::loadView('ventas.view_FacturacionContado',$data)->output();
         }

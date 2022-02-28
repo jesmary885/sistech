@@ -24,7 +24,7 @@ class ClienteSeeder extends Seeder
             'direccion' => 'Avenida francisco de miranda calle 84',
             'ciudad_id' => '1',
             'estado_id' => '1',
-            'puntos' => '0',
+            'puntos' => '11',
         ]);
 
         Cliente::create([
@@ -37,7 +37,7 @@ class ClienteSeeder extends Seeder
             'direccion' => 'Avenida francisco de miranda calle 8',
             'ciudad_id' => '1',
             'estado_id' => '1',
-            'puntos' => '0',
+            'puntos' => '5',
         ]);
 
         Cliente::create([
@@ -50,7 +50,7 @@ class ClienteSeeder extends Seeder
             'direccion' => 'Avenida francisco de miranda calle 8',
             'ciudad_id' => '1',
             'estado_id' => '1',
-            'puntos' => '0',
+            'puntos' => '8',
         ]);
         
     }

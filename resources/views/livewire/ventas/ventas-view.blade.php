@@ -37,6 +37,7 @@
                                             <tr>
                                                 <th>Cant</th>
                                                 <th>Producto</th>
+                                                <th>Serial</th>
                                                 <th>Precio</th>
                                                 <th>Subtotal</th>
                                             </tr>
@@ -44,13 +45,15 @@
                                         <tbody>
                                             @foreach ($productos as $producto)
                                                 <tr>
-                                                    <td>{{$producto->cantidad}}</td>
-                                                    <td>{{$producto->producto->nombre}}</td>
+                                                    <td>1</td>
+                                                    <td>{{$producto->productoSerialSucursal->producto->nombre}}</td>
+                                                    <td>{{$producto->productoSerialSucursal->serial}}</td>
                                                     <td>{{$producto->precio}}</td>
                                                     <td>{{$producto->precio}}</td>
                                                 </tr>
                                             @endforeach                     
                                             <tr>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td>Subtotal</td>
@@ -59,16 +62,19 @@
                                             <tr>
                                                 <td></td>
                                                 <td></td>
+                                                <td></td>
                                                 <td>Descuento</td>
                                                 <td>{{$descuento}}</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <td></td>
+                                                <td></td>
                                                 <td>Impuesto</td>
                                                 <td>{{$impuesto}}</td>
                                             </tr>
                                             <tr>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td>Total a pagar</td>

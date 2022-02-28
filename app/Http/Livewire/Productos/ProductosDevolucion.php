@@ -6,6 +6,7 @@ use App\Models\Devolucion;
 use App\Models\Producto;
 use App\Models\Producto_sucursal;
 use App\Models\Producto_venta;
+use App\Models\ProductoSerialSucursal;
 use App\Models\Venta;
 use Livewire\Component;
 Use Livewire\WithPagination;
@@ -30,7 +31,7 @@ class ProductosDevolucion extends Component
     }
 
     public function inventariar($DevolucionProductoId,$devolucionId,$ventaId){
-        $this->producto_select = Producto::where('id',$DevolucionProductoId)->first();
+     //   $this->producto_select = ProductoSerialSucursal::where('id',$DevolucionProductoId)->first();
         $busqueda_sucursal = Venta::where('id',$ventaId)->first();
         $this->sucursal_id = $busqueda_sucursal->sucursal_id;
         //$this->venta_id = $ventaId;
@@ -52,6 +53,11 @@ class ProductosDevolucion extends Component
         $cantidad_nueva_producto = $producto_sucursal->cantidad + 1;
         $producto_sucursal->update([
             'cantidad' => $cantidad_nueva_producto
+        ]);
+
+        $producto_serial = ProductoSerialSucursal::where('id',$this->producto_id)->first();
+        $producto_serial->update([
+            'estado' => 'activo'
         ]);
 
     }

@@ -24,7 +24,7 @@ class CreateProductosTable extends Migration
             $table->string('cod_barra');
             $table->string('estado');
            // $table->string('presentacion');
-            $table->string('puntos');
+            $table->integer('puntos');
             //$table->string('percepcion');
             $table->string('observaciones');
             $table->unsignedBigInteger('categoria_id');

@@ -61,7 +61,7 @@
                 </div>
                 <div class="mr-2 w-full">
                     <div class="w-full mr-2">
-                        <input wire:model="descuento" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Descuento en venta %">
+                        <input wire:model="descuento" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Descuento en venta %">
                         <x-input-error for="descuento" />
                     </div>
                 </div>
@@ -87,9 +87,9 @@
                 </div>
             </div>
 
-            <div class="w-z">
+            <div :class="{'hidden': tipo_pago != 2}">
                     <div class="w-1/4 m-2">
-                        <input wire:model="pago_cliente" type="text" class="w-full px-4 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Total pagado">
+                        <input wire:model="pago_cliente" type="number" class="w-full px-4 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Total pagado">
                         <x-input-error for="pago_cliente" />
                     </div>
             </div>
@@ -99,7 +99,7 @@
 
         <div class="flex" :class="{'hidden': siguiente_venta != 0}">
             <div class="mr-2">
-                <a href="{{route('ventas.ventas.show',$sucursal)}}" class="btn mt-6 mb-4 btn-primary"><i class="fas fa-undo-alt"></i> Regresar</a>
+                <a href="{{route('ventas.ventas.show',$sucursal)}}" class="btn mt-6 mb-4 btn-primary"><< Regresar</a>
             </div>
             
             <x-button
@@ -139,7 +139,7 @@
                         <article>
                             <h1 class="font-bold mr-4 text-lg text-gray-600">{{$item->name}}</h1>
                             <div class="flex">
-                                <p class="mr-2 text-sm font-semibold">Cantidad: {{$item->qty}}</p>
+                                <p class="mr-2 text-sm font-semibold">S/N: {{$item->options['serial']}}</p>
                                 <p class="text-sm"> - Precio: S/ {{$item->price}} - </p> 
                                 <p class="text-sm font-semibold text-red-600 ml-2"> Puntos: {{$item->options['puntos']}}</p> 
                                 @if ($puntos_canjeo >  $item->options['puntos'])
@@ -147,7 +147,7 @@
                                     wire:loading.attr="disabled"
                                     wire:target="canjear"
                                     class=" btn-sm mb-2 ml-2" 
-                                    wire:click="canjeo('{{$item->id}}}')">
+                                    wire:click="canjear('{{$item->id}}}')">
                                     <i class="fas fa-file-invoice"></i>
                                     </x-button>  
                                 @endif
@@ -169,6 +169,7 @@
                 <p class="flex justify-between items-center">
                     Cliente: 
                     <span class="font-semibold">{{$cliente_select}}</span>
+                    <x-input-error for="cliente_select" />
                 </p>
 
             </div>
@@ -182,7 +183,12 @@
                 </p>
                 <p class="flex justify-between items-center">
                     Descuento
-                    <span class="font-semibold">S/ {{$this->descuento_total)}}</span>
+                    @if ($canjeo == false)
+                        <span class="font-semibold">S/ {{Cart::subtotal() * ((int)($this->descuento) / 100)}}</span>
+                    @else
+                        <span class="font-semibold">S/ {{$descuento_total}}</span>
+                    @endif
+                   
                     
                     {{-- <span class="font-semibold">S/ {{$descuento_total = Cart::subtotal() * ($this->descuento / 100)}}</span> --}}
                 </p>
@@ -209,7 +215,7 @@
                     <p class="flex justify-between items-center">
                         Pendiente por pagar
                         <span class="font-semibold">
-                        S/ {{((Cart::subtotal() - $descuento_total) + ((Cart::subtotal() - $descuento_total) * ($iva))) - $pago_cliente}}
+                        S/ {{((Cart::subtotal() - $descuento_total) + ((Cart::subtotal() - $descuento_total) * ($iva))) - ((int)$pago_cliente)}}
                         </span>
                     </p>
                 </div>

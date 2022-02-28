@@ -22,18 +22,22 @@ class ReporteProducto extends Component
 
         if($sucursal == 0){
             $productos = DB::select('SELECT p.cod_barra, p.nombre, p.id, sum(dv.cantidad) as quantity from productos p
-            inner join producto_ventas dv on p.id=dv.producto_id
-            inner join ventas v on dv.venta_id = v.id where v.fecha BETWEEN :fecha_inicioo AND :fecha_finn
+            inner join producto_serial_sucursals ps on p.id=ps.producto_id
+            inner join producto_ventas dv on ps.id=dv.producto_serial_sucursal_id
+            inner join ventas v on dv.venta_id = v.id where v.fecha BETWEEN :fecha_inicioo AND :fecha_finn AND v.estado = "activa"
             group by p.cod_barra, p.nombre, p.id order by sum(dv.cantidad) desc limit 5',array('fecha_inicioo' => $fecha_inicioo,'fecha_finn' => $fecha_finn));
         } else{
             $productos = DB::select('SELECT p.cod_barra, p.nombre, p.id, sum(dv.cantidad) as quantity from productos p
-            inner join producto_ventas dv on p.id=dv.producto_id 
-            inner join ventas v on dv.venta_id = v.id where v.fecha BETWEEN :fecha_inicioo AND :fecha_finn and :sucursal = v.sucursal_id
+           inner join producto_serial_sucursals ps on p.id=ps.producto_id
+            inner join producto_ventas dv on ps.id=dv.producto_serial_sucursal_id
+            inner join ventas v on dv.venta_id = v.id where v.fecha BETWEEN :fecha_inicioo AND :fecha_finn and :sucursal = v.sucursal_id AND v.estado = "activa"
             group by p.cod_barra, p.nombre, p.id order by sum(dv.cantidad) desc limit 5',array('fecha_inicioo' => $fecha_inicioo,'fecha_finn' => $fecha_finn, 'sucursal' => $sucursal));
         }
 
         $data=json_encode($productos);
         $array = json_decode($data, true);
+
+     //  dd($array);
 
         foreach($array as $arrays){
             $puntos[]=['name' => $arrays['nombre'] , 'y' => $arrays['quantity']];

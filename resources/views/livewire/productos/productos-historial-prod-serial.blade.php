@@ -27,6 +27,7 @@
                                 <th class="text-center">Código de Barra</th>
                                 <th class="text-center">Serial</th>
                                 <th class="text-center">Descripción</th>
+                                <th class="text-center">Estado</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,6 +36,7 @@
                                     <td class="text-center">{{$producto->cod_barra}}</td>
                                     <td class="text-center">{{$producto->serial}}</td>
                                     <td class="text-center">{{$producto->producto->nombre}}</td>
+                                    <td class="text-center">{{$producto->estado}}</td>
                                     <td width="10px">
                                         <button
                                         class="ml-4 btn btn-primary btn-sm" 

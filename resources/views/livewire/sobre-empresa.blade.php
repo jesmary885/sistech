@@ -57,7 +57,7 @@
             </div>
             <div class="flex">
                 <i class="fas fa-file-invoice-dollar mt-4 mr-1"></i>
-              <h2 class="text-lg inline mt-3 underline decoration-gray-400"> Información de impuesto</h2>
+              <h2 class="text-lg inline mt-3 underline decoration-gray-400"> Información de impuesto y descuentos por canjes de puntos</h2>
           </div>
 
             <div class="flex justify-between w-full mt-3 mr-2">
@@ -69,6 +69,12 @@
                     <input wire:model="impuesto" type="text" title="Impuesto" class="px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="valor del impuesto">
                     <x-input-error for="impuesto" />
                 </div>
+
+                <div class="w-full">
+                    <input wire:model="porcentaje_puntos" type="text" title="Porcentaje de decuento en venta" class="px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Porcentaje">
+                    <x-input-error for="porcentaje_puntos" />
+                </div>
+
                
             </div>
 

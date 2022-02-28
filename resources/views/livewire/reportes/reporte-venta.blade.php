@@ -5,6 +5,7 @@
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead>
+              
                         <tr>
                             <th class="text-center">VENTAS REALIZADAS</th>
                             <th class="text-center">TOTAL EN VENTAS</th>
@@ -139,7 +140,7 @@
     },
     series: [
     {
-        name: "Negocio",
+        name: "Sucursal",
         colorByPoint: true,
         data: <?= $data2 ?> 
     }

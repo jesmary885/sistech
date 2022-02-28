@@ -14,7 +14,7 @@ class VentasContado extends Component
     protected $paginationTheme = "bootstrap";
 
 
-    protected $listeners = ['render' => 'render'];
+    protected $listeners = ['render' => 'render','confirmacion' => 'confirmacion'];
 
     public $search;
 
@@ -28,11 +28,25 @@ class VentasContado extends Component
 
         $ventas = Venta::where('fecha', 'LIKE', '%' . $this->search . '%')
                     ->where('tipo_pago', 1)
+                    ->where('estado', 'activa')
                     ->latest('id')
                     ->paginate(5);
 
 
         return view('livewire.ventas.ventas-contado',compact('ventas'));
+    }
+
+    public function delete($ventaId){
+        $this->venta = $ventaId;
+
+        $this->emit('confirm', 'Esta seguro de anular esta venta?','ventas.ventas-contado','confirmacion','La venta se ha anulado.');
+    }
+
+    public function confirmacion(){
+        $venta_destroy = Venta::where('id',$this->venta)->first();
+        $venta_destroy->update([
+            'estado' => 'anulada',
+        ]);
     }
 
    

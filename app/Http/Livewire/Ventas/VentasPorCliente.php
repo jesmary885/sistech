@@ -16,7 +16,7 @@ class VentasPorCliente extends Component
     public $productos,$collection = [];
 
 
-    protected $listeners = ['render' => 'render'];
+    protected $listeners = ['render' => 'render','confirmacion' => 'confirmacion'];
 
     public $search;
 
@@ -36,4 +36,18 @@ class VentasPorCliente extends Component
 
         return view('livewire.ventas.ventas-por-cliente',compact('ventas'));
     }
+
+    public function delete($ventaId){
+        $this->venta = $ventaId;
+
+        $this->emit('confirm', 'Esta seguro de anular esta venta?','ventas.ventas-por-cliente','confirmacion','La venta se ha anulado.');
+    }
+
+    public function confirmacion(){
+        $venta_destroy = Venta::where('id',$this->venta)->first();
+        $venta_destroy->update([
+            'estado' => 'anulada',
+        ]);
+    }
+
 }

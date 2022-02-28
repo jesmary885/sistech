@@ -26,6 +26,7 @@ class CreateVentasTable extends Migration
             $table->float('impuesto');
             $table->float('total_pagado_cliente');
             $table->float('deuda_cliente');
+            $table->string('estado');
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->unsignedBigInteger('user_id');

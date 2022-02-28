@@ -31,11 +31,11 @@ class HomeController extends Controller
         $clientes_cant = Cliente::count();
 
         $cantidad_ventas = DB::select('SELECT COUNT(*) as cantidad from ventas V 
-        where v.fecha = :fecha_actual'
+        where v.fecha = :fecha_actual AND v.estado = "activa"' 
         ,array('fecha_actual' => $fecha_actual));
 
         $total_ventas = DB::select('SELECT sum(v.total_pagado_cliente) as quantity from ventas v
-        where v.fecha = :fecha_actual'
+        where v.fecha = :fecha_actual AND v.estado = "activa"'
         ,array('fecha_actual' => $fecha_actual));
 
         

@@ -19,7 +19,7 @@
                                 <select wire:model="producto_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                     <option value="" selected>Seleccione el producto</option>
                                     @foreach ($productos as $producto)
-                                        <option value="{{$producto->producto->id}}">{{$producto->producto->nombre}}</option>
+                                        <option value="{{$producto->productoSerialSucursal->id}}">{{$producto->productoSerialSucursal->producto->nombre}} - S/N: {{$producto->productoSerialSucursal->serial}}</option>
                                     @endforeach
                                 </select>
                                 <x-input-error for="producto_id" />
@@ -41,7 +41,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="close" >Cerrar</button>
                         <div :class="{'hidden': factura != 1}">
-                            <button type="button" class="btn btn-primary disabled:opacity-25" wire:loading.attr="disabled" wire:click="buscar('{{$nro_factura}}}')">Buscar</button>
+                            <button type="button" class="btn btn-primary disabled:opacity-25" wire:loading.attr="disabled" wire:click="buscar('{{$nro_factura}}')">Buscar</button>
                         </div>
                         <div :class="{'hidden': factura != 0}">
                             <button type="button" class="btn btn-primary disabled:opacity-25" wire:loading.attr="disabled" wire:click="save">Guardar</button>

@@ -2,7 +2,7 @@
     <div>
         <div class="card">
             <div class="card-header">
-                <input wire:model="search" placeholder="Ingrese el nombre o código de barra del producto a buscar" class="form-control">
+                <input wire:model="search" placeholder="Ingrese código de barra del producto a buscar" class="form-control">
             </div>
             @if ($productos->count())
                 <div class="card-body">

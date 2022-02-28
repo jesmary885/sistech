@@ -20,7 +20,7 @@ class CreateProductoSucursalTable extends Migration
             $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');;
             $table->unsignedBigInteger('sucursal_id');
             $table->foreign('sucursal_id')->references('id')->on('sucursals');
-            $table->string('cantidad');
+            $table->integer('cantidad');
         });
     }
 

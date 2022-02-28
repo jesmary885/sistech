@@ -48,6 +48,7 @@ class ProductosSerialIndex extends Component
     public function render()
     {
         $productos = ProductoSerialSucursal::where('sucursal_id',$this->sucursal)
+        ->where('estado','activo')
         ->where('cod_barra', 'LIKE', '%' . $this->search . '%')
         ->latest('id')
         ->OrderBy($this->sort, $this->direction) 

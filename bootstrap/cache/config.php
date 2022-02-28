@@ -356,7 +356,7 @@
     'url' => 'http://sistech.test/',
     'asset_url' => NULL,
     'timezone' => 'UTC',
-    'locale' => 'en',
+    'locale' => 'es',
     'fallback_locale' => 'es',
     'faker_locale' => 'en_US',
     'key' => 'base64:8Bp5uv+7wBkDTSybgLzv7+ubml4gHyZ/ZESp0m97fcI=',

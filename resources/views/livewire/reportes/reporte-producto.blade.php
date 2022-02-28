@@ -12,6 +12,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                                
                         @foreach ($array as $value)
                         <tr>
                             <td class="text-center">{{$value['nombre']}}</td>
@@ -140,7 +141,8 @@ Highcharts.chart('container', {
         name: "Producto",
         colorByPoint: true,
         data: <?= $data2 ?> 
-    }]
+    }
+    ]
 });
 </script>  
 

@@ -9,8 +9,8 @@
                     <tr>
                         <th class="text-center">Producto</th>
                         <th class="text-center">Precio</th>
+                        <th class="text-center">Serial</th>
                         <th></th>
-                        <th class="text-center">Cantidad</th>
                         <th class="text-center">Total</th>
                     </tr>
                 </thead>
@@ -26,6 +26,10 @@
                                 <span> {{ $item->price }}</span>
                             </td>
                             <td class="text-center">
+                                <span> {{ $item->options['serial'] }}</span>
+                            </td>
+                     
+                            <td class="text-center">
                                 <a class="ml-12 cursor-pointer hover:text-red-600"
                                     wire:click="delete('{{$item->rowId}}')"
                                     wire:loading.class="text-red-600 opacity-25"
@@ -33,11 +37,7 @@
                                     <i class="fas fa-trash"></i>  
                                 </a>
                             </td>
-                            <td>
-                                <div class="flex justify-center">
-                                    @livewire('ventas.update-cart-item', ['rowId' => $item->rowId, 'sucursal' => $sucursal, 'producto' => $item->id], key($item->rowId))
-                                </div>
-                            </td>
+                        
                             <td class="text-center">
                              {{$item->price * $item->qty}}
                             </td>
@@ -72,11 +72,11 @@
                 <div class="flex">
 
                     <div>
-                        <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn mr-2 btn-primary"><i class="fas fa-undo-alt"></i> Regresar</a>
+                        <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn mr-2 btn-primary"> << Regresar</a>
                     </div>
 
                     <x-button-enlace href="{{route('facturacion',$sucursal)}}">
-                        Continuar
+                        Continuar >>
                     </x-button-enlace>
 
                     

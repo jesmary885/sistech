@@ -1,7 +1,7 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <input wire:model="search" placeholder="Ingrese la fecha de la venta o nro de documento del cliente a buscar" class="form-control">
+            <input wire:model="search" placeholder="Ingrese la fecha de la venta a buscar" class="form-control">
         </div>
         @if ($ventas->count())
             <div class="card-body">
@@ -25,11 +25,15 @@
                                 <td>{{$venta->estado_entrega}}</td>
                                 <td>{{$venta->total}}</td>
                                 <td width="10px">
-                                    @livewire('ventas.ventas-view', ['venta' => $venta],key($venta->id)) 
+                                    @livewire('ventas.ventas-view', ['venta' => $venta],key('0'.' '.$venta->id)) 
                                 </td>
                                 <td width="10px">
-                                    {{-- @livewire('admin.usuarios-edit', ['usuario' => $user],key($user->id)) --}}
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                    <button
+                                        class="btn btn-danger btn-sm" 
+                                        wire:click="delete('{{$venta->id}}')"
+                                        title="Anular venta">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach

@@ -25,11 +25,11 @@
                                 <td class="text-center">{{ $sucursal->nombre}}</td>
                                 <td width="10px">
                                     @if ($vista == 'ventas')
-                                        <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn btn-info btn-sm"><i class="fas fa-check"></i></a>
+                                        <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
                                     @elseif($vista == 'productos')
-                                        <a href="{{route('productos.traslado.select',$sucursal)}}" class="btn btn-info btn-sm"><i class="fas fa-check"></i></a>
+                                        <a href="{{route('productos.traslado.select',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
                                     @else
-                                        <a href="{{route('productos.serial.view',$sucursal)}}" class="btn btn-info btn-sm"><i class="fas fa-check"></i></a>
+                                        <a href="{{route('productos.serial.view',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
                                     @endif
                                 </td>
                             </tr>

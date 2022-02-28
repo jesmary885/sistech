@@ -16,6 +16,7 @@ class VentasSeleccionCantidades extends Component
 
     public $options = [
         'puntos' => null,
+        'serial' => null,
     ];
 
     public function decrement(){
@@ -28,28 +29,48 @@ class VentasSeleccionCantidades extends Component
 
     public function mount(){
 
-        $this->cantidad = qty_available($this->producto->id,$this->sucursal);
+      //  $this->cantidad = qty_available($this->producto->id,$this->sucursal);
 
     }
 
 
     public function addItem(){
-        if($this->precios == '1') $precio_venta = $this->producto->precio_letal;
-        else $precio_venta = $this->producto->precio_mayor;
-        $this->options['puntos'] = $this->producto->puntos;
 
-        Cart::add([ 'id' => $this->producto->id, 
-                    'name' => $this->producto->nombre, 
-                    'qty' => $this->qty, 
-                    'price' => $precio_venta, 
-                    'weight' => 0,
-                    'options' => $this->options,
-                ]);
+        $exist = 0;
 
-         $this->cantidad = qty_available($this->producto->id,$this->sucursal);
+        foreach(Cart::content() as $item){
+            if($item->id == $this->producto->id){
+                $exist = 1;
+            }
+        }
 
-        $this->reset('qty');
+        if($exist == 0){
+            if($this->precios == '1') $precio_venta = $this->producto->producto->precio_letal;
+            else $precio_venta = $this->producto->producto->precio_mayor;
+            $this->options['puntos'] = $this->producto->producto->puntos;
+            $this->options['serial'] = $this->producto->serial;
+
+            Cart::add([ 'id' => $this->producto->id, 
+                        'name' => $this->producto->producto->nombre, 
+                        'qty' => 1, 
+                        'price' => $precio_venta, 
+                        'weight' => 0,
+                        'options' => $this->options,
+                    ]);
+
+      //   $this->cantidad = qty_available($this->producto->id,$this->sucursal);
+
+        $this->reset('precios');
         $this->isopen = false;
+
+        }
+        else{
+            $this->emit('errorSize', 'Ya agregaste este producto al carrito');
+        }
+       
+     
+
+        
 
     
     }

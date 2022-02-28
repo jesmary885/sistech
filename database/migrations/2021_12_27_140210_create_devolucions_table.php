@@ -23,7 +23,7 @@ class CreateDevolucionsTable extends Migration
             $table->foreign('venta_id')->references('id')->on('ventas');
             $table->unsignedBigInteger('producto_id');
             $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');;
-            $table->string('cantidad');
+            $table->integer('cantidad');
             $table->string('observaciones');
         });
     }

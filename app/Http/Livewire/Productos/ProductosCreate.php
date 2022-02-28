@@ -55,8 +55,12 @@ class ProductosCreate extends Component
          'sucursal_id' => 'required',
          'estado' => 'required',
          'observaciones' => 'required',
-         'file' => 'image|max:1024',
+
       ];
+
+      protected $rule_file = [
+        'file' => 'image|max:1024',
+     ];
 
  
     public function mount(){
@@ -120,6 +124,8 @@ class ProductosCreate extends Component
         //agregando imagen de producto en tabla imagenes
 
        if ($this->file){
+            $rule_file = $this->rule_file;
+            $this->validate($rule_file);
             $url = Storage::put('public/productos', $this->file);
             $producto->imagen()->create([
                 'url' => $url
@@ -156,6 +162,7 @@ class ProductosCreate extends Component
                      'sucursal_id' => $this->sucursal_id,
                      'cod_barra' => $producto->cod_barra,
                      'compra_id' => $compra->id,
+                     'estado' => 'activo',
                      'fecha_compra' => $compra->fecha
                  ]);
              }
@@ -189,7 +196,7 @@ class ProductosCreate extends Component
             }
         }
 
-        $this->reset(['nombre','puntos','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','marca_id']);
+        $this->reset(['nombre','puntos','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','marca_id','file']);
        $this->emit('alert','Producto creado correctamente');
         $this->emitTo('productos.productos-index','render');
     

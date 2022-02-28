@@ -199,7 +199,7 @@
                     @foreach ($collection as $item)
                         <tr>
                             <td>{{$item->qty}}</td>
-                            <td>{{$item->name}}</td>
+                            <td>{{$item->name}} - S/N {{$item->options['serial']}}</td>
                             <td>S/ {{$item->price}}</td>
                             <td>S/ {{($item->qty)*($item->price)}}</td>
                         </tr>

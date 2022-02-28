@@ -25,6 +25,7 @@ class CreateProductoSerialSucursalsTable extends Migration
             $table->foreign('compra_id')->references('id')->on('compras');
             $table->string('serial');
             $table->string('cod_barra');
+            $table->string('estado');
         });
     }
 

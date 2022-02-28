@@ -44,14 +44,12 @@ function qty_available($producto_id,$sucursal_id){
 function discount($item,$sucursal_id){
 
     // $producto = Producto::find($item->id);
-    $qty_available = qty_available($item->id,$sucursal_id);
+    $qty_available = qty_available($item,$sucursal_id);
 
     $pivot = Pivot::where('sucursal_id',$sucursal_id)
-                         ->where('producto_id',$item->id)
+                         ->where('producto_id',$item)
                          ->first();
-    $pivot->cantidad = $qty_available;
-
-    $pivot->cantidad = $qty_available;
+    $pivot->cantidad = $pivot->cantidad - 1;
     $pivot->save();
 
 }

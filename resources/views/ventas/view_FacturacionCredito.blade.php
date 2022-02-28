@@ -199,10 +199,10 @@
                 <tbody>
                     @foreach ($productos as $producto)
                         <tr>
-                            <td>{{$producto->cantidad}}</td>
-                            <td>{{$producto->producto->nombre}}</td>
+                            <td>1</td>
+                            <td>{{$producto->productoSerialSucursal->producto->nombre}} - S/N: {{$producto->productoSerialSucursal->serial}}</td>
                             <td>S/ {{$producto->precio}}</td>
-                            <td>S/ {{($producto->cantidad)*($producto->precio)}}</td>
+                            <td>S/ {{$producto->precio}}</td>
                         </tr>
                     @endforeach
                 </tbody>

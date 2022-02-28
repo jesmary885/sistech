@@ -249,47 +249,6 @@
             </div>
         </div>
     </div>
-
-
-    <style>
-        .image-wrapper{
-            position: relative;
-            padding-bottom: 56.25%;
-        }
-        .image-wrapper img{
-            position: absolute;
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-        }
-
-    </style>
-
-    <script>
-        //Cambiar imagen
-    document.getElementById("file").addEventListener('change', cambiarImagen);
-
-
-function cambiarImagen(event){
-    var file = event.target.files[0];
-
-    var f = document.getElementById("file");
-
-
-    var reader = new FileReader();
-        reader.onload = (event) => {
-        document.getElementById("picture").setAttribute('src', event.target.result); 
-
-      
-        Livewire.emit('refreshimg',f);
-    };
-    reader.readAsDataURL(file);
-}
-    </script>
-
-
-
-
 </div>
 
 
