@@ -56,6 +56,11 @@
         @else
             <div class="card-body">
                 <strong>No hay registros</strong>
+                <div class="mt-4">
+                    <a href="{{route('ventas.ventas.index')}}" class="btn btn-primary"><< Regresar</a>
+
+                </div>
+                
             </div>
         @endif
 

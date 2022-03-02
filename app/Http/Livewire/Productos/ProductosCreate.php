@@ -117,6 +117,7 @@ class ProductosCreate extends Component
         $producto->precio_mayor = $this->precio_mayor;
         $producto->modelo_id = $this->modelo_id;
         $producto->marca_id = $this->marca_id;
+   
         $producto->categoria_id = $this->categoria_id;
         $producto->observaciones = $this->observaciones;
         $producto->estado = $this->estado;

@@ -68,9 +68,6 @@ class VentasSeleccionCantidades extends Component
             $this->emit('errorSize', 'Ya agregaste este producto al carrito');
         }
        
-     
-
-        
 
     
     }

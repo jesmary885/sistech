@@ -120,8 +120,21 @@
             border-bottom: 1px solid #ffffff;
         }
 
+        #facproducto tfoot th,td{
+            margin-bottom: 0px;
+            margin-top: 0px;
+       
+        }
+
         img{
-            margin-left: 0%;
+            margin-left: 0px;
+            margin-bottom: 0px;
+        }
+
+        #fp {
+            margin: 0;
+      
+                 
         }
 
 
@@ -205,9 +218,10 @@
                         </tr>
                     @endforeach
                 </tbody>
+    
                 <tfoot>
-                    <tr>
-                        <th colspan="3">
+                    <tr id="fp">
+                         <th colspan="3">
                             <p align="right">SUBTOTAL: </p>
                         </th>
                         <td>
@@ -236,7 +250,8 @@
                         </th>
                         <td>
                             <p align="center">S/ {{$total}}</p>
-                        </td>
+                        </td> 
+
                     </tr>
                 </tfoot>
             </table>

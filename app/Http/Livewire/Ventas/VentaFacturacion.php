@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Ventas;
 
 use App\Models\Cliente;
 use App\Models\Empresa;
+use App\Models\impresora;
 use App\Models\Movimiento;
 use App\Models\Movimiento_product_serial;
 use App\Models\Producto;
@@ -15,17 +16,19 @@ Use Livewire\WithPagination;
 use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\ServiceProvider;
 use PDF;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
+
 
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class VentaFacturacion extends Component
 {
 
     use WithPagination;
-    public $tipo_pago = 1;
+    public $tipo_pago,$tipo_comprobante,$send_mail,$imprimir,$ticket = 0, $impresoras, $impresora_id ="";
     public $metodo_pago, $total, $client, $search;
     public $sucursal,$cliente_select, $pago_cliente, $deuda_cliente, $descuento, $estado_entrega,$subtotal;
     public $siguiente_venta = 0;
@@ -91,6 +94,7 @@ class VentaFacturacion extends Component
         $this->canjeo = false;
         $this->puntos_canjeados = 0;
         //$this->descuento_total = 0;
+        $this->impresoras = impresora::all();
     }
 
     public function select_u($cliente_id){
@@ -103,52 +107,48 @@ class VentaFacturacion extends Component
 
     public function save(){
         if ($this->tipo_pago == "1"){
-        $rules = $this->rules;
-        $this->validate($rules);
+            $rules = $this->rules;
+            $this->validate($rules);
         }
         else{
-        $rule_credito = $this->rule_credito;
-        $this->validate($rule_credito);   
+            $rule_credito = $this->rule_credito;
+            $this->validate($rule_credito);   
         }
-
+ 
         $user_auth =  auth()->user()->id;
         $impuesto= Cart::subtotal() * $this->iva;
+
           //PROCESO DE SUMAR O RESTAR PUNTOS EN TABLA DE CLIENTES
 
           if($this->canjeo==false){
-            $descuento_total = Cart::subtotal() * ($this->descuento / 100);
-            $total_venta = ($impuesto + Cart::subtotal()) - $descuento_total;
-           // dd(round($total_venta,0));
-            $nuevos_puntos = $this->client->puntos + round($total_venta,0);
+                $descuento_total = Cart::subtotal() * ($this->descuento / 100);
+                $total_venta = ($impuesto + Cart::subtotal()) - $descuento_total;
+            // dd(round($total_venta,0));
+                $nuevos_puntos = $this->client->puntos + round($total_venta,0);
 
-            $this->client->update([
-                'puntos' => round($nuevos_puntos),
-            ]);
-        }else{
-            $descuento_total = Cart::subtotal() * (($this->descuento / 100) + ($this->porcentaje_descuento_puntos / 100));
-            $total_venta = ($impuesto + Cart::subtotal()) - $descuento_total;
-            //verifica si es porque debes colocar entero el total velo con dd a ver que te trae
-            
-            $nuevos_puntos = ($this->client->puntos - $this->puntos_canjeados) + round($total_venta,0);
+                $this->client->update([
+                    'puntos' => round($nuevos_puntos),
+                ]);
+            }else{
+                $descuento_total = Cart::subtotal() * (($this->descuento / 100) + ($this->porcentaje_descuento_puntos / 100));
+                $total_venta = ($impuesto + Cart::subtotal()) - $descuento_total;
+                //verifica si es porque debes colocar entero el total velo con dd a ver que te trae
+                
+                $nuevos_puntos = ($this->client->puntos - $this->puntos_canjeados) + round($total_venta,0);
 
-            $this->client->update([
-                'puntos' => round($nuevos_puntos),
-            ]);
-        }
+                $this->client->update([
+                    'puntos' => round($nuevos_puntos),
+                ]);
+            }   
 
-        //FIN DE PROCESO
-
-        //$descuento_total = (Cart::subtotal() * $this->descuento) / 100;
-        
-        $fecha_actual = date('Y-m-d');
-
+     
         if($this->estado_entrega == "1") $entrega = 'Entregado'; else
         $entrega = 'Por entregar';
 
         $venta = new Venta();
         $venta->user_id = $user_auth;
         $venta->cliente_id = $this->client->id;
-        $venta->fecha = $fecha_actual;
+        $venta->fecha = date('Y-m-d');
         $venta->tipo_pago = $this->tipo_pago;
         $venta->metodo_pago = $this->metodo_pago;
         if ($this->tipo_pago == "2"){
@@ -185,7 +185,7 @@ class VentaFacturacion extends Component
             ]);
 
             $movimiento = new Movimiento_product_serial();
-            $movimiento->fecha = $fecha_actual;
+            $movimiento->fecha = date('Y-m-d');
             $movimiento->tipo_movimiento = 'venta de producto';
             $movimiento->precio = $item->price;
             $movimiento->observacion = 'sin observacion';
@@ -196,58 +196,83 @@ class VentaFacturacion extends Component
             discount($producto_item->producto->id,$this->sucursal);
         }
 
-      
+            if ($this->tipo_pago == "1"){
+                $data = [
+                    'cliente_nombre' => $this->client->nombre." ".$this->client->apellido,
+                    'cliente_documento' =>$this->client->nro_documento,
+                    'cliente_telefono' =>$this->client->telefono,
+                    'usuario' => auth()->user()->name." ".auth()->user()->apellido,
+                    'fecha_actual' => date('Y-m-d'),
+                    'venta_nro' => $venta->id,
+                    'collection' => Cart::content(),
+                    'estado_entrega' => $entrega,
+                    'descuento' => $descuento_total,
+                    'subtotal' => Cart::subtotal(),
+                    'subtotal_menos_descuento' => Cart::subtotal() - ($descuento_total),
+                    'impuesto' => $impuesto,
+                    'total' => $total_venta,
+                    'iva' => $this->iva,];
 
-        if ($this->tipo_pago == "1"){
-            $data = [
-                'cliente_nombre' => $this->client->nombre." ".$this->client->apellido,
-                'cliente_documento' =>$this->client->nro_documento,
-                'cliente_telefono' =>$this->client->telefono,
-                'usuario' => auth()->user()->name." ".auth()->user()->apellido,
-                'fecha_actual' => $fecha_actual,
-                'venta_nro' => $venta->id,
-                'collection' => Cart::content(),
-                'estado_entrega' => $entrega,
-                'descuento' => $descuento_total,
-                'subtotal' => Cart::subtotal(),
-                'subtotal_menos_descuento' => Cart::subtotal() - ($descuento_total),
-                'impuesto' => $impuesto,
-                'total' => $total_venta,
-                'iva' => $this->iva,
+                if($this->tipo_comprobante == "1") $pdf = PDF::loadView('ventas.FacturaContado',$data)->output();
+                else $pdf = PDF::loadView('ventas.TicketContado',$data)->output();
+            }
+            else{
+                $data = [
+                    'cliente_nombre' => $this->client->nombre." ".$this->client->apellido,
+                    'cliente_documento' =>$this->client->nro_documento,
+                    'cliente_telefono' =>$this->client->telefono,
+                    'usuario' => auth()->user()->name." ".auth()->user()->apellido,
+                    'fecha_actual' => date('Y-m-d'),
+                    'venta_nro' => $venta->id,
+                    'collection' => Cart::content(),
+                    'estado_entrega' => $entrega,
+                    'descuento' => $descuento_total,
+                    'pagado' => $this->pago_cliente,
+                    'deuda' => $total_venta - $this->pago_cliente,
+                    'impuesto' => $impuesto,
+                    'subtotal' => Cart::subtotal(),
+                    'total' => $total_venta,
+                    'iva' => $this->iva,
 
-                
-            ];
-           $pdf = PDF::loadView('ventas.FacturaContado',$data)->output();
+                ];
+                if($this->tipo_comprobante == "1") $pdf = PDF::loadView('ventas.FacturaCredito',$data)->output();
+                else $pdf = PDF::loadView('ventas.TicketCredito',$data)->output();
+            }
+ 
+  
+        //Envio de correo
+        if($this->send_mail=="1"){
+            $data_m["email"] = $this->client->email;
+            $data_m["title"] = "Comprobante de pago - Tech";
+            $data_m["body"] = "Anexo se encuentra el comprobante de pago de su compra realizada hoy.";
+
+           // $pdf_m = PDF::loadView('mail', $data_m);
+
+            Mail::send('ventas.FacturaContado', $data, function ($message) use ($data_m, $pdf) {
+                $message->to($data_m["email"], $data_m["email"])
+                    ->subject($data_m["title"])
+                    ->attachData($pdf, "Comprobante.pdf");
+        });
+
         }
-        else{
-            $data = [
-                'cliente_nombre' => $this->client->nombre." ".$this->client->apellido,
-                'cliente_documento' =>$this->client->nro_documento,
-                'cliente_telefono' =>$this->client->telefono,
-                'usuario' => auth()->user()->name." ".auth()->user()->apellido,
-                'fecha_actual' => $fecha_actual,
-                'venta_nro' => $venta->id,
-                'collection' => Cart::content(),
-                'estado_entrega' => $entrega,
-                'descuento' => $descuento_total,
-                'pagado' => $this->pago_cliente,
-                'deuda' => $total_venta - $this->pago_cliente,
-                'impuesto' => $impuesto,
-                'subtotal' => Cart::subtotal(),
-                'total' => $total_venta,
-                'iva' => $this->iva,
+        cart::destroy();
+        $this->siguiente_venta = '1';
+        $this->reset(['cliente_select','pago_cliente','descuento','descuento_total','tipo_comprobante','send_mail']);
 
-            ];
-           $pdf = PDF::loadView('ventas.FacturaCredito',$data)->output();
+         //GENERANDO PDF
+         if($this->imprimir == 1){
+            $this->reset(['imprimir']);
+            return response()->streamDownload(
+                fn () => print($pdf),
+               "Comprobante.pdf"
+                );
+         }
+         //Regresando a la ventana de inicio
+         else {
+            $this->emit('alert','Venta registrada');
+            return redirect()->route('ventas.ventas.index');
         }
-         cart::destroy();
-         $this->siguiente_venta = '1';
-         $this->reset(['cliente_select','pago_cliente','descuento','descuento_total']);
        
-        return response()->streamDownload(
-         fn () => print($pdf),
-        "Factura.pdf"
-         );
          
     }
 
@@ -267,7 +292,7 @@ class VentaFacturacion extends Component
     }
 
     public function nueva_venta(){
-        return redirect()->route('ventas.ventas.index');
+     return redirect()->route('ventas.ventas.index');
     }
 
     public function inicio(){

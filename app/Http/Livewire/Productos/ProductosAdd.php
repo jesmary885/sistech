@@ -114,7 +114,7 @@ class ProductosAdd extends Component
                 'sucursal_id' => $this->sucursal_id,
                 'cod_barra' => $producto_select->cod_barra,
                 'compra_id' => $compra->id,
-                'status' => 'activo',
+                'estado' => 'activo',
                 'fecha_compra' => $compra->fecha
             ]);
         }

@@ -350,7 +350,7 @@
   ),
   'app' => 
   array (
-    'name' => 'Laravel',
+    'name' => 'sistech',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://sistech.test/',
@@ -584,7 +584,7 @@
         'driver' => 'octane',
       ),
     ),
-    'prefix' => 'laravel_cache',
+    'prefix' => 'sistech_cache',
   ),
   'cart' => 
   array (
@@ -700,7 +700,7 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'laravel_database_',
+        'prefix' => 'sistech_database_',
       ),
       'default' => 
       array (
@@ -878,11 +878,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'mailhog',
-        'port' => '1025',
-        'encryption' => NULL,
-        'username' => NULL,
-        'password' => NULL,
+        'host' => 'smtp.gmail.com',
+        'port' => '587',
+        'encryption' => 'tls',
+        'username' => 'jesmary885@gmail.com',
+        'password' => 'jszmatlofpoksrgs',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -924,8 +924,8 @@
     ),
     'from' => 
     array (
-      'address' => NULL,
-      'name' => 'Laravel',
+      'address' => 'jesmary885@gmail.com',
+      'name' => 'sistech',
     ),
     'markdown' => 
     array (
@@ -1098,7 +1098,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'laravel_session',
+    'cookie' => 'sistech_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => NULL,

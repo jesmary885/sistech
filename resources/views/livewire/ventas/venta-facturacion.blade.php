@@ -1,9 +1,9 @@
-<div x-data="{ tipo_pago: @entangle('tipo_pago'),siguiente_venta: @entangle('siguiente_venta')}" class="container py-8 grid grid-cols-5 gap-6">
+<div x-data="{ tipo_pago: @entangle('tipo_pago'),siguiente_venta: @entangle('siguiente_venta'), imprimir: @entangle('imprimir'),send_email: @entangle('send_email'),tipo_comprobante: @entangle('tipo_comprobante')}" class="container py-8 grid grid-cols-5 gap-6">
     <div class="col-span-3">
 
         <div class="bg-white rounded-lg shadow mb-2 pb-2">
             <div>
-                <input wire:model="search" placeholder="Ingrese el nombre o nro de documento del cliente" class="form-control">
+                <input wire:model="search" placeholder="*Seleccione el cliente o escriba aquí su nombre, apellido o nro documento a buscar" class="form-control">
             </div>
             @if ($clientes->count())
                 <div>
@@ -12,7 +12,8 @@
                             <tr>
                                 <th class="text-center">Nombre</th>
                                 <th class="text-center">Documento</th>
-                                <th class="text-center">Ptos acumulados</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Puntos</th>
                                 <th>@livewire('admin.clientes.clientes-create',['vista' => "ventas",'accion' => 'create'])</th>
                             </tr>
                         </thead>
@@ -21,6 +22,7 @@
                                 <tr>
                                     <td class="text-center">{{$cliente->nombre}} {{$cliente->apellido}}</td>
                                     <td class="text-center">{{$cliente->nro_documento}}</td>
+                                    <td class="text-center">{{$cliente->email}}</td>
                                     <td class="text-center">{{$cliente->puntos}}</td>
                                     <td width="10px">
                                     <button
@@ -48,29 +50,12 @@
         </div>
 
             
-        <div  class="bg-white rounded-lg shadow mt-2 w-full py-4">
-
-            <div class="flex justify-between w-full h-full">
-                <div class="ml-2 mr-2 w-full">
-                    <select id="estado_entrega" wire:model="estado_entrega" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
-                        <option value="" selected>Seleccione el estado de entrega</option>
-                        <option value="1">Entregado</option>
-                        <option value="2">Por entregar</option>
-                    </select>
-                    <x-input-error for="estado_entrega" />
-                </div>
-                <div class="mr-2 w-full">
-                    <div class="w-full mr-2">
-                        <input wire:model="descuento" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Descuento en venta %">
-                        <x-input-error for="descuento" />
-                    </div>
-                </div>
-            </div>
+        <div  class="bg-white rounded-lg shadow w-full py-2">
 
             <div class="flex justify-between w-full h-full mt-2">
                 <div class="ml-2 mr-2 w-full">
-                    <select id="metodo_pago" wire:model="metodo_pago" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
-                        <option value="" selected>Seleccione el metodo de pago</option>
+                    <select id="metodo_pago" wire:model="metodo_pago" title="Método de pago" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
+                        <option value="" selected>*Método de pago</option>
                         <option value="1">Efectivo</option>
                         <option value="2">Tarjeta Credito</option>
                         <option value="3">Tarjeta Debito </option>
@@ -78,24 +63,79 @@
                     <x-input-error for="metodo_pago" />
                 </div>
                 <div class="mr-2 w-full">
-                    <select id="tipo_pago" wire:model="tipo_pago" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
-                        <option value="" selected>Seleccione el tipo de pago</option>
+                    <select id="tipo_pago" wire:model="tipo_pago" title="Tipo de pago" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_pago">
+                        <option value="" selected>*Tipo de pago</option>
                         <option value="1">Contado</option>
-                        <option value="2">Credito</option>
+                        <option value="2">Crédito</option>
                     </select>
                     <x-input-error for="tipo_pago" />
                 </div>
+                {{--  --}}
             </div>
+
+            <div class="flex justify-between w-full h-full mt-2">
+                <div class="ml-2 mr-2 w-full">
+                    <select id="estado_entrega" wire:model="estado_entrega" title="Estado de la entrega" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
+                        <option value="" selected>*Estado de entrega</option>
+                        <option value="1">Entregado</option>
+                        <option value="2">Por entregar</option>
+                    </select>
+                    <x-input-error for="estado_entrega" />
+                </div>
+                <div class="mr-2 w-full">
+                    <div class="w-full mr-2">
+                        <input wire:model="descuento" type="number" title="Descuento en venta" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="*Descuento en venta %">
+                        <x-input-error for="descuento" />
+                    </div>
+                </div>
+            </div>
+
 
             <div :class="{'hidden': tipo_pago != 2}">
                     <div class="w-1/4 m-2">
-                        <input wire:model="pago_cliente" type="number" class="w-full px-4 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Total pagado">
+                        <input wire:model="pago_cliente" type="number" class="w-full px-4 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="*Total pagado">
                         <x-input-error for="pago_cliente" />
                     </div>
             </div>
 
+            <hr>
+            
+            <div class="flex w-full h-full mt-1 ml-4">
+                <input type="checkbox" class="ml-1 mt-1" wire:model="send_mail" value="1">
+                <p class="text-sm font-semibold text-gray-500 ml-2">Enviar comprobante al correo del cliente</p>
+            </div>
 
+            <div class="flex w-full h-full mt-1 ml-4">
+                <input type="checkbox" class=" ml-1 mt-1" wire:model="imprimir" value="1">
+                <p class="text-sm font-semibold text-gray-500 ml-2">Imprimir comprobante</p>
+            </div>
+
+            <div class="flex justify-start mt-2">
+                <div class="ml-2 mr-2" :class="{'hidden': (imprimir != 1)}">
+                        <select id="tipo_comprobante" wire:model="tipo_comprobante" title="Tipo de comprobante" class="block bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_comprobante">
+                            <option value="" selected>*Comprobante</option>
+                            <option value="1">Factura</option>
+                            <option value="2">Ticket</option>
+                        </select>
+                        <x-input-error for="tipo_comprobante" />
+                </div>
+                {{-- <div :class="{'hidden': tipo_comprobante != 2 }">
+                    <div :class="{'hidden': (imprimir != 1)}">
+                        <select wire:model="impresora_id" class="block bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                            <option value="" selected>Seleccione la impresora</option>
+                            @foreach ($impresoras as $impresora)
+                                <option value="{{$impresora->id}}">{{$impresora->nombre}}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error for="impresora_id" />
+                    </div>
+                </div> --}}
+            </div>
+
+            <h2 class="text-sm mt-4 ml-4 text-red-600 font-semibold"> * Campos obligatorios</h2>
         </div>
+
+       
 
         <div class="flex" :class="{'hidden': siguiente_venta != 0}">
             <div class="mr-2">
@@ -108,7 +148,7 @@
                 class="mt-6 mb-4 mr-2" 
                 wire:click="save">
                 <i class="fas fa-file-invoice mr-1"></i>
-                Facturar
+                Guardar venta
             </x-button>
         </div>
     

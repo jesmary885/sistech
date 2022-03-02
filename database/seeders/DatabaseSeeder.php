@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
        
         $this->call(ClienteSeeder::class);
         $this->call(EmpresaSeeder::class);
+        $this->call(ImpresoraSeeder::class);
        
     }
 }

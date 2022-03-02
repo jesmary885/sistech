@@ -65,7 +65,7 @@
                     <input wire:model="nombre_impuesto" title="Nombre del impuesto" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Nombre del impuesto">
                     <x-input-error for="nombre_impuesto" />
                </div>  
-                <div class="w-full">
+                <div class="w-full mr-2">
                     <input wire:model="impuesto" type="text" title="Impuesto" class="px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="valor del impuesto">
                     <x-input-error for="impuesto" />
                 </div>
