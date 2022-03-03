@@ -1,7 +1,7 @@
-<div x-data="{ tipo_pago: @entangle('tipo_pago'),siguiente_venta: @entangle('siguiente_venta'), imprimir: @entangle('imprimir'),send_email: @entangle('send_email'),tipo_comprobante: @entangle('tipo_comprobante')}" class="container py-8 grid grid-cols-5 gap-6">
+<div x-data="{ tipo_pago: @entangle('tipo_pago'),siguiente_venta: @entangle('siguiente_venta'), imprimir: @entangle('imprimir'),send_email: @entangle('send_email'),tipo_comprobante: @entangle('tipo_comprobante'),carrito: @entangle('carrito')}" class="container py-8 grid grid-cols-5 gap-6">
     <div class="col-span-3">
 
-        <div class="bg-white rounded-lg shadow mb-2 pb-2">
+        <div class="bg-white rounded-lg shadow mb-2 pb-2" :class="{'hidden': carrito == ''}">
             <div>
                 <input wire:model="search" placeholder="*Seleccione el cliente o escriba aquí su nombre, apellido o nro documento a buscar" class="form-control">
             </div>
@@ -50,7 +50,7 @@
         </div>
 
             
-        <div  class="bg-white rounded-lg shadow w-full py-2">
+        <div  class="bg-white rounded-lg shadow w-full py-2" :class="{'hidden': carrito == ''}">
 
             <div class="flex justify-between w-full h-full mt-2">
                 <div class="ml-2 mr-2 w-full">
@@ -137,7 +137,7 @@
 
        
 
-        <div class="flex" :class="{'hidden': siguiente_venta != 0}">
+        <div class="flex" :class="{'hidden': carrito == ''}">
             <div class="mr-2">
                 <a href="{{route('ventas.ventas.show',$sucursal)}}" class="btn mt-6 mb-4 btn-primary"><< Regresar</a>
             </div>
@@ -152,13 +152,13 @@
             </x-button>
         </div>
     
-        <div :class="{'hidden': siguiente_venta != 1}">
+        <div :class="{'hidden': carrito != ''}">
             <x-button
             class="btn btn-primary mt-6 mb-4 mr-2" 
             wire:click="nueva_venta">
             <i class="fas fa-cart-plus"></i>
             Nueva Venta
-        </x-button>
+            </x-button>
             <x-button
                 class="btn btn-primary mt-6 mb-4 mr-2" 
                 wire:click="inicio">
@@ -171,7 +171,7 @@
 
     {{-- Productos agregados en el carrito --}}
 
-    <div class="col-span-2">
+    <div class="col-span-2" :class="{'hidden': carrito == ''}">
         <div class="bg-white rounded-lg shadow p-6">
             <ul>
                 @forelse (Cart::content() as $item)

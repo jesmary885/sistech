@@ -3,7 +3,8 @@
 @section('title', 'TechPeru')
 
 @section('content_header')
-    @livewire('admin.clientes.clientes-create',['vista' => 'clientes','accion' => 'create'])    
+
+   
     <h1 class="text-lg ml-2"><i class="far fa-address-book"></i> Listado de Clientes</h1>
 @stop
 

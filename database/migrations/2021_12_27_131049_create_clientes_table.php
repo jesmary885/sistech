@@ -20,7 +20,7 @@ class CreateClientesTable extends Migration
             $table->string('apellido');
             $table->string('email')->unique();
             $table->string('tipo_documento');
-            $table->string('nro_documento');
+            $table->string('nro_documento')->unique();
             $table->string('telefono');
             $table->string('direccion');
             $table->integer('puntos');

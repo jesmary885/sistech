@@ -83,18 +83,18 @@
           ),
           1 => 
           array (
-            'text' => 'Roles y permisos',
-            'route' => 'admin.roles.index',
+            'text' => 'Clientes',
+            'route' => 'admin.clientes.index',
           ),
           2 => 
           array (
-            'text' => 'compras',
-            'route' => 'admin.compras.index',
+            'text' => 'Roles y permisos',
+            'route' => 'admin.roles.index',
           ),
           3 => 
           array (
-            'text' => 'Clientes',
-            'route' => 'admin.clientes.index',
+            'text' => 'compras',
+            'route' => 'admin.compras.index',
           ),
           4 => 
           array (

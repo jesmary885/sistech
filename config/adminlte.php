@@ -236,16 +236,16 @@ return [
                     'route'  => 'admin.usuarios.index',
                 ],
                 [
+                    'text'    => 'Clientes',
+                    'route'     => 'admin.clientes.index',
+                ],
+                [
                     'text'    => 'Roles y permisos',
                     'route'     => 'admin.roles.index',
                 ],
                 [
                     'text' => 'compras',
                     'route'     => 'admin.compras.index',
-                ],
-                [
-                    'text'    => 'Clientes',
-                    'route'     => 'admin.clientes.index',
                 ],
                 [
                     'text' => 'Proveedores',

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Clientes;
 use App\Models\Ciudad;
 use App\Models\Cliente;
 use App\Models\Estado;
+use Illuminate\Contracts\Validation\Rule;
 use Livewire\Component;
 
 class ClientesCreate extends Component
@@ -15,23 +16,38 @@ class ClientesCreate extends Component
     public $isopen = false;
     public $vista, $accion, $cliente;
       
-    protected $rules = [
+    protected $rules_create = [
         'estado_id' => 'required',
         'ciudad_id' => 'required',
-        'nombre' => 'required|max:50',
-        'apellido' => 'required|max:50',
+        'nombre' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
+        'apellido' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
         'direccion' => 'required|max:50',
-        'documento' => 'required|numeric|min:5',
+        'documento' => 'required|min:5|unique:clientes',
         'tipo_documento' => 'required',
-        'telefono' => 'required|numeric|min:11',
-        'email' => 'required|max:50'
+        'telefono' => 'required|numeric|min:9',
+        'email' => 'required|max:50|email|unique:clientes'
+    ];
+    
+    protected $rules_mail_edit = [
+        'email' => 'required|max:50|unique:clientes->ignore($this->cliente->id, )',
+    ];
+
+    protected $rules_edit = [
+        'estado_id' => 'required',
+        'ciudad_id' => 'required',
+        'nombre' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
+        'apellido' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
+        'direccion' => 'required|max:50',
+        'tipo_documento' => 'required',
+        'telefono' => 'required|numeric|min:9',
+
     ];
 
 
-    public function updatedCiudadId($value)
+    public function updatedEstadoId($value)
     {
-        $ciudad_select = Ciudad::find($value);
-        $this->estados = $ciudad_select->estados;
+        $estado_select = Estado::find($value);
+        $this->ciudades = $estado_select->ciudades;
     }
 
     public function mount(Cliente $cliente){
@@ -43,6 +59,7 @@ class ClientesCreate extends Component
         
         $this->cliente = $cliente;
         if($cliente){
+
             $this->tipo_documento = $this->cliente->tipo_documento;
             $this->documento = $this->cliente->nro_documento;
             $this->telefono = $this->cliente->telefono;
@@ -73,11 +90,13 @@ class ClientesCreate extends Component
     }
 
     public function save(){
-            $rules = $this->rules;
-            $this->validate($rules);
+           
 
             if($this->accion == 'create')
             {
+                $rules_create = $this->rules_create;
+                $this->validate($rules_create);
+
                 $cliente = new Cliente();
                 $cliente->nombre = $this->nombre;
                 $cliente->apellido = $this->apellido;
@@ -88,6 +107,8 @@ class ClientesCreate extends Component
                 $cliente->telefono = $this->telefono;
                 $cliente->ciudad_id = $this->ciudad_id;
                 $cliente->estado_id = $this->estado_id;
+                $cliente->puntos = '0';
+
                 $cliente->save();
 
                 $this->reset(['nombre','apellido','email','telefono','documento','tipo_documento','direccion','ciudad_id','estado_id','isopen']);
@@ -98,6 +119,22 @@ class ClientesCreate extends Component
             }
             else
             {
+                $rules_edit = $this->rules_edit;
+                $this->validate($rules_edit);
+
+                $rule_email = [
+                    'email' => 'required|max:50|email|unique:clientes,email,' .$this->cliente->id,
+                ];
+
+                $rule_documento = [
+                    'documento' => 'equired|min:5|unique:clientes,nro_documento,' .$this->cliente->id,
+                ];
+
+                $this->validate($rule_email);
+                $this->validate($rule_documento);
+
+             //   $validate_email = [Rule$table->dropUnique('users_email_unique');('clientes')->ignore($this->cliente->id, 'id' )];
+
                 $this->cliente->update([
                     'nombre' => $this->nombre,
                     'apellido' => $this->apellido,

@@ -11,9 +11,9 @@
                         <h5 class="modal-title">Pago de venta a crédito</h5>   
                     </div>
                     <div class="modal-body">
-                        <div class="w-1/3 mt-2">
+                        <div class="w-1/3">
                          
-                                <input wire:model="total_pagado_cliente" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Total pagado">
+                                <input wire:model="total_pagado_cliente" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Total pagado">
                                 <x-input-error for="total_pagado_cliente" />
                          
                         </div> 

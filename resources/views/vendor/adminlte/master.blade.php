@@ -176,6 +176,21 @@
         })
     </script>
 
+<script>
+    livewire.on('ayuda', function(ms){
+        Swal.fire({
+    title: ms,
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    }
+  })
+    })
+</script>
+
+
 {{--     
 <script>
     livewire.on('confirm_img', function(ms){

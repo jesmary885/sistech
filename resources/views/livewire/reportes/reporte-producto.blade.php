@@ -35,9 +35,7 @@
     <figure class="highcharts-figure">
         <div id="container"></div>
         <p class="highcharts-description">
-            All color options in Highcharts can be defined as gradients or patterns.
-            In this chart, a gradient fill is used for decorative effect in a pie
-            chart.
+           Porcentajes calculados de acuerdo al top 5 de productos más vendidos en el periodo indicado
         </p>
     </figure>
 
@@ -115,7 +113,7 @@ Highcharts.chart('container', {
         type: 'pie'
     },
     title: {
-        text: 'Productos mas vendidos'
+        text: 'Top 5 de productos más vendidos'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

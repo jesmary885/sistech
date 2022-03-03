@@ -18,21 +18,21 @@ class UsuariosCreate extends Component
 
     public $estado_id ="",$ciudad_id ="", $roles_id, $sucursales_id = "";
     public $ciudades = [];
-    public $name, $apellido, $sucursales, $limitacion, $roles, $tipo_documento, $documento, $telefono, $email, $estado, $password, $direccion, $password_confirm, $estados;
+    public $name, $apellido, $sucursales, $limitacion, $roles, $tipo_documento, $nro_documento, $telefono, $email, $estado, $password, $direccion, $password_confirm, $estados;
     
     protected $rules = [
         'estado_id' => 'required',
         'ciudad_id' => 'required',
         'estado' => 'required',
-        'name' => 'required|max:50',
+        'name' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
         'direccion' => 'required|max:50',
-        'apellido' => 'required|max:50',
-        'documento' => 'required|numeric|min:5',
+        'apellido' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
+        'nro_documento' => 'required|numeric|min:5|unique:users',
         'tipo_documento' => 'required',
         'roles_id' => 'required',
-        'telefono' => 'required|numeric|min:11',
-        'email' => 'required|max:50|unique:users',
-        'password' => 'required',
+        'telefono' => 'required|numeric|min:9',
+        'email' => 'required|email|max:50|unique:users',
+        'password' => 'required|min:6|max:12',
         'sucursales_id' => 'required',
         'limitacion' => 'required',
     ];
@@ -77,7 +77,7 @@ class UsuariosCreate extends Component
             $usuario->name = $this->name;
             $usuario->apellido = $this->apellido;
             $usuario->email = $this->email;
-            $usuario->nro_documento = $this->documento;
+            $usuario->nro_documento = $this->nro_documento;
             $usuario->tipo_documento = $this->tipo_documento;
             $usuario->direccion= $this->direccion;
             $usuario->telefono = $this->telefono;
@@ -91,7 +91,7 @@ class UsuariosCreate extends Component
             $usuario->save();
             $usuario->roles()->sync($this->roles_id);
 
-            $this->reset(['name','apellido','email','telefono','sucursales_id','limitacion','password','password_confirm','documento','tipo_documento','direccion','estado','ciudad_id','estado_id','roles_id']);
+            $this->reset(['name','apellido','email','telefono','sucursales_id','limitacion','password','password_confirm','nro_documento','tipo_documento','direccion','estado','ciudad_id','estado_id','roles_id']);
             $this->emit('alert','usuario creado correctamente');
         } else{
             $rul_password_conf = $this->rul_password_confirm;

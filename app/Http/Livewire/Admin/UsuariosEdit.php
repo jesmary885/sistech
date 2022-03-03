@@ -16,7 +16,7 @@ class UsuariosEdit extends Component
 
     public $estado_id ="",$ciudad_id ="", $roles_id, $sucursales_id = "";
     public $estados, $usuario;
-    public $name, $apellido, $sucursales, $limitacion, $roles, $tipo_documento, $documento, $telefono, $email, $ciudades, $estado, $password, $direccion, $password_confirm;
+    public $name, $apellido, $sucursales, $limitacion, $roles, $tipo_documento, $nro_documento, $telefono, $email, $ciudades, $estado, $password, $direccion, $password_confirm;
 
     public $isopen = false;
 
@@ -25,15 +25,13 @@ class UsuariosEdit extends Component
         'estado_id' => 'required',
         'ciudad_id' => 'required',
         'estado' => 'required',
-        'name' => 'required|max:50',
-        'apellido' => 'required|max:50',
+        'name' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
+        'apellido' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
         'direccion' => 'required|max:50',
-        'documento' => 'required|numeric|min:5',
         'tipo_documento' => 'required',
         'roles_id' => 'required',
-        'telefono' => 'required|numeric|min:11',
-        'email' => 'required|max:50',
-        'password' => 'required',
+        'telefono' => 'required|numeric|min:9',
+        'password' => 'required|min:6|max:12',
         'sucursales_id' => 'required',
         'limitacion' => 'required',
     ];
@@ -58,7 +56,7 @@ class UsuariosEdit extends Component
 
 
         $this->tipo_documento = $this->usuario->tipo_documento;
-        $this->documento = $this->usuario->nro_documento;
+        $this->nro_documento = $this->usuario->nro_documento;
         $this->telefono = $this->usuario->telefono;
         $this->name = $this->usuario->name;
         $this->apellido = $this->usuario->apellido;
@@ -95,13 +93,24 @@ class UsuariosEdit extends Component
     public function update(){
         $rules = $this->rules;
         $this->validate($rules);
+
+        $rule_email = [
+            'email' => 'required|max:50|email|unique:clientes,email,' .$this->usuario->id,
+        ];
+
+        $rule_documento = [
+            'documento' => 'equired|min:5|unique:clientes,nro_documento,' .$this->usuario->id,
+        ];
+
+        $this->validate($rule_email);
+        $this->validate($rule_documento);
  
         if($this->password == $this->password_confirm){
             $this->usuario->update([
                 'name' => $this->name,
                 'email' => $this->email,
                 'apellido' => $this->apellido,
-                'nro_documento' => $this->documento,
+                'nro_documento' => $this->nro_documento,
                 'tipo_documento' => $this->tipo_documento,
                 'direccion' => $this->direccion,
                 'telefono' => $this->telefono,

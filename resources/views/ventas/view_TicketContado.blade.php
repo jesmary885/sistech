@@ -44,10 +44,6 @@ $medidaTicket = 180;
             font-size: 9px;
         }
 
-        .cant{
-            padding-left: 4px;
-        }
-
         td.producto {
             text-align: center;
         }
@@ -81,6 +77,9 @@ $medidaTicket = 180;
             margin: 0;
             padding: 0;
         }
+        .cant{
+            padding-left: 4px;
+        }
 
         body {
             text-align: center;
@@ -111,11 +110,11 @@ $medidaTicket = 180;
                 </tr>
             </thead>
             <tbody>
-                @foreach ($collection as $item)
+                @foreach ($productos as $producto)
                         <tr>
-                            <td class="cant">{{$item->qty}}</td>
-                            <td>{{$item->name}} - {{$item->options['serial']}}</td>
-                            <td>S/ {{$item->price}}</td>
+                            <td class="cant">1</td>
+                            <td>{{$producto->productoSerialSucursal->producto->nombre}} - {{$producto->productoSerialSucursal->serial}}</td>
+                            <td>S/ {{$producto->precio}}</td>
                         </tr>
                     @endforeach
             </tbody>

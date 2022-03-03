@@ -1,7 +1,27 @@
 <div>
+
+    {{-- <h2 class="text-sm ml-2 text-gray-500 font-semibold">- Para editar datos haga click en el botón <i class="fas fa-user-edit"></i> ubicado al lado de cada cliente</h2> 
+    <h2 class="text-sm ml-2 text-gray-500 font-semibold">- Para eliminar registros haga click en el botón <i class="fas fa-trash-alt"></i> ubicado al lado de cada cliente</h2>  --}}
     <div class="card">
-        <div class="card-header">
-            <input wire:model="search" placeholder="Ingrese el nombre o nro de documento del cliente" class="form-control">
+        <div class="card-header flex items-center justify-between">
+            <div class="flex-1">
+                <input wire:model="search" placeholder="Ingrese el nombre o nro de documento del cliente a buscar" class="form-control">
+            </div>
+            <div class="ml-2">
+                <button
+                title="Ayuda a usuario"
+                class="btn btn-success btn-sm" 
+                wire:click="ayuda"><i class="fas fa-info"></i>
+                Guía rápida
+            </button>
+            </div>
+            <div class="ml-2">
+                @livewire('admin.clientes.clientes-create',['vista' => 'clientes','accion' => 'create']) 
+            </div>
+         
+           
+            
+            
         </div>
         @if ($clientes->count())
             <div class="card-body">
@@ -9,9 +29,9 @@
                     <thead>
                         <tr>
                             <th class="text-center">Nombre</th>
-                            <th class="text-center">Nro de documento</th>
-                            <th class="text-center">Telefono</th>
-                            <th class="text-center">Ptos acumulados</th>
+                            <th class="text-center">Nº de documento</th>
+                            <th class="text-center">Teléfono</th>
+                            <th class="text-center">Ptos. acumulados</th>
                             <th colspan="2"></th>  
                         </tr>
                     </thead>
@@ -27,6 +47,7 @@
                                 </td>
                                 <td width="10px">
                                     <button
+                                        title="Eliminar cliente"
                                         class="btn btn-danger btn-sm" 
                                         wire:click="delete('{{$cliente->id}}')">
                                         <i class="fas fa-trash-alt"></i>

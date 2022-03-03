@@ -32,7 +32,7 @@ class VentaFacturacion extends Component
     public $metodo_pago, $total, $client, $search;
     public $sucursal,$cliente_select, $pago_cliente, $deuda_cliente, $descuento, $estado_entrega,$subtotal;
     public $siguiente_venta = 0;
-    public $iva;
+    public $iva, $carrito;
     public $puntos_canjeo, $canjeo, $puntos_canjeados, $descuento_total,$porcentaje_descuento_puntos = 0,$empresa;
  
     protected $paginationTheme = "bootstrap";
@@ -70,7 +70,8 @@ class VentaFacturacion extends Component
 
     public function render()
     {
-
+        $this->carrito = Cart::content();
+        
         $this->empresa = Empresa::first();
         $this->iva = ($this->empresa->impuesto)/100;
 

@@ -93,8 +93,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="close" >Cerrar</button>
-                        <button type="button" class="btn btn-primary" wire:click="export_pdf"><i class="far fa-file-pdf"></i> Exportar Factura</button>
-                        <button type="button" class="btn btn-primary" wire:click="export_pdf_ticket"><i class="far fa-file-pdf"></i> Exportar Ticket</button>
+                        <button type="button" class="btn btn-primary" wire:click="export_pdf('factura')"><i class="far fa-file-pdf"></i> Exportar Factura</button>
+                        <button type="button" class="btn btn-primary" wire:click="export_pdf('ticket')"><i class="far fa-file-pdf"></i> Exportar Ticket</button>
                     </div>
                 </div>
             </div>

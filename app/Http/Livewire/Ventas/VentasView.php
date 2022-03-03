@@ -23,6 +23,11 @@ class VentasView extends Component
         $this->isopen = false;  
     }
     public function mount(){
+       
+    }
+    public function render()
+    {
+
         $this->fecha_creacion = $this->venta->fecha;
         $this->factura_nro = $this->venta->id;
         $this->nombre_cliente = $this->venta->cliente->nombre;
@@ -41,15 +46,13 @@ class VentasView extends Component
         $this->estado_entrega = $this->venta->estado_entrega;
         $this->pago_cliente= $this->venta->total_pagado_cliente;
         $this->deuda_cliente= $this->venta->deuda_cliente;
-    }
-    public function render()
-    {
+        
         $productos = Producto_venta::where('venta_id',$this->venta->id)->get();
         return view('livewire.ventas.ventas-view',compact('productos'));
     }
 
 
-    public function export_pdf(){
+    public function export_pdf($comprobante){
 
         $productos = Producto_venta::where('venta_id',$this->venta->id)->get();
         
@@ -71,7 +74,8 @@ class VentasView extends Component
                 'iva' => $this->iva,
 
             ];
-           $pdf = PDF::loadView('ventas.view_FacturacionContado',$data)->output();
+            if($comprobante=='factura') $pdf = PDF::loadView('ventas.view_FacturacionContado',$data)->output();
+            else $pdf = PDF::loadView('ventas.view_TicketContado',$data)->output();
         }
         else{
             $data = [
@@ -92,7 +96,8 @@ class VentasView extends Component
                 'deuda' => $this->deuda_cliente,
                 'iva' => $this->iva,
             ];
-           $pdf = PDF::loadView('ventas.view_FacturacionCredito',$data)->output();
+            if($comprobante=='factura') $pdf = PDF::loadView('ventas.view_FacturacionCredito',$data)->output();
+           else $pdf = PDF::loadView('ventas.view_TicketCredito',$data)->output();
         }
 
         return response()->streamDownload(

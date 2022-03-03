@@ -52,6 +52,10 @@ $medidaTicket = 180;
             text-align: center;
         }
 
+        .cant{
+            padding-left: 4px;
+        }
+
 
         .centrado {
             text-align: center;
@@ -101,7 +105,7 @@ $medidaTicket = 180;
         <table>
             <thead>
                 <tr class="centrado">
-                    <th class="cantidad">Cant </th>
+                    <th class="cant">Cant </th>
                     <th class="producto">Descripción </th>
                     <th class="precio">Subtotal</th>
                 </tr>
@@ -109,7 +113,7 @@ $medidaTicket = 180;
             <tbody>
                 @foreach ($collection as $item)
                         <tr>
-                            <td>{{$item->qty}}</td>
+                            <td class="cant">{{$item->qty}}</td>
                             <td>{{$item->name}} - {{$item->options['serial']}}</td>
                             <td>S/ {{$item->price}}</td>
                         </tr>

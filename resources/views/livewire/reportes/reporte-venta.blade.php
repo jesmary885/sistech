@@ -38,9 +38,8 @@
     <figure class="highcharts-figure">
         <div id="container"></div>
         <p class="highcharts-description">
-            Chart showing browser market shares. Clicking on individual columns
-            brings up more detailed data. This chart makes use of the drilldown
-            feature in Highcharts to easily switch between datasets.
+            Porcentajes calculados de acuerdo al total de ganancias obtenidas en el periodo indicado por cada sucursal. Haciendo clic en columnas individuales
+            muestra datos más detallados.
         </p>
     </figure>
 

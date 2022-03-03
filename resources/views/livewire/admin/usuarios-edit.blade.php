@@ -9,11 +9,19 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Editar usuario</h5>
+              <h5 class="modal-title py-0 text-lg text-gray-800"><i class="fas fa-user-tie"></i> Editar usuario</h5>
              
             </div>
             <div class="modal-body">
-
+                <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Complete todos los campos y presiona Guardar</h2> 
+            <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> El campo Email debe registrarlo completo, ejemplo: maria@gmail.com </h2> 
+            <h2 class="text-sm ml-2 m-0 p-0 mb-2 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> La contraseña debe contener mínimo 6 y máximo 12 caracteres</h2> 
+                <hr class="m-0 p-0">
+                <div class="flex">
+                    <i class="far fa-address-card mt-2 mr-1"></i>
+                  <h2 class="inline text-base mt-1"> Información personal</h2>
+               
+              </div>
                 <div class="flex mt-2 justify-between w-full">
                     <div class="w-full mr-2">
                       <select wire:model="tipo_documento" id="tipo_documento" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_documento">
@@ -28,11 +36,11 @@
                          <x-input-error for="tipo_documento" />
                     </div>
                     <div class="w-full mr-2">
-                        <input wire:model.defer="documento" name="documento" type="text" class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Nro de documento">
-                        <x-input-error for="documento" />
+                        <input wire:model.defer="nro_documento" name="nro_documento" type="number" class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Nro de documento">
+                        <x-input-error for="nro_documento" />
                     </div>
                      <div class="w-full">
-                      <input wire:model="telefono" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Telefono">
+                      <input wire:model="telefono" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Telefono">
                       <x-input-error for="telefono" />
                   </div>
                 </div>
@@ -82,14 +90,15 @@
                         <x-input-error for="ciudad_id" />
                     </div>
                 </div>
+                <hr class="mb-0 pb-0">
 
 
 
 
-                <div class="flex mt-4">
-            
-                   <h2 class="text-lg inline underline decoration-gray-400 mt-2">Información de la cuenta</h2>
-               </div>
+                <div class="flex">
+                    <i class="fas fa-user-lock mt-3 mr-1"></i>
+                  <h2 class="inline text-base mt-3"> Información de la cuenta</h2>
+              </div>
    
                <div class="flex justify-between w-full mt-3 mr-2">
                     <div class="w-full mr-2">
@@ -120,11 +129,12 @@
                         <x-input-error for="roles_id" />
                     </div>
                 </div>
+                <hr class="mb-0 pb-0">
 
-                <div class="flex mt-4">
-             
-                   <h2 class="text-lg inline underline decoration-gray-400 mt-2">Zona de atención</h2>
-               </div>
+                <div class="flex">
+                    <i class="fas fa-location-arrow mt-3 mr-1"></i>
+                  <h2 class="inline text-base mt-2"> Zona de atención</h2>
+              </div>
 
                <div class="flex justify-between w-full mt-3 mr-2">
                 

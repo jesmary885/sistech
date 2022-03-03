@@ -37,15 +37,12 @@ $medidaTicket = 180;
 
         td.cantidad {
             font-size: 11px;
+  
         }
 
         
         .foo {
             font-size: 9px;
-        }
-
-        .cant{
-            padding-left: 4px;
         }
 
         td.producto {
@@ -82,6 +79,10 @@ $medidaTicket = 180;
             padding: 0;
         }
 
+        .cant{
+            padding-left: 4px;
+        }
+
         body {
             text-align: center;
         }
@@ -105,17 +106,17 @@ $medidaTicket = 180;
         <table>
             <thead>
                 <tr class="centrado">
-                    <th class="cant">Cant </th>
+                    <th class="cant">Cant</th>
                     <th class="producto">Descripción </th>
                     <th class="precio">Subtotal</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($collection as $item)
+                @foreach ($productos as $producto)
                         <tr>
-                            <td class="cant">{{$item->qty}}</td>
-                            <td>{{$item->name}} - {{$item->options['serial']}}</td>
-                            <td>S/ {{$item->price}}</td>
+                            <td class="cant">  1</td>
+                            <td>{{$producto->productoSerialSucursal->producto->nombre}} - {{$producto->productoSerialSucursal->serial}}</td>
+                            <td>S/ {{$producto->precio}}</td>
                         </tr>
                     @endforeach
             </tbody>
@@ -153,6 +154,24 @@ $medidaTicket = 180;
                 </td>
                 <td class="precio">
                     <p>S/ {{$total}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cantidad"></td>
+                <td class="producto">
+                    <strong>PAGADO</strong>
+                </td>
+                <td class="precio">
+                    <p>S/ {{$pagado}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cantidad"></td>
+                <td class="producto">
+                    <strong>PENDIENTE</strong>
+                </td>
+                <td class="precio">
+                    <p>S/ {{$deuda}}</p>
                 </td>
             </tr>
         </table>
