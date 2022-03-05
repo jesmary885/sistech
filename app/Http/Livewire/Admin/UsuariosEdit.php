@@ -99,7 +99,7 @@ class UsuariosEdit extends Component
         ];
 
         $rule_documento = [
-            'documento' => 'equired|min:5|unique:clientes,nro_documento,' .$this->usuario->id,
+            'nro_documento' => 'required|min:5|unique:clientes,nro_documento,' .$this->usuario->id,
         ];
 
         $this->validate($rule_email);

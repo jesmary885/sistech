@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -37,12 +38,6 @@ class RoleController extends Controller
     }
 
     
-    public function show($id)
-    {
-        //
-    }
-
-   
     public function edit(Role $role)
     {
         $permissions = Permission::all();
@@ -59,13 +54,27 @@ class RoleController extends Controller
         $role->update($request->all());
         $role->permissions()->sync($request->permissions);
 
-        return redirect()->route('admin.roles.edit',$role)->with('info','El rol se actualizó con éxito');
+        return redirect()->route('admin.roles.index')->with('info','Se han registrado los datos con éxito');
     }
 
   
     public function destroy(Role $role)
     {
-        $role->delete();
-        return redirect()->route('admin.roles.index')->with('info','El rol se ha eliminado con éxito');
+
+        $usuarios = User::all();
+        $cont = 0;
+
+        foreach($usuarios as $usuario){
+           if($usuario->roles->first()->id == $role->id) $cont++;
+        }
+
+        if($cont != 0){
+            return redirect()->route('admin.roles.index')->with('info','El rol esta asociado a algún usuario, no puedo eliminarlo');
+        }else
+        {
+            $role->delete();
+            return redirect()->route('admin.roles.index')->with('info','El rol se ha eliminado con éxito');
+        }
+       
     }
 }

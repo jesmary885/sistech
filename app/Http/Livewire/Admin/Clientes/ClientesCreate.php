@@ -127,7 +127,7 @@ class ClientesCreate extends Component
                 ];
 
                 $rule_documento = [
-                    'documento' => 'equired|min:5|unique:clientes,nro_documento,' .$this->cliente->id,
+                    'documento' => 'required|min:5|unique:clientes,nro_documento,' .$this->cliente->id,
                 ];
 
                 $this->validate($rule_email);

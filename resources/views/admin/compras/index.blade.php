@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-    <h1 class="text-lg ml-2"><i class="far fa-address-book"></i> Listado de compras</h1>
+    <h1 class="text-lg ml-2"><i class="fas fa-shopping-bag"></i> Listado de compras</h1>
 @stop
 
 @section('content')

@@ -6,7 +6,7 @@
             </div>
             @if ($productos->count())
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-responsive">
                         <thead>
                             <tr>
                                 <th class="text-center">Imagen</th>

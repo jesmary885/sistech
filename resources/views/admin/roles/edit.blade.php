@@ -16,7 +16,8 @@
             <div class="card-body">
                 {!! Form::model($role, ['route' => ['admin.roles.update',$role], 'method' => 'put']) !!}
                     @include('admin.roles.partials.form')
-                    {!! Form::submit('Editar Rol', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-4']) !!}
+                    <a href="{{route('admin.roles.index')}}" class="btn btn-primary mt-4 ml-2"><i class="fas fa-undo-alt"></i> Regresar</a>
                 {!! Form::close() !!}
             </div>
         </div>

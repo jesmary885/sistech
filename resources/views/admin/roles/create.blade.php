@@ -14,13 +14,21 @@
 </div>
 @endif
 <div class="card">
-<div class="card-body">
-    {!! Form::open(['route' => 'admin.roles.store']) !!}
-        @include('admin.roles.partials.form')
-    {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-4'])!!}
-    <a href="{{route('admin.roles.index')}}" class="btn btn-primary mt-4 ml-2"><i class="fas fa-undo-alt"></i> Regresar</a>
-    {!! Form::close() !!}
-</div>
+    <div class="card-body">
+        {!! Form::open(['route' => 'admin.roles.store']) !!}
+        <div class="form-group">
+            {!! Form::label('name', 'Nombre') !!}
+            {!! Form::text('name', null, ['class' => 'form-control','placeholder' => 'Ingrese el nombre del rol']) !!}
+            @error('name')
+                <small class="text-danger">
+                    {{$message}}
+                </small>
+            @enderror
+        </div>
+        {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-4'])!!}
+        <a href="{{route('admin.roles.index')}}" class="btn btn-primary mt-4 ml-2"><i class="fas fa-undo-alt"></i> Regresar</a>
+        {!! Form::close() !!}
+    </div>
 </div>
 
 @stop

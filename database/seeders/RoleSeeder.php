@@ -15,23 +15,90 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $role1 = Role::create(['name' => 'Admin']);
-        $role2 = Role::create(['name' => 'usuario']);
+        $role1 = Role::create(['name' => 'Administrador']);
+        $role2 = Role::create(['name' => 'Usuario']);
+
+        //MODULO ADMINISTRACION
 
         Permission::create(['name' => 'admin.clientes.index',
-                            'description' => 'Ver listado de clientes'])->syncRoles([$role1]);
-        Permission::create(['name' => 'admin.clientes.create',
-                            'description' => 'Crear clientes'])->syncRoles([$role1]);
-        Permission::create(['name' => 'admin.clientes.edit',
-                            'description' => 'Editar clientes'])->syncRoles([$role1]);
+                            'description' => 'Administrar clientes'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'admin.usuarios.index',
+                            'description' => 'Administrar usuarios'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'admin.roles.index',
+                            'description' => 'Administrar roles y permisos'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'admin.compras.index',
+                            'description' => 'Administrar compras'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'admin.sucursales.index',
+                            'description' => 'Administrar sucursales'])->syncRoles([$role1]); 
+        
+        Permission::create(['name' => 'admin.proveedores.index',
+                            'description' => 'Administrar proveedores'])->syncRoles([$role1]); 
+
+        Permission::create(['name' => 'admin.categorias.index',
+                            'description' => 'Administrar categorias'])->syncRoles([$role1]); 
+
+        Permission::create(['name' => 'admin.marcas.index',
+                            'description' => 'Administrar marcas'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'admin.modelos.index',
+                            'description' => 'Administrar modelos'])->syncRoles([$role1]);
+
+        //MODULO VENTAS
+
+        Permission::create(['name' => 'ventas.ventas.index',
+                            'description' => 'Registrar ventas'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'ventas.mostrar_ventas_contado',
+                            'description' => 'Ver y administrar ventas al contado'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'ventas.mostrar_ventas_credito',
+                            'description' => 'Ver y administrar ventas a credito'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'ventas.mostrar_ventas_clientes',
+                            'description' => 'Ver y administrar ventas por cliente'])->syncRoles([$role1]);
+
+        //MODULO PRODUCTOS
+                            
 
         Permission::create(['name' => 'productos.productos.index',
-                            'description' => 'Ver listado de productos'])->syncRoles([$role1,$role2]);
-        Permission::create(['name' => 'productos.productos.create',
-                            'description' => 'Crear productos'])->syncRoles([$role1]);
-        Permission::create(['name' => 'productos.productos.edit',
-                            'description' => 'Editar productos'])->syncRoles([$role1]);
-        Permission::create(['name' => 'productos.productos.destroy',
-                            'description' => 'Eliminar productos'])->syncRoles([$role1]);
+                            'description' => 'Administrar productos por código de barra'])->syncRoles([$role1,$role2]);
+
+        Permission::create(['name' => 'productos.index_serial',
+                            'description' => 'Administrar productos por serial'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'productos.devolucion',
+                            'description' => 'Administrar devolución de equipos'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'productos.traslado',
+                            'description' => 'Administrar traslado de equipos'])->syncRoles([$role1]);
+
+        //MODULO REPORTES
+                            
+
+        Permission::create(['name' => 'reportes.productos',
+        'description' => 'Generar reportes de productos más vendidos'])->syncRoles([$role1,$role2]);
+
+        Permission::create(['name' => 'reportes.movimientos',
+        'description' => 'Generar reportes de historial de productos'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'reportes.ventas',
+        'description' => 'Generar reportes de ventas'])->syncRoles([$role1]);
+
+         
+        //MODULO REPORTES
+                            
+
+         Permission::create(['name' => 'ajustes.contrasena',
+         'description' => 'Cambiar contraseña'])->syncRoles([$role1,$role2]);
+ 
+         Permission::create(['name' => 'ajustes.empresa',
+         'description' => 'Administrar datos de empresa'])->syncRoles([$role1]);
+ 
+
+
     }
 }

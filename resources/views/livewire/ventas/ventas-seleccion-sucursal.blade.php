@@ -1,35 +1,40 @@
 <div>
     <div class="card">
-        <div class="card-header">
+        <div class="card-heade bg-gray-700">
             @if ($vista == 'ventas')
-                <h2 class="text-lg text-gray-600">Seleccione la sucursal en donde realizara la venta</h2>
+                <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal en donde realizara la venta</h2>
             @elseif($vista == 'productos')
-            <h2 class="text-lg text-gray-600">Seleccione la sucursal donde esta el producto a trasladar</h2>
-            @else <h2 class="text-lg text-gray-600">Seleccione el almacen</h2>
+            <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal donde esta el producto a trasladar</h2>
+            @else <h2 class="text-lg text-white text-center bg-gray-700">Seleccione el almacen</h2>
             @endif
             
         </div>
         @if ($sucursales->count())
             <div class="card-body">
-                <table class="table table-bordered">
+                <th><h2 class="text-sm ml-2 mb-2 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Haga click sobre el nombre de la sucursal</h2> </th>
+                <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th class="text-center">Id</th>
-                            <th class="text-center">Sucursal</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($sucursales as $sucursal)
                             <tr>
-                                <td class="text-center">{{ $sucursal->id }}</td>
-                                <td class="text-center">{{ $sucursal->nombre}}</td>
+                                {{-- <td class="text-center">{{ $sucursal->nombre}}</td> --}}
                                 <td width="10px">
-                                    @if ($vista == 'ventas')
-                                        <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
-                                    @elseif($vista == 'productos')
-                                        <a href="{{route('productos.traslado.select',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
+                                   
+                                    <td class="text-center text-lg">
+                                        @if ($vista == 'ventas')
+                                        <a class="text-gray-600" href="{{route('ventas.ventas.edit',$sucursal)}}">{{$sucursal->nombre}}</a>
+
+                                        {{-- <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a> --}}
+                                        @elseif($vista == 'productos')
+                                        <a class="text-gray-600" href="{{route('productos.traslado.select',$sucursal)}}">{{$sucursal->nombre}}</a>
+                                        {{-- <a href="{{route('productos.traslado.select',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a> --}}
                                     @else
-                                        <a href="{{route('productos.serial.view',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
+                                    <a class="text-gray-600" href="{{route('productos.serial.view',$sucursal)}}">{{$sucursal->nombre}}</a>
+                                        {{-- <a href="{{route('productos.serial.view',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a> --}}
                                     @endif
                                 </td>
                             </tr>

@@ -234,38 +234,47 @@ return [
                 [
                     'text' => 'Usuarios',
                     'route'  => 'admin.usuarios.index',
+                    'can' => 'admin.usuarios.index',
                 ],
                 [
                     'text'    => 'Clientes',
                     'route'     => 'admin.clientes.index',
+                    'can' => 'admin.clientes.index',
                 ],
                 [
                     'text'    => 'Roles y permisos',
                     'route'     => 'admin.roles.index',
+                    'can' => 'admin.roles.index',
                 ],
                 [
                     'text' => 'compras',
                     'route'     => 'admin.compras.index',
+                    'can' => 'admin.compras.index',
                 ],
                 [
                     'text' => 'Proveedores',
                     'route'     => 'admin.proveedores.index',
+                    'can' => 'admin.proveedores.index',
                 ],
                 [
                     'text' => 'Sucursales',
                     'route'     => 'admin.sucursales.index',
+                    'can' => 'admin.sucursales.index',
                 ],
                 [
                     'text' => 'Categorias',
                     'route'     => 'admin.categorias.index',
+                    'can' => 'admin.categorias.index',
                 ],
                 [
                     'text' => 'Marcas',
                     'route'     => 'admin.marcas.index',
+                    'can' => 'admin.marcas.index',
                 ],
                 [
                     'text' => 'Modelos',
                     'route'     => 'admin.modelos.index',
+                    'can' => 'admin.modelos.index',
                 ],
                 // [
                 //     'text' => 'Servicios',
@@ -282,18 +291,22 @@ return [
                 [
                     'text' => 'Nueva venta',
                     'route'  => 'ventas.ventas.index',
+                    'can' => 'ventas.ventas.index'
                 ],
                 [
                     'text'    => 'Ventas al contado',
                     'route'     => 'ventas.mostrar_ventas.index',
+                    'can' => 'ventas.mostrar_ventas_contado'
                 ],
                 [
                     'text' => 'Ventas a credito',
                     'route'  => 'ventas.mostrar_ventas.create',
+                    'can' => 'ventas.mostrar_ventas_credito'
                 ],
                 [
                     'text' => 'Ventas por cliente',
                     'route'  => 'ventas.clientes',
+                    'can' => 'ventas.mostrar_ventas_clientes'
                 ],
             ],
             
@@ -306,18 +319,22 @@ return [
                 [
                     'text' => 'Registro e inventario',
                     'route'  => 'productos.productos.index',
+                    'can' => 'productos.productos.index'
                 ],
                 [
                     'text' => 'Productos por serial',
                     'route'  => 'productos.serial.index',
+                    'can' => 'productos.index_serial'
                 ],
                 [
                     'text'    => 'Devolucion',
                     'route'     => 'devolucion.index',
+                    'can' => 'productos.devolucion'
                 ],
                 [
                     'text'    => 'Traslado',
                     'route'     => 'traslado.index',
+                    'can' => 'productos.traslado'
                 ],
             ],
             
@@ -329,14 +346,17 @@ return [
                 [
                     'text' => 'Productos más vendidos',
                     'route'     => 'reportes.index.productos',
+                    'can' => 'reportes.productos'
                 ],
                 [
                     'text' => 'Historial de productos',
                     'route' => 'movimientos.modalidad',
+                    'can' => 'reportes.movimientos'
                 ],
                 [
                     'text'    => 'ventas',
                     'route'     => 'reportes.index.ventas',
+                    'can' => 'reportes.ventas'
                 ],
             ],
             
@@ -349,10 +369,12 @@ return [
                 [
                     'text' => 'Cambiar contrasena',
                     'route'     => 'ajustes.ccontrasena',
+                    'can' => 'ajustes.contrasena'
                 ],
                 [
                     'text'    => 'Sobre la empresa',
                     'route'     => 'ajustes.empresa',
+                    'can' => 'ajustes.empresa'
                 ],
             ],
         ],

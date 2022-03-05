@@ -80,46 +80,55 @@
           array (
             'text' => 'Usuarios',
             'route' => 'admin.usuarios.index',
+            'can' => 'admin.usuarios.index',
           ),
           1 => 
           array (
             'text' => 'Clientes',
             'route' => 'admin.clientes.index',
+            'can' => 'admin.clientes.index',
           ),
           2 => 
           array (
             'text' => 'Roles y permisos',
             'route' => 'admin.roles.index',
+            'can' => 'admin.roles.index',
           ),
           3 => 
           array (
             'text' => 'compras',
             'route' => 'admin.compras.index',
+            'can' => 'admin.compras.index',
           ),
           4 => 
           array (
             'text' => 'Proveedores',
             'route' => 'admin.proveedores.index',
+            'can' => 'admin.proveedores.index',
           ),
           5 => 
           array (
             'text' => 'Sucursales',
             'route' => 'admin.sucursales.index',
+            'can' => 'admin.sucursales.index',
           ),
           6 => 
           array (
             'text' => 'Categorias',
             'route' => 'admin.categorias.index',
+            'can' => 'admin.categorias.index',
           ),
           7 => 
           array (
             'text' => 'Marcas',
             'route' => 'admin.marcas.index',
+            'can' => 'admin.marcas.index',
           ),
           8 => 
           array (
             'text' => 'Modelos',
             'route' => 'admin.modelos.index',
+            'can' => 'admin.modelos.index',
           ),
         ),
       ),
@@ -133,21 +142,25 @@
           array (
             'text' => 'Nueva venta',
             'route' => 'ventas.ventas.index',
+            'can' => 'ventas.ventas.index',
           ),
           1 => 
           array (
             'text' => 'Ventas al contado',
             'route' => 'ventas.mostrar_ventas.index',
+            'can' => 'ventas.mostrar_ventas_contado',
           ),
           2 => 
           array (
             'text' => 'Ventas a credito',
             'route' => 'ventas.mostrar_ventas.create',
+            'can' => 'ventas.mostrar_ventas_credito',
           ),
           3 => 
           array (
             'text' => 'Ventas por cliente',
             'route' => 'ventas.clientes',
+            'can' => 'ventas.mostrar_ventas_clientes',
           ),
         ),
       ),
@@ -161,21 +174,25 @@
           array (
             'text' => 'Registro e inventario',
             'route' => 'productos.productos.index',
+            'can' => 'productos.productos.index',
           ),
           1 => 
           array (
             'text' => 'Productos por serial',
             'route' => 'productos.serial.index',
+            'can' => 'productos.index_serial',
           ),
           2 => 
           array (
             'text' => 'Devolucion',
             'route' => 'devolucion.index',
+            'can' => 'productos.devolucion',
           ),
           3 => 
           array (
             'text' => 'Traslado',
             'route' => 'traslado.index',
+            'can' => 'productos.traslado',
           ),
         ),
       ),
@@ -189,16 +206,19 @@
           array (
             'text' => 'Productos más vendidos',
             'route' => 'reportes.index.productos',
+            'can' => 'reportes.productos',
           ),
           1 => 
           array (
             'text' => 'Historial de productos',
             'route' => 'movimientos.modalidad',
+            'can' => 'reportes.movimientos',
           ),
           2 => 
           array (
             'text' => 'ventas',
             'route' => 'reportes.index.ventas',
+            'can' => 'reportes.ventas',
           ),
         ),
       ),
@@ -212,11 +232,13 @@
           array (
             'text' => 'Cambiar contrasena',
             'route' => 'ajustes.ccontrasena',
+            'can' => 'ajustes.contrasena',
           ),
           1 => 
           array (
             'text' => 'Sobre la empresa',
             'route' => 'ajustes.empresa',
+            'can' => 'ajustes.empresa',
           ),
         ),
       ),

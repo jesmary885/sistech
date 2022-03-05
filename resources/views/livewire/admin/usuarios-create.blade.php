@@ -14,7 +14,6 @@
                    <h2 class="text-lg inline mt-2"> Información personal</h2>
                 
                </div>
-               <hr class="m-0 p-0">
                <div class="flex mt-2 justify-between w-full">
                    <div class="w-full mr-2">
                      <select wire:model="tipo_documento" id="tipo_documento" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_documento">
@@ -81,14 +80,14 @@
                     
                    
                </div>
+               <hr class="mb-0 pb-0" >
    
             
-               <div class="flex mt-4">
+               <div class="flex">
                     <i class="fas fa-user-lock mt-3 mr-1"></i>
                    <h2 class="text-lg inline mt-2">Información de la cuenta</h2>
                </div>
-               <hr class="m-0 p-0">
-   
+    
                <div class="flex justify-between w-full mt-3 mr-2">
                     <div class="w-full mr-2">
                         <input wire:model="password" type="text" id="password" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Contraseña">
@@ -118,13 +117,13 @@
                    
                 </div>
                 
-
-                <div class="flex mt-4">
+                <hr class="mb-0 pb-0" >
+                <div class="flex">
                     <i class="fas fa-location-arrow mt-3 mr-1"></i>
                    <h2 class="text-lg inline mt-2">Zona de atención</h2>
                </div>
 
-               <hr class="m-0 p-0">
+    
 
                <div class="flex justify-between w-full mt-3 mr-2">
                 
@@ -147,6 +146,7 @@
                     <x-input-error for="sucursales_id" />
                 </div>
             </div>
+            <hr class="mb-0 pb-0" >
 
    
                <div class="py-12">

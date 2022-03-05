@@ -1,8 +1,18 @@
 <div>
     <div class="card">
-        <div class="card-header">
-            <input wire:model="search" placeholder="Ingrese el nombre o Cod. de barra del producto a buscar"
-                class="form-control">
+        <div class="card-header flex items-center justify-between">
+            <div class="flex-1">
+                <input wire:model="search" placeholder="Ingrese el código de barra del producto a buscar" class="form-control">
+            </div>
+            <div class="ml-2">
+                <button
+                    title="Ayuda a usuario"
+                    class="btn btn-success btn-sm" 
+                    wire:click="ayuda"><i class="fas fa-info"></i>
+                    Guía rápida
+                </button>
+            </div>
+           
         </div>
         @if ($productos->count())
             <div class="card-body">
@@ -14,7 +24,7 @@
                             <th class="text-center">Serial</th>
                             <th class="text-center">Precio letal</th>
                             <th class="text-center">Precio mayor</th>
-                            <th class="text-center"></th>
+                            <th colspan="1"></th>
                         </tr>
                     </thead>
                     <tbody>

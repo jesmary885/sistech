@@ -9,9 +9,10 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Agregar productos a la venta</h5>
+                            <h5 class="modal-title py-0 text-lg text-gray-800"> <i class="	fas fa-shopping-basket"></i>  Agregar productos a la venta</h5>
                         </div>
                         <div class="modal-body">
+                            <h2 class="text-sm ml-2 mb-4 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Seleccione el tipo de precio a utilizar en la venta del producto y haga click en "Agregar a la venta"</h2> 
              
                                 {{-- <div class="mr-4">
                                     <x-secondary-button 

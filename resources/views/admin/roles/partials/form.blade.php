@@ -7,7 +7,7 @@
         </small>
     @enderror
 </div>
-<h2 class="h5">Listado de Permisos</h2>
+<h2 class="text-sm ml-2 m-0 mb-4 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Seleccione los permisos del rol y presiona Guardar</h2> 
 @foreach ($permissions as $permission)
         <div>
             <label>

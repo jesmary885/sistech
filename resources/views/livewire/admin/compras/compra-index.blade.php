@@ -1,35 +1,48 @@
 <div>
     <div class="card">
-        <div class="card-header">
-            <input wire:model="search" placeholder="Ingrese la fecha de la compra realizada o nombre del producto a buscar" class="form-control">
+        <div class="card-header flex items-center justify-between">
+            <div class="flex-1">
+                <input wire:model="search" placeholder="Ingrese la fecha de la compra a buscar en formato Año-Mes-Día" class="form-control">
+            </div>
+            <div class="ml-2">
+                <button
+                    title="Ayuda a usuario"
+                    class="btn btn-success btn-sm" 
+                    wire:click="ayuda"><i class="fas fa-info"></i>
+                    Guía rápida
+                </button>
+            </div>
+            
         </div>
         @if ($compras->count())
             <div class="card-body">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Fecha</th>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th>Precio de compra</th>
-                            <th>Total</th>
-                            <th>Sucursal</th>
+                            <th class="text-center">Fecha</th>
+                            <th class="text-center">Producto</th>
+                            <th class="text-center">Cantidad</th>
+                            <th class="text-center">Precio de compra</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-center">Sucursal</th>
+                            <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($compras as $compra)
                             <tr>
-                                <td>{{$compra->fecha}}</td>
-                                <td>{{$compra->producto->nombre}} - Cod. barra: {{$compra->producto->cod_barra}}</td>
-                                <td>{{$compra->cantidad}}</td>
-                                <td>{{$compra->precio_compra}}</td>
-                                <td>{{$compra->total}}</td>
-                                <td>{{$compra->sucursal->nombre}}</td>
+                                <td class="text-center">{{$compra->fecha}}</td>
+                                <td class="text-center">{{$compra->producto->nombre}} - Cod. barra: {{$compra->producto->cod_barra}}</td>
+                                <td class="text-center">{{$compra->cantidad}}</td>
+                                <td class="text-center">{{$compra->precio_compra}}</td>
+                                <td class="text-center">{{$compra->total}}</td>
+                                <td class="text-center">{{$compra->sucursal->nombre}}</td>
                                 <td width="10px">
                                     @livewire('admin.compras.compras-edit',['compra' => $compra],key($compra->id))
                                 </td>
                                 <td width="10px">
                                     <button
+                                        title="Eliminar compra"
                                         class="btn btn-danger btn-sm" 
                                         wire:click="delete('{{$compra->id}}')">
                                         <i class="fas fa-trash-alt"></i>
