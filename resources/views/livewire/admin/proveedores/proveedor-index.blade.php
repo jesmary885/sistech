@@ -5,23 +5,23 @@
         </div>
         @if ($proveedores->count())
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
                     <thead>
                         <tr>
-                            <th>Proveedor</th>
-                            <th>Encargado</th>
-                            <th>Telefono</th>
-                            <th>Email</th>
+                            <th class="text-center">Proveedor</th>
+                            <th class="text-center">Encargado</th>
+                            <th class="text-center">Telefono</th>
+                            <th class="text-center">Email</th>
                             <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($proveedores as $proveedor)
                             <tr>
-                                <td>{{$proveedor->nombre_proveedor}}</td>
-                                <td>{{$proveedor->nombre_encargado}}</td>
-                                <td>{{$proveedor->telefono}}</td>
-                                <td>{{$proveedor->email}}</td>
+                                <td class="text-center">{{$proveedor->nombre_proveedor}}</td>
+                                <td class="text-center">{{$proveedor->nombre_encargado}}</td>
+                                <td class="text-center">{{$proveedor->telefono}}</td>
+                                <td class="text-center">{{$proveedor->email}}</td>
                                 <td width="10px">
                                     @livewire('admin.proveedores.proveedor-create',['accion' => 'edit', 'proveedor' => $proveedor->id],key($proveedor->id))
                                 </td>

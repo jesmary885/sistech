@@ -37,7 +37,7 @@ class ProductosCreate extends Component
     protected $listeners = ['refreshimg'];
 
      protected $rules = [
-         'nombre' => 'required|min:3|unique:productos',
+         'nombre' => 'required|unique:productos',
          'cod_barra'=>'nullable|unique:productos',
          'precio_entrada' => 'required|numeric',
          'precio_letal' => 'required|numeric',
@@ -95,7 +95,6 @@ class ProductosCreate extends Component
     public function save()
     {
 
-       
         $rules = $this->rules;
         $this->validate($rules);
 

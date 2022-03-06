@@ -22,7 +22,7 @@
 
         @if (Cart::count())
         
-            <table class="table-hover w-full">
+            <table class="table-striped table-responsive-lg table-responsive-md table-responsive-sm w-full">
                 <thead>
                     <tr>
                         <th class="text-center">Producto</th>

@@ -5,7 +5,7 @@
             </div>
             @if ($devoluciones->count())
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                         <thead>
                             <tr>
                                 <th class="text-center">Fecha</th>

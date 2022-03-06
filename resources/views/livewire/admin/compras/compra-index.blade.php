@@ -16,7 +16,7 @@
         </div>
         @if ($compras->count())
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
                     <thead>
                         <tr>
                             <th class="text-center">Fecha</th>

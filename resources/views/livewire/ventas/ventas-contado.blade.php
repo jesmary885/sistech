@@ -1,29 +1,39 @@
 <div>
     <div class="card">
-        <div class="card-header">
-            <input wire:model="search" placeholder="Ingrese la fecha de la venta a buscar" class="form-control">
+        <div class="card-header flex items-center justify-between">
+            <div class="flex-1">
+                <input wire:model="search" placeholder="Ingrese la fecha de la venta a buscar" class="form-control">
+            </div>
+            <div class="ml-2">
+                <button
+                    title="Ayuda a usuario"
+                    class="btn btn-success btn-sm" 
+                    wire:click="ayuda"><i class="fas fa-info"></i>
+                    Guía rápida
+                </button>
+            </div>
         </div>
         @if ($ventas->count())
-            <div class="card-body">
-                <table class="table table-striped">
+            <div class="card-body mt-0">
+                <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
                     <thead>
                         <tr>
-                            <th>Fecha</th>
-                            <th>Cliente</th>
-                            <th>Cliente - Documento</th>
-                            <th>Estado de entrega</th>
-                            <th>Total de venta</th>
-                            <th></th>
+                            <th class="text-center">Fecha</th>
+                            <th class="text-center">Cliente</th>
+                            <th class="text-center">Cliente - Documento</th>
+                            <th class="text-center">Estado de entrega</th>
+                            <th class="text-center">Total de venta</th>
+                            <th colspan="2"></th>  
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($ventas as $venta)
                             <tr>
-                                <td>{{$venta->fecha}}</td>
-                                <td>{{$venta->cliente->nombre}} {{$venta->cliente->apellido}}</td>
-                                <td>{{$venta->cliente->nro_documento}}</td>
-                                <td>{{$venta->estado_entrega}}</td>
-                                <td>{{$venta->total}}</td>
+                                <td class="text-center">{{$venta->fecha}}</td>
+                                <td class="text-center">{{$venta->cliente->nombre}} {{$venta->cliente->apellido}}</td>
+                                <td class="text-center">{{$venta->cliente->nro_documento}}</td>
+                                <td class="text-center">{{$venta->estado_entrega}}</td>
+                                <td class="text-center">{{$venta->total}}</td>
                                 <td width="10px">
                                     @livewire('ventas.ventas-view', ['venta' => $venta],key('0'.' '.$venta->id)) 
                                 </td>

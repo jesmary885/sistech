@@ -32,9 +32,9 @@ class VentasCart extends Component
     }
 
     public function ayuda(){
-        $this->emit('ayuda','<p class="text-sm text-gray-500 m-0 p-0 text-justify">1-. Editar compras: Haga click en el botón " <i class="fas fa-edit"></i> ", ubicado al lado de cada compra y complete el formulario.</p> 
-        <p class="text-sm text-gray-500 m-0 p-0 text-justify">2-.Eliminar compra: Haga click en el botón " <i class="fas fa-trash-alt"></i> ", ubicado al lado de cada compra, confirme haciendo click en la opción " Si, seguro " .</p> 
-        <p class="text-sm text-gray-500 m-0 p-0 text-justify">3-.Registro de compras: Al registrar el producto recibido automáticamente se registra la compra, por ende para registrar compras debe registrar el producto o agregar unidades al producto comprado.</p>');
+        $this->emit('ayuda','<p class="text-sm text-gray-500 m-0 p-0 text-justify">1-. Eliminar un producto de la venta: Haga click en el botón " <i class="fas fa-trash"></i> ", ubicado al lado del producto que desea eliminar.</p> 
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">2-.Eliminar todos los productos de la venta: Haga click en el botón " <i class="fas fa-trash"></i> Borrar todos los productos ", ubicado en el área inferior izquierda del listado de productos.</p> 
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">3-.Continuar con la venta: Haga click sobre el botón "Continuar>>" ubicado en la zona inferior izquierda </p>');
     }
     
 }

@@ -3,7 +3,7 @@
     <div class="card">
         @if ($array)
             <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                     <thead>
                         <tr>
                             <th class="text-center">Producto</th>

@@ -5,19 +5,19 @@
         </div>
         @if ($marcas->count())
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Categoria</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Categoria</th>
                             <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($marcas as $marca)
                             <tr>
-                                <td>{{$marca->id}}</td>
-                                <td>{{$marca->nombre}}</td>
+                                <td class="text-center">{{$marca->id}}</td>
+                                <td class="text-center">{{$marca->nombre}}</td>
                                 <td width="10px">
                                     @livewire('admin.marcas.marca-create',['accion' => 'edit', 'marca' => $marca->id],key($marca->id))
                                 </td>

@@ -62,6 +62,9 @@ class ProductosExport extends Component
     }
 
     public function export(){
+
+        $rules = $this->rules;
+        $this->validate($rules);
         
         if($this->estado == 1){
             if($this->sucursal_id == 0){

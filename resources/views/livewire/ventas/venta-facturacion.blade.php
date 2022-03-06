@@ -2,19 +2,29 @@
     <div class="col-span-3">
 
         <div class="bg-white rounded-lg shadow mb-2 pb-2" :class="{'hidden': carrito == ''}">
-            <div>
-                <input wire:model="search" placeholder="*Seleccione el cliente o escriba aquí su nombre, apellido o nro documento a buscar" class="form-control">
+            <div class="flex items-center justify-between mb-0">
+                <div class="flex-1">
+                    <input wire:model="search" placeholder="*Seleccione el cliente o escriba aquí su nombre, apellido o nro documento a buscar" class="form-control">
+                </div>
+                <div class="ml-2 mt-4">
+                    <button
+                        title="Ayuda a usuario"
+                        class="btn btn-success btn-sm mb-6" 
+                        wire:click="ayuda"><i class="fas fa-info"></i>
+                        Guía rápida
+                    </button>
+                </div>
             </div>
             @if ($clientes->count())
                 <div>
-                    <table class="table table-striped">
+                    <table class="table table-hover table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm ">
                         <thead>
                             <tr>
                                 <th class="text-center">Nombre</th>
                                 <th class="text-center">Documento</th>
                                 <th class="text-center">Email</th>
                                 <th class="text-center">Puntos</th>
-                                <th>@livewire('admin.clientes.clientes-create',['vista' => "ventas",'accion' => 'create'])</th>
+                                <th class="text-center">@livewire('admin.clientes.clientes-create',['vista' => "ventas",'accion' => 'create'])</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,7 +36,7 @@
                                     <td class="text-center">{{$cliente->puntos}}</td>
                                     <td width="10px">
                                     <button
-                                        class="ml-4 btn btn-primary btn-sm" 
+                                        class="ml-4 btn btn-primary btn-sm" title="Seleccionar cliente"
                                         wire:click="select_u('{{$cliente->id}}}')">
                                         <i class="fas fa-check"></i>
                                     </button>
@@ -84,7 +94,7 @@
                 </div>
                 <div class="mr-2 w-full">
                     <div class="w-full mr-2">
-                        <input wire:model="descuento" type="number" title="Descuento en venta" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="*Descuento en venta %">
+                        <input wire:model="descuento" type="number" min="0" title="Descuento en venta" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="*Descuento en venta %">
                         <x-input-error for="descuento" />
                     </div>
                 </div>
@@ -93,7 +103,7 @@
 
             <div :class="{'hidden': tipo_pago != 2}">
                     <div class="w-1/4 m-2">
-                        <input wire:model="pago_cliente" type="number" class="w-full px-4 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="*Total pagado">
+                        <input wire:model="pago_cliente" type="number" min="0" class="w-full px-4 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="*Total pagado">
                         <x-input-error for="pago_cliente" />
                     </div>
             </div>
@@ -177,20 +187,24 @@
                 @forelse (Cart::content() as $item)
                     <li class="border-b border-gray-200">
                         <article>
-                            <h1 class="font-bold mr-4 text-lg text-gray-600">{{$item->name}}</h1>
                             <div class="flex">
+                                <h1 class="font-bold mr-4 text-lg text-gray-600 pt-2">{{$item->name}}</h1>
+                                @if ($puntos_canjeo >  $item->options['puntos'])
+                                    <button type="submit" class="btn btn-warning btn-sm ml-2 text-white"
+                                    wire:loading.attr="disabled"
+                                    wire:target="canjear"
+                                    wire:click="canjear('{{$item->id}}}')">
+                                    <i class="fas fa-award p-0"></i>
+                                    </button>  
+                                @endif
+
+                            </div>
+                           
+                            <div class="flex m-0">
                                 <p class="mr-2 text-sm font-semibold">S/N: {{$item->options['serial']}}</p>
                                 <p class="text-sm"> - Precio: S/ {{$item->price}} - </p> 
                                 <p class="text-sm font-semibold text-red-600 ml-2"> Puntos: {{$item->options['puntos']}}</p> 
-                                @if ($puntos_canjeo >  $item->options['puntos'])
-                                    <x-button
-                                    wire:loading.attr="disabled"
-                                    wire:target="canjear"
-                                    class=" btn-sm mb-2 ml-2" 
-                                    wire:click="canjear('{{$item->id}}}')">
-                                    <i class="fas fa-file-invoice"></i>
-                                    </x-button>  
-                                @endif
+                                
                             </div>
                         </article>
                     </li>

@@ -8,12 +8,14 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Agregar Unidades a Producto</h5>
+                        <h5 class="modal-title py-0 text-lg text-gray-800"> <i class="fas fa-database"></i>  Agregar unidades al producto</h5>
+      
                     </div>
                     <div class="modal-body">
+                        <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold mb-4"><i class="fas fa-info-circle"></i> Complete todos los campos y presiona Guardar</h2> 
                         <div class="flex mt-2 ustify-between w-full">
                             <div class="w-full mr-2">
-                                <input wire:model.defer="cantidad" name="documento" type="text" class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cantidad">
+                                <input wire:model.defer="cantidad" name="documento" type="number" min="0" class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cantidad">
                                 <x-input-error for="cantidad" />
                             </div>
                             <div class="w-full">
@@ -33,7 +35,7 @@
                         </div>
                         <div class="flex mt-2 ustify-between w-full">
                             <div class="w-full mr-2">
-                                <input wire:model.defer="precio_compra" name="documento" type="text" class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio de compra">
+                                <input wire:model.defer="precio_compra" name="documento" type="number" min="0" type="text" class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio de compra">
                                 <x-input-error for="precio_compra" />
                             </div>
                             

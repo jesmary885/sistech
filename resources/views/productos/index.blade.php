@@ -4,16 +4,17 @@
 
 @section('content_header')
 
-    <div class="flex justify-content-end ">
-        <div>
+    <div class="flex justify-between">
+        <h1 class="flex-1 text-lg"> <i class="fas fa-clipboard-list"></i> Inventario de equipos</h1>
+        <div class=" justify-end ">
             @livewire('productos.productos-export')
         </div>
-        <div class="ml-2">
-            <a href="{{route('productos.productos.create')}}" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> Nuevo producto</a>
+        <div class="ml-2 justify-end">
+            <a href="{{route('productos.productos.create')}}" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> Nuevo equipo</a>
         </div>
     </div>
 
-    <h1 class="text-lg ml-2"> <i class="fas fa-clipboard-list"></i> Listado de productos</h1>
+    
     
     
 @stop

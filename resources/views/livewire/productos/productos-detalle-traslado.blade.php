@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <input wire:model="search" placeholder="Ingrese el serial del producto a buscar" class="form-control mb-2">
 
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm" >
                             <thead>
                                 <tr>
                                     <th>Serial</th>

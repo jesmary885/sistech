@@ -568,11 +568,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .ml-3 {
   margin-left: 0.75rem;
 }
-.mr-4 {
-  margin-right: 1rem;
-}
 .mb-6 {
   margin-bottom: 1.5rem;
+}
+.mr-4 {
+  margin-right: 1rem;
 }
 .ml-0 {
   margin-left: 0px;
@@ -666,9 +666,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .flex-1 {
   flex: 1 1 0%;
-}
-.table-auto {
-  table-layout: auto;
 }
 .border-collapse {
   border-collapse: collapse;
@@ -1225,6 +1222,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 @media (min-width: 768px) {
+
+  .md\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  .md\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));

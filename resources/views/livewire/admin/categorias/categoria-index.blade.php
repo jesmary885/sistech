@@ -5,19 +5,19 @@
         </div>
         @if ($categorias->count())
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Categoria</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Categoria</th>
                             <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($categorias as $categoria)
                             <tr>
-                                <td>{{$categoria->id}}</td>
-                                <td>{{$categoria->nombre}}</td>
+                                <td class="text-center">{{$categoria->id}}</td>
+                                <td class="text-center">{{$categoria->nombre}}</td>
                                 <td width="10px">
                                     @livewire('admin.categorias.categoria-create',['accion' => 'edit', 'categoria' => $categoria->id],key($categoria->id))
                                 </td>

@@ -299,4 +299,15 @@ class VentaFacturacion extends Component
     public function inicio(){
         return redirect()->route('home');
     }
+
+    public function ayuda(){
+        $this->emit('ayuda','<p class="text-sm text-gray-500 m-0 p-0 text-justify">1-. Seleccionar cliente ya registrado: Haga click en el botón " <i class="fas fa-check"></i>", ubicado al lado de cada cliente.</p> 
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">2-.Registrar cliente para la venta si no esta registrado: Haga click en el botón " <i class="fas fa-user-plus"></i>" ubicado en la zona superior derecha de la tabla de clientes.</p> 
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">2-.Canjeo de puntos: Si el cliente tiene suficientes puntos para canjear en algun producto, al lado del o los productos le aparecerá el botón "<i class="fas fa-award p-0"></i>", solo debe hacer click sobre él para añadir el descuento a la cuenta total de la venta </p> 
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">3. Campos obligatorios: Método de pago, tipo de pago, estado de entrega y descuento en venta, si el tipo de pago es al contado debe ingresar como campo obligatorio el total pagado por el cliente.</p>
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">4-. Enviar comprobante al correo del cliente: si desea que el sistema envie una copia del comprobante de pago debe seleccionar el check ubicado al lado de "Enviar comprobante al correo del cliente". </p>
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">5-. Guardar venta: para culminar con la venta haga click en "Guardar venta ubicado en la zona inferior izquierda"</p>
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">6-. Si desea imprimir comprobante, debe hacer click sobre el check ubicado al lado de "Imprimir comprobante", seguidamente como campo obligatorio debe seleccionar el tipo de comprobante, al guardar la venta el comprobante se descargara automáticamente solo debe abrirlo e imprimirlo. </p>');
+    }
+
 }

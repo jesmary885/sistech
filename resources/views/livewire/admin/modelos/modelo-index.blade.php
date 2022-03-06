@@ -5,21 +5,21 @@
         </div>
         @if ($modelos->count())
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Modelo</th>
-                            <th>Marca</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Modelo</th>
+                            <th class="text-center">Marca</th>
                             <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($modelos as $modelo)
                             <tr>
-                                <td>{{$modelo->id}}</td>
-                                <td>{{$modelo->nombre}}</td>
-                                <td>{{$modelo->marca->nombre}}</td>
+                                <td class="text-center">{{$modelo->id}}</td>
+                                <td class="text-center">{{$modelo->nombre}}</td>
+                                <td class="text-center">{{$modelo->marca->nombre}}</td>
                                 <td width="10px">
                                     @livewire('admin.modelos.modelo-create',['accion' => 'edit', 'modelo' => $modelo->id],key($modelo->id))
                                 </td>
