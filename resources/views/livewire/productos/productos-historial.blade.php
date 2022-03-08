@@ -6,7 +6,7 @@
                 <h2 class="text-lg inline mt-2 text-gray-800">Periodo de fechas en que desee realizar la busqueda:</h2>
             </div>
            
-            <div class="flex justify-items-stretch w-full mt-3 mb-2 ml-4">
+            <div class="lg:flex justify-items-stretch w-full mt-3 mb-2 ml-4">
                 <div>
                     <x-input.date wire:model.lazy="fecha_inicio" id="fecha_inicio" placeholder="Seleccione la fecha inicio" class="px-4 outline-none"/>
                     <x-input-error for="fecha_inicio"/>     
@@ -37,7 +37,7 @@
             </div>
             @if ($productos->count())
                 <div class="card-body">
-                    <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
+                    <table class="table table-bordered table-responsive-md table-responsive-sm">
                         <thead class="thead-dark">
                             <tr>
                                 <th class="text-center">Código de Barra</th>

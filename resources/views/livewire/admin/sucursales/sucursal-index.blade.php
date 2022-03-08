@@ -20,7 +20,7 @@
 
         @if ($sucursales->count())
             <div class="card-body">
-                <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm class="text-center"">
+                <table class="table table-striped table-responsive-md table-responsive-sm class="text-center"">
                     <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Sucursal</th>

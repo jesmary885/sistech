@@ -3,7 +3,7 @@
          
             @if ($movimientos->count())
                 <div class="card-body">
-                    <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
+                    <table class="table table-bordered table-responsive-md table-responsive-sm">
                         <thead class="thead-dark">
                             <tr>
                            

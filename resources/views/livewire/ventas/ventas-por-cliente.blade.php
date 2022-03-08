@@ -18,7 +18,7 @@
         @if ($ventas->count())
             <div class="card-body">
                 <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Fecha</th>
                             <th class="text-center">Cliente</th>
@@ -28,6 +28,7 @@
                             <th class="text-center">Total pagado</th>
                             <th class="text-center">Deuda</th>
                             <th class="text-center">Estado</th>
+                            <th colspan="2"></th>
                  
                         </tr>
                     </thead>

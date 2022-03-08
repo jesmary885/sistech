@@ -17,7 +17,7 @@
         @if ($ventas->count())
             <div class="card-body">
                 <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Fecha</th>
                             <th class="text-center">Cliente</th>

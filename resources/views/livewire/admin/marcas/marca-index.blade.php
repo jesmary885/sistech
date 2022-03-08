@@ -19,7 +19,7 @@
         </div>
         @if ($marcas->count())
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-responsive-md table-responsive-sm">
                     <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Id</th>

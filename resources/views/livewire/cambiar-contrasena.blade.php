@@ -8,7 +8,7 @@
 
             <div class="flex mt-1">
                 <i class="fas fa-user-lock mt-3 mr-1"></i>
-               <h2 class="text-lg inline underline decoration-gray-400 mt-2">Información requerida</h2>
+               <h2 class="text-lg inline mt-2">Información requerida</h2>
            </div>
 
            <div class="flex justify-between w-full mt-3 mr-2">

@@ -7,8 +7,9 @@
         <div class="card-body w-full pt-0 mt-0">
             <div class="flex">
                   <i class="far fa-address-card mt-3 mr-1"></i>
-                <h2 class="text-lg inline mt-2 underline decoration-gray-400"> Datos de la empresa</h2>
+                <h2 class="text-lg inline mt-2"> Datos de la empresa</h2>
             </div>
+
             <div class="flex mt-2 justify-between w-full">
                 <div class="w-full mr-2">
                   <select wire:model="tipo_documento" title="Tipo de documento" id="tipo_documento" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_documento">
@@ -39,14 +40,17 @@
                 <x-input-error for="direccion" />
             </div>
 
+            <hr>
+
+
             <div class="flex">
-                <i class="fas fa-phone-volume mt-4 mr-1"></i>
-              <h2 class="text-lg inline mt-3 underline decoration-gray-400"> Información de contacto</h2>
+                <i class="fas fa-phone-volume mt-2 mr-1"></i>
+              <h2 class="text-lg inline mt-1"> Información de contacto</h2>
           </div>
 
             <div class="flex justify-between w-full mt-3 mr-2">
                 <div class="w-full mr-2">
-                    <input wire:model="telefono" title="Teléfono de contacto" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Telefono">
+                    <input wire:model="telefono" title="Teléfono de contacto" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Telefono">
                     <x-input-error for="telefono" />
                 </div>
                 <div class="w-full m">
@@ -55,9 +59,11 @@
                 </div>
     
             </div>
+            <hr>
+
             <div class="flex">
-                <i class="fas fa-file-invoice-dollar mt-4 mr-1"></i>
-              <h2 class="text-lg inline mt-3 underline decoration-gray-400"> Información de impuesto y descuentos por canjes de puntos</h2>
+                <i class="fas fa-file-invoice-dollar mt-2 mr-1"></i>
+              <h2 class="text-lg inline mt-1"> Información de impuesto y descuentos por canjes de puntos</h2>
           </div>
 
             <div class="flex justify-between w-full mt-3 mr-2">
@@ -66,17 +72,18 @@
                     <x-input-error for="nombre_impuesto" />
                </div>  
                 <div class="w-full mr-2">
-                    <input wire:model="impuesto" type="text" title="Impuesto" class="px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="valor del impuesto">
+                    <input wire:model="impuesto" type="number" min="0" title="valor del mpuesto" class="px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="valor del impuesto">
                     <x-input-error for="impuesto" />
                 </div>
 
                 <div class="w-full">
-                    <input wire:model="porcentaje_puntos" type="text" title="Porcentaje de decuento en venta" class="px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Porcentaje">
+                    <input wire:model="porcentaje_puntos" type="number" min="0" title="Porcentaje de decuento en venta" class="px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Porcentaje">
                     <x-input-error for="porcentaje_puntos" />
                 </div>
 
                
             </div>
+       
 
             <div class="mt-4">
                 <button type="submit" class="btn btn-primary" wire:click="update">
