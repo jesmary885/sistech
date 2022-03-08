@@ -16,15 +16,15 @@
             </div>
             @if ($productos->count())
                 <div class="card-body">
-                    <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
-                        <thead>
+                    <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
+                        <thead class="thead-dark">
                             <tr>
                                 <th class="text-center">Imagen</th>
-                                <th class="text-center">Código de Barra</th>
-                                <th class="text-center">Descripción</th>
-                                <th class="text-center">Stock general</th>
-                                <th class="text-center">Precio letal</th>
-                                <th class="text-center">Precio mayor</th>
+                                <th class="text-center">Código</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Stock</th>
+                                <th class="text-center">letal</th>
+                                <th class="text-center">mayor</th>
                                 <th class="text-center">Puntos</th>
                                 <th colspan="4"></th>
                             </tr>
@@ -40,10 +40,15 @@
                                         @endif
                                     </td>
                                     <td class="text-center">{{$producto->cod_barra}}</td>
-                                    <td class="text-center">{{$producto->nombre}}</td>
-                                    <td class="text-center">@foreach ($sucursales as $sucursal)
-                                        {{$sucursal->nombre}} = {{$producto->sucursals->find($sucursal)->pivot->cantidad}} <br>
-                                        @endforeach</td>
+                                    <td class="text-justify">{{$producto->nombre}}</td>
+                                    <?php
+                                        $cant = 0;
+                                        foreach($sucursales as $sucursal){
+                                            $cant = $cant + $producto->sucursals->find($sucursal)->pivot->cantidad;
+                                        }
+                                    ?>
+                                    <td class="text-center">@livewire('productos.productos-stock-sucursal', ['producto' => $producto, 'cant' => $cant],key(0.,'$producto->id')) </td>
+                                        {{-- <b>{{$sucursal->nombre}}</b> = {{$producto->sucursals->find($sucursal)->pivot->cantidad}}, --}}
                                     <td class="text-center">{{$producto->precio_letal}}</td>
                                     <td class="text-center">{{$producto->precio_mayor}}</td>
                                     <td class="text-center">{{$producto->puntos}}</td>
@@ -62,7 +67,7 @@
                                         <button
                                             class="btn btn-danger btn-sm" 
                                             wire:click="delete('{{$producto->id}}')"
-                                            title="Eliminar producto">
+                                            title="Eliminar equipo">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>

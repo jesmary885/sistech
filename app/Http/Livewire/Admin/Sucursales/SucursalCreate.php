@@ -10,7 +10,6 @@ use Livewire\Component;
 class SucursalCreate extends Component
 {
 
-    
     public $estado_id ="",$ciudad_id ="";
     public $nombre, $telefono, $ciudades, $direccion, $estados;
     public $isopen = false;
@@ -21,7 +20,7 @@ class SucursalCreate extends Component
         'ciudad_id' => 'required',
         'nombre' => 'required|max:50',
         'direccion' => 'required|max:50',
-        'telefono' => 'required|numeric|min:11',
+        'telefono' => 'required|min:5',
     ];
 
    /* public function updatedCiudadId($value)
@@ -29,6 +28,12 @@ class SucursalCreate extends Component
         $ciudad_select = Ciudad::find($value);
         $this->estados = $ciudad_select->estados;
     }*/
+
+    public function updatedEstadoId($value)
+    {
+        $estado_select = Estado::find($value);
+        $this->ciudades = $estado_select->ciudades;
+    }
 
     public function mount(Sucursal $sucursal){
         $this->sucursal = $sucursal ;
@@ -48,6 +53,8 @@ class SucursalCreate extends Component
        
         $this->estados=Estado::all();
     }
+
+    
 
     
     public function open()

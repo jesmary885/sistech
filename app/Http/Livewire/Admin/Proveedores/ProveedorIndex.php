@@ -40,4 +40,10 @@ class ProveedorIndex extends Component
         $proveedor_destroy = Proveedor::where('id',$this->proveedor)->first();
         $proveedor_destroy->delete();
     }
+
+    public function ayuda(){
+        $this->emit('ayuda','<p class="text-sm m-0 p-0 text-gray-500 text-justify">1-. Registro de proveedores: Haga click en el botón " <i class="fas fa-user-plus"></i> Nuevo proveedor " y complete el formulario.</p>
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">2-. Editar datos de proveedores: Haga click en el botón " <i class="fas fa-user-edit"></i> ", ubicado al lado de cada proveedor y complete el formulario.</p> 
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">3-.Eliminar proveedor: Haga click en el botón " <i class="fas fa-trash-alt"></i> ", ubicado al lado de cada proveedor, si el proveedor esta asociado a una compra de producto no podrá eliminarlo, de lo contrario confirme haciendo click en la opción " Si, seguro " .</p> ');
+    }
 }

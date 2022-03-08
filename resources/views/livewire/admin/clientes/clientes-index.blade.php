@@ -1,7 +1,5 @@
 <div>
 
-    {{-- <h2 class="text-sm ml-2 text-gray-500 font-semibold">- Para editar datos haga click en el botón <i class="fas fa-user-edit"></i> ubicado al lado de cada cliente</h2> 
-    <h2 class="text-sm ml-2 text-gray-500 font-semibold">- Para eliminar registros haga click en el botón <i class="fas fa-trash-alt"></i> ubicado al lado de cada cliente</h2>  --}}
     <div class="card">
         <div class="card-header flex items-center justify-between">
             <div class="flex-1">
@@ -23,7 +21,7 @@
         @if ($clientes->count())
             <div class="card-body">
                 <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Nombre</th>
                             <th class="text-center">Nº de documento</th>

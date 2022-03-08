@@ -23,6 +23,11 @@ class ProductosDevolucionAdd extends Component
         'accion' => 'required'
     ];
 
+    protected $rule_factura = [
+        'nro_factura' => 'required',
+
+    ];
+
     public function render()
     {
         return view('livewire.productos.productos-devolucion-add');
@@ -38,6 +43,9 @@ class ProductosDevolucionAdd extends Component
     }
 
     public function buscar($nro_factura){
+        $rule_factura = $this->rule_factura;
+        $this->validate($rule_factura);
+        
         $nro_factura = $this->nro_factura;
         $this->factura = 0;
         $this->productos = Producto_venta::where('venta_id',$nro_factura)

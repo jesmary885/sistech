@@ -12,7 +12,7 @@ class ClientesCreate extends Component
 {
 
     public $estado_id ="",$ciudad_id ="";
-    public $nombre, $apellido, $tipo_documento, $documento, $telefono, $email, $ciudades, $direccion, $client, $estados;
+    public $nombre, $apellido, $tipo_documento, $nro_documento, $telefono, $email, $ciudades, $direccion, $client, $estados;
     public $isopen = false;
     public $vista, $accion, $cliente;
       
@@ -22,7 +22,7 @@ class ClientesCreate extends Component
         'nombre' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
         'apellido' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
         'direccion' => 'required|max:50',
-        'documento' => 'required|min:5|unique:clientes',
+        'nro_documento' => 'required|min:5|unique:clientes',
         'tipo_documento' => 'required',
         'telefono' => 'required|numeric|min:9',
         'email' => 'required|max:50|email|unique:clientes'
@@ -61,7 +61,7 @@ class ClientesCreate extends Component
         if($cliente){
 
             $this->tipo_documento = $this->cliente->tipo_documento;
-            $this->documento = $this->cliente->nro_documento;
+            $this->nro_documento = $this->cliente->nro_documento;
             $this->telefono = $this->cliente->telefono;
             $this->nombre = $this->cliente->nombre;
             $this->apellido = $this->cliente->apellido;
@@ -101,7 +101,7 @@ class ClientesCreate extends Component
                 $cliente->nombre = $this->nombre;
                 $cliente->apellido = $this->apellido;
                 $cliente->email = $this->email;
-                $cliente->nro_documento = $this->documento;
+                $cliente->nro_documento = $this->nro_documento;
                 $cliente->tipo_documento = $this->tipo_documento;
                 $cliente->direccion= $this->direccion;
                 $cliente->telefono = $this->telefono;
@@ -111,7 +111,7 @@ class ClientesCreate extends Component
 
                 $cliente->save();
 
-                $this->reset(['nombre','apellido','email','telefono','documento','tipo_documento','direccion','ciudad_id','estado_id','isopen']);
+                $this->reset(['nombre','apellido','email','telefono','nro_documento','tipo_documento','direccion','ciudad_id','estado_id','isopen']);
                 if ($this->vista == "ventas") $this->emitTo('ventas.venta-facturacion','render');
                 else $this->emitTo('admin.clientes.clientes-index','render');
 
@@ -127,7 +127,7 @@ class ClientesCreate extends Component
                 ];
 
                 $rule_documento = [
-                    'documento' => 'required|min:5|unique:clientes,nro_documento,' .$this->cliente->id,
+                    'nro_documento' => 'required|min:5|unique:clientes,nro_documento,' .$this->cliente->id,
                 ];
 
                 $this->validate($rule_email);

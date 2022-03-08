@@ -1,12 +1,28 @@
 <div>
     <div class="card">
-        <div class="card-header">
-            <input wire:model="search" placeholder="Ingrese el nombre de la categoria a buscar" class="form-control">
+
+        <div class="card-header flex items-center justify-between">
+            <div class="flex-1">
+                <input wire:model="search" placeholder="Ingrese el nombre de la categoria a buscar" class="form-control">
+            </div>
+            <div class="ml-2">
+                <button
+                title="Ayuda a usuario"
+                class="btn btn-success btn-sm" 
+                wire:click="ayuda"><i class="fas fa-info"></i>
+                Guía rápida
+            </button>
+            </div>
+            <div class="ml-2">
+                @livewire('admin.categorias.categoria-create',['accion' => 'create'])
+            </div>
         </div>
+
+
         @if ($categorias->count())
             <div class="card-body">
                 <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Id</th>
                             <th class="text-center">Categoria</th>
@@ -37,9 +53,9 @@
                 {{$categorias->links()}}
             </div>
         @else
-             <div class="card-body">
-                <strong>No hay registros</strong>
-            </div>
+        <div class="text-center">
+            <strong><i class="fas fa-exclamation-triangle"></i> No hay registros</strong>
+         </div>
         @endif
             
     </div>

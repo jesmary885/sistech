@@ -46,10 +46,10 @@
                                 <x-input-error for="tipo_documento" />
                             </div>
                             <div class="w-full mr-2">
-                                <input wire:model.defer="documento" name="documento" type="text"
+                                <input wire:model.defer="nro_documento" name="documento" type="text"
                                     class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     placeholder="*Nro de documento" title="Nro de documento">
-                                <x-input-error for="documento" />
+                                <x-input-error for="nro_documento" />
                             </div>
                             <div class="w-full mr-2">
                                 <input wire:model="telefono" type="number"

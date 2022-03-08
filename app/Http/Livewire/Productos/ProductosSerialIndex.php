@@ -15,9 +15,6 @@ class ProductosSerialIndex extends Component
 {
     use WithPagination;
     protected $paginationTheme = "bootstrap";
-    public $sort = 'id';
-    public $direction = 'desc';
-
 
     protected $listeners = ['render' => 'render','confirmacion' => 'confirmacion'];
 
@@ -28,21 +25,7 @@ class ProductosSerialIndex extends Component
         $this->resetPage();
     }
 
-    public function order($sort)
-    {
-        if ($this->sort == $sort)
-        {
-            if ($this->direction == 'desc') {
-                $this->direction = 'asc';
-            } else {
-                $this->direction = 'desc';
-            }
-        }
-        else{
-            $this->sort=$sort;
-            $this->direction='asc';
-        }
-    }
+   
 
 
     public function render()
@@ -51,7 +34,6 @@ class ProductosSerialIndex extends Component
         ->where('estado','activo')
         ->where('cod_barra', 'LIKE', '%' . $this->search . '%')
         ->latest('id')
-        ->OrderBy($this->sort, $this->direction) 
         ->paginate(5);
 
         return view('livewire.productos.productos-serial-index',compact('productos'));
@@ -59,7 +41,7 @@ class ProductosSerialIndex extends Component
 
     public function delete($productoId){
         $this->producto = $productoId;
-        $busqueda = Producto_venta::where('producto_id',$productoId)->first();
+        $busqueda = Producto_venta::where('producto_serial_sucursal_id',$productoId)->first();
 
         if($busqueda) $this->emit('errorSize', 'Este producto esta asociado a una venta, no puede eliminarlo');
         else $this->emit('confirm', 'Esta seguro de eliminar este producto?','productos.productos-serial-index','confirmacion','El producto se ha eliminado.');
@@ -108,10 +90,18 @@ class ProductosSerialIndex extends Component
             'user_id' => $usuario_auth
         ]);
 
+
+
+
        
 
 
 
+    }
+
+    public function ayuda(){
+        $this->emit('ayuda','<p class="text-sm text-gray-500 m-0 p-0 text-justify">1-. Agregar serial a equipo: Haga click en el botón "<i class="fas fa-edit"></i>", ubicado al lado de cada equipo.</p> 
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">2-.Eliminar equipo: Haga click en el botón "<i class="fas fa-trash-alt"></i>", ubicado al lado de cada equipo el sistema solicitará confirmación.</p>');
     }
 
 }

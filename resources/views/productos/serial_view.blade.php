@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-<h1 class="text-lg ml-2"> <i class="fas fa-clipboard-list"></i> Listado de productos</h1>
+<h1 class="text-lg ml-2"> <i class="fas fa-clipboard-list"></i> Listado de equipos por serial</h1>
 
 @stop
 

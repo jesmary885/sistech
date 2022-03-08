@@ -31,13 +31,15 @@ class ProductosDetalleTraslado extends Component
         'sucursal_id' => 'required',
     ];
 
-    public function mount(Producto $producto,$sucursal){
+    public function mount(Producto $producto){
+ 
         $this->producto = $producto;
-        $this->sucursal = $sucursal;
+        //$this->sucursal = $sucursal;
              $this->sucursales=Sucursal::where('id','!=',$this->sucursal)->get();
      }
     public function render()
     {
+      
         $productos = ProductoSerialSucursal::where('serial', 'LIKE', '%' . $this->search . '%')
             ->where('sucursal_id',$this->sucursal)
             ->where('cod_barra',$this->producto->cod_barra)
@@ -100,5 +102,11 @@ class ProductosDetalleTraslado extends Component
         $this->emitTo('productos.productos-traslado','render');
         $this->emit('alert','Datos registrados correctamente');
 
+    }
+
+    public function ayuda(){
+        $this->emit('ayuda','<p class="text-sm text-gray-500 m-0 p-0 text-justify">1-. Seleccionar sucursal destino: Seleccione la sucursal destino en el select ubicado en la zona superior izquierda</p> 
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">2-. Seleccionar equipos por serial a trasladar: Haga click en el check cuadrado ubicado al lado de cada equipo.</p>
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">3-. Procesar traslado: Una vez haya seleccionado todos los equipos a trasladar haga click en el botón Procesar</p>');
     }
 }

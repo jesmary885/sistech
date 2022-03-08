@@ -42,4 +42,10 @@ class SucursalIndex extends Component
         $sucursal_destroy = Sucursal::where('id',$this->sucursal)->first();
         $sucursal_destroy->delete();
     }
+
+    public function ayuda(){
+        $this->emit('ayuda','<p class="text-sm m-0 p-0 text-gray-500 text-justify">1-. Registro de sucursales: Haga click en el botón " <i class="fas fa-warehouse"></i> Nueva sucursal  " y complete el formulario.</p>
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">2-. Editar datos de sucursales: Haga click en el botón " <i class="fas fa-edit"></i> ", ubicado al lado de cada sucursal y complete el formulario.</p> 
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">3-.Eliminar sucursal: Haga click en el botón " <i class="fas fa-trash-alt"></i> ", ubicado al lado de cada sucursal, si la sucursal esta asociada a un producto no podrá eliminarla, de lo contrario confirme haciendo click en la opción " Si, seguro " .</p> ');
+    }
 }

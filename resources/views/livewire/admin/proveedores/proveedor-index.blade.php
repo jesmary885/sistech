@@ -1,16 +1,31 @@
 <div>
     <div class="card">
-        <div class="card-header">
-            <input wire:model="search" placeholder="Ingrese el nombre o nro de documento del proveedor" class="form-control">
+      
+        <div class="card-header flex items-center justify-between">
+            <div class="flex-1">
+                <input wire:model="search" placeholder="Ingrese el nombre o nro de documento del proveedor" class="form-control">
+            </div>
+            <div class="ml-2">
+                <button
+                title="Ayuda a usuario"
+                class="btn btn-success btn-sm" 
+                wire:click="ayuda"><i class="fas fa-info"></i>
+                Guía rápida
+            </button>
+            </div>
+            <div class="ml-2">
+                @livewire('admin.proveedores.proveedor-create',['accion' => 'create'])
+            </div>
+
         </div>
         @if ($proveedores->count())
             <div class="card-body">
                 <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Proveedor</th>
                             <th class="text-center">Encargado</th>
-                            <th class="text-center">Telefono</th>
+                            <th class="text-center">Teléfono</th>
                             <th class="text-center">Email</th>
                             <th colspan="2"></th>
                         </tr>

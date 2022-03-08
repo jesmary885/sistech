@@ -4,7 +4,7 @@
             @if ($vista == 'ventas')
                 <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal en donde realizara la venta</h2>
             @elseif($vista == 'productos')
-            <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal donde esta el producto a trasladar</h2>
+            <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal donde esta el equipo a trasladar</h2>
             @else <h2 class="text-lg text-white text-center bg-gray-700">Seleccione el almacen</h2>
             @endif
             

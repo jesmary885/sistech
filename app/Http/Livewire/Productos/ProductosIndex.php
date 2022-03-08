@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Productos;
 use App\Models\Producto;
 use App\Models\Producto_venta;
 use App\Models\Sucursal;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 Use Livewire\WithPagination;
 
@@ -24,6 +25,7 @@ class ProductosIndex extends Component
     public function render()
     {
 
+
         $sucursales = Sucursal::all();
 
         $productos = Producto::where('nombre', 'LIKE', '%' . $this->search . '%')
@@ -37,7 +39,12 @@ class ProductosIndex extends Component
 
     public function delete($productoId){
         $this->producto = $productoId;
-        $busqueda = Producto_venta::where('producto_id',$productoId)->first();
+
+       // $busqueda = Producto_venta::where('producto_id',$productoId)->first();
+
+        $busqueda = Producto_venta::whereHas('productoSerialSucursal',function(Builder $query){
+            $query->where('producto_id',$this->producto);
+         })->first();
 
         if($busqueda) $this->emit('errorSize', 'Este producto esta asociado a una venta, no puede eliminarlo');
         else $this->emit('confirm', 'Esta seguro de eliminar este producto?','productos.productos-index','confirmacion','El producto se ha eliminado.');
@@ -52,9 +59,11 @@ class ProductosIndex extends Component
         $this->emit('ayuda','<p class="text-sm text-gray-500 m-0 p-0 text-justify">1-. Registro de equipos: Haga click en el botón "<i class="fas fa-plus-square"></i> Nuevo equipo", ubicado en la zona superior derecha y complete el formulario.</p> 
         <p class="text-sm text-gray-500 m-0 p-0 text-justify">2-.Exportar inventario: Haga click en el botón "<i class="far fa-file-excel"></i> Exportar inventario" ubicado en la zona superior derecha, complete el formulario y haga click en Exportar.</p>
         <p class="text-sm text-gray-500 m-0 p-0 text-justify">3-.Agregar unidades a un tipo de equipo: Haga click en el botón "<i class="fas fa-plus-square"></i>" ubicado eal lado de cada equipo registrado y complete el formulario.</p>
-        <p class="text-sm text-gray-500 m-0 p-0 text-justify">3-.Exportar inventario: Haga click en el botón "<i class="far fa-file-excel"></i> Exportar inventario" ubicado en la zona superior derecha, complete el formulario y haga click en Exportar.</p>
-        <p class="text-sm text-gray-500 m-0 p-0 text-justify">3-.Exportar inventario: Haga click en el botón "<i class="far fa-file-excel"></i> Exportar inventario" ubicado en la zona superior derecha, complete el formulario y haga click en Exportar.</p>
-        <p class="text-sm text-gray-500 m-0 p-0 text-justify">3-.Exportar inventario: Haga click en el botón "<i class="far fa-file-excel"></i> Exportar inventario" ubicado en la zona superior derecha, complete el formulario y haga click en Exportar.</p>
-        <p class="text-sm text-gray-500 m-0 p-0 text-justify">3-.Exportar inventario: Haga click en el botón "<i class="far fa-file-excel"></i> Exportar inventario" ubicado en la zona superior derecha, complete el formulario y haga click en Exportar.</p>');
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">4-.Editar información de equipos: Haga click en el botón "<i class="far fa-edit"></i>" ubicado al lado de cada equipo, complete el formulario y haga click en Guardar.</p>
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">5-.Ver stock de equipos por almacen: Haga click en el botón "<i class="fas fa-warehouse"></i>" ubicado al lado del stock de cada equipo y le aparecerá la información detallada por sucursal.</p>
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">6-.Imrpimir códigos de barra: Haga click en el botón "<i class="far fa-file-excel"></i> Exportar inventario" ubicado en la zona superior derecha, complete el formulario y haga click en Exportar.</p>
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">7-.Eliminar equipo: Haga click en el botón "<i class="fas fa-trash-alt"></i>", si el equipo esta asociado a alguna venta no podrá eliminarlo, de lo contrario el sistema solicitará confirmación.</p>');
     }
+
+   
 }

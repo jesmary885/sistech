@@ -10,6 +10,12 @@ class ReporteIndex extends Component
 {
     public $vista, $fecha_inicio, $fecha_fin, $sucursal_id,$sucursales,$sucursal_select;
 
+    protected $rules = [
+        'fecha_inicio' => 'required',
+        'fecha_fin' => 'required',
+        'sucursal_id' => 'required',
+     ];
+
     
     public function mount(){
         $this->sucursales = Sucursal::all();
@@ -21,6 +27,9 @@ class ReporteIndex extends Component
     }
 
     public function buscar(){
+
+        $rules = $this->rules;
+        $this->validate($rules);
         
         $sucursal_id = $this->sucursal_id;
         $fecha_inicio = Carbon::parse($this->fecha_inicio);

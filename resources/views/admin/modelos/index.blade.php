@@ -3,7 +3,7 @@
 @section('title', 'TechPeru')
 
 @section('content_header')
-    @livewire('admin.modelos.modelo-create',['accion' => 'create'])
+    
     <h1 class="text-lg ml-2"><i class="fas fa-th-list"></i> Listado de modelos</h1>
 @stop
 

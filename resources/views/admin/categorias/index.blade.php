@@ -3,7 +3,7 @@
 @section('title', 'TechPeru')
 
 @section('content_header')
-    @livewire('admin.categorias.categoria-create',['accion' => 'create'])
+    
     <h1 class="text-lg ml-2"><i class="fas fa-th-list"></i> Listado de categorias</h1>
 @stop
 

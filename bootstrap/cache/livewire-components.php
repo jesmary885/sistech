@@ -32,6 +32,7 @@
   'productos.productos-historial-prod-serial' => 'App\\Http\\Livewire\\Productos\\ProductosHistorialProdSerial',
   'productos.productos-index' => 'App\\Http\\Livewire\\Productos\\ProductosIndex',
   'productos.productos-serial-index' => 'App\\Http\\Livewire\\Productos\\ProductosSerialIndex',
+  'productos.productos-stock-sucursal' => 'App\\Http\\Livewire\\Productos\\ProductosStockSucursal',
   'productos.productos-traslado' => 'App\\Http\\Livewire\\Productos\\ProductosTraslado',
   'reportes.reporte-index' => 'App\\Http\\Livewire\\Reportes\\ReporteIndex',
   'reportes.reporte-producto' => 'App\\Http\\Livewire\\Reportes\\ReporteProducto',

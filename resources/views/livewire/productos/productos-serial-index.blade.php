@@ -1,28 +1,30 @@
 <div>
     <div>
         <div class="card">
-            <div class="card-header">
-                <input wire:model="search" placeholder="Ingrese código de barra del producto a buscar" class="form-control">
+            <div class="card-header flex items-center justify-between">
+                <div class="flex-1">
+                    <input wire:model="search" placeholder="Ingrese código de barra del producto a buscar" class="form-control">
+                </div>
+                <div class="ml-2">
+                    <button
+                        title="Ayuda a usuario"
+                        class="btn btn-success btn-sm" 
+                        wire:click="ayuda"><i class="fas fa-info"></i>
+                        Guía rápida
+                    </button>
+                </div>
             </div>
             @if ($productos->count())
                 <div class="card-body">
                     <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
-                                <th class="text-center" wire:click="order('fecha_compra')">Fecha de compra
-                                    @if ($sort == 'title')
-                                    @if ($direction == 'asc')
-                                        <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i> 
-                                    @else
-                                        <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>  
-                                    @endif
-                                @else
-                                    <i class="fas fa-sort float-right mt-1"></i>                                    
-                                @endif</th>
+                                <th class="text-center">Fecha de compra
                                 <th class="text-center">Compra Nro</th>
                                 <th class="text-center">Producto</th>
                                 <th class="text-center">Código de Barra</th>
                                 <th class="text-center">Serial</th>
+                                <th colspan="2"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,21 +53,26 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer">
-                    <div class="flex">
+                <div class="card-footer flex">
+                    <div class="flex -1">
+                        
                         {{$productos->links()}}
+                    </div>
 
                     <div class="ml-2 mr-2">
                         <a href="{{route('productos.serial.index')}}" class="btn btn-primary ml-4"><i class="fas fa-undo-alt"></i> Regresar</a>
                     </div>
-
-                    </div>
-                    
                 </div>
             @else
                  <div class="card-body">
-                    <strong>No hay registros</strong>
+                     <div class="text-center">
+                        <strong><i class="fas fa-exclamation-triangle"></i> No hay registros</strong>
+                     </div>
+                    <div>
+                        <a href="{{route('productos.serial.index')}}" class="btn btn-primary mt-4 ml-2"><i class="fas fa-undo-alt"></i> Regresar</a>
+                    </div>
                 </div>
+               
             @endif
                 
         </div>

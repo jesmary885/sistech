@@ -9,25 +9,39 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Editar Producto</h5>
+                        <h5 class="modal-title py-0 text-lg text-gray-800"> <i class="far fa-edit"></i>  Editar producto</h5>
                     </div>
                     <div class="modal-body">
+                        <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Complete todos los campos y presiona Guardar</h2> 
+                        <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> El código de barra debe tener mínimo 8 y máximo 12 caracteres</h2> 
+                        <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Campos opcionales: Observaciones e imágen</h2>  
+                    <hr>
                         <div class="flex">
                             <i class="fas fa-barcode mr-2"></i>
-                            <h2 class="text-sm inline underline decoration-gray-400">Información del producto</h2>
+                            <h2 class="text-md">Información del producto</h2>
                         </div>
                         <div class="flex justify-between w-full">
-                            <input wire:model="nombre" type="text" title="Nombre del producto" class="w-full mr-2 px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Nombre">
-                            <x-input-error for="nombre" />
-                            <input wire:model="cod_barra" type="text" title="Código de barra" class="w-full px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cód de barra">
-                            <x-input-error for="cod_barra" />
+                            <div class="w-full mr-2">
+                                <input wire:model="nombre" type="text" title="Nombre del producto" class="w-full px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Nombre">
+                                <x-input-error for="nombre" />
+
+                            </div>
+                            
+                            <div class="w-full">
+                                <input wire:model="cod_barra" type="text" title="Código de barra" class="w-full px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cód de barra">
+                                <x-input-error for="cod_barra" />
+                            </div>
+       
                         </div>
                         <div class="flex mt-2 justify-between w-full">
-            
-                            <input wire:model.defer="precio_letal" name="precio_letal" title="Precio al letal" type="text" class="mr-2 px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio al detal">
-                            <x-input-error for="precio_letal" />
-                            <input wire:model="precio_mayor" type="text" title="Precio al mayor" class="w-full px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio al mayor">
-                            <x-input-error for="precio_mayor" />
+                            <div class="w-full mr-2">
+                                <input wire:model.defer="precio_letal" name="precio_letal" title="Precio al letal" type="number" min="0" class="mr-2 px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio al detal">
+                                <x-input-error for="precio_letal" />
+                            </div>
+                            <div class="w-full">
+                                <input wire:model="precio_mayor" type="number" min="0" title="Precio al mayor" class="w-full px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio al mayor">
+                                <x-input-error for="precio_mayor" />
+                            </div>
                         </div>
                         {{-- <div class="flex mt-2 justify-between w-full">
                             <input wire:model.defer="cantidad" name="cantidad" type="text" title="Cantidad" class="mr-2 px-2 appearance-none block w-full bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cantidad">
@@ -47,46 +61,56 @@
                             <x-input-error for="presentacion" />
                         </div> --}}
                         <div class="flex mt-2 justify-between w-full">
-                            <select wire:model="categoria_id" title="Categoría" class="mr-1 block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                <option value="" selected>Seleccione la categoría</option>
-                                @foreach ($categorias as $categoria)
-                                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
-                                @endforeach
-                            </select>
-                            <x-input-error for="categoria_id" />
-                            <select wire:model="marca_id" title="Marca" class="mr-1 block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                <option value="" selected>Seleccione la marca</option>
-                                @foreach ($marcas as $marca)
-                                    <option value="{{$marca->id}}">{{$marca->nombre}}</option>
-                                @endforeach
-                            </select>
-                            <x-input-error for="marca_id" />
+                            <div class="w-full mr-2">
+                                <select wire:model="categoria_id" title="Categoría" class="mr-1 block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <option value="" selected>Seleccione la categoría</option>
+                                    @foreach ($categorias as $categoria)
+                                        <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                                    @endforeach
+                                </select>
+                                <x-input-error for="categoria_id" />
+                            </div>
+                            <div class="w-full mr-2">
+                               
+                                <select wire:model="marca_id" title="Marca" class="mr-1 block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <option value="" selected>Seleccione la marca</option>
+                                    @foreach ($marcas as $marca)
+                                        <option value="{{$marca->id}}">{{$marca->nombre}}</option>
+                                    @endforeach
+                                </select>
+                                <x-input-error for="marca_id" />
+                            </div>
 
-                            <select wire:model="modelo_id" title="Modelo" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                <option value="" selected>Seleccione el modelo</option>
-                                @foreach ($modelos as $modelo)
-                                    <option value="{{$modelo->id}}">{{$modelo->nombre}}</option>
-                                @endforeach
-                            </select>
-                            <x-input-error for="modelo_id" />
+                            <div class="w-full">
+                                <select wire:model="modelo_id" title="Modelo" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <option value="" selected>Seleccione el modelo</option>
+                                    @foreach ($modelos as $modelo)
+                                        <option value="{{$modelo->id}}">{{$modelo->nombre}}</option>
+                                    @endforeach
+                                </select>
+                                <x-input-error for="modelo_id" />
+                            </div>
                         </div>
+                        <hr>
                         <div class="flex mt-3">
                             <i class="fas fa-luggage-cart mr-2"></i>
-                            <h2 class="text-sm inline underline decoration-gray-400">Valor en puntos</h2>
+                            <h2 class="text-md">Valor en puntos</h2>
                         </div>
                         <div class="w-1/4">
-                            <input title="Puntos" wire:model="puntos" type="number" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Tiempo de garantia">
+                            <input title="Puntos" wire:model="puntos" type="number" min="0" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Tiempo de garantia">
                             <x-input-error for="puntos" />
 
                         </div>
+                        <hr>
                             
                       
                         <div class="flex mt-3">
                             <i class="fas fa-truck-loading mr-2"></i>
-                            <h2 class="text-sm inline underline decoration-gray-400">Información de almacenamiento</h2>
+                            <h2 class="text-md inline">Información de almacenamiento</h2>
                         </div>
                         <div class="flex mt-2 justify-between w-full">
                             @if ($limitacion_sucursal)
+                            <div class="w-full mr-2">
                                 <select wire:model="sucursal_id" title="Sucursal" class="mr-2 block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                     <option value="" selected>Seleccione el almacen</option>
                                     @foreach ($sucursales as $sucursal)
@@ -97,19 +121,24 @@
                                 <input type="text" readonly value="Sucursal {{$sucursal_nombre}}" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
                             @endif   
                                 <x-input-error for="sucursal_id" />
+                            </div>
+                            <div class="w-full">
                                 <select id="estado" wire:model="estado" title="Estado del producto" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="estado">
                                     <option value="" selected>Estado del producto</option>
                                     <option value="1">Habilitado</option>
                                     <option value="2">Deshabilitado</option>
                                 </select>
                                 <x-input-error for="estado" />
+                            </div>
                         </div>
                         <div class="mt-2">
                             <textarea title="Observaciones" wire:model="observaciones" class="mt-2 mr-3 resize-none rounded-md outline-none px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="observaciones" cols="60" rows="2" required placeholder="Observaciones"></textarea>
+                            <x-input-error for="observaciones" />
                         </div>
+                        <hr>
                         <div class="flex mt-3">
                             <i class="far fa-image mr-2"></i>
-                            <h2 class="text-sm inline underline decoration-gray-400">Foto o imagen del producto</h2>
+                            <h2 class="text-sm">Foto o imagen del producto</h2>
                         </div>
 
                         <div class="row ml-3 mr-3">
@@ -132,7 +161,7 @@
                                         @error('file')
                                         <small class="text-danger">{{$message}}</small>
                                         @enderror
-                                        <p class="text-sm text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere repudiandae eius obcaecati ipsam error quas? Explicabo maiores sapiente recusandae, odio accusamus amet saepe error, deleniti doloribus expedita et natus consequuntur.</p>
+                                        <p class="text-sm text-gray-400">Tipos de archivos permitidos: JPG, JPEG, PNG. Tamaño máximo 3MB. Resolución recomendada 300px X 300px o superior.</p>
                                     </div>
                                 </div>
                         </div> 

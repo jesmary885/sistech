@@ -31,4 +31,9 @@ class ProductosTraslado extends Component
 
         return view('livewire.productos.productos-traslado',compact('productos'));
     }
+
+    public function ayuda(){
+        $this->emit('ayuda','<p class="text-sm text-gray-500 m-0 p-0 text-justify">1-. Seleccionar equipo por código de barra a trasladar: Haga click en el botón "<i class="fas fa-check"></i>", ubicado al lado de cada equipo.</p>');
+    }
+
 }

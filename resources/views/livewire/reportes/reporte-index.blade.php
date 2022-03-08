@@ -1,7 +1,21 @@
 <div>
     <div class="card mt-2">
+
+        <h5 class="modal-title py-0 text-lg ml-4 mt-4 text-gray-500"> <i class="fas fa-chart-pie"></i>  Reportes</h5>
+
+        <hr>
+
+        <div class="mt-2">
+            <h2 class="text-sm ml-4 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Complete todos los campos y presiona Generar reporte</h2>
+         
+        </div>
+
+        <hr>
       
-        <p class="text-gray-700 mt-4 ml-4 font-semibold">Periodo de fechas en que desee generar el reporte:</p>
+        <div class="flex ml-4">
+            <i class="fas fa-calendar-alt mt-1 mr-2 text-gray-800"></i>
+            <h2 class="text-lg inline mt-0 text-gray-800">Periodo del reporte</h2>
+        </div>
         <div class="flex justify-items-stretch w-full mt-2 mb-2 ml-4">
             <div>
                 <x-input.date wire:model.lazy="fecha_inicio" id="fecha_inicio" placeholder="Seleccione la fecha inicio" class="px-4 outline-none"/>
@@ -13,7 +27,13 @@
                 <x-input-error for="fecha_fin"/>
             </div>
         </div>
-        <p class="text-gray-700 mt-2 ml-4 font-semibold">Ubicación:</p>
+
+        <hr>
+
+        <div class="flex ml-4">
+            <i class="fas fa-thumbtack mt-1 mr-2 text-gray-800"></i>
+            <h2 class="text-lg inline mt-0 text-gray-800">Ubicación</h2>
+        </div>
 
       
             <div class="mt-2 mb-2 ml-4 w-1/3">
@@ -24,6 +44,7 @@
                         <option value="{{$sucursal->id}}">{{$sucursal->nombre}}</option>
                     @endforeach
                 </select>
+                <x-input-error for="sucursal_id" />
             </div>
 
             <div>

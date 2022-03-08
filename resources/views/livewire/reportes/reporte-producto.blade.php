@@ -4,7 +4,7 @@
         @if ($array)
             <div class="card-body">
                 <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Producto</th>
                             <th class="text-center">Cód de barra</th>
@@ -38,6 +38,12 @@
            Porcentajes calculados de acuerdo al top 5 de productos más vendidos en el periodo indicado
         </p>
     </figure>
+
+    <div >
+        <a href="{{route('reportes.index.productos')}}" class="btn btn-primary m-4"><i class="fas fa-undo-alt"></i> Regresar</a> 
+    </div>
+
+    
 
       <style>
         .highcharts-figure,

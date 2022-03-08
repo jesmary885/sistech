@@ -8,9 +8,10 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Agregue el serial del producto</h5>
+                        <h5 class="modal-title py-0 text-lg text-gray-800"> <i class="fas fa-barcode"></i>  Registro de serial de equipo</h5>
                     </div>
                     <div class="modal-body">
+                        <h2 class="text-sm ml-2 mb-4 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Ingrese el serial del equipo y presiona Guardar</h2> 
                         <div class="w-full mr-2">
                             <input wire:model="serial" name="serial" type="text" class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="serial">
                             <x-input-error for="serial" />

@@ -113,7 +113,7 @@ class ProductosAdd extends Component
             }*/
 
             //agregando productos a la tabla productosSerialSucursal
-    
+
             for ($i=0; $i < $this->cantidad; $i++) {
                 $producto_select->productoSerialSucursals()->create([
                     'serial' => 'S/S',

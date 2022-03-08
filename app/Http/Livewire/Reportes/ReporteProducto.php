@@ -38,11 +38,19 @@ class ReporteProducto extends Component
         $array = json_decode($data, true);
 
      //  dd($array);
+        if($array){
+            foreach($array as $arrays){
+                $puntos[]=['name' => $arrays['nombre'] , 'y' => $arrays['quantity']];
+                $data2 = json_encode($puntos);
+            }
 
-        foreach($array as $arrays){
-            $puntos[]=['name' => $arrays['nombre'] , 'y' => $arrays['quantity']];
+        }
+        else{
+            $puntos[]="";
             $data2 = json_encode($puntos);
         }
+
+        
         return view('livewire.reportes.reporte-producto',compact('array','data2'));
     }
 }

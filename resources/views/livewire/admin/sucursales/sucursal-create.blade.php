@@ -1,7 +1,7 @@
 <div>
     <button type="submit" class="btn btn-primary btn-sm float-right" wire:click="open">
         @if ($accion == 'create')
-        Nueva sucursal <i class="fas fa-plus-square"></i>
+        <i class="fas fa-warehouse"></i> Nueva sucursal 
         @else
         <i class="fas fa-edit"></i>
         @endif
@@ -13,21 +13,22 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Registro de sucursales</h5>
+                        <h5 class="modal-title py-0 text-lg text-gray-800"> <i class="fas fa-user-tie"></i>  Registro de sucursales</h5>
                     </div>
                     <div class="modal-body">
-
+                        <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Complete todos los campos y presiona Guardar</h2> 
+                        <hr>
                         <div class="flex mt-2 justify-between w-full">
                             <div class="w-full mr-2">
-                                <input wire:model="nombre" type="text"
+                                <input wire:model="nombre" type="text" title="Nombre"
                                     class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     placeholder="Nombre de la sucursal">
                                 <x-input-error for="nombre" />
                             </div>
                             <div class="w-full mr-2">
-                                <input wire:model="telefono" type="text"
+                                <input wire:model="telefono" type="number" title="Teléfono"
                                     class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    placeholder="Telefono">
+                                    placeholder="Teléfono">
                                 <x-input-error for="telefono" />
                             </div>
                         </div>
@@ -35,7 +36,7 @@
 
                         <div class="w-full mt-2 mr-2">
 
-                                <input wire:model="direccion" type="text"
+                                <input wire:model="direccion" type="text" title="Dirección"
                                     class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     placeholder="Dirección">
                                 <x-input-error for="direccion" />
@@ -44,7 +45,7 @@
 
                         <div class="flex justify-between w-full mt-2">
                             <div class="w-full mr-2">
-                                <select wire:model="estado_id"
+                                <select wire:model="estado_id" title="Estado/provincia/region"
                                     class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                     <option value="" selected>Estado/provincia/region</option>
                                     @foreach ($estados as $estado)
@@ -56,7 +57,7 @@
                             </div>
 
                             <div class="w-full mr-2">
-                                <select wire:model="ciudad_id"
+                                <select wire:model="ciudad_id" title="Ciudad"
                                     class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                     <option value="" selected>Seleccione la ciudad</option>
                                     @foreach ($ciudades as $ciudad)

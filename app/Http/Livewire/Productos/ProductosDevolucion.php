@@ -61,4 +61,9 @@ class ProductosDevolucion extends Component
         ]);
 
     }
+
+    public function ayuda(){
+        $this->emit('ayuda','<p class="text-sm text-gray-500 m-0 p-0 text-justify">1-. Registro de devolución: Haga click en el botón "<i class="fas fa-exchange-alt"></i>  Registro de devolución", ubicado en la zona superior derecha.</p> 
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">2-.Regresar equipo a inventario como activo: Haga click en el botón "<i class="fas fa-exchange-alt"></i>", ubicado al lado de la devolución asociada al equipo que desea reintegrar al inventario, el sistema le solicitará confirmación.</p>');
+    }
 }

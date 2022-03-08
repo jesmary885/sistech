@@ -25,23 +25,14 @@ class ProductoEdit extends Component
     public $limitacion_sucursal = true;
 
     protected $rules = [
-        'nombre' => 'required|min:3|unique:productos',
-        'cod_barra'=>'required|unique:productos',
-       // 'precio_entrada' => 'required|regex:/^\d{1,3}(?:\.\d\d\d)*(?:,\d{1,2})?$/',
-        //'precio_entrada' => 'required',
         'precio_letal' => 'required',
         'precio_mayor' => 'required',
-        'cantidad' => 'required|numeric',
-        'presentacion' => 'required',
         'categoria_id' => 'required',
         'marca_id' => 'required',
         'modelo_id' => 'required',
-        'proveedor_id' => 'required',
         'sucursal_id' => 'required',
         'estado' => 'required',
         'puntos' => 'required',
-        'observaciones' => 'required',
-        'file' => 'image|max:1024',
      ];
 
 
@@ -86,9 +77,6 @@ class ProductoEdit extends Component
          $this->proveedores=Proveedor::all();
      }
 
-
-
-
     public function render()
     {
         return view('livewire.productos.producto-edit');
@@ -104,56 +92,62 @@ class ProductoEdit extends Component
     }
 
     public function update(){
-      //  $rules = $this->rules;
-       // $this->validate($rules);
+        $rules = $this->rules;
+        $this->validate($rules);
 
+        $rule_nombre = [
+            'nombre' => 'required|min:3|unique:productos,nombre,' .$this->producto->id
+        ];
+
+        $rule_cod_barra = [
+            'cod_barra'=>'required|unique:productos,cod_barra,' .$this->producto->id,
+        ];
+
+        $this->validate($rule_nombre);
+        $this->validate($rule_cod_barra);
         $this->fecha_actual = date('Y-m-d');
 
         $usuario_auth = Auth::id();
+           
+        if($this->observaciones == '') $this->observaciones = 'Sin observaciones';
+
+        if($this->precio_letal < 0 || $this->precio_mayor < 0 || $this->puntos < 0){
+            $this->emit('errorSize','Ha ingresado un valor negativo, intentelo de nuevo');
+        }
+        else{
+            $this->producto->update([
+                'nombre' => $this->nombre,
+                'cod_barra' => $this->cod_barra,
+                'precio_letal' => $this->precio_letal,
+                'precio_mayor' => $this->precio_mayor,
+                'modelo_id' => $this->modelo_id,
+                'categoria_id' => $this->categoria_id,
+                'puntos' => $this->puntos,
+                'marca_id' => $this->marca_id,
+                'observaciones' => $this->observaciones,
+                'estado' => $this->estado
+            ]);
+    
+            if ($this->file){
+                $imagen = Imagen::where('imageable_id',$this->producto->id)->first();
+                $url = Storage::put('public/productos', $this->file);
+                if($imagen) $this->producto->imagen()->update(['url' => $url]);
+                else $this->producto->imagen()->create(['url' => $url]);
+             }
+    
+            $this->producto->movimientos()->create([
+                'fecha' => $this->fecha_actual,
+                'tipo_movimiento' => 'Modificación de información de producto',
+                'cantidad' => $this->cantidad,
+                'precio' => $this->precio_letal,
+                'observacion' => 'Modificación de datos',
+                'user_id' => $usuario_auth
+            ]);
+            $this->reset(['isopen']);
+            $this->emitTo('productos.productos-index','render');
+            $this->emit('alert','Producto modificado correctamente');
+        }
+
         
-       /* $this->pivot = Pivot::where('sucursal_id',$this->sucursal_id)
-                            ->where('producto_id',$this->producto->id)
-                            ->first();*/
-
-        $this->producto->update([
-            'nombre' => $this->nombre,
-            'cod_barra' => $this->cod_barra,
-            //'precio_entrada' => $this->precio_entrada,
-            'precio_letal' => $this->precio_letal,
-            'precio_mayor' => $this->precio_mayor,
-         //   'inventario_min' => $this->inventario_min,
-            'modelo_id' => $this->modelo_id,
-            'categoria_id' => $this->categoria_id,
-        //    'tipo_garantia' => $this->tipo_garantia,
-        //    'garantia' => $this->garantia,
-            'puntos' => $this->puntos,
-            'marca_id' => $this->marca_id,
-         //   'presentacion' => $this->presentacion,
-            'observaciones' => $this->observaciones,
-            'estado' => $this->estado
-        ]);
-
-    if ($this->file){
-            $imagen = Imagen::where('imageable_id',$this->producto->id)->first();
-            $url = Storage::put('public/productos', $this->file);
-            if($imagen) $this->producto->imagen()->update(['url' => $url]);
-            else $this->producto->imagen()->create(['url' => $url]);
-         }
-
-        $this->producto->movimientos()->create([
-            'fecha' => $this->fecha_actual,
-            'tipo_movimiento' => 'Modificación de información de producto',
-            'cantidad' => $this->cantidad,
-            'precio' => $this->precio_letal,
-            'observacion' => 'Modificación de datos',
-            'user_id' => $usuario_auth
-        ]);
-
-       /*  $this->pivot->cantidad = $this->cantidad;
-         $this->pivot->save();*/
-
-        $this->reset(['isopen']);
-       $this->emitTo('productos.productos-index','render');
-        $this->emit('alert','Producto modificado correctamente');
     }
 }

@@ -39,4 +39,10 @@ class ModeloIndex extends Component
         $modelo_destroy = Modelo::where('id',$this->modelo)->first();
         $modelo_destroy->delete();
     }
+
+    public function ayuda(){
+        $this->emit('ayuda','<p class="text-sm m-0 p-0 text-gray-500 text-justify">1-. Registro de modelos: Haga click en el botón " <i class="fas fa-plus-square"></i> Nuevo modelo " y complete el formulario.</p>
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">2-. Editar datos de modelos: Haga click en el botón " <i class="fas fa-edit"></i> ", ubicado al lado de cada modelo y complete el formulario.</p> 
+        <p class="text-sm text-gray-500 m-0 p-0 text-justify">3-.Eliminar modelos: Haga click en el botón " <i class="fas fa-trash-alt"></i> ", ubicado al lado de cada modelo, si el modelo esta asociado a un producto no podrá eliminarlo, de lo contrario confirme haciendo click en la opción " Si, seguro " .</p> ');
+    }
 }

@@ -36,18 +36,24 @@ class ProductosBarcode extends Component
         $rules = $this->rules;
         $this->validate($rules);
 
-        $data = [
-            'cod_barra' => $this->producto->cod_barra,
-            'nombre' => $this->producto->nombre,
-            'cantidad' => $this->cantidad,     
-        ];
+        if($this->cantidad < 0){
+            $this->emit('errorSize','Ha ingresado un valor negativo, intentelo de nuevo');
+        }else{
+            $data = [
+                'cod_barra' => $this->producto->cod_barra,
+                'nombre' => $this->producto->nombre,
+                'cantidad' => $this->cantidad,     
+            ];
+    
+            $pdf = PDF::loadView('productos.barcode',$data)->output();
+    
+            return response()->streamDownload(
+                fn () => print($pdf),
+               "filename.pdf"
+                );
+        }
 
-        $pdf = PDF::loadView('productos.barcode',$data)->output();
-
-        return response()->streamDownload(
-            fn () => print($pdf),
-           "filename.pdf"
-            );
+       
 
 
     }

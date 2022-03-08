@@ -47,4 +47,8 @@ class ProductosHistorialProdSerial extends Component
         $this->resetPage();
     }
 
+    public function ayuda(){
+        $this->emit('ayuda','<p class="text-sm text-gray-500 m-0 p-0 text-justify">Para generar el reporte de los movimientos del equipo, ingrese el periodo de fechas en que desee generar el reporte y haga click al boton "<i class="fas fa-check"></i>" ubicado al lado del equipo que desea seleccionar');
+    }
+
 }

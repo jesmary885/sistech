@@ -12,6 +12,7 @@ class="flex rounded-md shadow-sm"
 
 <input
     {{ $attributes }}
+    readonly
     x-ref="input"
     class="rounded-none rounded-r-md flex-1 form-input block w-full transition border-gray-300 duration-150 ease-in-out sm:text-sm sm:leading-5"
 />

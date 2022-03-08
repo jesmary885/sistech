@@ -8,12 +8,14 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Agregar Unidades a Producto</h5>
+                        <h5 class="modal-title py-0 text-lg text-gray-800"> <i class="fas fa-barcode"></i>  Imprimir códigos de barra</h5>
                     </div>
                     <div class="modal-body">
-                        <div class="flex mt-2 ustify-between w-full">
-                            <div class="w-full mr-2">
-                                <input wire:model.defer="cantidad" name="documento" type="text" class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cantidad de códigos a imprimir">
+                        <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Indique la cantidad de códigos a imprimir y presione Generar</h2> 
+                        <hr>
+                        <div class="flex mt-2 justify-between w-full">
+                            <div class="w-1/4 mr-2">
+                                <input wire:model.defer="cantidad" name="cantidad" type="number" min="0" class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cantidad">
                                 <x-input-error for="cantidad" />
                             </div>
                             
