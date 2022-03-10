@@ -6,14 +6,14 @@
             title="Editar cliente"
         @endif wire:click="open">
         
-        @if ($accion == 'create')
+   
             <i class="fas fa-user-plus"></i>
-                @if ($vista=='clientes')
+         
                     Nuevo cliente
-                @endif
-            @else
-            <i class="fas fa-user-edit"></i>
-        @endif
+            
+        
+         
+     
     </button>
 
     @if ($isopen)

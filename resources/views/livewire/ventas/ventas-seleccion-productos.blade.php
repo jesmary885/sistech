@@ -17,7 +17,7 @@
         @if ($productos->count())
             <div class="card-body">
                 <table class="table table-bordered table-responsive-md table-responsive-sm">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Producto</th>
                             <th class="text-center">Codigo de Barra</th>

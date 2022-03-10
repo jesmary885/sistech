@@ -1,4 +1,4 @@
-<div class="container py-4">
+<div class="py-4">
     <section class="bg-white rounded-lg shadow-lg p-6 text-gray-700">
         <div class="flex items-center justify-between">
             <div class="flex-1">
@@ -22,7 +22,7 @@
 
         @if (Cart::count())
         
-            <table class="table-striped  table-responsive-sm w-full">
+            <table class="table-striped w-full">
                 <thead>
                     <tr>
                         <th class="text-center">Producto</th>
