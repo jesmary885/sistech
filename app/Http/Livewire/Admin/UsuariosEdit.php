@@ -95,11 +95,11 @@ class UsuariosEdit extends Component
         $this->validate($rules);
 
         $rule_email = [
-            'email' => 'required|max:50|email|unique:clientes,email,' .$this->usuario->id,
+            'email' => 'required|max:50|email|unique:users,email,' .$this->usuario->id,
         ];
 
         $rule_documento = [
-            'nro_documento' => 'required|min:5|unique:clientes,nro_documento,' .$this->usuario->id,
+            'nro_documento' => 'required|min:5|unique:users,nro_documento,' .$this->usuario->id,
         ];
 
         $this->validate($rule_email);
@@ -113,6 +113,7 @@ class UsuariosEdit extends Component
                 'nro_documento' => $this->nro_documento,
                 'tipo_documento' => $this->tipo_documento,
                 'direccion' => $this->direccion,
+                'estado' => $this->estado,
                 'telefono' => $this->telefono,
                 'password' => Hash::make($this->password),
                 'password_encriptada' => Crypt::encryptString($this->password),

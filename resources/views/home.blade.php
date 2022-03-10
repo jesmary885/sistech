@@ -20,6 +20,7 @@
 
 
 <div class="row mt-4">
+  @can('ventas.ventas.index')
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-info">
@@ -34,7 +35,9 @@
         <a href="{{route('ventas.ventas.index')}}" class="small-box-footer">Nueva venta <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
+  @endcan
     <!-- ./col -->
+    @can('productos.productos.index')
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-info">
@@ -49,7 +52,9 @@
         <a href="{{route('productos.productos.create')}}" class="small-box-footer">Nuevo producto<i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
+    @endcan
     <!-- ./col -->
+    @can('admin.clientes.index')
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-info">
@@ -64,7 +69,9 @@
         <a href="{{route('admin.clientes.index')}}" class="small-box-footer">Nuevo cliente <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
+    @endcan
     <!-- ./col -->
+    @can('reportes.productos')
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-info">
@@ -79,6 +86,7 @@
         <a href="{{route('reportes.index.productos')}}" class="small-box-footer">Ver reportes<i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
+    @endcan
     <!-- ./col -->
   </div>
     

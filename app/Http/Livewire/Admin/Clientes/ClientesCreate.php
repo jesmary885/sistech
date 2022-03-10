@@ -139,7 +139,7 @@ class ClientesCreate extends Component
                     'nombre' => $this->nombre,
                     'apellido' => $this->apellido,
                     'email' => $this->email,
-                    'nro_documento' => $this->documento,
+                    'nro_documento' => $this->nro_documento,
                     'tipo_documento' => $this->tipo_documento,
                     'direccion' => $this->direccion,
                     'telefono' => $this->telefono,

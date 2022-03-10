@@ -59,7 +59,7 @@ class VentasController extends Controller
      */
     public function show($sucursal)
     {
-        return view('ventas.Cart',compact('sucursal'));
+        return view('ventas.cart',compact('sucursal'));
     }
 
     /**

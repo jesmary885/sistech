@@ -85,12 +85,19 @@
     </head>
     <body>   
       <div class="login">
+        @if (session('info'))
+        <div class="alert alert-success">
+            {{session('info')}}
+        </div>
+        @endif
           <div class="form">
               <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <img src="vendor/adminlte/dist/img/logotech_2.jpg" class="mb-4" alt="">
               <input type="email" name="email"  id="email" placeholder="Email" required>
+              <x-input-error for="email" />
               <input type="password" id="password" name="password" required placeholder="Contraseña">
+              <x-input-error for="password" />
               <x-button class="mt-6 w-full">
                 {{ __('Ingresar') }}
             </x-button>
