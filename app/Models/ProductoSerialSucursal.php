@@ -46,4 +46,9 @@ class ProductoSerialSucursal extends Model
         return $this->hasMany(Movimiento_product_serial::class);
     }
 
+    
+    public function productostraslados(){
+        return $this->hasMany(ProductosTraslado::class);
+    }
+
 }

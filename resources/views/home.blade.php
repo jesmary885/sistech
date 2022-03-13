@@ -71,7 +71,7 @@
     </div>
   
     @endcan
-    @can('reportes.productos')
+    {{-- @can('reportes.productos')
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-info">
@@ -86,7 +86,7 @@
         <a href="{{route('reportes.index.productos')}}" class="small-box-footer">Ver reportes<i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
-    @endcan
+    @endcan --}}
     <!-- ./col -->
     {{-- @can('admin.clientes.index') --}}
     <div class="col-lg-3 col-6">
@@ -104,7 +104,7 @@
         <div class="icon">
           <i class="ion ion-filing"></i>
         </div>
-        <a href="#" class="small-box-footer">Recibir traslado<i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{route('traslado.index')}}"  class="small-box-footer">Recibir traslado<i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     {{-- @endcan --}}

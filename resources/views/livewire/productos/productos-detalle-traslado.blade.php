@@ -17,7 +17,7 @@
 
             
             
-            @if ($productos->count())
+            
                 <div class="card-body">
                     <div class="flex items-center justify-between">
                         <div class="flex-1">
@@ -33,6 +33,8 @@
                         </div>
 
                     </div>
+
+                    @if ($productos->count())
 
                     <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm" >
                         <thead class="thead-dark">

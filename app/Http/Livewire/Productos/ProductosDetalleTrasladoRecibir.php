@@ -8,6 +8,7 @@ use App\Models\Sucursal;
 use App\Models\Traslado;
 use App\Models\Producto_sucursal as Pivot;
 use App\Models\ProductosTraslado;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,6 +17,8 @@ class ProductosDetalleTrasladoRecibir extends Component
 
     use WithPagination;
     protected $paginationTheme = "bootstrap";
+
+    protected $listeners = ['render' => 'render'];
 
     public $isopen = false;
     public $sucursal, $cantidad, $sucursal_id = "", $sucursales,$prod, $prodr, $search2;
@@ -27,9 +30,25 @@ class ProductosDetalleTrasladoRecibir extends Component
     public function render()
     {
 
-        $trasl = ProductosTraslado:://where('serial', 'LIKE', '%' . $this->search2 . '%')
+      /*  $trasl = ProductosTraslado:://where('serial', 'LIKE', '%' . $this->search2 . '%')
         where('sucursal_id',$this->sucursal)
-        ->Paginate(5);
+        ->Paginate(5);*/
+
+
+        $trasl = ProductosTraslado::where('sucursal_id',$this->sucursal)
+                    ->whereHas('productoSerialSucursal',function(Builder $query){
+                        $query->where('serial','LIKE', '%' . $this->search2 . '%');       
+                        })
+                        ->paginate(5);
+
+        
+
+
+     /*   $productos = ProductoSerialSucursal::whereHas('modelo',function(Builder $query){
+            $query->where('nombre','LIKE', '%' . $this->search . '%')
+            ->where('sucursal_id',$this->sucursal)
+            ->where('estado','activo');
+         })->paginate(5);*/
 
 
         return view('livewire.productos.productos-detalle-traslado-recibir',compact('trasl'));
@@ -92,8 +111,9 @@ class ProductosDetalleTrasladoRecibir extends Component
             $cant++;
         }
 
-
+        $this->reset(['prod','prodr']);
         $this->emitTo('productos.productos-detalle-traslado','render');
+        $this->resetPage();
         $this->emit('alert','Datos registrados correctamente');
 
     }
