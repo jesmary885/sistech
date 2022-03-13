@@ -56,7 +56,7 @@ class ProductosAddSerial extends Component
 
         $this->reset(['isopen']);
         $this->emitTo('productos.productos-serial-index','render');
-        $this->emit('alert','Datos registrados correctamente');
+       // $this->emit('alert','Datos registrados correctamente');
     }
 
    

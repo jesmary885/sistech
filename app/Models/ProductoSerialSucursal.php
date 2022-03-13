@@ -24,6 +24,14 @@ class ProductoSerialSucursal extends Model
         return $this->belongsTo(Sucursal::class);
     }
 
+    public function modelo(){
+        return $this->belongsTo(Modelo::class);
+    }
+
+    public function marca(){
+        return $this->belongsTo(Marca::class);
+    }
+
     //Relacion uno a muchos
    
     /*public function producto_ventas(){

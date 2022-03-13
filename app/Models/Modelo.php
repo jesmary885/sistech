@@ -16,8 +16,16 @@ class Modelo extends Model
         return $this->hasMany(Producto::class);
     }
 
+    public function productoSerialSucursals(){
+        return $this->hasMany(ProductoSerialSucursal::class);
+    }
+
     //Relaion uno a muhos inversa
     public function marca(){
         return $this->belongsTo(Marca::class);
     }
+
+      //Relacion uno a muchos
+   
+     
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMovimientoProductSerialsTable extends Migration
+class CreateProductosTrasladosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateMovimientoProductSerialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('movimiento_product_serials', function (Blueprint $table) {
+        Schema::create('productos_traslados', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->date('fecha');
-            $table->string('tipo_movimiento');
-            $table->float('precio');
-            $table->string('observacion');
+
+            $table->unsignedBigInteger('sucursal_id');
+            $table->foreign('sucursal_id')->references('id')->on('sucursals');
             $table->unsignedBigInteger('producto_serial_sucursal_id');
             $table->foreign('producto_serial_sucursal_id')->references('id')->on('producto_serial_sucursals')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+
         });
     }
 
@@ -34,6 +32,6 @@ class CreateMovimientoProductSerialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movimiento_product_serials');
+        Schema::dropIfExists('productos_traslados');
     }
 }

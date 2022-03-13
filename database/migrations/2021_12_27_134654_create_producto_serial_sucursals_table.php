@@ -22,7 +22,11 @@ class CreateProductoSerialSucursalsTable extends Migration
             $table->unsignedBigInteger('sucursal_id');
             $table->foreign('sucursal_id')->references('id')->on('sucursals');
             $table->unsignedBigInteger('compra_id');
-            $table->foreign('compra_id')->references('id')->on('compras')->onDelete('cascade');;
+            $table->foreign('compra_id')->references('id')->on('compras')->onDelete('cascade');
+            $table->unsignedBigInteger('modelo_id');
+            $table->foreign('modelo_id')->references('id')->on('modelos')->onDelete('cascade');
+            $table->unsignedBigInteger('marca_id');
+            $table->foreign('marca_id')->references('id')->on('marcas')->onDelete('cascade');
             $table->string('serial');
             $table->string('cod_barra');
             $table->string('estado');

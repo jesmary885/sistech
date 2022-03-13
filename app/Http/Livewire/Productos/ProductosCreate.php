@@ -160,6 +160,8 @@ class ProductosCreate extends Component
                         'sucursal_id' => $this->sucursal_id,
                         'cod_barra' => $producto->cod_barra,
                         'compra_id' => $compra->id,
+                        'modelo_id' => $this->modelo_id,
+                        'marca_id' => $this->marca_id,
                         'estado' => 'activo',
                         'fecha_compra' => $compra->fecha
                     ]);

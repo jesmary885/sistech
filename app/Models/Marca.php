@@ -15,4 +15,8 @@ class Marca extends Model
     public function modelos(){
         return $this->hasMany(Modelo::class);
     }
+
+    public function productoSerialSucursals(){
+        return $this->hasMany(ProductoSerialSucursal::class);
+    }
 }

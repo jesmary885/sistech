@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire\Ventas;
 
+use App\Models\Modelo;
 use App\Models\Producto;
 use App\Models\ProductoSerialSucursal;
+use App\Models\Sucursal;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 Use Livewire\WithPagination;
 
@@ -11,7 +14,9 @@ Use Livewire\WithPagination;
 class VentasSeleccionProductos extends Component
 {
 
-    public $search, $sucursal,$pivot;
+    public $search, $sucursal,$pivot,$buscador,$modalidad_busqueda,$tipo;
+
+    //protected $listeners = ['render' => 'render'];
 
 
     use WithPagination;
@@ -21,17 +26,49 @@ class VentasSeleccionProductos extends Component
         $this->resetPage();
     }
 
+    public function mount(){
+        //$this->buscador = "1";
+    }
+
+
     public function render()
     {
         $sucursal = $this->sucursal;
 
+        $sucursales = Sucursal::all();
 
-        $productos = ProductoSerialSucursal::where('cod_barra', 'LIKE', '%' . $this->search . '%')
+       
+        if($this->buscador == '1'){
+            $this->tipo = 0;
+            $productos = ProductoSerialSucursal::where('serial', 'LIKE', '%' . $this->search . '%')
             ->where('sucursal_id',$this->sucursal)
             ->where('estado','activo')
             ->paginate(5);
+        }
+        elseif($this->buscador == '2'){
+            $productos = ProductoSerialSucursal::whereHas('marca',function(Builder $query){
+                $query->where('nombre','LIKE', '%' . $this->search . '%')
+                ->where('sucursal_id',$this->sucursal)
+                ->where('estado','activo');
+             })->paginate(5);
+        }
 
-        return view('livewire.ventas.ventas-seleccion-productos',compact('productos','sucursal'));
+        elseif($this->buscador == '3'){
+             $productos = ProductoSerialSucursal::whereHas('modelo',function(Builder $query){
+                $query->where('nombre','LIKE', '%' . $this->search . '%')
+                ->where('sucursal_id',$this->sucursal)
+                ->where('estado','activo');
+             })->paginate(5);
+        }
+       
+        else{
+            $productos = ProductoSerialSucursal::where('cod_barra', 'LIKE', '%' . $this->search . '%')
+            ->where('sucursal_id',$this->sucursal)
+            ->where('estado','activo')
+            ->paginate(5);
+        }
+
+        return view('livewire.ventas.ventas-seleccion-productos',compact('productos','sucursal','sucursales'));
     }
 
     public function ayuda(){

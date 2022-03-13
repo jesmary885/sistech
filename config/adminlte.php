@@ -308,6 +308,11 @@ return [
                     'route'  => 'ventas.clientes',
                     'can' => 'ventas.mostrar_ventas_clientes'
                 ],
+                [
+                    'text' => 'Proformas',
+                    'url'  => '#',
+                    'can' => 'ventas.ventas.index'
+                ],
             ],
             
         ],
@@ -354,6 +359,11 @@ return [
                     'can' => 'reportes.movimientos'
                 ],
                 [
+                    'text' => 'Traslados',
+                    'route' => 'reportes.index.traslados',
+                    'can' => 'reportes.movimientos'
+                ],
+                [
                     'text'    => 'ventas',
                     'route'     => 'reportes.index.ventas',
                     'can' => 'reportes.ventas'
@@ -372,8 +382,18 @@ return [
                     'can' => 'ajustes.contrasena'
                 ],
                 [
+                    'text'    => 'Cajas',
+                    'url'     => '#',
+                    'can' => 'ajustes.empresa'
+                ],
+                [
                     'text'    => 'Sobre la empresa',
                     'route'     => 'ajustes.empresa',
+                    'can' => 'ajustes.empresa'
+                ],
+                [
+                    'text'    => 'Reinicio de sistema',
+                    'url'     => '#',
                     'can' => 'ajustes.empresa'
                 ],
             ],

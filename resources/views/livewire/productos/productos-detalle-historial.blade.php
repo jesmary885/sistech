@@ -45,7 +45,7 @@
                     </div>
                 @endif
                 <div>
-                    <button class="btn btn-success mt-2 ml-2 mb-2" wire:click="export" title="Eliminar producto"> <i class="far fa-file-excel"></i> Exportar historial</button>
+                    <button class="btn btn-success mt-2 ml-2 mb-2" wire:click="export" title="Exportar"> <i class="far fa-file-excel"></i> Exportar historial</button>
                 </div>
 
             </div>

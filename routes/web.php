@@ -93,10 +93,13 @@ Route::get('reportes_productos/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[Report
 Route::get('reporte_venta',[ReportesController::class,'index_venta'])->name('reportes.index.ventas');
 Route::get('reportes_ventas/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'ventas'])->name('ventas.reportes');
 Route::get('ventas_clientes',[VentasViewController::class,'index'])->name('ventas.clientes');
+//reporte de traslados
+Route::get('reporte_traslados',[ReportesController::class,'index_traslados'])->name('reportes.index.traslados'); 
+Route::get('reportes_traslados/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'traslados'])->name('traslados.reportes');
 
 // livewire
 
-Route::get('productos/{sucursal}/traslado', ProductosTraslado::class)->name('producto.traslado.view');
+//Route::get('productos/{sucursal}/traslado', ProductosTraslado::class)->name('reportes.index.traslados');
 
 //Cargar imagen de producto
 Route::post('productos/{product}/files', [FilesController::class, 'files'])->name('productos.files');

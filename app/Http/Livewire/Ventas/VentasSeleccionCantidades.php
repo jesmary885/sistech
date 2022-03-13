@@ -62,6 +62,7 @@ class VentasSeleccionCantidades extends Component
 
         $this->reset('precios');
         $this->isopen = false;
+        $this->emitTo('ventas.ventas-cart','render');
 
         }
         else{

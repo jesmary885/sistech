@@ -121,6 +121,8 @@ class ProductosAdd extends Component
                     'cod_barra' => $producto_select->cod_barra,
                     'compra_id' => $compra->id,
                     'estado' => 'activo',
+                    'modelo_id' => $producto_select->modelo_id,
+                    'marca_id' => $producto_select->marca_id,
                     'fecha_compra' => $compra->fecha
                 ]);
             }

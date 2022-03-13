@@ -32,5 +32,22 @@ class UserSeeder extends Seeder
             'sucursal_id' => '1',
         ])->assignRole('Administrador');
         
+        User::create([
+            'name' => 'Maria',
+            'apellido' => 'Perez',
+            'email' => 'perez@tech.com',
+            'password' => bcrypt('12345678'),
+            'password_cifrada' => Crypt::encryptString('12345678'),
+            'telefono' => '519633254',
+            'direccion' => 'Perú',
+            'tipo_documento' => '3',
+            'nro_documento' => '17523698',
+            'ciudad_id' => '1',
+            'estado_id' => '1',
+            'estado' => '1',
+            'limitacion' => '2',
+            'sucursal_id' => '2',
+        ])->assignRole('Administrador');
+        
     }
 }

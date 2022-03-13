@@ -6,7 +6,7 @@
 @stop
 
 @section('content')
-    @livewire('productos.productos-detalle-traslado',['sucursal' => $sucursal])
+     @livewire('reportes.reporte-index-traslados')
 @stop
 
 @section('css')

@@ -18,6 +18,10 @@ class ReportesController extends Controller
         return view('reportes.index',compact('vista'));
     }
 
+    public function index_traslados(){
+        return view('reportes.index-traslados');
+    }
+
 
     public function productos($sucursal_id,$fecha_inicio,$fecha_fin)
     {
@@ -27,6 +31,11 @@ class ReportesController extends Controller
     public function ventas($sucursal_id,$fecha_inicio,$fecha_fin)
     {
         return view('reportes.ventas',compact('sucursal_id','fecha_inicio','fecha_fin'));
+    }
+
+    public function traslados($fecha_inicio,$fecha_fin)
+    {
+        return view('reportes.traslados',compact('fecha_inicio','fecha_fin'));
     }
 
 }
