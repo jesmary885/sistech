@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
- @livewire('ventas.ventas-seleccion-productos',['sucursal' => $sucursal]) 
+ @livewire('ventas.ventas-seleccion-productos',['sucursal' => $sucursal, 'proforma' => $proforma]) 
 
 
 @stop

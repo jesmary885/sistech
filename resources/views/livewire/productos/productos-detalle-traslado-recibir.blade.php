@@ -23,7 +23,7 @@
 
                 </div>
                 @if ($trasl->count())
-                
+              
                 <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm" >
                     <thead class="thead-dark">
                         <tr>
@@ -42,6 +42,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                <x-input-error for="prodr" />
             </div>
             <div class="card-footer">
                 {{$trasl->links()}}

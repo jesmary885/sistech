@@ -162,15 +162,34 @@
             'route' => 'ventas.clientes',
             'can' => 'ventas.mostrar_ventas_clientes',
           ),
-          4 => 
-          array (
-            'text' => 'Proformas',
-            'url' => '#',
-            'can' => 'ventas.ventas.index',
-          ),
         ),
       ),
       2 => 
+      array (
+        'text' => 'PROFORMAS',
+        'icon' => 'fas fa-file-invoice-dollar fa-fw',
+        'submenu' => 
+        array (
+          0 => 
+          array (
+            'text' => 'Nueva proforma',
+            'route' => 'proformas.proformas.index',
+          ),
+          1 => 
+          array (
+            'text' => 'Mostrar proformas',
+            'route' => 'proformas.view',
+          ),
+        ),
+      ),
+      3 => 
+      array (
+        'text' => 'MOVIMIENTOS EN CAJA',
+        'icon' => 'fas fa-cash-register',
+        'route' => 'movimiento.caja.index',
+        'can' => 'ventas.ventas.index',
+      ),
+      4 => 
       array (
         'text' => 'PRODUCTOS',
         'icon' => 'fas fa-boxes fa-fw',
@@ -202,7 +221,7 @@
           ),
         ),
       ),
-      3 => 
+      5 => 
       array (
         'text' => 'REPORTES',
         'icon' => 'fas fa-chart-bar fa-fw',
@@ -216,17 +235,23 @@
           ),
           1 => 
           array (
+            'text' => 'Kardex',
+            'url' => '#',
+            'can' => 'reportes.productos',
+          ),
+          2 => 
+          array (
             'text' => 'Historial de productos',
             'route' => 'movimientos.modalidad',
             'can' => 'reportes.movimientos',
           ),
-          2 => 
+          3 => 
           array (
             'text' => 'Traslados',
             'route' => 'reportes.index.traslados',
             'can' => 'reportes.movimientos',
           ),
-          3 => 
+          4 => 
           array (
             'text' => 'ventas',
             'route' => 'reportes.index.ventas',
@@ -234,7 +259,7 @@
           ),
         ),
       ),
-      4 => 
+      6 => 
       array (
         'text' => 'AJUSTES',
         'icon' => 'fas fa-cogs fa-fw',

@@ -156,8 +156,13 @@
             </table>
         </div>
         <div id="fact">
+            @if ($proforma == 'proforma')
+            <p>FACTURA PROFORMA</p>
+            <p></p>
+            @else
             <p>FACTURA NRO.</p>
             <p>{{$venta_nro}}</p>
+            @endif
         </div>
     </header>
     <br>

@@ -79,9 +79,8 @@
                            
                         </div>
                         <div class="ml-2">
-                            <a href="{{route('facturacion',$sucursal)}}" class="btn btn-primary">Continuar >></a>
+                            <a href="{{route('facturacion',['sucursal'=>$sucursal ,'proforma'=>$proforma])}}" class="btn btn-primary">Continuar >></a>
                             
-    
                         </div>
                       
                         

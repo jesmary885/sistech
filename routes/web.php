@@ -10,11 +10,13 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SucursalesController;
 use App\Http\Controllers\AjustesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Movimientos\MovimientoController;
 use App\Http\Controllers\Productos\FilesController;
 use App\Http\Controllers\Productos\MovimientosController;
 use App\Http\Controllers\Productos\ProductosController;
 use App\Http\Controllers\Productos\ProductosMovController;
 use App\Http\Controllers\Productos\ProductosSerialController;
+use App\Http\Controllers\Proformas\ProformasController;
 use App\Http\Controllers\Reportes\ReportesController;
 use App\Http\Controllers\Ventas\FacturacionController;
 use App\Http\Controllers\Ventas\MostrarVentasController;
@@ -67,7 +69,7 @@ Route::resource('Ventas', VentasController::class)->only('create','index','edit'
 Route::resource('Mostrar_ventas', MostrarVentasController::class)->only('create','index','edit','update','show')->names('ventas.mostrar_ventas');
 Route::get('compras',[ComprasController::class,'index'])->name('admin.compras.index');
 
-Route::get('facturacion/{sucursal}',[FacturacionController::class,'facturacion'])->name('facturacion');
+Route::get('facturacion/{sucursal}/{proforma}',[FacturacionController::class,'facturacion'])->name('facturacion');
 
 Route::get('traslado',[MovimientosController::class,'index'])->name('traslado.index');
 Route::get('traslado/{sucursal}',[MovimientosController::class,'select'])->name('productos.traslado.select');
@@ -76,6 +78,19 @@ Route::get('traslado/{sucursal}/{producto}',[MovimientosController::class,'selec
 
 Route::get('devolucion',[MovimientosController::class,'devolucion'])->name('devolucion.index');
 Route::get('devolucion_registro',[MovimientosController::class,'devolucion_create'])->name('devolucion.create');
+
+//Proformas
+
+Route::get('Proforma',[ProformasController::class,'index'])->name('proformas.proformas.index');
+Route::get('Proforma_lista',[ProformasController::class,'view'])->name('proformas.view');
+Route::get('Ventas/{sucursal}/{proforma}',[ProformasController::class,'seleccio'])->name('ventas.seleccio');
+
+//Movimientos en caja
+
+Route::get('Movimientos_caja',[MovimientoController::class,'index'])->name('movimiento.caja.index');
+Route::get('Nuevo_movimiento_caja/{sucursal}',[MovimientoController::class,'view'])->name('movimiento.caja.view');
+
+
 
 //Reportes
 

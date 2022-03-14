@@ -18,11 +18,12 @@ class VentasController extends Controller
     public function index()
     {
         $vista = 'ventas';
+        $proforma = 'venta';
         $usuario_auth = User::where('id',Auth::id())->first();
         $sucursal = $usuario_auth->sucursal_id;
 
-        if($usuario_auth->limitacion == '1') return view('ventas.seleccion_sucursal',compact('vista'));
-        else return view('ventas.seleccion_producto',compact('sucursal'));
+        if($usuario_auth->limitacion == '1') return view('ventas.seleccion_sucursal',compact('vista','proforma'));
+        else return view('ventas.seleccion_producto',compact('sucursal','proforma'));
     }
 
     /**
@@ -70,10 +71,10 @@ class VentasController extends Controller
      */
 
 
-    public function edit($sucursal)
+    public function edit($sucursal,$proforma)
     {
 
-        return view('ventas.seleccion_producto',compact('sucursal'));
+        return view('ventas.seleccion_producto',compact('sucursal','proforma'));
     }
 
     /**

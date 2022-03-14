@@ -12,10 +12,11 @@ class MovimientosController extends Controller
     public function index()
     {
         $vista = 'productos';
+        $proforma = 'traslado';
         $usuario_auth = User::where('id',Auth::id())->first();
         $sucursal = $usuario_auth->sucursal_id;
 
-        if($usuario_auth->limitacion == '1')  return view('ventas.seleccion_sucursal',compact('vista'));
+        if($usuario_auth->limitacion == '1')  return view('ventas.seleccion_sucursal',compact('vista','proforma'));
         else return view('productos.traslado_select_serial',compact('sucursal'));
 
     }

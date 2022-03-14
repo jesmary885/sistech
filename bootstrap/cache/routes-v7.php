@@ -43,7 +43,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::dJkazSNu8BXqmc5z',
+            '_route' => 'generated::AQm8M7YLS2JwJfnV',
           ),
           1 => NULL,
           2 => 
@@ -82,7 +82,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::A4xlpX8YOuiqt9nN',
+            '_route' => 'generated::iLDGAA9T5lF9YChq',
           ),
           1 => NULL,
           2 => 
@@ -102,7 +102,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::10HFdYBzdYmeSAOP',
+            '_route' => 'generated::NMChvGLwNkDlkGNm',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::EmFIjUNHYWUGwp5s',
+            '_route' => 'generated::PGzy4upFxDqHvZJK',
           ),
           1 => NULL,
           2 => 
@@ -142,7 +142,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::DEIQ59qPc2Qd1NfV',
+            '_route' => 'generated::X9xEj2fdV7qcMROT',
           ),
           1 => NULL,
           2 => 
@@ -199,7 +199,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::s42nvHIjNhcKRLPM',
+            '_route' => 'generated::aORbuXbcgGauVu1o',
           ),
           1 => NULL,
           2 => 
@@ -254,7 +254,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::lhIPh9qBc0hVG3Kv',
+            '_route' => 'generated::0KW6cKURM5Q3VzaV',
           ),
           1 => NULL,
           2 => 
@@ -345,7 +345,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::FI3sTnXzQsNFoSl5',
+            '_route' => 'generated::dy5WrJAiyw8thgPc',
           ),
           1 => NULL,
           2 => 
@@ -734,6 +734,66 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/Proforma' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'proformas.proformas.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/Proforma_lista' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'proformas.view',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/Movimientos_caja' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'movimiento.caja.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/historial_modalidad' => 
       array (
         0 => 
@@ -993,7 +1053,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/livewire/(?|message/([^/]++)(*:36)|preview\\-file/([^/]++)(*:65))|/p(?|assword/reset/([^/]++)(*:100)|roductos(?|/([^/]++)/(?|edit(*:136)|files(*:149))|_serial/([^/]++)(*:174)))|/r(?|oles/([^/]++)(?|/edit(*:210)|(*:218))|eportes_(?|productos/([^/]++)/([^/]++)/([^/]++)(*:274)|ventas/([^/]++)/([^/]++)/([^/]++)(*:315)|traslados/([^/]++)/([^/]++)(*:350)))|/Ventas/([^/]++)(?|(*:379)|/edit(*:392)|(*:400))|/Mostrar_ventas/([^/]++)(?|(*:436)|/edit(*:449)|(*:457))|/facturacion/([^/]++)(*:487)|/traslado/([^/]++)(?|(*:516)|/([^/]++)(*:533))|/historial_modalidad/([^/]++)/([^/]++)/([^/]++)/([^/]++)(*:598))/?$}sDu',
+      0 => '{^(?|/livewire/(?|message/([^/]++)(*:36)|preview\\-file/([^/]++)(*:65))|/p(?|assword/reset/([^/]++)(*:100)|roductos(?|/([^/]++)/(?|edit(*:136)|files(*:149))|_serial/([^/]++)(*:174)))|/r(?|oles/([^/]++)(?|/edit(*:210)|(*:218))|eportes_(?|productos/([^/]++)/([^/]++)/([^/]++)(*:274)|ventas/([^/]++)/([^/]++)/([^/]++)(*:315)|traslados/([^/]++)/([^/]++)(*:350)))|/Ventas/([^/]++)(?|(*:379)|/(?|edit(*:395)|([^/]++)(*:411))|(*:420))|/Mostrar_ventas/([^/]++)(?|(*:456)|/edit(*:469)|(*:477))|/facturacion/([^/]++)/([^/]++)(*:516)|/traslado/([^/]++)(?|(*:545)|/([^/]++)(*:562))|/Nuevo_movimiento_caja/([^/]++)(*:602)|/historial_modalidad/([^/]++)/([^/]++)/([^/]++)/([^/]++)(*:666))/?$}sDu',
     ),
     3 => 
     array (
@@ -1295,7 +1355,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      392 => 
+      395 => 
       array (
         0 => 
         array (
@@ -1318,7 +1378,31 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      400 => 
+      411 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'ventas.seleccio',
+          ),
+          1 => 
+          array (
+            0 => 'sucursal',
+            1 => 'proforma',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      420 => 
       array (
         0 => 
         array (
@@ -1341,7 +1425,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      436 => 
+      456 => 
       array (
         0 => 
         array (
@@ -1364,7 +1448,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      449 => 
+      469 => 
       array (
         0 => 
         array (
@@ -1387,7 +1471,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      457 => 
+      477 => 
       array (
         0 => 
         array (
@@ -1410,7 +1494,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      487 => 
+      516 => 
       array (
         0 => 
         array (
@@ -1421,6 +1505,7 @@ app('router')->setCompiledRoutes(
           1 => 
           array (
             0 => 'sucursal',
+            1 => 'proforma',
           ),
           2 => 
           array (
@@ -1433,7 +1518,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      516 => 
+      545 => 
       array (
         0 => 
         array (
@@ -1456,7 +1541,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      533 => 
+      562 => 
       array (
         0 => 
         array (
@@ -1480,7 +1565,30 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      598 => 
+      602 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'movimiento.caja.view',
+          ),
+          1 => 
+          array (
+            0 => 'sucursal',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      666 => 
       array (
         0 => 
         array (
@@ -1557,7 +1665,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::dJkazSNu8BXqmc5z' => 
+    'generated::AQm8M7YLS2JwJfnV' => 
     array (
       'methods' => 
       array (
@@ -1578,7 +1686,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'as' => 'generated::dJkazSNu8BXqmc5z',
+        'as' => 'generated::AQm8M7YLS2JwJfnV',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1688,7 +1796,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::A4xlpX8YOuiqt9nN' => 
+    'generated::iLDGAA9T5lF9YChq' => 
     array (
       'methods' => 
       array (
@@ -1700,7 +1808,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@source',
         'controller' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@source',
-        'as' => 'generated::A4xlpX8YOuiqt9nN',
+        'as' => 'generated::iLDGAA9T5lF9YChq',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1716,7 +1824,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::10HFdYBzdYmeSAOP' => 
+    'generated::NMChvGLwNkDlkGNm' => 
     array (
       'methods' => 
       array (
@@ -1728,7 +1836,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@maps',
         'controller' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@maps',
-        'as' => 'generated::10HFdYBzdYmeSAOP',
+        'as' => 'generated::NMChvGLwNkDlkGNm',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1744,7 +1852,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::EmFIjUNHYWUGwp5s' => 
+    'generated::PGzy4upFxDqHvZJK' => 
     array (
       'methods' => 
       array (
@@ -1761,13 +1869,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:295:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:77:"function (\\Illuminate\\Http\\Request $request) {
     return $request->user();
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000007eb3d64f0000000067e29435";}";s:4:"hash";s:44:"tspnbGFTvwOWpqB2u98v/QpmpxRrSBsrTsygBc5c86U=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000000c4e1f94000000004ee72929";}";s:4:"hash";s:44:"ZyZnVz89purgouhOz7+yQqGQb1re+mmGFxK9I+3GCZ4=";}}',
         'namespace' => NULL,
         'prefix' => 'api',
         'where' => 
         array (
         ),
-        'as' => 'generated::EmFIjUNHYWUGwp5s',
+        'as' => 'generated::PGzy4upFxDqHvZJK',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1783,7 +1891,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::DEIQ59qPc2Qd1NfV' => 
+    'generated::X9xEj2fdV7qcMROT' => 
     array (
       'methods' => 
       array (
@@ -1799,13 +1907,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:265:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:47:"function () {
     return \\view(\'auth/login\');
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000007eb3d64d0000000067e29435";}";s:4:"hash";s:44:"QwXLmMS/6Kj9QQpDOLr6ub2/kfntY3wgRtkmiPOoyWE=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000000c4e1f96000000004ee72929";}";s:4:"hash";s:44:"faV2daWkCS6ZCzyLWmsLVoSsLFQfN31+O2bx4zjAFO0=";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'generated::DEIQ59qPc2Qd1NfV',
+        'as' => 'generated::X9xEj2fdV7qcMROT',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1895,7 +2003,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::s42nvHIjNhcKRLPM' => 
+    'generated::aORbuXbcgGauVu1o' => 
     array (
       'methods' => 
       array (
@@ -1915,7 +2023,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::s42nvHIjNhcKRLPM',
+        'as' => 'generated::aORbuXbcgGauVu1o',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2004,7 +2112,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::lhIPh9qBc0hVG3Kv' => 
+    'generated::0KW6cKURM5Q3VzaV' => 
     array (
       'methods' => 
       array (
@@ -2024,7 +2132,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::lhIPh9qBc0hVG3Kv',
+        'as' => 'generated::0KW6cKURM5Q3VzaV',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2223,7 +2331,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::FI3sTnXzQsNFoSl5' => 
+    'generated::dy5WrJAiyw8thgPc' => 
     array (
       'methods' => 
       array (
@@ -2243,7 +2351,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::FI3sTnXzQsNFoSl5',
+        'as' => 'generated::dy5WrJAiyw8thgPc',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3252,7 +3360,7 @@ app('router')->setCompiledRoutes(
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'facturacion/{sucursal}',
+      'uri' => 'facturacion/{sucursal}/{proforma}',
       'action' => 
       array (
         'middleware' => 
@@ -3458,6 +3566,196 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'devolucion.create',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'proformas.proformas.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'Proforma',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Proformas\\ProformasController@index',
+        'controller' => 'App\\Http\\Controllers\\Proformas\\ProformasController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'proformas.proformas.index',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'proformas.view' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'Proforma_lista',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Proformas\\ProformasController@view',
+        'controller' => 'App\\Http\\Controllers\\Proformas\\ProformasController@view',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'proformas.view',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'ventas.seleccio' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'Ventas/{sucursal}/{proforma}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Proformas\\ProformasController@seleccio',
+        'controller' => 'App\\Http\\Controllers\\Proformas\\ProformasController@seleccio',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'ventas.seleccio',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'movimiento.caja.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'Movimientos_caja',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Movimientos\\MovimientoController@index',
+        'controller' => 'App\\Http\\Controllers\\Movimientos\\MovimientoController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'movimiento.caja.index',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'movimiento.caja.view' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'Nuevo_movimiento_caja/{sucursal}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Movimientos\\MovimientoController@view',
+        'controller' => 'App\\Http\\Controllers\\Movimientos\\MovimientoController@view',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'movimiento.caja.view',
       ),
       'fallback' => false,
       'defaults' => 

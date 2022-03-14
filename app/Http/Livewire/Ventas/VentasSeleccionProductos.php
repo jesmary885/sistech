@@ -14,7 +14,7 @@ Use Livewire\WithPagination;
 class VentasSeleccionProductos extends Component
 {
 
-    public $search, $sucursal,$pivot,$buscador,$modalidad_busqueda,$tipo;
+    public $search, $sucursal,$pivot,$buscador,$modalidad_busqueda,$tipo,$proforma;
 
     //protected $listeners = ['render' => 'render'];
 
@@ -36,6 +36,8 @@ class VentasSeleccionProductos extends Component
         $sucursal = $this->sucursal;
 
         $sucursales = Sucursal::all();
+
+        $proforma = $this->proforma;
 
        
         if($this->buscador == '1'){
@@ -68,7 +70,7 @@ class VentasSeleccionProductos extends Component
             ->paginate(5);
         }
 
-        return view('livewire.ventas.ventas-seleccion-productos',compact('productos','sucursal','sucursales'));
+        return view('livewire.ventas.ventas-seleccion-productos',compact('productos','sucursal','sucursales','proforma'));
     }
 
     public function ayuda(){

@@ -42,6 +42,10 @@ class ProductoSerialSucursal extends Model
         return $this->hasMany(Producto_venta::class);
     }
 
+    public function producto_proformas(){
+        return $this->hasMany(Producto_proforma::class);
+    }
+
     public function movimientos(){
         return $this->hasMany(Movimiento_product_serial::class);
     }

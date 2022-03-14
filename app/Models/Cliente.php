@@ -27,5 +27,9 @@ class Cliente extends Model
         return $this->hasMany(Venta::class);
     }
 
+    public function proformas(){
+        return $this->hasMany(Proforma::class);
+    }
+
     
 }

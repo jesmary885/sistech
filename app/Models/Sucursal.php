@@ -28,4 +28,12 @@ class Sucursal extends Model
     public function users(){
         return $this->hasMany(User::class);
     }
+
+    public function proformas(){
+        return $this->hasMany(Proforma::class);
+    }
+
+    public function movimientoCajas(){
+        return $this->hasMany(MovimientoCaja::class);
+    }
 }

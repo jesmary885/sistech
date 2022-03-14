@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class FacturacionController extends Controller
 {
-    public function facturacion($sucursal)
+    public function facturacion($sucursal,$proforma)
     {
-        return view('ventas.facturacion',compact('sucursal'));
+        return view('ventas.facturacion',compact('sucursal','proforma'));
     }
 }

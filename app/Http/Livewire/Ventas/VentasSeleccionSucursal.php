@@ -7,12 +7,14 @@ use Livewire\Component;
 
 class VentasSeleccionSucursal extends Component
 {
-    public $vista;
+    public $vista,$proforma;
+
     public function render()
     {
 
+        $proforma = $this->proforma;
         $sucursales = Sucursal::all();
 
-        return view('livewire.ventas.ventas-seleccion-sucursal',compact('sucursales'));
+        return view('livewire.ventas.ventas-seleccion-sucursal',compact('sucursales','proforma'));
     }
 }

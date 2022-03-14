@@ -120,21 +120,8 @@
             border-bottom: 1px solid #ffffff;
         }
 
-        #facproducto tfoot th,td{
-            margin-bottom: 0px;
-            margin-top: 0px;
-       
-        }
-
         img{
-            margin-left: 0px;
-            margin-bottom: 0px;
-        }
-
-        #fp {
-            margin: 0;
-      
-                 
+            margin-left: 0%;
         }
 
 
@@ -168,14 +155,8 @@
             </table>
         </div>
         <div id="fact">
-            @if ($proforma == 'proforma')
             <p>FACTURA PROFORMA</p>
             <p></p>
-            @else
-            <p>FACTURA NRO.</p>
-            <p>{{$venta_nro}}</p>
-            @endif
-            
         </div>
     </header>
     <br>
@@ -215,19 +196,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($collection as $item)
+                    @foreach ($productos as $producto)
                         <tr>
-                            <td>{{$item->qty}}</td>
-                            <td>{{$item->name}} - S/N {{$item->options['serial']}}</td>
-                            <td>S/ {{$item->price}}</td>
-                            <td>S/ {{($item->qty)*($item->price)}}</td>
+                            <td>1</td>
+                            <td>{{$producto->productoSerialSucursal->producto->nombre}} - S/N: {{$producto->productoSerialSucursal->serial}}</td>
+                            <td>S/ {{$producto->precio}}</td>
+                            <td>S/ {{$producto->precio}}</td>
                         </tr>
                     @endforeach
                 </tbody>
-    
                 <tfoot>
-                    <tr id="fp">
-                         <th colspan="3">
+                    <tr>
+                        <th colspan="3">
                             <p align="right">SUBTOTAL: </p>
                         </th>
                         <td>
@@ -256,8 +236,7 @@
                         </th>
                         <td>
                             <p align="center">S/ {{$total}}</p>
-                        </td> 
-
+                        </td>
                     </tr>
                 </tfoot>
             </table>
@@ -272,7 +251,3 @@
             ***Precios de productos incluyen impuestos. Para poder realizar un reclamo o devolucion debe presentar esta factura***
         </p>
     </footer>
-
-    
-</body>
-</html>

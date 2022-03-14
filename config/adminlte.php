@@ -308,13 +308,33 @@ return [
                     'route'  => 'ventas.clientes',
                     'can' => 'ventas.mostrar_ventas_clientes'
                 ],
+            ],
+            
+        ],
+
+        [
+            'text'    => 'PROFORMAS',
+            'icon'    => 'fas fa-file-invoice-dollar fa-fw',
+            'submenu' => [
                 [
-                    'text' => 'Proformas',
-                    'url'  => '#',
-                    'can' => 'ventas.ventas.index'
+                    'text' => 'Nueva proforma',
+                    'route'  => 'proformas.proformas.index',
+                    // 'can' => 'ventas.ventas.index'
+                ],
+                [
+                    'text'    => 'Mostrar proformas',
+                    'route'     => 'proformas.view',
+                    //'can' => 'ventas.mostrar_ventas_contado'
                 ],
             ],
             
+        ],
+
+        [
+            'text'    => 'MOVIMIENTOS EN CAJA',
+            'icon'    => 'fas fa-cash-register',
+            'route'  => 'movimiento.caja.index',
+            'can' => 'ventas.ventas.index'           
         ],
 
         [
@@ -351,6 +371,11 @@ return [
                 [
                     'text' => 'Productos más vendidos',
                     'route'     => 'reportes.index.productos',
+                    'can' => 'reportes.productos'
+                ],
+                [
+                    'text' => 'Kardex',
+                    'url'     => '#',
                     'can' => 'reportes.productos'
                 ],
                 [

@@ -19,6 +19,7 @@ class CreateSucursalsTable extends Migration
             $table->string('nombre');
             $table->string('direccion');
             $table->string('telefono');
+            $table->float('saldo');
             $table->unsignedBigInteger('estado_id');
             $table->foreign('estado_id')->references('id')->on('estados');
             $table->unsignedBigInteger('ciudad_id');
