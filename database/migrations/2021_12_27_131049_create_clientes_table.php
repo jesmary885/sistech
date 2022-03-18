@@ -28,6 +28,8 @@ class CreateClientesTable extends Migration
             $table->foreign('ciudad_id')->references('id')->on('ciudads');
             $table->unsignedBigInteger('estado_id');
             $table->foreign('estado_id')->references('id')->on('estados');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

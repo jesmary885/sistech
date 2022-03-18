@@ -17,12 +17,12 @@ class CreateMovimientosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->date('fecha');
-            $table->string('tipo_movimiento');
-            $table->string('cantidad');
-            $table->float('precio');
-            $table->string('observacion');
+            $table->string('cantidad_entrada');
+            $table->float('precio_entrada');
+            $table->string('cantidad_salida');
+            $table->float('precio_salida');
             $table->unsignedBigInteger('producto_id');
-            $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');;
+            $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });

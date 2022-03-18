@@ -62,6 +62,14 @@ class VentasSeleccionProductos extends Component
                 ->where('estado','activo');
              })->paginate(5);
         }
+
+        elseif($this->buscador == '4'){
+            $productos = ProductoSerialSucursal::whereHas('categoria',function(Builder $query){
+                $query->where('nombre','LIKE', '%' . $this->search . '%')
+                ->where('sucursal_id',$this->sucursal)
+                ->where('estado','activo');
+             })->paginate(5);
+        }
        
         else{
             $productos = ProductoSerialSucursal::where('cod_barra', 'LIKE', '%' . $this->search . '%')

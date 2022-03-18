@@ -53,6 +53,7 @@ class ProductosIndex extends Component
     public function confirmacion(){
         $producto_destroy = Producto::where('id',$this->producto)->first();
         $producto_destroy->delete();
+        $this->resetPage();
     }
 
     public function ayuda(){

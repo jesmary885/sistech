@@ -56,7 +56,11 @@
                     </table>
                 </div>
                 <div class="card-footer">
-                    {{$productos->links()}}
+                    <div class="d-flex justify-content-center">
+                        {{$productos->links()}}
+
+                    </div>
+                   
                 </div>
 
                 <div class="flex mt-2 mb-2 ml-4">

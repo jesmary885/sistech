@@ -122,18 +122,20 @@ class ProductosAdd extends Component
                     'compra_id' => $compra->id,
                     'estado' => 'activo',
                     'modelo_id' => $producto_select->modelo_id,
+                    'categoria_id' => $producto_select->categoria_id,
                     'marca_id' => $producto_select->marca_id,
                     'fecha_compra' => $compra->fecha
                 ]);
             }
 
             //registrando moviemientos en tabla movimientos
+
             $producto_select->movimientos()->create([
                 'fecha' => $this->fecha_actual,
-                'tipo_movimiento' => 'Agregando unidades a producto',
-                'cantidad' => $this->cantidad,
-                'precio' => $this->precio_compra,
-                'observacion' => "Registro de unidades del producto". $producto_select->nombre,
+                'cantidad_entrada' => $this->cantidad,
+                'cantidad_salida' => 0,
+                'precio_entrada' => $this->precio_compra * $this->cantidad,
+                'precio_salida' => 0,
                 'user_id' => $usuario_auth
             ]);
 

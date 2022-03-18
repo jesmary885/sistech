@@ -32,7 +32,7 @@
                                 <tr>
                                     <td class="text-center">{{$producto->fecha_compra}}</td>
                                     <td class="text-center">{{$producto->compra_id}}</td>
-                                    <td class="text-center">{{$producto->producto->nombre}}</td>
+                                    <td class="text-center">{{$producto->producto->nombre}} {{$producto->categoria->nombre}} {{$producto->marca->nombre}} {{$producto->modelo->nombre}}</td>
                                     <td class="text-center">{{$producto->producto->cod_barra}}</td>
                                     <td class="text-center">{{$producto->serial}}</td>
 

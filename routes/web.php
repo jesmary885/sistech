@@ -61,10 +61,12 @@ Route::resource('roles', RoleController::class)->only('index','edit','update','d
 Route::resource('clientes', ClientesController::class)->only('index')->names('admin.clientes');
 Route::resource('proveedores', ProveedoresController::class)->only('index')->names('admin.proveedores');
 Route::resource('sucursales', SucursalesController::class)->only('index')->names('admin.sucursales');
-Route::resource('categorias', CategoriasController::class)->only('index')->names('admin.categorias');
-Route::resource('marcas', MarcasController::class)->only('index')->names('admin.marcas');
-Route::resource('modelos', ModelosController::class)->only('index')->names('admin.modelos');
-Route::resource('productos', ProductosController::class)->only('index','create','edit')->names('productos.productos');
+
+Route::resource('categorias', CategoriasController::class)->only('index','store')->names('admin.categorias');
+Route::resource('marcas', MarcasController::class)->only('index','store')->names('admin.marcas');
+Route::resource('modelos', ModelosController::class)->only('index','store')->names('admin.modelos');
+
+Route::resource('productos', ProductosController::class)->only('index','create','edit','store')->names('productos.productos');
 Route::resource('Ventas', VentasController::class)->only('create','index','edit','update','show')->names('ventas.ventas');
 Route::resource('Mostrar_ventas', MostrarVentasController::class)->only('create','index','edit','update','show')->names('ventas.mostrar_ventas');
 Route::get('compras',[ComprasController::class,'index'])->name('admin.compras.index');
@@ -111,6 +113,14 @@ Route::get('ventas_clientes',[VentasViewController::class,'index'])->name('venta
 //reporte de traslados
 Route::get('reporte_traslados',[ReportesController::class,'index_traslados'])->name('reportes.index.traslados'); 
 Route::get('reportes_traslados/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'traslados'])->name('traslados.reportes');
+//reporte movimientos en caja
+Route::get('reporte_caja',[ReportesController::class,'index_caja'])->name('reportes.index.caja');
+Route::get('reportes_caja/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'cajas'])->name('cajas.reportes');
+//reporte de kardex
+Route::get('reporte_kardex',[ReportesController::class,'index_kardex'])->name('reportes.index.kardex');
+Route::get('reportes_kardex/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'kardex'])->name('kardex.reportes');
+
+
 
 // livewire
 
@@ -122,6 +132,7 @@ Route::post('productos/{product}/files', [FilesController::class, 'files'])->nam
 //productos por serial
 
 Route::get('productos_serial',[ProductosSerialController::class,'index'])->name('productos.serial.index');
+Route::post('productos_serial',[ProductosSerialController::class,'store'])->name('productos.serial.store');
 Route::get('productos_serial/{sucursal}',[ProductosSerialController::class,'view'])->name('productos.serial.view');
 
 //Ajustes

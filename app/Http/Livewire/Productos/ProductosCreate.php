@@ -161,6 +161,7 @@ class ProductosCreate extends Component
                         'cod_barra' => $producto->cod_barra,
                         'compra_id' => $compra->id,
                         'modelo_id' => $this->modelo_id,
+                        'categoria_id' => $this->categoria_id,
                         'marca_id' => $this->marca_id,
                         'estado' => 'activo',
                         'fecha_compra' => $compra->fecha
@@ -170,13 +171,14 @@ class ProductosCreate extends Component
             //registrando moviemientos en tabla movimientos
             $producto->movimientos()->create([
                 'fecha' => $this->fecha_actual,
-                'tipo_movimiento' => 'registro y compra de producto',
-                'cantidad' => $this->cantidad,
-                'precio' => $this->precio_letal,
-                'observacion' => 'registro de producto',
+                'cantidad_entrada' => $this->cantidad,
+                'cantidad_salida' => 0,
+                'precio_entrada' => $this->precio_compra * $this->cantidad,
+                'precio_salida' => 0,
                 'user_id' => $usuario_auth
             ]);
 
+         
         
 
             //guardando cantidades en tabla pivote entre sucursal y productos

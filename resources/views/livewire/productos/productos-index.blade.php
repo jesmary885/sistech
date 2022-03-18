@@ -21,7 +21,7 @@
                             <tr>
                                 <th class="text-center">Imagen</th>
                                 <th class="text-center">Código</th>
-                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Producto</th>
                                 <th class="text-center">Stock</th>
                                 <th class="text-center">letal</th>
                                 <th class="text-center">mayor</th>
@@ -40,7 +40,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center">{{$producto->cod_barra}}</td>
-                                    <td class="text-justify">{{$producto->nombre}}</td>
+                                    <td class="text-justify">{{$producto->categoria->nombre}} {{$producto->marca->nombre}} {{$producto->modelo->nombre}}</td>
                                     <?php
                                         $cant = 0;
                                         foreach($sucursales as $sucursal){
@@ -55,13 +55,13 @@
                                     
                                         
                                     <td width="10px">
-                                        @livewire('productos.productos-add', ['producto' => $producto],key($producto->id))
+                                        @livewire('productos.productos-add', ['producto' => $producto],key(02.,'$producto->id'))
                                     </td>
                                     <td width="10px">
-                                         @livewire('productos.producto-edit', ['producto' => $producto],key($producto->nombre))
+                                         @livewire('productos.producto-edit', ['producto' => $producto],key(01.,'$producto->id'))
                                     </td>
                                     <td width="10px">
-                                        @livewire('productos.productos-barcode', ['producto' => $producto],key($producto->cod_barra))
+                                        @livewire('productos.productos-barcode', ['producto' => $producto],key(011.,'$producto->id'))
                                    </td>
                                     <td width="10px">
                                         <button

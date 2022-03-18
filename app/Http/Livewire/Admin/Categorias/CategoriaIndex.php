@@ -21,7 +21,6 @@ class CategoriaIndex extends Component
         $this->resetPage();
     }
 
-
     public function render()
     {
         $categorias = Categoria::where('nombre', 'LIKE', '%' . $this->search . '%')
@@ -38,9 +37,11 @@ class CategoriaIndex extends Component
         if($busqueda) $this->emit('errorSize', 'Esta categoria esta asociada a un producto, no puede eliminarlo');
         else $this->emit('confirm', 'Esta seguro de eliminar esta categoria?','admin.categorias.categoria-index','confirmacion','La categoria se ha eliminado.');
     }
+
     public function confirmacion(){
         $categoria_destroy = Categoria::where('id',$this->categoria)->first();
         $categoria_destroy->delete();
+     $this->resetPage();
     }
 
     public function ayuda(){

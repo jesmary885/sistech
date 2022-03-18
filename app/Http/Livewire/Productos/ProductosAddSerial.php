@@ -46,13 +46,13 @@ class ProductosAddSerial extends Component
              'serial' => $this->serial
          ]);
 
-         $this->producto->movimientos()->create([
+        /* $this->producto->movimientos()->create([
             'fecha' => $this->fecha_actual,
             'tipo_movimiento' => 'Registro de serial',
             'precio' => $this->producto->producto->precio_letal,
             'observacion' => 'Registro de unidad',
             'user_id' => $usuario_auth
-        ]);
+        ]);*/
 
         $this->reset(['isopen']);
         $this->emitTo('productos.productos-serial-index','render');

@@ -7,9 +7,11 @@ use App\Models\Empresa;
 use App\Models\impresora;
 use App\Models\Movimiento;
 use App\Models\Movimiento_product_serial;
+use App\Models\MovimientoCaja;
 use App\Models\Producto;
 use App\Models\ProductoSerialSucursal;
 use App\Models\Proforma;
+use App\Models\Sucursal;
 use App\Models\Venta;
 use Facade\FlareClient\Http\Client;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -96,7 +98,7 @@ class VentaFacturacion extends Component
         $this->canjeo = false;
         $this->puntos_canjeados = 0;
         //$this->descuento_total = 0;
-        $this->impresoras = impresora::all();
+
     }
 
     public function select_u($cliente_id){
@@ -171,7 +173,12 @@ class VentaFacturacion extends Component
 
         else
         {
+            $caja_final= Sucursal::where('id',$this->sucursal)->first();
+            $saldo_caja_final = $caja_final->saldo;
+
              //PROCESO DE SUMAR O RESTAR PUNTOS EN TABLA DE CLIENTES
+
+            
 
             if($this->canjeo==false){
                 $descuento_total = Cart::subtotal() * ($this->descuento / 100);
@@ -198,6 +205,7 @@ class VentaFacturacion extends Component
             if($this->estado_entrega == "1") $entrega = 'Entregado'; else
             $entrega = 'Por entregar';
 
+            //REGISTRANDO VENTA EN TABLA DE VENTAS
             $venta = new Venta();
             $venta->user_id = $user_auth;
             $venta->cliente_id = $this->client->id;
@@ -207,10 +215,28 @@ class VentaFacturacion extends Component
             if ($this->tipo_pago == "2"){
                 $venta->total_pagado_cliente = $this->pago_cliente;
                 $venta->deuda_cliente = $total_venta - $this->pago_cliente;
+                 //REGISTRANDO MOVIMIENTO EN CAJA DE ENTA A CREDITO
+                $movimiento = new MovimientoCaja();
+                $movimiento->fecha = date('Y-m-d');
+                $movimiento->tipo_movimiento = 1;
+                $movimiento->cantidad = $this->pago_cliente;
+                $movimiento->observacion = 'Venta a credito';
+                $movimiento->user_id = $user_auth;
+                $movimiento->sucursal_id = $this->sucursal;
+                $movimiento->save();
             }
             else{
                 $venta->total_pagado_cliente = $total_venta;
                 $venta->deuda_cliente = "0";
+                //REGISTRANDO MOVIMIENTO EN CAJA DE ENTA A CONTADO
+                $movimiento = new MovimientoCaja();
+                $movimiento->fecha = date('Y-m-d');
+                $movimiento->tipo_movimiento = 1;
+                $movimiento->cantidad = $total_venta;
+                $movimiento->observacion = 'Venta a contado';
+                $movimiento->user_id = $user_auth;
+                $movimiento->sucursal_id = $this->sucursal;
+                $movimiento->save();
             }
             $venta->subtotal = Cart::subtotal();
             $venta->total = $total_venta;
@@ -221,6 +247,12 @@ class VentaFacturacion extends Component
             $venta->estado='activa';
             $venta->save();
 
+            //REGISTRANDO VENTA EN TABLAS DE SUCURSAL AÑADIENDO SALDO
+            $caja_final->update([
+                'saldo' => $saldo_caja_final + $this->pago_cliente,
+            ]);
+
+           
         
 
             foreach (Cart::content() as $item) {
@@ -237,12 +269,13 @@ class VentaFacturacion extends Component
                     'estado' => 'inactivo',
                 ]);
 
-                $movimiento = new Movimiento_product_serial();
+                $movimiento = new Movimiento();
                 $movimiento->fecha = date('Y-m-d');
-                $movimiento->tipo_movimiento = 'venta de producto';
-                $movimiento->precio = $item->price;
-                $movimiento->observacion = 'sin observacion';
-                $movimiento->producto_serial_sucursal_id = $item->id;
+                $movimiento->cantidad_entrada = 0;
+                $movimiento->cantidad_salida = 1;
+                $movimiento->precio_entrada = 0;
+                $movimiento->precio_salida = $item->price;
+                $movimiento->producto_id = $producto_item->producto->id;
                 $movimiento->user_id = $user_auth;
                 $movimiento->save();
                 //descuento la cantidad

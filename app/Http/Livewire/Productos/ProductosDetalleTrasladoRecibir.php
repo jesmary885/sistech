@@ -87,7 +87,7 @@ class ProductosDetalleTrasladoRecibir extends Component
                     'estado' => 'activo',
                     'sucursal_id' => $this->sucursal
                 ]);
-
+/*
                 $movimiento_serial = Movimiento_product_serial:: where('producto_serial_sucursal_id',$producr->id)->first();
                 $movimiento_serial = new Movimiento_product_serial();
                 $movimiento_serial->fecha = $fecha_actual;
@@ -96,7 +96,7 @@ class ProductosDetalleTrasladoRecibir extends Component
                 $movimiento_serial->observacion = 'Traslado (recibido) en almacen '. $sucursal->nombre;
                 $movimiento_serial->producto_serial_sucursal_id = $producr->id;
                 $movimiento_serial->user_id = $user_auth;
-                $movimiento_serial->save();
+                $movimiento_serial->save();*/
 
                 $traslado = Traslado::where('producto_serial_sucursal_id',$producr->id)
                                     ->where('estado','PENDIENTE')

@@ -1,0 +1,94 @@
+<?php
+
+namespace App\Http\Livewire\Reportes;
+
+use App\Exports\ReporteCaja as ExportsReporteCaja;
+use App\Exports\ReporteCajaExport;
+use App\Models\MovimientoCaja;
+use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+
+
+class ReporteCaja extends Component
+{
+    public $fecha_inicio, $fecha_fin, $sucursal_id;
+
+    public function render()
+    {
+        $sucursal = $this->sucursal_id;
+
+        if($sucursal == 0){
+
+            $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+            ->paginate(5);
+        }
+        else{
+            $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+            ->where('sucursal_id',$sucursal)
+            ->paginate(5);
+
+        }
+        return view('livewire.reportes.reporte-caja',compact('movimientos'));
+    }
+
+    public function export_excel(){
+
+        $fecha_inicioo = date("Y-m-d",strtotime($this->fecha_inicio));
+        $fecha_finn = date("Y-m-d",strtotime($this->fecha_fin));
+
+        $sucursal = $this->sucursal_id;
+
+        if($sucursal == 0){
+
+            $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+            ->paginate(5);
+        }
+        else{
+            $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+            ->where('sucursal_id',$sucursal)
+            ->paginate(5);
+
+        }
+
+        return Excel::download(new ReporteCajaExport($movimientos,$fecha_inicioo,$fecha_finn), 'MovimientoCajas.xlsx');
+
+    }
+
+
+
+    public function export_pdf(){
+
+        $fecha_inicioo = date("Y-m-d",strtotime($this->fecha_inicio));
+        $fecha_finn = date("Y-m-d",strtotime($this->fecha_fin));
+
+        $sucursal = $this->sucursal_id;
+
+        if($sucursal == 0){
+
+            $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+            ->paginate(5);
+        }
+        else{
+            $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+            ->where('sucursal_id',$sucursal)
+            ->paginate(5);
+
+        }
+
+        $data = [
+            'movimientos' => $movimientos,
+            'fecha_inicio' => $fecha_inicioo,
+            'fecha_fin' => $fecha_finn,     
+        ];
+
+       $pdf = PDF::loadView('reportes.exportPdfCaja',$data)->output();
+
+       return response()->streamDownload(
+        fn () => print($pdf),
+       "Reporte_venta.pdf"
+        );
+
+    }
+
+}

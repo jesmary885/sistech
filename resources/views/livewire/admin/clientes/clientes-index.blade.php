@@ -14,19 +14,32 @@
             </button>
             </div>
             <div class="ml-2">
+                <button
+                title="Exportar clientes"
+                class="btn btn-success btn-sm" 
+                wire:click="export"><i class="far fa-file-excel"></i>
+                Exportar clientes
+            </button>
+        </div>
+
+            <div class="ml-2">
                 @livewire('admin.clientes.clientes-create',['vista' => 'clientes','accion' => 'create']) 
             </div>
+
+            
+            
 
         </div>
         @if ($clientes->count())
             <div class="card-body">
-                <table class="table table-striped table-responsive table-responsive-sm table-responsive-md ">
+                <table class="table table-striped table-responsive-sm table-responsive-md ">
                     <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Nombre</th>
                             <th class="text-center">Nº de documento</th>
                             <th class="text-center">Teléfono</th>
                             <th class="text-center">Ptos. acumulados</th>
+                            <th class="text-center">Asesor de ventas</th>
                             <th colspan="2"></th>  
                         </tr>
                     </thead>
@@ -37,6 +50,7 @@
                                 <td class="text-center">{{$cliente->nro_documento}}</td>
                                 <td class="text-center">{{$cliente->telefono}}</td>
                                 <td class="text-center">{{$cliente->puntos}}</td>
+                                <td class="text-center">{{$cliente->user->name}} {{$cliente->user->apellido}}</td>
                                 <td width="10px">
                                     @livewire('admin.clientes.clientes-create',['vista' => 'clientes','accion' => 'edit', 'cliente' => $cliente->id],key($cliente->id))
                                 </td>

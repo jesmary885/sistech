@@ -96,6 +96,7 @@ class ClientesCreate extends Component
             {
                 $rules_create = $this->rules_create;
                 $this->validate($rules_create);
+                $usuario_auth = Auth::id();
 
                 $cliente = new Cliente();
                 $cliente->nombre = $this->nombre;
@@ -107,6 +108,7 @@ class ClientesCreate extends Component
                 $cliente->telefono = $this->telefono;
                 $cliente->ciudad_id = $this->ciudad_id;
                 $cliente->estado_id = $this->estado_id;
+                $cliente->user_id = $usuario_auth;
                 $cliente->puntos = '0';
 
                 $cliente->save();

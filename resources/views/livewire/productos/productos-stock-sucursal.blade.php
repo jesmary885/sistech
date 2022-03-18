@@ -1,4 +1,4 @@
-<div class="m-0 p-0">
+<div class="m-0 p-0 font-semibold text-blue-600">
   
 
   {{$cant}}  <a href="#" wire:click="open">  <i class="fas fa-warehouse"></i></a>
@@ -27,7 +27,7 @@
                                 @foreach ($sucursales as $sucursal)
                                     <tr>
                                         <td class="text-center">{{$sucursal->nombre}}</td>
-                                        <td class="text-center">{{$producto->sucursals->find($sucursal)->pivot->cantidad}}</td>
+                                        <td class="text-center">@if($producto->sucursals->find($sucursal)->pivot->cantidad) {{$producto->sucursals->find($sucursal)->pivot->cantidad}}@endif</td>
                                     </tr>
                                 @endforeach
                             </tbody>

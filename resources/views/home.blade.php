@@ -111,6 +111,26 @@
     <!-- ./col -->
    
 </div>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+  
+  <aside class="md:col-span-1 lg:col-span-2">
+
+  @livewire('home.ventas')
+
+  </aside>
+
+
+  <div class="md:col-span-1 lg:col-span-2">
+    
+    @livewire('home.movimientos')
+    
+  </div>
+
+</div>
+    
+
+
     
 @stop
 

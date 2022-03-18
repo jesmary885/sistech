@@ -6,7 +6,7 @@
 @stop
 
 @section('content')
-     @livewire('reportes.reporte-index-traslados')
+     @livewire('reportes.reporte-index-traslados',['vista' => $vista])
 @stop
 
 @section('css')

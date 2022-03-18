@@ -236,25 +236,25 @@
           1 => 
           array (
             'text' => 'Kardex',
-            'url' => '#',
-            'can' => 'reportes.productos',
-          ),
-          2 => 
-          array (
-            'text' => 'Historial de productos',
-            'route' => 'movimientos.modalidad',
+            'route' => 'reportes.index.kardex',
             'can' => 'reportes.movimientos',
           ),
-          3 => 
+          2 => 
           array (
             'text' => 'Traslados',
             'route' => 'reportes.index.traslados',
             'can' => 'reportes.movimientos',
           ),
+          3 => 
+          array (
+            'text' => 'Ventas',
+            'route' => 'reportes.index.ventas',
+            'can' => 'reportes.ventas',
+          ),
           4 => 
           array (
-            'text' => 'ventas',
-            'route' => 'reportes.index.ventas',
+            'text' => 'Movimientos en caja',
+            'route' => 'reportes.index.caja',
             'can' => 'reportes.ventas',
           ),
         ),
@@ -273,17 +273,11 @@
           ),
           1 => 
           array (
-            'text' => 'Cajas',
-            'url' => '#',
-            'can' => 'ajustes.empresa',
-          ),
-          2 => 
-          array (
             'text' => 'Sobre la empresa',
             'route' => 'ajustes.empresa',
             'can' => 'ajustes.empresa',
           ),
-          3 => 
+          2 => 
           array (
             'text' => 'Reinicio de sistema',
             'url' => '#',

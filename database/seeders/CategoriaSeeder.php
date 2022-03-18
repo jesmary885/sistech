@@ -16,11 +16,62 @@ class CategoriaSeeder extends Seeder
     {
         $categorias = [
             [
-               'nombre' => 'GLASS',
+               'nombre' => 'TACTIL',
             ],
             [
                 'nombre' => 'LCD',
              ],
+             [
+                'nombre' => 'TACTIL+LCD',
+             ],
+             [
+                'nombre' => 'TAPA',
+             ],
+             [
+                'nombre' => 'GLASS',
+             ],
+             [
+                'nombre' => 'SOCALOS',
+             ],
+             [
+                'nombre' => 'FLEX DE CARGA',
+             ],
+             [
+                'nombre' => 'OCA',
+             ],
+             [
+                'nombre' => 'BATERIAS',
+             ],
+             [
+                'nombre' => 'DESTORNILLADOR',
+             ],
+             [
+                'nombre' => 'REMOV DE ESTAÑO',
+             ],
+             [
+                'nombre' => 'BISEL',
+             ],
+             [
+                'nombre' => 'CAUTIL',
+             ],
+             [
+               'nombre' => 'MICRO',
+            ],
+            [
+               'nombre' => 'DIRECCIONALES',
+            ],
+            [
+               'nombre' => 'PINSA',
+            ],
+            [
+               'nombre' => 'CINTA',
+            ],
+            [
+               'nombre' => 'HILO',
+            ],
+            [
+               'nombre' => 'PEGAMENTO',
+            ],
 
             ];
 

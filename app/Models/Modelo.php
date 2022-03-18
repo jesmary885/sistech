@@ -9,8 +9,8 @@ class Modelo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre'];
-
+    protected $guarded = ['id','created_at','updated_at'];
+    
     //Relacion uno a muchos
     public function productos(){
         return $this->hasMany(Producto::class);

@@ -21,6 +21,10 @@ class Cliente extends Model
         return $this->belongsTo(Estado::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
      //Relacion uno a muchos
    
      public function ventas(){

@@ -24,7 +24,7 @@
                 <table class="table table-striped table-responsive-md table-responsive-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th class="text-center">Id</th>
+                  
                             <th class="text-center">Categoria</th>
                             <th colspan="2"></th>
                         </tr>
@@ -32,7 +32,7 @@
                     <tbody>
                         @foreach ($categorias as $categoria)
                             <tr>
-                                <td class="text-center">{{$categoria->id}}</td>
+                               
                                 <td class="text-center">{{$categoria->nombre}}</td>
                                 <td width="10px">
                                     @livewire('admin.categorias.categoria-create',['accion' => 'edit', 'categoria' => $categoria->id],key($categoria->id))
@@ -53,9 +53,9 @@
                 {{$categorias->links()}}
             </div>
         @else
-        <div class="text-center">
-            <strong><i class="fas fa-exclamation-triangle"></i> No hay registros</strong>
-         </div>
+        <div class="card-body">
+            <strong>No hay registros</strong>
+        </div>
         @endif
             
     </div>

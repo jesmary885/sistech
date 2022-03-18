@@ -46,10 +46,7 @@
                        <input wire:model="apellido" type="apellido" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Apellidos">
                        <x-input-error for="apellido" />
                    </div>
-                   <div class="w-full mr-2">
-                       <input wire:model="email" type="email" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="E-mail">
-                       <x-input-error for="email" />
-                   </div>
+                   
        
                </div>
    
@@ -89,6 +86,11 @@
                </div>
     
                <div class="flex justify-between w-full mt-3 mr-2">
+
+                <div class="w-full mr-2">
+                    <input wire:model="email" type="email" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="E-mail">
+                    <x-input-error for="email" />
+                </div> 
                     <div class="w-full mr-2">
                         <input wire:model="password" type="text" id="password" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Contraseña">
                         <x-input-error for="password" />
@@ -97,6 +99,10 @@
                         <input wire:model="password_confirm" id="password_confirm" name="password_confirmation" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Repetir contraseña">
                         <x-input-error for="password_confirm" />
                     </div>
+                </div>
+
+                <div class="flex justify-between w-full mt-3 mr-2">
+
                     <div class="w-full mr-2">
                         <select wire:model="estado" id="estado" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="estado">
                             <option value="" selected>Estado de la cuenta</option>

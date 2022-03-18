@@ -32,6 +32,10 @@ class ProductoSerialSucursal extends Model
         return $this->belongsTo(Marca::class);
     }
 
+    public function categoria(){
+        return $this->belongsTo(Categoria::class);
+    }
+
     //Relacion uno a muchos
    
     /*public function producto_ventas(){
@@ -44,10 +48,6 @@ class ProductoSerialSucursal extends Model
 
     public function producto_proformas(){
         return $this->hasMany(Producto_proforma::class);
-    }
-
-    public function movimientos(){
-        return $this->hasMany(Movimiento_product_serial::class);
     }
 
     

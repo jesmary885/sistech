@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\Productos;
 
+use App\Exports\KardexExport;
 use App\Models\Movimiento;
 use App\Models\Producto;
 use Livewire\Component;
 Use Livewire\WithPagination;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductosHistorial extends Component
 {
@@ -14,40 +17,53 @@ class ProductosHistorial extends Component
 
     protected $paginationTheme = "bootstrap";
 
-    public $search, $fecha_inicio, $fecha_fin;
-
-    protected $rules = [
-        'fecha_inicio' => 'required',
-        'fecha_fin' => 'required',
-        ];
+    public $search, $fecha_inicio, $fecha_fin, $movimientos_totales;
 
     public function render()
     {
-        $productos = Producto::where('nombre', 'LIKE', '%' . $this->search . '%')
-          ->orwhere('cod_barra', 'LIKE', '%' . $this->search . '%')
-          ->latest('id')
-          ->paginate(5);
+        $fecha_inicioo = date("Y-m-d",strtotime($this->fecha_inicio));
+        $fecha_finn = date("Y-m-d",strtotime($this->fecha_fin));
 
-        return view('livewire.productos.productos-historial',compact('productos'));
+        $productos=Producto::all();
+
+
+            $movimientos = DB::select('SELECT p.cod_barra, p.nombre, p.id, p.categoria_id, p.modelo_id, p.marca_id, mc.nombre as marca_nombre, md.nombre as modelo_nombre, c.nombre as categoria_nombre, sum(m.precio_entrada) as precie_entrada, sum(m.precio_salida) as precie_salida, sum(m.cantidad_entrada) as quantity_entrada , sum(m.cantidad_salida) as quantity_salida from productos p
+            right join categorias c on p.categoria_id = c.id
+            right join modelos md on p.modelo_id = md.id
+            right join marcas mc on p.marca_id = mc.id
+            inner join movimientos m on p.id=m.producto_id where m.fecha BETWEEN :fecha_inicioo AND :fecha_finn
+            group by p.cod_barra, p.nombre, p.id, p.categoria_id, p.modelo_id, p.marca_id, c.nombre, md.nombre, mc.nombre',array('fecha_inicioo' => $fecha_inicioo,'fecha_finn' => $fecha_finn));
+       
+
+            $data=json_encode($movimientos);
+            $array = json_decode($data, true);
+
+            $this->movimientos_totales = $array;
+
+
+
+        return view('livewire.productos.productos-historial',compact('array'));
     }
 
+    public function export(){
 
-    public function select_product($producto_id){
-
-        $rules = $this->rules;
-        $this->validate($rules);
         
-        $producto = Producto::where('id',$producto_id)->first();
-        $fecha_inicio = Carbon::parse($this->fecha_inicio);
-        $fecha_fin = carbon::parse($this->fecha_fin);
-        $vista = 'cod_barra';
+        $fecha_inicio = date("d-m-Y",strtotime($this->fecha_inicio));
+        $fecha_fin = date("d-m-Y",strtotime($this->fecha_fin));
+        $movimientos_totales = $this->movimientos_totales;
 
-        return redirect()->route('movimientos.historial.detalle', ['producto' => $producto,'fecha_inicio'=> $fecha_inicio, 'fecha_fin' => $fecha_fin, 'vista' => $vista]);
+
+       // dd($movimientos_totales);
+
+        return Excel::download(new KardexExport($movimientos_totales,$fecha_inicio,$fecha_fin), 'Kardex.xlsx');
+
+
     }
 
-    public function updatingSearch(){
-        $this->resetPage();
-    }
+    
+
+
+    
 
     public function ayuda(){
         $this->emit('ayuda','<p class="text-sm text-gray-500 m-0 p-0 text-justify">Para generar el reporte de los movimientos del equipo, ingrese el periodo de fechas en que desee generar el reporte y haga click al boton "<i class="fas fa-check"></i>" ubicado al lado del equipo que desea seleccionar');

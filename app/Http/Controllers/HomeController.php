@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\MovimientoCaja;
 use App\Models\Producto;
+use App\Models\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator; 
+
 
 class HomeController extends Controller
 {
@@ -26,7 +30,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        //Paginator::useBootstrap();
+        
         $usuario_auth = auth()->user();
+
+        $usuario_ac = $usuario_auth->sucursal->nombre;
+        $sucursal_act = $usuario_auth->sucursal->id;
         
 
             $fecha_actual = date('Y-m-d');
@@ -45,8 +55,15 @@ class HomeController extends Controller
             where pt.sucursal_id = :sucursal_usuario' 
             ,array('sucursal_usuario' => $usuario_auth->sucursal_id));
 
+            $movimientos = MovimientoCaja::where('fecha',$fecha_actual)
+                                            ->where('sucursal_id',$sucursal_act)
+                                            ->paginate(5);
 
-            
+            $ventas = Venta::where('fecha', $fecha_actual)
+                            ->where('sucursal_id',$sucursal_act)
+                            ->where('estado', 'activa')
+                            ->paginate(5);
+                                                        
             $ventas_dia=json_encode($cantidad_ventas);
             $ventas_dia_total=json_decode($ventas_dia);
 
@@ -62,11 +79,10 @@ class HomeController extends Controller
 
             //dd($total_traslados_pendientes);
 
+            
 
-       // $total_venta[0]->quantity;
 
-
-            return view('home',compact('productos_cant','clientes_cant','ventas_totales_dia','total_ganancias_dia','total_traslados_pendientes'));
+            return view('home',compact('ventas','movimientos','usuario_ac','productos_cant','clientes_cant','ventas_totales_dia','total_ganancias_dia','total_traslados_pendientes'));
     
         
     }

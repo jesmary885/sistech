@@ -36,7 +36,7 @@
                             <div class="w-full mr-2">
                                 <input wire:model.defer="cantidad" type="number"
                                     class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    placeholder="*Cantidad" title="Monto">
+                                    placeholder="*Cantidad" min="0" title="Monto">
                                 <x-input-error for="cantidad" />
                             </div>
                         </div>

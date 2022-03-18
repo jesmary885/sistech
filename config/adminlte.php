@@ -375,12 +375,7 @@ return [
                 ],
                 [
                     'text' => 'Kardex',
-                    'url'     => '#',
-                    'can' => 'reportes.productos'
-                ],
-                [
-                    'text' => 'Historial de productos',
-                    'route' => 'movimientos.modalidad',
+                    'route' => 'reportes.index.kardex',
                     'can' => 'reportes.movimientos'
                 ],
                 [
@@ -389,8 +384,13 @@ return [
                     'can' => 'reportes.movimientos'
                 ],
                 [
-                    'text'    => 'ventas',
+                    'text'    => 'Ventas',
                     'route'     => 'reportes.index.ventas',
+                    'can' => 'reportes.ventas'
+                ],
+                [
+                    'text'    => 'Movimientos en caja',
+                    'route'     => 'reportes.index.caja',
                     'can' => 'reportes.ventas'
                 ],
             ],
@@ -405,11 +405,6 @@ return [
                     'text' => 'Cambiar contrasena',
                     'route'     => 'ajustes.ccontrasena',
                     'can' => 'ajustes.contrasena'
-                ],
-                [
-                    'text'    => 'Cajas',
-                    'url'     => '#',
-                    'can' => 'ajustes.empresa'
                 ],
                 [
                     'text'    => 'Sobre la empresa',

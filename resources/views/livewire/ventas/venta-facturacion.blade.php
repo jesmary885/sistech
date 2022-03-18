@@ -111,7 +111,7 @@
     
                 <div class="text-gray-600">
                    
-                    <p class="flex font-bold justify-between bg-gray-400 items-center">
+                    <p class="flex font-bold justify-between items-center">
                         Cliente: 
                         <span class="font-bold">{{$cliente_select}}</span>
                         <x-input-error for="cliente_select" />

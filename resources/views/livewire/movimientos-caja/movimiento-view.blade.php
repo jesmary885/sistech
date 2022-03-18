@@ -3,7 +3,22 @@
     <div class="card">
         <div class="card-header flex items-center justify-between">
             <div class="flex-1">
-                <input wire:model="search" placeholder="Ingrese " class="form-control">
+                <div class="flex">
+                    <div class="w-1/4">
+                        <select wire:model="buscador" id="buscador" class="form-control text-m" name="buscador">
+                            <option value="0">Fecha</option>
+                            <option value="1">Usuario</option>
+                        </select>
+    
+                        <x-input-error for="buscador" />
+
+                    </div>
+
+
+                    <input wire:model="search" placeholder="Ingrese el detalle del movimiento a buscar" class="form-control">
+
+                </div>
+                
             </div>
             <div class="ml-2">
                 <button
@@ -20,7 +35,7 @@
         </div>
         @if ($movimientos->count())
             <div class="card-body">
-                <table class="table table-striped table-responsive table-responsive-sm table-responsive-md ">
+                <table class="table table-bordered ">
                     <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Fecha y hora</th>
@@ -28,15 +43,30 @@
                             <th class="text-center">Cantidad</th>
                             <th class="text-center">Detalle</th>
                             <th class="text-center">Usuario</th>
-                            <th colspan="2"></th>  
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($movimientos as $movimiento)
-                            <tr>
+                            <?php
+                            if($movimiento->tipo_movimiento == 1){
+                                 $tipoMovimiento = 'Ingreso';
+                                 $tipoMovimiento_bg = 'bg-green-200';
+                            }
+                            elseif($movimiento->tipo_movimiento == 2) {
+                                $tipoMovimiento = 'Egreso';
+                                $tipoMovimiento_bg = 'bg-red-200';
+                            }
+                            else{
+                                $tipoMovimiento = 'Transferencia';
+                                $tipoMovimiento_bg = 'bg-yellow-200';
+                            }
+                            ?>
+
+                            <tr class="{{$tipoMovimiento_bg}}">
                                 <td class="text-center">{{$movimiento->fecha}}</td>
-                                <td class="text-center">{{$movimiento->tipo_movimiento}}</td>
+                                <td class="text-center">{{$tipoMovimiento}} </td>
                                 <td class="text-center">{{$movimiento->cantidad}}</td>
+                                <td class="text-center">{{$movimiento->observacion}}</td>
                                 <td class="text-center">{{$movimiento->user->name}} {{$movimiento->user->apellido}}</td>
                             </tr>
                         @endforeach
@@ -45,7 +75,7 @@
                
             </div>
             <div class="card-footer">
-                {{$movimientoss->links()}}
+                {{$movimientos->links()}}
             </div>
         @else
              <div class="card-body">

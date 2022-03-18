@@ -127,6 +127,15 @@ class ProductoEdit extends Component
                 'observaciones' => $this->observaciones,
                 'estado' => $this->estado
             ]);
+
+
+                $this->producto->productoSerialSucursals()->update([
+                    'cod_barra' => $this->cod_barra,
+                    'modelo_id' => $this->modelo_id,
+                    'categoria_id' => $this->categoria_id,
+                    'marca_id' => $this->marca_id,
+                ]);
+            
     
             if ($this->file){
                 $imagen = Imagen::where('imageable_id',$this->producto->id)->first();

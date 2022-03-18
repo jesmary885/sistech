@@ -19,4 +19,5 @@ class Movimiento extends Model
     public function producto(){
         return $this->belongsTo(Producto::class);
     }
+
 }

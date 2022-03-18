@@ -4,7 +4,20 @@
 
 @section('content_header')
 
-<h1 class="text-lg ml-2"> <i class="fas fa-clipboard-list"></i> Listado de equipos por serial</h1>
+
+<div class="flex justify-between">
+    <h1 class="flex-1 text-lg ml-2"> <i class="fas fa-clipboard-list"></i> Listado de equipos por serial</h1>
+    <div class="mr-2 justify-end ">
+        @livewire('productos.productos-export',['vista' => 'serial'])
+    </div>
+
+    <div class=" justify-end ">
+        @livewire('productos.productos-import',['vista' => 'serial'])
+    </div>
+</div>
+
+
+
 
 @stop
 

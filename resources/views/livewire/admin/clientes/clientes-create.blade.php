@@ -4,16 +4,18 @@
             title = "Registro de cliente"
         @else
             title="Editar cliente"
-        @endif wire:click="open">
+        @endif
         
-   
-            <i class="fas fa-user-plus"></i>
+        wire:click="open">
+
+        @if ($accion == 'create')
+        <i class="fas fa-user-plus"></i>
          
-                    Nuevo cliente
-            
+        Nuevo cliente
+        @else
+        <i class="fas fa-user-edit"></i>
         
-         
-     
+        @endif
     </button>
 
     @if ($isopen)

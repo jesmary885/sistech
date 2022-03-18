@@ -90,4 +90,8 @@ class User extends Authenticatable
     public function movimientos_producto_serial(){
         return $this->hasMany(Movimiento_product_serial::class);
     }
+
+    public function clientes(){
+        return $this->hasMany(Cliente::class);
+    }
 }

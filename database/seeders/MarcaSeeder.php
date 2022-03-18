@@ -24,6 +24,66 @@ class MarcaSeeder extends Seeder
              [
                 'nombre' => 'HUA',
              ],
+             [
+               'nombre' => 'MOT',
+            ],
+            [
+               'nombre' => 'ALC',
+            ],
+            [
+               'nombre' => 'BIT',
+            ],
+            [
+               'nombre' => 'ZTE',
+            ],
+            [
+               'nombre' => 'BMB',
+            ],
+            [
+               'nombre' => 'XIO',
+            ],
+            [
+               'nombre' => 'VERY',
+            ],
+            [
+               'nombre' => 'SON',
+            ],
+            [
+               'nombre' => 'EKS',
+            ],
+            [
+               'nombre' => 'IPH',
+            ],
+            [
+               'nombre' => 'HTC',
+            ],
+            [
+               'nombre' => 'AZUN',
+            ],
+            [
+               'nombre' => 'LEN',
+            ],
+            [
+               'nombre' => 'IPH',
+            ],
+            [
+               'nombre' => 'S/M',
+            ],
+            [
+               'nombre' => 'NOKIA',
+            ],
+            [
+               'nombre' => 'IP',
+            ],
+            [
+               'nombre' => 'GENERICO',
+            ],
+            [
+               'nombre' => 'LENOVO',
+            ],
+            [
+               'nombre' => 'HUW',
+            ],
 
             ];
 

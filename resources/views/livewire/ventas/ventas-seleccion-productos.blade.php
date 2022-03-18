@@ -1,6 +1,6 @@
 <div class="grid lg:grid-cols-4 gap-6">
     <aside class="lg:col-span-3">
-        <div class="card">
+        <div class="card overflow-y-scroll">
             <div class="card-header flex items-center justify-between">
                 <div class="flex-1">
                     <div class=flex>
@@ -10,6 +10,7 @@
                                 <option value="1">serial</option>
                                 <option value="2">Marca</option>
                                 <option value="3">Modelo</option>
+                                <option value="4">Categoría</option>
                             </select>
         
                             <x-input-error for="buscador" />
@@ -53,7 +54,7 @@
                                         }
                                     ?>
                                   
-                                    <td class="text-center">{{$producto->producto->nombre}} {{$producto->producto->marca->nombre}} {{$producto->producto->modelo->nombre}} @livewire('productos.productos-stock-sucursal', ['producto' => $producto->producto, 'cant' => $cant],key(0.,'$producto->producto->id'))</td>
+                                    <td class="text-center">{{$producto->producto->nombre}} {{$producto->producto->categoria->nombre}}  {{$producto->producto->marca->nombre}} {{$producto->producto->modelo->nombre}} @livewire('productos.productos-stock-sucursal', ['producto' => $producto->producto, 'cant' => $cant],key(0.,'$producto->producto->id'))</td>
                                     <td class="text-center">{{ $producto->cod_barra }}</td>
                                     <td class="text-center">{{ $producto->serial }}</td>
                                     <td class="text-center">{{ $producto->producto->precio_letal}}</td>
@@ -70,17 +71,18 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="flex card-footer">
+                <div class="flex card-footer overflow-y-scroll">
+                    <div class="d-flex justify-content-center">
                     {{ $productos->links()}}
+                    </div>
     
-                    <div class="ml-2 flex">
+                    <div class="ml-2 flex justify-content-center">
                         <div>
-                            <a href="{{route('ventas.ventas.index')}}" class="btn btn-primary"><< Regresar</a>
+                            <a href="{{route('ventas.ventas.index')}}" class="btn btn-primary">Regresar</a>
                            
                         </div>
                         <div class="ml-2">
-                            <a href="{{route('facturacion',['sucursal'=>$sucursal ,'proforma'=>$proforma])}}" class="btn btn-primary">Continuar >></a>
-                            
+                            <a href="{{route('facturacion',['sucursal'=>$sucursal ,'proforma'=>$proforma])}}" class="btn btn-primary">Continuar</a>
                         </div>
                       
                         

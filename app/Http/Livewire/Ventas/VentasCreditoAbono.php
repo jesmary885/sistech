@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Ventas;
 
+use App\Models\MovimientoCaja;
+use App\Models\Sucursal;
 use Livewire\Component;
 
 class VentasCreditoAbono extends Component
@@ -34,6 +36,7 @@ class VentasCreditoAbono extends Component
     public function update(){
         $rules = $this->rules;
         $this->validate($rules);
+        $user_auth =  auth()->user()->id;
 
         if ($this->total_pagado_cliente < 0){
             $this->emit('errorSize','Ha ingresado un valor negativo, intentelo de nuevo');
@@ -54,6 +57,26 @@ class VentasCreditoAbono extends Component
                     'total_pagado_cliente' => $total_pagado,
                     'deuda_cliente' => $deuda_total
                 ]);
+
+                //IDENTIFICANDO LA CAJA DE LA SUCURSAL INICIAL
+                $caja_final= Sucursal::where('id',$this->venta->sucursal_id)->first();
+                $saldo_caja_final = $caja_final->saldo;
+
+
+                //REGISTRANDO VENTA EN TABLAS DE SUCURSAL AÑADIENDO SALDO
+            $caja_final->update([
+                'saldo' => $saldo_caja_final + $this->total_pagado_cliente,
+            ]);
+
+            //REGISTRANDO MOVIMIENTO EN CAJA
+            $movimiento = new MovimientoCaja();
+            $movimiento->fecha = date('Y-m-d');
+            $movimiento->tipo_movimiento = 1;
+            $movimiento->cantidad = $this->total_pagado_cliente;
+            $movimiento->observacion = 'Abono de venta a credito';
+            $movimiento->user_id = $user_auth;
+            $movimiento->sucursal_id = $caja_final->id;
+            $movimiento->save();
 
                 $this->reset(['isopen']);
                 if($this->vista==1){

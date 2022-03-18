@@ -2,8 +2,24 @@
     <div class="card">
         <div class="card-header flex items-center justify-between">
             <div class="flex-1">
-                <input wire:model="search" placeholder="Ingrese el recurso a buscar" class="form-control">
+                <div class=flex>
+                    <div class="w-1/4">
+                        <select wire:model="buscador" id="buscador" class="form-control text-m" name="buscador">
+                            <option value="0">Fecha</option>
+                            <option value="1">Cliente</option>
+                            <option value="2">Usuario</option>
+                        </select>
+    
+                        <x-input-error for="buscador" />
+
+                    </div>
+                    <input wire:model="search" placeholder="Ingrese {{$item_buscar}}" class="form-control ml-2">
+                        
+                </div>
+                
             </div>
+
+
             <div class="ml-2">
                 <button
                     title="Ayuda a usuario"
@@ -13,6 +29,8 @@
                 </button>
             </div>
         </div>
+
+   
         @if ($proformas->count())
             <div class="card-body mt-0">
                 <table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm">

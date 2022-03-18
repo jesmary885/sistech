@@ -24,6 +24,7 @@ class ClienteSeeder extends Seeder
             'direccion' => 'Avenida francisco de miranda calle 84',
             'ciudad_id' => '1',
             'estado_id' => '1',
+            'user_id' => '1',
             'puntos' => '11',
         ]);
 
@@ -37,6 +38,7 @@ class ClienteSeeder extends Seeder
             'direccion' => 'Avenida francisco de miranda calle 8',
             'ciudad_id' => '1',
             'estado_id' => '1',
+            'user_id' => '1',
             'puntos' => '5',
         ]);
 
@@ -49,6 +51,7 @@ class ClienteSeeder extends Seeder
             'telefono' => '041526687447',
             'direccion' => 'Avenida francisco de miranda calle 8',
             'ciudad_id' => '1',
+            'user_id' => '1',
             'estado_id' => '1',
             'puntos' => '8',
         ]);

@@ -3,8 +3,15 @@
 @section('title', 'TechPeru')
 
 @section('content_header')
+
+<div class="flex justify-between">
     
     <h1 class="text-lg ml-2"><i class="fas fa-th-list"></i> Listado de modelos</h1>
+
+    <div class="justify-end">
+        @livewire('admin.modelos.modelo-import')
+    </div>
+</div>
 @stop
 
 @section('content')

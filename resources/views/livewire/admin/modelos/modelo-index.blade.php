@@ -24,7 +24,7 @@
                 <table class="table table-striped table-responsive-md table-responsive-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th class="text-center">Id</th>
+           
                             <th class="text-center">Modelo</th>
                             <th class="text-center">Marca</th>
                             <th colspan="2"></th>
@@ -33,7 +33,7 @@
                     <tbody>
                         @foreach ($modelos as $modelo)
                             <tr>
-                                <td class="text-center">{{$modelo->id}}</td>
+                            
                                 <td class="text-center">{{$modelo->nombre}}</td>
                                 <td class="text-center">{{$modelo->marca->nombre}}</td>
                                 <td width="10px">

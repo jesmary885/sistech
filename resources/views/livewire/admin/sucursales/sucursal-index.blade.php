@@ -26,6 +26,7 @@
                             <th class="text-center">Sucursal</th>
                             <th class="text-center">Dirección</th>
                             <th class="text-center">Teléfono</th>
+                            <th class="text-center">Dinero en caja</th>
                             <th colspan="2"></th>
                         </tr>
                     </thead>
@@ -35,6 +36,7 @@
                                 <td class="text-center">{{$sucursal->nombre}}</td>
                                 <td class="text-center">{{$sucursal->direccion}}</td>
                                 <td class="text-center">{{$sucursal->telefono}}</td>
+                                <td class="text-center">{{$sucursal->saldo}}</td>
                                 <td width="10px">
                                     @livewire('admin.sucursales.sucursal-create',['accion' => 'edit', 'sucursal' => $sucursal->id],key($sucursal->id))
                                 </td>
