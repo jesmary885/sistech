@@ -102,6 +102,7 @@ class ProductosCreate extends Component
             $this->emit('errorSize','Ha ingresado un valor negativo, intentelo de nuevo');
         }
         else{
+
             //agregando producto en tabla productos
             $producto = new Producto();
             $producto->nombre = $this->nombre;
@@ -172,9 +173,12 @@ class ProductosCreate extends Component
             $producto->movimientos()->create([
                 'fecha' => $this->fecha_actual,
                 'cantidad_entrada' => $this->cantidad,
+                'stock_antiguo' => 0,
+                'stock_nuevo' => $this->cantidad,
                 'cantidad_salida' => 0,
                 'precio_entrada' => $this->precio_compra * $this->cantidad,
                 'precio_salida' => 0,
+                'dtalle' => 'Registro de producto',
                 'user_id' => $usuario_auth
             ]);
 

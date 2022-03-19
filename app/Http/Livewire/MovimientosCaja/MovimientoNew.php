@@ -71,6 +71,15 @@ class MovimientoNew extends Component
                         'saldo' => $saldo_caja_final + $this->cantidad,
                     ]);
 
+                    $movimiento = new MovimientoCaja();
+                    $movimiento->fecha = $fecha_hora;
+                    $movimiento->tipo_movimiento = 'Ingreso';
+                    $movimiento->cantidad = $this->cantidad;
+                    $movimiento->observacion = 'Transferencia desde sucursal'. $caja_actual->nombre;
+                    $movimiento->user_id = $usuario_auth->id;
+                    $movimiento->sucursal_id = $caja_final->id;
+                    $movimiento->save();
+
                     $accion = '1';
     
                 }

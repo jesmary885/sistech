@@ -124,6 +124,8 @@ class VentaFacturacion extends Component
         $user_auth =  auth()->user()->id;
         $impuesto= Cart::subtotal() * $this->iva;
 
+        //PROFORMA
+
         if($this->proforma == 'proforma'){
             if($this->canjeo==false){
                 $descuento_total = Cart::subtotal() * ($this->descuento / 100);
@@ -170,7 +172,7 @@ class VentaFacturacion extends Component
             }
 
         }
-
+        //VENTA
         else
         {
             $caja_final= Sucursal::where('id',$this->sucursal)->first();
@@ -254,8 +256,10 @@ class VentaFacturacion extends Component
 
            
         
-
+            $sucursales1 = Sucursal::all();
+           
             foreach (Cart::content() as $item) {
+           
                 //generando producto_por_serial_venta
                 $venta->producto_ventas()->create([
                     'venta_id' => $venta->id,
@@ -266,19 +270,33 @@ class VentaFacturacion extends Component
                 
                 $producto_item = ProductoSerialSucursal::where('id',$item->id)->first();
                 $producto_item->update([
-                    'estado' => 'inactivo',
+                    'estado' => 'inactivo por venta',
                 ]);
 
-                $movimiento = new Movimiento();
-                $movimiento->fecha = date('Y-m-d');
-                $movimiento->cantidad_entrada = 0;
-                $movimiento->cantidad_salida = 1;
-                $movimiento->precio_entrada = 0;
-                $movimiento->precio_salida = $item->price;
-                $movimiento->producto_id = $producto_item->producto->id;
-                $movimiento->user_id = $user_auth;
-                $movimiento->save();
-                //descuento la cantidad
+                $producto_barra = Producto::where('id',$producto_item->producto->id)->first();
+
+                //Guardando movimiento de producto para kardex
+
+                $stock_antiguo = 0;
+                foreach($sucursales1 as $sucursalx){
+                    $stock_antiguo = $producto_barra->sucursals->find($sucursalx)->pivot->cantidad + $stock_antiguo;
+                }
+
+                $stock_nuevo = $stock_antiguo -1;
+                $producto_barra->movimientos()->create([
+                    'fecha' => date('Y-m-d'),
+                    'cantidad_entrada' => 0,
+                    'cantidad_salida' => 1,
+                    'stock_antiguo' => $stock_antiguo,
+                    'stock_nuevo' => $stock_nuevo,
+                    'precio_entrada' => 0,
+                    'precio_salida' => $item->price,
+                    'detalle' => 'Venta de producto - Venta Nro ' .$venta->id .' Serial de producto:'. $producto_item->serial ,
+                    'user_id' => $user_auth
+                ]);
+
+
+                //descuento la cantidad en tabla producto_sucursal
                 discount($producto_item->producto->id,$this->sucursal);
             }
 

@@ -33,6 +33,7 @@ class VentasController extends Controller
      */
     public function create()
     {
+
      
     }
 

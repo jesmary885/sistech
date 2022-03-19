@@ -319,11 +319,11 @@ return [
                 [
                     'text' => 'Nueva proforma',
                     'route'  => 'proformas.proformas.index',
-                    // 'can' => 'ventas.ventas.index'
+                     'can' => 'proformas.proformas.index'
                 ],
                 [
                     'text'    => 'Mostrar proformas',
-                    'route'     => 'proformas.view',
+                    'route'     => 'proformas.mostrar_proformas',
                     //'can' => 'ventas.mostrar_ventas_contado'
                 ],
             ],
@@ -334,7 +334,7 @@ return [
             'text'    => 'MOVIMIENTOS EN CAJA',
             'icon'    => 'fas fa-cash-register',
             'route'  => 'movimiento.caja.index',
-            'can' => 'ventas.ventas.index'           
+            'can' => 'movimientos_caja.index'           
         ],
 
         [
@@ -381,7 +381,7 @@ return [
                 [
                     'text' => 'Traslados',
                     'route' => 'reportes.index.traslados',
-                    'can' => 'reportes.movimientos'
+                    'can' => 'reportes.traslados'
                 ],
                 [
                     'text'    => 'Ventas',
@@ -391,7 +391,7 @@ return [
                 [
                     'text'    => 'Movimientos en caja',
                     'route'     => 'reportes.index.caja',
-                    'can' => 'reportes.ventas'
+                    'can' => 'reportes.movimientos_caja'
                 ],
             ],
             
@@ -411,11 +411,11 @@ return [
                     'route'     => 'ajustes.empresa',
                     'can' => 'ajustes.empresa'
                 ],
-                [
-                    'text'    => 'Reinicio de sistema',
-                    'url'     => '#',
-                    'can' => 'ajustes.empresa'
-                ],
+                // [
+                //     'text'    => 'Reinicio de sistema',
+                //     'url'     => '#',
+                //     'can' => 'ajustes.empresa'
+                // ],
             ],
         ],
     ],

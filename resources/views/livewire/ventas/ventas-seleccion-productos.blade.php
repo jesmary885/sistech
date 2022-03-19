@@ -16,7 +16,7 @@
                             <x-input-error for="buscador" />
     
                         </div>
-                        <input wire:model="search" placeholder="Ingrese el detalle del producto a buscar" class="form-control ml-2">
+                        <input wire:model="search" placeholder="Ingrese {{$item_buscar}}" class="form-control ml-2">
                             
                     </div>
                     
@@ -36,7 +36,7 @@
                     <table class="table table-bordered table-responsive-md table-responsive-sm">
                         <thead class="thead-dark">
                             <tr>
-                                <th class="text-center">Producto</th>
+                                <th class="text-center">Producto (Nombre/Cat/Marc/Mod)</th>
                                 <th class="text-center">Cód</th>
                                 <th class="text-center">Serial</th>
                                 <th class="text-center">Letal</th>

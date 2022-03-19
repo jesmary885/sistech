@@ -41,6 +41,7 @@ class SucursalIndex extends Component
     public function confirmacion(){
         $sucursal_destroy = Sucursal::where('id',$this->sucursal)->first();
         $sucursal_destroy->delete();
+        $this->resetPage();
     }
 
     public function ayuda(){

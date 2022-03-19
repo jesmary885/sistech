@@ -8,6 +8,7 @@ use App\Models\Producto;
 use Livewire\Component;
 Use Livewire\WithPagination;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -17,7 +18,7 @@ class ProductosHistorial extends Component
 
     protected $paginationTheme = "bootstrap";
 
-    public $search, $fecha_inicio, $fecha_fin, $movimientos_totales;
+    public $search, $fecha_inicio, $fecha_fin, $movimientos_totales,$buscador;
 
     public function render()
     {
@@ -27,7 +28,41 @@ class ProductosHistorial extends Component
         $productos=Producto::all();
 
 
-            $movimientos = DB::select('SELECT p.cod_barra, p.nombre, p.id, p.categoria_id, p.modelo_id, p.marca_id, mc.nombre as marca_nombre, md.nombre as modelo_nombre, c.nombre as categoria_nombre, sum(m.precio_entrada) as precie_entrada, sum(m.precio_salida) as precie_salida, sum(m.cantidad_entrada) as quantity_entrada , sum(m.cantidad_salida) as quantity_salida from productos p
+            if($this->buscador == 0){
+        
+
+                $array = Movimiento::whereHas('producto',function(Builder $query){
+                    $query->where('nombre','LIKE', '%' . $this->search . '%')
+                ->whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin]);
+            })->paginate(5);
+    
+                $this->item_buscar = "el nombre del producto a buscar";
+            }
+
+
+            elseif ($this->buscador == 1){
+                $array = Movimiento::whereHas('producto',function(Builder $query){
+                    $query->where('cod_barra','LIKE', '%' . $this->search . '%')
+                ->whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin]);})               
+                ->paginate(5);
+    
+                $this->item_buscar = "el código de barra del producto a buscar";
+            }
+    
+            else{
+
+                $array = Movimiento::whereHas('user',function(Builder $query){
+                    $query->where('name','LIKE', '%' . $this->search . '%')
+                ->whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin]);})               
+                ->paginate(5);
+
+                $this->item_buscar = "el nombre del usuario asociado a los movimientos";
+    
+            }
+
+
+
+            /*$movimientos = DB::select('SELECT p.cod_barra, p.nombre, p.id, p.categoria_id, p.modelo_id, p.marca_id, mc.nombre as marca_nombre, md.nombre as modelo_nombre, c.nombre as categoria_nombre, sum(m.precio_entrada) as precie_entrada, sum(m.precio_salida) as precie_salida, sum(m.cantidad_entrada) as quantity_entrada , sum(m.cantidad_salida) as quantity_salida from productos p
             right join categorias c on p.categoria_id = c.id
             right join modelos md on p.modelo_id = md.id
             right join marcas mc on p.marca_id = mc.id
@@ -36,10 +71,11 @@ class ProductosHistorial extends Component
        
 
             $data=json_encode($movimientos);
-            $array = json_decode($data, true);
+            $array = json_decode($data, true);*/
 
-            $this->movimientos_totales = $array;
+            
 
+         
 
 
         return view('livewire.productos.productos-historial',compact('array'));
@@ -50,10 +86,7 @@ class ProductosHistorial extends Component
         
         $fecha_inicio = date("d-m-Y",strtotime($this->fecha_inicio));
         $fecha_fin = date("d-m-Y",strtotime($this->fecha_fin));
-        $movimientos_totales = $this->movimientos_totales;
-
-
-       // dd($movimientos_totales);
+        $movimientos_totales = Movimiento::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])->get();
 
         return Excel::download(new KardexExport($movimientos_totales,$fecha_inicio,$fecha_fin), 'Kardex.xlsx');
 

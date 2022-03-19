@@ -88,5 +88,12 @@ class MovimientosController extends Controller
         return view('productos.traslado_select_serial',compact('sucursal','producto'));
     }
 
+    //mostrar ventas
+
+    public function mostrar_ventas($sucursal,$tipo)
+    {
+        return view('ventas.index',compact('sucursal','tipo'));
+    }
+
     
 }

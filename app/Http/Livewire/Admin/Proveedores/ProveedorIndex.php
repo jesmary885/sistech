@@ -39,6 +39,7 @@ class ProveedorIndex extends Component
     public function confirmacion(){
         $proveedor_destroy = Proveedor::where('id',$this->proveedor)->first();
         $proveedor_destroy->delete();
+        $this->resetPage();
     }
 
     public function ayuda(){

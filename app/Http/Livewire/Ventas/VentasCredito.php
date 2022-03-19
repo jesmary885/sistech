@@ -14,7 +14,7 @@ class VentasCredito extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public $productos,$collection = [], $venta;
+    public $productos,$collection = [], $venta,$sucursal;
 
 
     protected $listeners = ['render' => 'render','confirmacion' => 'confirmacion'];
@@ -33,6 +33,7 @@ class VentasCredito extends Component
         $ventas = Venta::where('fecha', 'LIKE', '%' . $this->search . '%')
                         ->where('tipo_pago', 2)
                         ->where('estado', 'activa')
+                        ->where('sucursal_id',$this->sucursal)
                         ->latest('id')
                         ->paginate(5);
         return view('livewire.ventas.ventas-credito',compact('ventas'));
@@ -49,6 +50,7 @@ class VentasCredito extends Component
         $venta_destroy->update([
             'estado' => 'anulada',
         ]);
+        $this->resetPage();
     }
 
     public function ayuda(){

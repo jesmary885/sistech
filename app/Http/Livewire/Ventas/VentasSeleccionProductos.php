@@ -46,6 +46,8 @@ class VentasSeleccionProductos extends Component
             ->where('sucursal_id',$this->sucursal)
             ->where('estado','activo')
             ->paginate(5);
+            
+            $this->item_buscar = "el serial del producto a buscar";
         }
         elseif($this->buscador == '2'){
             $productos = ProductoSerialSucursal::whereHas('marca',function(Builder $query){
@@ -53,6 +55,8 @@ class VentasSeleccionProductos extends Component
                 ->where('sucursal_id',$this->sucursal)
                 ->where('estado','activo');
              })->paginate(5);
+
+             $this->item_buscar = "la marca del producto a buscar";
         }
 
         elseif($this->buscador == '3'){
@@ -61,6 +65,8 @@ class VentasSeleccionProductos extends Component
                 ->where('sucursal_id',$this->sucursal)
                 ->where('estado','activo');
              })->paginate(5);
+
+             $this->item_buscar = "el nombre del producto a buscar";
         }
 
         elseif($this->buscador == '4'){
@@ -69,6 +75,8 @@ class VentasSeleccionProductos extends Component
                 ->where('sucursal_id',$this->sucursal)
                 ->where('estado','activo');
              })->paginate(5);
+
+             $this->item_buscar = "la categoria del producto a buscar";
         }
        
         else{
@@ -76,6 +84,7 @@ class VentasSeleccionProductos extends Component
             ->where('sucursal_id',$this->sucursal)
             ->where('estado','activo')
             ->paginate(5);
+            $this->item_buscar = "el código de barra del producto a buscar";
         }
 
         return view('livewire.ventas.ventas-seleccion-productos',compact('productos','sucursal','sucursales','proforma'));

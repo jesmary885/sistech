@@ -110,14 +110,7 @@ class ComprasEdit extends Component
         ]);
 
          //registrando moviemientos en tabla movimientos
-         $producto->movimientos()->create([
-            'fecha' => $this->fecha_actual,
-            'tipo_movimiento' => 'Modificación de compra',
-            'cantidad' => $this->cantidad,
-            'precio' => $this->precio_compra,
-            'observacion' => "Modificación de compras",
-            'user_id' => $usuario_auth
-        ]);
+    
 
         $this->reset(['isopen']);
         $this->emitTo('admin.compras.compra-index','render');

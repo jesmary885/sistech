@@ -277,12 +277,6 @@
             'route' => 'ajustes.empresa',
             'can' => 'ajustes.empresa',
           ),
-          2 => 
-          array (
-            'text' => 'Reinicio de sistema',
-            'url' => '#',
-            'can' => 'ajustes.empresa',
-          ),
         ),
       ),
     ),

@@ -61,6 +61,23 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'ventas.mostrar_ventas_clientes',
                             'description' => 'Ver y administrar ventas por cliente'])->syncRoles([$role1]);
 
+        //MODULO PROFORMAS
+
+        Permission::create(['name' => 'proformas.proformas.index',
+        'description' => 'Registrar proformas'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'proformas.mostrar_proformas',
+        'description' => 'Ver proformas registradas'])->syncRoles([$role1]);
+
+         //MODULO PROFORMAS
+
+         Permission::create(['name' => 'movimientos_caja.index',
+         'description' => 'Ver y registrar movimientos de caja'])->syncRoles([$role1]);
+ 
+       
+
+
+
         //MODULO PRODUCTOS
                             
 
@@ -83,13 +100,19 @@ class RoleSeeder extends Seeder
         'description' => 'Generar reportes de productos más vendidos'])->syncRoles([$role1,$role2]);
 
         Permission::create(['name' => 'reportes.movimientos',
-        'description' => 'Generar reportes de historial de productos'])->syncRoles([$role1]);
+        'description' => 'Generar kardex'])->syncRoles([$role1]);
 
         Permission::create(['name' => 'reportes.ventas',
         'description' => 'Generar reportes de ventas'])->syncRoles([$role1]);
 
+        Permission::create(['name' => 'reportes.movimientos_caja',
+        'description' => 'Generar reportes de movimientos en cajas'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'reportes.traslados',
+        'description' => 'Generar reportes de traslados'])->syncRoles([$role1]);
+
          
-        //MODULO REPORTES
+        //MODULO AJUSTES
                             
 
          Permission::create(['name' => 'ajustes.contrasena',

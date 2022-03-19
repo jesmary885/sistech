@@ -71,8 +71,28 @@ class ProductosAdd extends Component
             $rules = $this->rules;
             $this->validate($rules);
 
-            //modificando cantidad en tabla pivote producto_sucursal
+            //Guardando movimiento de producto para kardex
 
+            $stock_antiguo = 0;
+            foreach($sucursales as $sucursalx){
+                $stock_antiguo = $this->producto->sucursals->find($sucursalx)->pivot->cantidad + $stock_antiguo;
+            }
+
+            $stock_nuevo = $stock_antiguo + $this->cantidad;
+            $producto_select->movimientos()->create([
+                'fecha' => $this->fecha_actual,
+                'cantidad_entrada' => $this->cantidad,
+                'cantidad_salida' => 0,
+                'stock_antiguo' => $stock_antiguo,
+                'stock_nuevo' => $stock_nuevo,
+                'precio_entrada' => $this->precio_compra * $this->cantidad,
+                'precio_salida' => 0,
+                'detalle' => 'Compra y registro de nuevas unidades',
+                'user_id' => $usuario_auth
+            ]);
+
+
+            //modificando cantidad en tabla pivote producto_sucursal
             $cantidad_nueva_sucursal = $this->producto->sucursals->find($this->sucursal_id)->pivot->cantidad + $this->cantidad;
             $pivot = Pivot::where('sucursal_id',$this->sucursal_id)
                             ->where('producto_id',$producto_select->id)
@@ -130,14 +150,7 @@ class ProductosAdd extends Component
 
             //registrando moviemientos en tabla movimientos
 
-            $producto_select->movimientos()->create([
-                'fecha' => $this->fecha_actual,
-                'cantidad_entrada' => $this->cantidad,
-                'cantidad_salida' => 0,
-                'precio_entrada' => $this->precio_compra * $this->cantidad,
-                'precio_salida' => 0,
-                'user_id' => $usuario_auth
-            ]);
+        
 
 
             $this->reset(['isopen','precio_compra','sucursal_id','proveedor_id','cantidad']);

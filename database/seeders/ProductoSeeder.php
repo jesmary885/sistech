@@ -31,21 +31,7 @@ class ProductoSeeder extends Seeder
             'marca_id' => '1',
         ]);
 
-        Producto::create([
-          'nombre' => 'Bateria',
-        //  'inventario_min' => '5',
-          'precio_entrada' => '5',
-          'precio_letal' => '8',
-          'precio_mayor' => '7',
-          'puntos' => '10',
-          'cod_barra' => '58966622',
-          'estado' => '1',
-        //  'presentacion' => '1',
-          'observaciones' => 'sin observaciones',
-          'categoria_id' => '2',
-          'modelo_id' => '2',
-          'marca_id' => '2',
-      ]);
+  
 
         // Imagen::factory(1)->create([
         //     'imageable_id'=> '1',

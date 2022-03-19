@@ -16,9 +16,9 @@ class MarcaSeeder extends Seeder
     {
         $marcas = [
             [
-               'nombre' => 'SAM',
+               'nombre' => 'Otro',
             ],
-            [
+           /* [
                 'nombre' => 'LG',
              ],
              [
@@ -83,7 +83,7 @@ class MarcaSeeder extends Seeder
             ],
             [
                'nombre' => 'HUW',
-            ],
+            ],*/
 
             ];
 

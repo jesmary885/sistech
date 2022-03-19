@@ -7,6 +7,7 @@ use App\Models\Producto;
 use App\Models\Producto_sucursal;
 use App\Models\Producto_venta;
 use App\Models\ProductoSerialSucursal;
+use App\Models\Sucursal;
 use App\Models\Venta;
 use Livewire\Component;
 Use Livewire\WithPagination;
@@ -42,13 +43,36 @@ class ProductosDevolucion extends Component
     }
 
     public function confirmacion(){
-        
+        $user_auth = auth()->user()->id;  
+        $fecha_actual = date('Y-m-d');      
         $devolucion_eliminar = Devolucion::where('id',$this->devolucion_id)->first();
         $devolucion_eliminar->delete();
 
         $producto_sucursal= Producto_sucursal::where('sucursal_id',$this->sucursal_id)
                                             ->where('producto_id',$this->producto_id)
                                             ->first();
+
+          //Guardando movimiento de producto para kardex
+          $sucursales = Sucursal::all();
+          $producto_barra = Producto::where('id',$producto_sucursal->producto->id)->first();
+  
+          $stock_antiguo = 0;
+          foreach($sucursales as $sucursalx){
+              $stock_antiguo = $producto_barra->sucursals->find($sucursalx)->pivot->cantidad + $stock_antiguo;
+          }
+  
+          $stock_nuevo = $stock_antiguo + $this->cantidad;
+          $producto_barra->movimientos()->create([
+              'fecha' => $this->fecha_actual,
+              'cantidad_entrada' => 1,
+              'cantidad_salida' => 0,
+              'stock_antiguo' => $stock_antiguo,
+              'stock_nuevo' => $stock_antiguo + 1,
+              'precio_entrada' => $this->precio_compra * $this->cantidad,
+              'precio_salida' => 0,
+              'Detalle' => 'Integro a deposito de equipo como estado "activo" luego de devolución',
+              'user_id' => $user_auth 
+          ]);
 
         $cantidad_nueva_producto = $producto_sucursal->cantidad + 1;
         $producto_sucursal->update([
@@ -59,6 +83,7 @@ class ProductosDevolucion extends Component
         $producto_serial->update([
             'estado' => 'activo'
         ]);
+        $this->resetPage();
 
     }
 

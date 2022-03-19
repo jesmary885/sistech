@@ -6,12 +6,17 @@ use App\Exports\ReporteCaja as ExportsReporteCaja;
 use App\Exports\ReporteCajaExport;
 use App\Models\MovimientoCaja;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
 
 class ReporteCaja extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = "bootstrap";
+
+
     public $fecha_inicio, $fecha_fin, $sucursal_id;
 
     public function render()

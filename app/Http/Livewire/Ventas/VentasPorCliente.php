@@ -13,7 +13,7 @@ class VentasPorCliente extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
 
-    public $productos,$collection = [];
+    public $productos,$sucursal, $collection = [];
 
 
     protected $listeners = ['render' => 'render','confirmacion' => 'confirmacion'];
@@ -28,11 +28,11 @@ class VentasPorCliente extends Component
     {
 
         $ventas = Venta::whereHas('cliente',function(Builder $query){
-            $query->where('nro_documento','LIKE', '%' . $this->search . '%');
+            $query->where('nro_documento','LIKE', '%' . $this->search . '%')
+            ->where('estado', 'activa')
+            ->where('sucursal_id',$this->sucursal);
          })->latest('id')
          ->paginate(5);
-
-
 
         return view('livewire.ventas.ventas-por-cliente',compact('ventas'));
     }
@@ -48,6 +48,7 @@ class VentasPorCliente extends Component
         $venta_destroy->update([
             'estado' => 'anulada',
         ]);
+        $this->resetPage();
     }
 
     public function ayuda(){

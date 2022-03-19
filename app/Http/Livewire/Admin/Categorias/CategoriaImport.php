@@ -9,6 +9,8 @@ use Maatwebsite\Excel\Facades\Excel;
 class CategoriaImport extends Component
 {
     public $isopen = false,$file;
+
+   
     
     public function render()
     {

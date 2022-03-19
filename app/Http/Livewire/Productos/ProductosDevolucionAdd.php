@@ -5,7 +5,9 @@ namespace App\Http\Livewire\Productos;
 use App\Models\Devolucion;
 use App\Models\Movimiento;
 use App\Models\Movimiento_product_serial;
+use App\Models\Producto;
 use App\Models\Producto_venta;
+use App\Models\Sucursal;
 use App\Models\Venta;
 use Livewire\Component;
 
@@ -83,14 +85,37 @@ class ProductosDevolucionAdd extends Component
         $movimiento->observacion = $this->observaciones;
         $movimiento->save();
 
-        $movimiento_serial = new Movimiento_product_serial();
+
+        //Guardando movimiento de producto para kardex
+        $sucursales = Sucursal::all();
+        $producto_barra = Producto::where('id',$producto_venta->productoSerialSucursal->producto->id)->first();
+
+        $stock_antiguo = 0;
+        foreach($sucursales as $sucursalx){
+            $stock_antiguo = $producto_barra->sucursals->find($sucursalx)->pivot->cantidad + $stock_antiguo;
+        }
+
+        $stock_nuevo = $stock_antiguo + $this->cantidad;
+        $producto_barra->movimientos()->create([
+            'fecha' => $this->fecha_actual,
+            'cantidad_entrada' => 0,
+            'cantidad_salida' => 0,
+            'stock_antiguo' => $stock_antiguo,
+            'stock_nuevo' => $stock_antiguo,
+            'precio_entrada' => 0,
+            'precio_salida' => 0,
+            'Detalle' => 'Devolución de equipo',
+            'user_id' => $user_auth 
+        ]);
+
+     /*   $movimiento_serial = new Movimiento_product_serial();
         $movimiento_serial->fecha = $fecha_actual;
         $movimiento_serial->tipo_movimiento = 'Devolución de producto';
         $movimiento_serial->precio = $producto_venta->precio;
         $movimiento_serial->producto_serial_sucursal_id = $producto_venta->productoSerialSucursal->producto->id;
         $movimiento_serial->user_id = $user_auth;
         $movimiento_serial->observacion = $this->observaciones;
-        $movimiento_serial->save();
+        $movimiento_serial->save();*/
         
         if($this->accion == '1' || $this->accion == '3'){ //Reintegro del dinero o entrega de otro producto distinto
             $venta= Venta::where('id',$this->nro_factura)->first(); 
@@ -110,7 +135,7 @@ class ProductosDevolucionAdd extends Component
             $producto_venta->update([
                  'cantidad' => 0
              ]);
-             $movimiento->observacion = $this->observaciones .' '. 'Se ha realizado reintegro del dinero al cliente por el monto de '.$producto_venta->precio;
+          //   $movimiento->observacion = $this->observaciones .' '. 'Se ha realizado reintegro del dinero al cliente por el monto de '.$producto_venta->precio;
         }
  
         $this->reset(['factura','nro_factura','producto_id','cantidad','observaciones','isopen','accion']);

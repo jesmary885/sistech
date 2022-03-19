@@ -18,7 +18,7 @@ class CategoriaSeeder extends Seeder
             [
                'nombre' => 'TACTIL',
             ],
-            [
+           /* [
                 'nombre' => 'LCD',
              ],
              [
@@ -71,7 +71,7 @@ class CategoriaSeeder extends Seeder
             ],
             [
                'nombre' => 'PEGAMENTO',
-            ],
+            ],*/
 
             ];
 

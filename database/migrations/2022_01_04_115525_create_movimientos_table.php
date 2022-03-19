@@ -18,6 +18,9 @@ class CreateMovimientosTable extends Migration
             $table->timestamps();
             $table->date('fecha');
             $table->string('cantidad_entrada');
+            $table->string('stock_antiguo');
+            $table->string('stock_nuevo');
+            $table->string('detalle');
             $table->float('precio_entrada');
             $table->string('cantidad_salida');
             $table->float('precio_salida');

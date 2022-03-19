@@ -45,6 +45,7 @@ class ClientesIndex extends Component
     public function confirmacion(){
         $cliente_destroy = Cliente::where('id',$this->cliente)->first();
         $cliente_destroy->delete();
+        $this->resetPage();
     }
 
     public function ayuda(){

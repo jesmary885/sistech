@@ -73,7 +73,7 @@ class ProductosDetalleTraslado extends Component
 
        foreach($this->prod as $p){
           
-            $movimiento_serial = new Movimiento_product_serial();
+           
             $produc=ProductoSerialSucursal::where('id',$p)->first();
 
 
@@ -87,15 +87,6 @@ class ProductosDetalleTraslado extends Component
             $producto_traslado->sucursal_id = $this->sucursal_id;
             $producto_traslado->save();
 
-            $movimiento_serial->fecha = $fecha_actual;
-            $movimiento_serial->tipo_movimiento = 'Traslado';
-            $movimiento_serial->precio =  $produc->producto->precio_letal;
-            $movimiento_serial->observacion = 'Traslado (envio) desde almacen '. $sucursal_inicial .' hasta almacen '. $sucursal_final;
-            $movimiento_serial->producto_serial_sucursal_id = $p;
-            $movimiento_serial->user_id = $user_auth;
-            $movimiento_serial->save();
-
-            
             $traslado = new Traslado();
             $traslado->fecha = $fecha_actual;
             $traslado->observacion_inicial = 'Traslado desde almacen '. $sucursal_inicial .' hasta almacen '. $sucursal_final .', por usuario '. $user_auth_nombre .' '. $user_auth_apellido. ' Fecha del registro del tradado: '. $fecha_actual ;

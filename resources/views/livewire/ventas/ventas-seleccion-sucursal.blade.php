@@ -5,6 +5,10 @@
                 <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal en donde realizara la venta</h2>
             @elseif($vista == 'productos')
             <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal donde esta el equipo a trasladar</h2>
+            @elseif($vista == 'ver_ventas')
+            <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal en donde desea ver las ventas</h2>
+            @elseif($vista == 'ver_ventas_cliente')
+            <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal en donde desea ver las ventas</h2>
             @else <h2 class="text-lg text-white text-center bg-gray-700">Seleccione el almacen</h2>
             @endif
             
@@ -26,17 +30,18 @@
                                    
                                     <td class="text-center text-lg">
                                         @if ($vista == 'ventas')
-
-
                                         <a class="text-gray-600" href="{{route('ventas.seleccio',['sucursal'=>$sucursal,'proforma'=>$proforma])}}">{{$sucursal->nombre}}</a>
-
                                         {{-- <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a> --}}
                                         @elseif($vista == 'productos')
                                         <a class="text-gray-600" href="{{route('productos.traslado.select',$sucursal)}}">{{$sucursal->nombre}}</a>
                                         @elseif($vista == 'cajas')
                                         <a class="text-gray-600" href="{{route('movimiento.caja.view',$sucursal)}}">{{$sucursal->nombre}}</a>
                                         {{-- <a href="{{route('productos.traslado.select',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a> --}}
-                                    @else
+                                        @elseif($vista == 'ver_ventas')
+                                        <a class="text-gray-600" href="{{route('mostrar.ventas',['sucursal'=>$sucursal,'tipo'=>$proforma])}}">{{$sucursal->nombre}}</a>
+                                        @elseif($vista == 'ver_ventas_cliente')
+                                        <a class="text-gray-600" href="{{route('ventas.clientes.view',['sucursal'=>$sucursal])}}">{{$sucursal->nombre}}</a>
+                                        @else
                                     <a class="text-gray-600" href="{{route('productos.serial.view',$sucursal)}}">{{$sucursal->nombre}}</a>
                                         {{-- <a href="{{route('productos.serial.view',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a> --}}
                                     @endif

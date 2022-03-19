@@ -25,15 +25,5 @@ class CompraSeeder extends Seeder
             'sucursal_id' => '1',
         ]);
 
-        Compra::create([
-            'fecha' => date('Y-m-d'),
-            'total' => '30',
-            'precio_compra' => '5',
-            'proveedor_id' => '1',
-            'producto_id' => '2',
-            'cantidad' => '10',
-            'user_id' => '1',
-            'sucursal_id' => '1',
-        ]);
     }
 }

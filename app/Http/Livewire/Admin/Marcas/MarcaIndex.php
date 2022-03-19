@@ -40,6 +40,7 @@ class MarcaIndex extends Component
     public function confirmacion(){
         $marca_destroy = Marca::where('id',$this->marca)->first();
         $marca_destroy->delete();
+        $this->resetPage();
     }
 
     public function ayuda(){

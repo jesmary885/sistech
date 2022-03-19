@@ -3,7 +3,23 @@
         <div class="card">
             <div class="card-header flex items-center justify-between">
                 <div class="flex-1">
-                    <input wire:model="search" placeholder="Ingrese el nombre o código de barra del producto a buscar" class="form-control">
+                    <div class=flex>
+                        <div class="w-1/4">
+                   
+                            <select wire:model="buscador" id="buscador" class="form-control text-m" name="buscador">
+                                <option value="0">Código de barra</option>
+                                <option value="1">Categoria</option>
+                                <option value="2">Marca</option>
+                                <option value="3">Modelo</option>
+                            </select>
+        
+                            <x-input-error for="buscador" />
+    
+                        </div>
+                        <input wire:model="search" placeholder="Ingrese {{$item_buscar}}" class="form-control ml-2">
+                            
+                    </div>
+                    
                 </div>
                 <div class="ml-2">
                     <button

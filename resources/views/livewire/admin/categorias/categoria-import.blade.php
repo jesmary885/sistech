@@ -17,6 +17,7 @@
                             @csrf
 
                             <input type="file" name="import_file">
+                            <x-input-error for="import_file" />
                             <div class="flex justify-end mt-4">
                                 <div>
                                     <button type="submit" class="mr-2 btn btn-success disabled:opacity-25 justify-center" wire:loading.attr="disabled" ><i class="far fa-file-excel"></i> Importar</button>

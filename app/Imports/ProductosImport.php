@@ -34,7 +34,7 @@ class ProductosImport implements ToModel, WithHeadingRow, WithBatchInserts, With
     */
     public function model(array $row)
     {
-          Producto::create([
+         $producto = Producto::create([
             'nombre'  => $row['nombre'],
             'precio_entrada' => $row['compra'],
             'precio_letal'    => $row['minorista'],
@@ -65,7 +65,7 @@ class ProductosImport implements ToModel, WithHeadingRow, WithBatchInserts, With
 
                // dd($nombre_separada);
                 Producto_sucursal::create([
-                    'producto_id' => $row['id'],
+                    'producto_id' => $producto->id,
                     'sucursal_id' => $sucurs->id,
                     'cantidad' => $row[$nombre_final],
                 ]);

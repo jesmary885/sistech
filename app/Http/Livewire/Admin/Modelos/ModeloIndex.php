@@ -38,6 +38,7 @@ class ModeloIndex extends Component
     public function confirmacion(){
         $modelo_destroy = Modelo::where('id',$this->modelo)->first();
         $modelo_destroy->delete();
+        $this->resetPage();
     }
 
     public function ayuda(){

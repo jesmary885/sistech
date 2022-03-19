@@ -20,6 +20,12 @@ class ProductosController extends Controller
     }
     public function store(Request $request)
     {
+
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+     
+        
         $file = $request->file('import_file');
         Excel::import(new ProductosImport(), $file);
         return redirect()->route('productos.productos.index');

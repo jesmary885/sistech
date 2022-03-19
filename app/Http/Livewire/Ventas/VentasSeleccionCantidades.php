@@ -19,6 +19,8 @@ class VentasSeleccionCantidades extends Component
         'serial' => null,
     ];
 
+
+
     public function decrement(){
         $this->qty = $this->qty - 1;
     }
@@ -45,8 +47,8 @@ class VentasSeleccionCantidades extends Component
         }
 
         if($exist == 0){
-            if($this->precios == '1') $precio_venta = $this->producto->producto->precio_letal;
-            else $precio_venta = $this->producto->producto->precio_mayor;
+            if($this->precios == 1) $precio_venta = $this->producto->producto->precio_letal;
+            elseif($this->precios == 2) $precio_venta = $this->producto->producto->precio_mayor;
             $this->options['puntos'] = $this->producto->producto->puntos;
             $this->options['serial'] = $this->producto->serial;
 

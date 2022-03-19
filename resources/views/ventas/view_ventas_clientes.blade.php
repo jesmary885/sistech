@@ -8,7 +8,7 @@
 
 @section('content')
 
- @livewire('ventas.ventas-por-cliente')
+ @livewire('ventas.ventas-por-cliente',['sucursal'=>$sucursal])
 @stop
 
 @section('css')

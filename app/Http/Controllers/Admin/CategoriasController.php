@@ -18,6 +18,10 @@ class CategoriasController extends Controller
 
     public function store(Request $request)
     {
+
+        $request->validate([
+            'import_file' => 'required'
+        ]);
      
         $file = $request->file('import_file');
    

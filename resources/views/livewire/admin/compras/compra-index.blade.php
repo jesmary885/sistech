@@ -25,7 +25,7 @@
                             <th class="text-center">Precio de compra</th>
                             <th class="text-center">Total</th>
                             <th class="text-center">Sucursal</th>
-                            <th colspan="2"></th>
+                   
                         </tr>
                     </thead>
                     <tbody>
@@ -37,17 +37,17 @@
                                 <td class="text-center">{{$compra->precio_compra}}</td>
                                 <td class="text-center">{{$compra->total}}</td>
                                 <td class="text-center">{{$compra->sucursal->nombre}}</td>
-                                <td width="10px">
+                                {{-- <td width="10px">
                                     @livewire('admin.compras.compras-edit',['compra' => $compra],key($compra->id))
-                                </td>
-                                <td width="10px">
+                                </td> --}}
+                                {{-- <td width="10px">
                                     <button
                                         title="Eliminar compra"
                                         class="btn btn-danger btn-sm" 
                                         wire:click="delete('{{$compra->id}}')">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>

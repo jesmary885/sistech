@@ -37,7 +37,7 @@
 
                                 <div class="w-1/2">
                                     <select id="precios" wire:model="precios" class="block bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
-                                        <option value="" selected>Precio de venta</option>
+                                         <option value="" selected>Precio de venta</option>
                                         <option value="1">Precio letal</option>
                                         <option value="2">Precio al mayor</option>
                                     </select>

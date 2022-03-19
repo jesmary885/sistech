@@ -16,17 +16,10 @@ class ModeloSeeder extends Seeder
     {
         $modelos = [
             [
-               'nombre' => 'J2 Prime',
+               'nombre' => 'Otro',
                'marca_id' => '1',
             ],
-            [
-                'nombre' => 'X165(L Bello 2)',
-                'marca_id' => '2',
-             ],
-             [
-                'nombre' => 'Y3ii 3g',
-                'marca_id' => '3',
-             ],
+          
 
             ];
 

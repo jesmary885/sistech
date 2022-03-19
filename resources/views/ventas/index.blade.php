@@ -8,9 +8,10 @@
 
 @section('content')
     @if ($tipo == 'contado')
-        @livewire('ventas.ventas-contado')
+        @livewire('ventas.ventas-contado',['sucursal'=> $sucursal])
     @else
-        @livewire('ventas.ventas-credito')
+        @livewire('ventas.ventas-credito',['sucursal'=> $sucursal])
+
     @endif
 @stop
 

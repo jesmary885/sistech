@@ -3,9 +3,11 @@
 namespace App\Http\Livewire\Productos;
 
 use App\Models\Producto;
+use App\Models\Producto_sucursal;
 use App\Models\Producto_venta;
 use App\Models\Sucursal;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 Use Livewire\WithPagination;
 
@@ -17,7 +19,7 @@ class ProductosIndex extends Component
     protected $listeners = ['render' => 'render','confirmacion' => 'confirmacion'];
 
 
-    public $search, $producto;
+    public $search, $producto,$buscador;
 
     public function updatingSearch(){
         $this->resetPage();
@@ -28,10 +30,46 @@ class ProductosIndex extends Component
 
         $sucursales = Sucursal::all();
 
-        $productos = Producto::where('nombre', 'LIKE', '%' . $this->search . '%')
-                    ->orwhere('cod_barra', 'LIKE', '%' . $this->search . '%')
-                    ->latest('id')
-                    ->paginate(5);
+        if($this->buscador == 0){
+            $productos = Producto::where('nombre', 'LIKE', '%' . $this->search . '%')
+            ->orwhere('cod_barra', 'LIKE', '%' . $this->search . '%')
+            ->where('estado',1)
+            ->paginate(5);
+            
+            $this->item_buscar = "el código de barra o nombre del producto a buscar";
+        }
+
+        if($this->buscador == 1){
+
+            $productos = Producto::whereHas('categoria',function(Builder $query){
+                $query->where('nombre','LIKE', '%' . $this->search . '%')
+                ->where('estado',1);
+            })->paginate(5);
+
+            $this->item_buscar = "la categoria del producto a buscar";
+        }
+
+        
+        if($this->buscador == 2){
+
+            $productos = Producto::whereHas('marca',function(Builder $query){
+                $query->where('nombre','LIKE', '%' . $this->search . '%')
+                ->where('estado',1);
+            })->paginate(5);
+
+            $this->item_buscar = "la marca del producto a buscar";
+        }
+
+        if($this->buscador == 3){
+
+            $productos = Producto::whereHas('modelo',function(Builder $query){
+                $query->where('nombre','LIKE', '%' . $this->search . '%')
+                ->where('estado',1);
+            })->paginate(5);
+
+            $this->item_buscar = "el modelo del producto a buscar";
+        }
+
         
         return view('livewire.productos.productos-index',compact('productos','sucursales'));
 
@@ -39,7 +77,7 @@ class ProductosIndex extends Component
 
     public function delete($productoId){
         $this->producto = $productoId;
-
+       
        // $busqueda = Producto_venta::where('producto_id',$productoId)->first();
 
         $busqueda = Producto_venta::whereHas('productoSerialSucursal',function(Builder $query){
@@ -51,8 +89,22 @@ class ProductosIndex extends Component
     }
 
     public function confirmacion(){
+        $this->fecha_actual = date('Y-m-d');
+        $usuario_auth = Auth::id();
+        $user_auth_nombre =  auth()->user();
+
         $producto_destroy = Producto::where('id',$this->producto)->first();
-        $producto_destroy->delete();
+        
+        $producto_destroy->update([
+            'estado' => 'inactivo por eliminación, por usuario'. $user_auth_nombre->nombre. ' ' . $user_auth_nombre->apellido. 'en fecha:' .$this->fecha_actual,
+        ]);
+
+        $productos_seriales = Producto_sucursal::where('producto_id',$producto_destroy->id)->get();
+        foreach($productos_seriales as $ps){
+            $ps->update([
+                'estado' => 'inactivo por eliminación, por usuario'. $usuario_auth . 'en fecha:' .$this->fecha_actual,
+            ]);
+        }
         $this->resetPage();
     }
 

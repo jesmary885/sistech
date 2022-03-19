@@ -14,8 +14,18 @@
 
                       
 
+                        @if ($vista == 'barra')
+                        <h2 class="text-sm ml-2 mb-1 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Descargue la planilla, y complete todos los campos obligatoriamente, guarde el documento y seleccionelo, finalmente haga click en Importar.</h2> 
+                        <h2 class="text-sm ml-2 mb-1 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> En las columnas con el nombre de cada sucursal va a colocar el stock del producto en dicha sucursal.</h2>
+                        <h2 class="text-sm ml-2 mb-1 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Mantener el nombre de las columnas como se encuentran.</h2>  
+                        <hr>
+                        @else
+                        <h2 class="text-sm ml-2 mb-1 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Descargue la planilla, y complete todos los campos obligatoriamente, guarde el documento y seleccionelo, finalmente haga click en Importar</h2> 
+                        <h2 class="text-sm ml-2 mb-1 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> En la columna sucursal va a colocar el nombre de la sucursal donde se encuentra el producto, con los nombres de las sucursales tal como se encuentran en la planilla (Casa matriz,Tienda Lima 1,Movox).</h2>
+                        <h2 class="text-sm ml-2 mb-1 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Mantener el nombre de las columnas como se encuentran.</h2>  
+                        <hr>
+                        @endif
 
-                        <h2 class="text-sm ml-2 mb-4 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Descargue la planilla, y complete todos los campos obligatoriamente, guarde el documento y seleccionelo, finalmente haga click en Importar</h2> 
                         @if ($vista == 'barra')
                             <form action="{{route('productos.productos.store')}}" method="POST" enctype="multipart/form-data">
                         @else

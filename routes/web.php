@@ -77,6 +77,9 @@ Route::get('traslado',[MovimientosController::class,'index'])->name('traslado.in
 Route::get('traslado/{sucursal}',[MovimientosController::class,'select'])->name('productos.traslado.select');
 Route::get('traslado/{sucursal}/{producto}',[MovimientosController::class,'select_serial'])->name('productos.traslado.serial');
 
+//Mostrar ventas al contado y a credito
+Route::get('Mostrar_ventas/{sucursal}/{tipo}',[MovimientosController::class,'mostrar_ventas'])->name('mostrar.ventas');
+
 
 Route::get('devolucion',[MovimientosController::class,'devolucion'])->name('devolucion.index');
 Route::get('devolucion_registro',[MovimientosController::class,'devolucion_create'])->name('devolucion.create');
@@ -109,7 +112,10 @@ Route::get('reportes_productos/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[Report
 //reporte de ventas
 Route::get('reporte_venta',[ReportesController::class,'index_venta'])->name('reportes.index.ventas');
 Route::get('reportes_ventas/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'ventas'])->name('ventas.reportes');
+
+//Mostrar ventas por clientes
 Route::get('ventas_clientes',[VentasViewController::class,'index'])->name('ventas.clientes');
+Route::get('ventas_clientes/{sucursal}',[VentasViewController::class,'view'])->name('ventas.clientes.view');
 //reporte de traslados
 Route::get('reporte_traslados',[ReportesController::class,'index_traslados'])->name('reportes.index.traslados'); 
 Route::get('reportes_traslados/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'traslados'])->name('traslados.reportes');

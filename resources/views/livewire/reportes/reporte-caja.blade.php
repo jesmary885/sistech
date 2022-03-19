@@ -8,9 +8,9 @@
               
                         <tr>
                             <th class="text-center">Fecha y hora</th>
-                            @if ($sucursal_id == 0)
+                        
                                 <th class="text-center">Sucursal</th>                                
-                            @endif
+                    
                             <th class="text-center">Tipo de movimiento</th>
                             <th class="text-center">Cantidad</th>
                             <th class="text-center">Detalle</th>

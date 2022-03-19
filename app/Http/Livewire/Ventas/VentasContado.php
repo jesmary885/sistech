@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Ventas;
 
+use App\Models\Sucursal;
 use App\Models\Venta;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
@@ -16,11 +17,13 @@ class VentasContado extends Component
 
     protected $listeners = ['render' => 'render','confirmacion' => 'confirmacion'];
 
-    public $search;
+    public $search,$sucursal;
 
     public function updatingSearch(){
         $this->resetPage();
     }
+
+  
 
    
     public function render()
@@ -28,6 +31,7 @@ class VentasContado extends Component
 
         $ventas = Venta::where('fecha', 'LIKE', '%' . $this->search . '%')
                     ->where('tipo_pago', 1)
+                    ->where('sucursal_id',$this->sucursal)
                     ->where('estado', 'activa')
                     ->latest('id')
                     ->paginate(5);
@@ -47,6 +51,7 @@ class VentasContado extends Component
         $venta_destroy->update([
             'estado' => 'anulada',
         ]);
+        $this->resetPage();
     }
 
     public function ayuda(){

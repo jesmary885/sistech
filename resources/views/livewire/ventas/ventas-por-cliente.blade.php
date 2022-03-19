@@ -28,7 +28,7 @@
                             <th class="text-center">Total pagado</th>
                             <th class="text-center">Deuda</th>
                             <th class="text-center">Estado</th>
-                            <th colspan="2"></th>
+                            <th colspan="3"></th>
                  
                         </tr>
                     </thead>
