@@ -7,6 +7,7 @@ use App\Models\Producto;
 use App\Models\Producto_sucursal;
 use App\Models\Producto_venta;
 use App\Models\ProductoSerialSucursal;
+use App\Models\Sucursal;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -100,6 +101,27 @@ class ProductosSerialIndex extends Component
 
         $producto=Producto::where('id',$producto_destroy->producto_id)->first();
 
+        //registrando movimientos para kardex
+
+        $sucursales = Sucursal::all();
+
+        $stock_antiguo = 0;
+        foreach($sucursales as $sucursalx){
+            $stock_antiguo = $producto->sucursals->find($sucursalx)->pivot->cantidad + $stock_antiguo;
+        }
+
+        $producto->movimientos()->create([
+            'fecha' => $this->fecha_actual,
+            'cantidad_entrada' => 0,
+            'stock_antiguo' => $stock_antiguo,
+            'stock_nuevo' => $stock_antiguo - 1,
+            'cantidad_salida' => 1,
+            'precio_entrada' => 0,
+            'precio_salida' => 0,
+            'detalle' => 'Eliminación de producto, por usuario'. $user_auth_nombre->nombre. ' ' . $user_auth_nombre->apellido. 'en fecha:' .$this->fecha_actual,
+            'user_id' => $usuario_auth
+        ]);
+
         //Disminuyendo a uno cantidades en tabla producto_sucursal
         $producto_cod_barra = Producto_sucursal::where('producto_id',$producto_destroy->producto_id)
                                                 ->where('sucursal_id',$this->sucursal)->first();
@@ -121,6 +143,8 @@ class ProductosSerialIndex extends Component
             'total' => $total_compra_new,
             'cantidad' => $cantidad_compra_new,
         ]);
+
+        
 
      
         //registrando moviemientos en tabla movimientos

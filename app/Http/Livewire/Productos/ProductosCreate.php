@@ -176,9 +176,9 @@ class ProductosCreate extends Component
                 'stock_antiguo' => 0,
                 'stock_nuevo' => $this->cantidad,
                 'cantidad_salida' => 0,
-                'precio_entrada' => $this->precio_compra * $this->cantidad,
+                'precio_entrada' => $this->precio_entrada * $this->cantidad,
                 'precio_salida' => 0,
-                'dtalle' => 'Registro de producto',
+                'detalle' => 'Registro de producto',
                 'user_id' => $usuario_auth
             ]);
 

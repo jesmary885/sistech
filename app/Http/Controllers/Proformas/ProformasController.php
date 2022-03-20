@@ -22,7 +22,7 @@ class ProformasController extends Controller
 
     public function view(){
 
-            return view ('proformas.view');
+            return view('proformas.view');
         
     }
 

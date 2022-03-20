@@ -69,7 +69,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'proformas.mostrar_proformas',
         'description' => 'Ver proformas registradas'])->syncRoles([$role1]);
 
-         //MODULO PROFORMAS
+         //MODULO MOVIMIENTOS
 
          Permission::create(['name' => 'movimientos_caja.index',
          'description' => 'Ver y registrar movimientos de caja'])->syncRoles([$role1]);
@@ -86,6 +86,9 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'productos.index_serial',
                             'description' => 'Administrar productos por serial'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'productos.productos.delete',
+                            'description' => 'Eliminar productos'])->syncRoles([$role1,$role2]);
 
         Permission::create(['name' => 'productos.devolucion',
                             'description' => 'Administrar devolución de equipos'])->syncRoles([$role1]);

@@ -21,7 +21,7 @@ class ProductoSerialSucursal extends Model
     }
 
     public function compra(){
-        return $this->belongsTo(Sucursal::class);
+        return $this->belongsTo(Compra::class);
     }
 
     public function modelo(){

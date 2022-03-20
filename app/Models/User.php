@@ -64,7 +64,7 @@ class User extends Authenticatable
         return $this->belongsTo(Estado::class);
     }
     public function sucursal(){
-        return $this->belongsTo(sucursal::class);
+        return $this->belongsTo(Sucursal::class);
     }
 
 

@@ -79,6 +79,7 @@
                                     <td width="10px">
                                         @livewire('productos.productos-barcode', ['producto' => $producto],key(011.,'$producto->id'))
                                    </td>
+                                   @can('productos.productos.delete')
                                     <td width="10px">
                                         <button
                                             class="btn btn-danger btn-sm" 
@@ -87,6 +88,7 @@
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                         </tbody>

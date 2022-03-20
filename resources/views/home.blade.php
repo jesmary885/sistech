@@ -116,7 +116,7 @@
   
   <aside class="md:col-span-1 lg:col-span-2">
 
-  @livewire('home.ventas')
+   @livewire('home.ventas')
 
   </aside>
 

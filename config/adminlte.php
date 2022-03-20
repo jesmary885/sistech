@@ -323,8 +323,8 @@ return [
                 ],
                 [
                     'text'    => 'Mostrar proformas',
-                    'route'     => 'proformas.mostrar_proformas',
-                    //'can' => 'ventas.mostrar_ventas_contado'
+                    'route'     => 'proformas.view',
+                    'can' => 'proformas.mostrar_proformas'
                 ],
             ],
             

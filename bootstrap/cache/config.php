@@ -174,11 +174,13 @@
           array (
             'text' => 'Nueva proforma',
             'route' => 'proformas.proformas.index',
+            'can' => 'proformas.proformas.index',
           ),
           1 => 
           array (
             'text' => 'Mostrar proformas',
             'route' => 'proformas.view',
+            'can' => 'proformas.mostrar_proformas',
           ),
         ),
       ),
@@ -187,7 +189,7 @@
         'text' => 'MOVIMIENTOS EN CAJA',
         'icon' => 'fas fa-cash-register',
         'route' => 'movimiento.caja.index',
-        'can' => 'ventas.ventas.index',
+        'can' => 'movimientos_caja.index',
       ),
       4 => 
       array (
@@ -243,7 +245,7 @@
           array (
             'text' => 'Traslados',
             'route' => 'reportes.index.traslados',
-            'can' => 'reportes.movimientos',
+            'can' => 'reportes.traslados',
           ),
           3 => 
           array (
@@ -255,7 +257,7 @@
           array (
             'text' => 'Movimientos en caja',
             'route' => 'reportes.index.caja',
-            'can' => 'reportes.ventas',
+            'can' => 'reportes.movimientos_caja',
           ),
         ),
       ),
