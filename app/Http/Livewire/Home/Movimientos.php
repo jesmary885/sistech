@@ -52,7 +52,7 @@ class Movimientos extends Component
             'fecha' =>$fecha,
         ];
 
-        $pdf = PDF::loadView('movimientos_caja.home',$data)->output();
+        $pdf = PDF::loadView('Movimientos_caja.home',$data)->output();
 
         return response()->streamDownload(
             fn () => print($pdf),

@@ -40,7 +40,7 @@ class ProductosSerialController extends Controller
         $file = $request->file('import_file');
    
         Excel::import(new ProductosSerialSucursalImport(), $file);
-        return redirect()->route('productos.productos.index');
+        return redirect()->route('productos.serial.index');
     }
 
 

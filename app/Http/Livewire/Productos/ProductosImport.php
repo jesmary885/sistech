@@ -31,7 +31,7 @@ class ProductosImport extends Component
 
     public function import(){
 
-        Excel::import(new ProductosImport(), $this->file);
+        //Excel::import(new ProductosImport(), $this->file);
         
         //return redirect('/')->with('success', 'All good!');
         

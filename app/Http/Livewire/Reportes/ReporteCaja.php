@@ -47,12 +47,12 @@ class ReporteCaja extends Component
         if($sucursal == 0){
 
             $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
-            ->paginate(5);
+            ->get();
         }
         else{
             $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
             ->where('sucursal_id',$sucursal)
-            ->paginate(5);
+            ->get();
 
         }
 
