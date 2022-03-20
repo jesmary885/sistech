@@ -44,7 +44,7 @@ class Movimientos extends Component
 
         $movimientos = MovimientoCaja::where('fecha',$fecha_actual)
                                             ->where('sucursal_id',$sucursal_act)
-                                            ->paginate(5);
+                                            ->get();
 
         $data = [
             'movimientos' => $movimientos,
