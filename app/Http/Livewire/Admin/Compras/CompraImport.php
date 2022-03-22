@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Admin\Compras;
 
+use App\Exports\PlanillaComprasExport;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CompraImport extends Component
 {
@@ -22,4 +24,9 @@ class CompraImport extends Component
     {
         return view('livewire.admin.compras.compra-import');
     }
+
+    public function planilla(){
+        return Excel::download(new PlanillaComprasExport(), 'Compras.xlsx');
+    }
+
 }

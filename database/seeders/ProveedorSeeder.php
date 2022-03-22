@@ -16,7 +16,7 @@ class ProveedorSeeder extends Seeder
     {
         Proveedor::create([
             'nombre_encargado' => 'Juan Perez',
-            'nombre_proveedor' => 'v&j c.a',
+            'nombre_proveedor' => 'vj c.a',
             'tipo_documento' => 'ci',
             'nro_documento' => '444444',
             'email' => 'vj@gmail.com',
