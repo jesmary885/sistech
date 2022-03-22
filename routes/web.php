@@ -70,6 +70,7 @@ Route::resource('productos', ProductosController::class)->only('index','create',
 Route::resource('Ventas', VentasController::class)->only('create','index','edit','update','show')->names('ventas.ventas');
 Route::resource('Mostrar_ventas', MostrarVentasController::class)->only('create','index','edit','update','show')->names('ventas.mostrar_ventas');
 Route::get('compras',[ComprasController::class,'index'])->name('admin.compras.index');
+Route::post('compras_import',[ComprasController::class,'store'])->name('admin.compras.store');
 
 Route::get('facturacion/{sucursal}/{proforma}',[FacturacionController::class,'facturacion'])->name('facturacion');
 
@@ -93,7 +94,9 @@ Route::get('Ventas/{sucursal}/{proforma}',[ProformasController::class,'seleccio'
 //Movimientos en caja
 
 Route::get('Movimientos_caja',[MovimientoController::class,'index'])->name('movimiento.caja.index');
+Route::get('Movimientos_caja_pendiente',[MovimientoController::class,'index_pendiente'])->name('movimientos.caja.index.pendiente');
 Route::get('Nuevo_movimiento_caja/{sucursal}',[MovimientoController::class,'view'])->name('movimiento.caja.view');
+Route::get('Nuevo_movimiento_pendiente_caja/{sucursal}',[MovimientoController::class,'view_pendiente'])->name('movimiento.caja_pendiente.view');
 
 
 

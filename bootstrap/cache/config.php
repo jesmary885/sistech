@@ -188,8 +188,21 @@
       array (
         'text' => 'MOVIMIENTOS EN CAJA',
         'icon' => 'fas fa-cash-register',
-        'route' => 'movimiento.caja.index',
-        'can' => 'movimientos_caja.index',
+        'submenu' => 
+        array (
+          0 => 
+          array (
+            'text' => 'Registro y movimientos recibidos',
+            'route' => 'movimiento.caja.index',
+            'can' => 'movimientos_caja.index',
+          ),
+          1 => 
+          array (
+            'text' => 'Movimientos por recibir',
+            'route' => 'movimientos.caja.index.pendiente',
+            'can' => 'movimientos_caja_pendiente.index',
+          ),
+        ),
       ),
       4 => 
       array (
@@ -416,7 +429,7 @@
     'debug' => true,
     'url' => 'http://sistech.test/',
     'asset_url' => NULL,
-    'timezone' => 'UTC',
+    'timezone' => 'America/Lima',
     'locale' => 'es',
     'fallback_locale' => 'es',
     'faker_locale' => 'en_US',

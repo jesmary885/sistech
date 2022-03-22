@@ -38,7 +38,7 @@ class ProductosSerialSucursalImport implements ToModel, WithHeadingRow, WithBatc
     {
           ProductoSerialSucursal::create([
             'fecha_compra' => date('Y-m-d'),
-            'compra_id' => 1,
+            'compra_id' => $row['compra'],
             'cod_barra'    => $row['codigo_de_barras'],
             'estado'    => 'activo',
             'serial'    => $row['serial'],

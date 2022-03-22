@@ -47,8 +47,7 @@ class MovimientoNew extends Component
     }
 
     public function save(){
-        $objecto = new DateTime();
-        $fecha_hora = $objecto->format('Y-m-d H:i:s');
+        $fecha_hora = date('Y-m-d');
         $accion = '0';
         $usuario_auth = auth()->user();
         $caja_actual = Sucursal::where('id',$this->sucursal)->first();
@@ -61,42 +60,31 @@ class MovimientoNew extends Component
     
                 if($saldo_caja_actual > $this->cantidad){
                     $caja_final= Sucursal::where('id',$this->sucursal_id)->first();
-                    $saldo_caja_final = $caja_final->saldo;
-    
-                    $caja_actual->update([
-                        'saldo' => $saldo_caja_actual - $this->cantidad,
-                    ]);
-    
-                    $caja_final->update([
-                        'saldo' => $saldo_caja_final + $this->cantidad,
-                    ]);
-
                     $movimiento = new MovimientoCaja();
                     $movimiento->fecha = $fecha_hora;
-                    $movimiento->tipo_movimiento = 'Ingreso';
+                    $movimiento->tipo_movimiento = 1;
                     $movimiento->cantidad = $this->cantidad;
-                    $movimiento->observacion = 'Transferencia desde sucursal'. $caja_actual->nombre;
+                    $movimiento->observacion = $caja_actual->id;
                     $movimiento->user_id = $usuario_auth->id;
                     $movimiento->sucursal_id = $caja_final->id;
+                    $movimiento->estado = 'pendiente';
                     $movimiento->save();
-
-                    $accion = '1';
-    
+                    $accion = '0';
+                    $this->reset(['isopen','cantidad','sucursal_id','tipo_movimiento','observaciones']);
+                    $this->emitTo('movimientos-caja.movimiento-view','render');
+                    $this->emit('alert','La sucursal destino debe confirmar que ha recibido el dinero para registrar el movimiento');
                 }
                 else{
                     $this->emit('errorSize', 'Fondos insuficientes para la transferencia de dinero');
                 }
-    
             }
             else{
                 $rules = $this->rules;
                 $this->validate($rules);
-    
                 if($this->tipo_movimiento == 1){
                     $caja_actual->update([
                         'saldo' => $saldo_caja_actual + $this->cantidad,
                     ]);
-
                     $accion = '1';
                 }
                 else{
@@ -104,16 +92,13 @@ class MovimientoNew extends Component
                         $caja_actual->update([
                             'saldo' => $saldo_caja_actual - $this->cantidad,
                         ]);
-
                         $accion = '1';
                     }
                     else{
                         $this->emit('errorSize', 'Fondos insuficientes para la transferencia de dinero');
                     }
                 }
-    
             }
-    
             if($accion == '1'){
                 $movimiento = new MovimientoCaja();
                 $movimiento->fecha = $fecha_hora;
@@ -122,14 +107,12 @@ class MovimientoNew extends Component
                 $movimiento->observacion = $this->observaciones;
                 $movimiento->user_id = $usuario_auth->id;
                 $movimiento->sucursal_id = $this->sucursal;
+                $movimiento->estado = 'entregado';
                 $movimiento->save();
-
                 $this->reset(['isopen','cantidad','sucursal_id','tipo_movimiento','observaciones']);
                 $this->emitTo('movimientos-caja.movimiento-view','render');
                 $this->emit('alert','Datos registrados correctamente');
             }
-
         }
-
     }
 }

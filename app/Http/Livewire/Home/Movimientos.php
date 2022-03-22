@@ -28,6 +28,7 @@ class Movimientos extends Component
 
         $movimientos = MovimientoCaja::where('fecha',$fecha_actual)
                                             ->where('sucursal_id',$sucursal_act)
+                                            ->where('estado','entregado')
                                             ->paginate(5);
 
         return view('livewire.home.movimientos',compact('movimientos','usuario_ac'));
@@ -44,6 +45,7 @@ class Movimientos extends Component
 
         $movimientos = MovimientoCaja::where('fecha',$fecha_actual)
                                             ->where('sucursal_id',$sucursal_act)
+                                            ->where('estado','entregado')
                                             ->get();
 
         $data = [

@@ -73,6 +73,8 @@ class RoleSeeder extends Seeder
 
          Permission::create(['name' => 'movimientos_caja.index',
          'description' => 'Ver y registrar movimientos de caja'])->syncRoles([$role1]);
+         Permission::create(['name' => 'movimientos_caja_pendiente.index',
+         'description' => 'Movimientos pendientes en caja'])->syncRoles([$role1]);
  
        
 

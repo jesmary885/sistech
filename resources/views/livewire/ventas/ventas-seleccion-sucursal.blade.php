@@ -7,6 +7,10 @@
             <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal donde esta el equipo a trasladar</h2>
             @elseif($vista == 'ver_ventas')
             <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal en donde desea ver las ventas</h2>
+            @elseif($vista == 'cajas')
+            <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal en donde desea ver los movimientos</h2>
+            @elseif($vista == 'cajas_pendiente')
+            <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal en donde desea ver los movimientos</h2>
             @elseif($vista == 'ver_ventas_cliente')
             <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal en donde desea ver las ventas</h2>
             @else <h2 class="text-lg text-white text-center bg-gray-700">Seleccione el almacen</h2>
@@ -37,6 +41,8 @@
                                         @elseif($vista == 'cajas')
                                         <a class="text-gray-600" href="{{route('movimiento.caja.view',$sucursal)}}">{{$sucursal->nombre}}</a>
                                         {{-- <a href="{{route('productos.traslado.select',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a> --}}
+                                        @elseif($vista == 'cajas_pendiente')
+                                        <a class="text-gray-600" href="{{route('movimiento.caja_pendiente.view',$sucursal)}}">{{$sucursal->nombre}}</a>
                                         @elseif($vista == 'ver_ventas')
                                         <a class="text-gray-600" href="{{route('mostrar.ventas',['sucursal'=>$sucursal,'tipo'=>$proforma])}}">{{$sucursal->nombre}}</a>
                                         @elseif($vista == 'ver_ventas_cliente')

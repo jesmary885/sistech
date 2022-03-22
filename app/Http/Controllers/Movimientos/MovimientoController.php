@@ -14,6 +14,10 @@ class MovimientoController extends Controller
         return view('Movimientos_caja.view',compact('sucursal'));
     }
 
+    public function view_pendiente($sucursal){
+        return view('Movimientos_caja.view_pendiente',compact('sucursal'));
+    }
+
     public function index(){
         $vista = 'cajas';
         $proforma = 'venta';
@@ -27,4 +31,14 @@ class MovimientoController extends Controller
     /*public function new($sucursal){
         return view('Movimientos_caja.new',compact('sucursal'));
     }*/
+
+    public function index_pendiente(){
+        $vista = 'cajas_pendiente';
+        $proforma = 'venta';
+        $usuario_auth = User::where('id',Auth::id())->first();
+        $sucursal = $usuario_auth->sucursal_id;
+
+        if($usuario_auth->limitacion == '1') return view('ventas.seleccion_sucursal',compact('vista','proforma'));
+        else return view('Movimientos_caja.view_pendiente',compact('sucursal'));
+    }
 }

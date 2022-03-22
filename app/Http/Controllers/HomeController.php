@@ -31,15 +31,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        //Paginator::useBootstrap();
-        
+      
         $usuario_auth = auth()->user();
-
         $usuario_ac = $usuario_auth->sucursal->nombre;
         $sucursal_act = $usuario_auth->sucursal->id;
-
-        
 
             $fecha_actual = date('Y-m-d');
             $productos_cant = Producto::count();
@@ -57,8 +52,18 @@ class HomeController extends Controller
             where pt.sucursal_id = :sucursal_usuario' 
             ,array('sucursal_usuario' => $usuario_auth->sucursal_id));
 
+            $movimientos_pendientes = MovimientoCaja::where('sucursal_id',$sucursal_act)
+            ->where('estado','pendiente')
+            ->get();
+
+            $total_movimientos_pendientes = 0;
+            foreach($movimientos_pendientes as $mp){
+                $total_movimientos_pendientes++;
+            }
+
             $movimientos = MovimientoCaja::where('fecha',$fecha_actual)
                                             ->where('sucursal_id',$sucursal_act)
+                                            ->where('estado','entregado')
                                             ->paginate(5);
 
             $ventas = Venta::where('fecha', $fecha_actual)
@@ -79,13 +84,7 @@ class HomeController extends Controller
             $total_ganancias_dia=$total_venta[0]->quantity;
             $total_traslados_pendientes =$traslado_pendient[0]->cantidad;
 
-            //dd($total_traslados_pendientes);
+            return view('home',compact('ventas','movimientos','total_movimientos_pendientes','usuario_ac','productos_cant','clientes_cant','ventas_totales_dia','total_ganancias_dia','total_traslados_pendientes'));
 
-            
-
-
-            return view('home',compact('ventas','movimientos','usuario_ac','productos_cant','clientes_cant','ventas_totales_dia','total_ganancias_dia','total_traslados_pendientes'));
-    
-        
     }
 }

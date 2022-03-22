@@ -26,10 +26,12 @@ class ReporteCaja extends Component
         if($sucursal == 0){
 
             $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+                                            ->where('estado','entregado')
             ->paginate(5);
         }
         else{
             $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+            ->where('estado','entregado')
             ->where('sucursal_id',$sucursal)
             ->paginate(5);
 
@@ -47,10 +49,12 @@ class ReporteCaja extends Component
         if($sucursal == 0){
 
             $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+            ->where('estado','entregado')
             ->get();
         }
         else{
             $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+            ->where('estado','entregado')
             ->where('sucursal_id',$sucursal)
             ->get();
 
@@ -72,10 +76,12 @@ class ReporteCaja extends Component
         if($sucursal == 0){
 
             $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+            ->where('estado','entregado')
             ->paginate(5);
         }
         else{
             $movimientos = MovimientoCaja::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
+            ->where('estado','entregado')
             ->where('sucursal_id',$sucursal)
             ->paginate(5);
 

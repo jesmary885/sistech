@@ -125,7 +125,6 @@ class VentaFacturacion extends Component
         $impuesto= Cart::subtotal() * $this->iva;
 
         //PROFORMA
-
         if($this->proforma == 'proforma'){
             if($this->canjeo==false){
                 $descuento_total = Cart::subtotal() * ($this->descuento / 100);
@@ -137,7 +136,7 @@ class VentaFacturacion extends Component
             
             if($this->estado_entrega == "1") $entrega = 'Entregado'; else
             $entrega = 'Por entregar';
-
+            
             $proform = new Proforma();
             $proform->user_id = $user_auth;
             $proform->cliente_id = $this->client->id;
@@ -179,8 +178,6 @@ class VentaFacturacion extends Component
             $saldo_caja_final = $caja_final->saldo;
 
              //PROCESO DE SUMAR O RESTAR PUNTOS EN TABLA DE CLIENTES
-
-            
 
             if($this->canjeo==false){
                 $descuento_total = Cart::subtotal() * ($this->descuento / 100);
@@ -225,6 +222,7 @@ class VentaFacturacion extends Component
                 $movimiento->observacion = 'Venta a credito';
                 $movimiento->user_id = $user_auth;
                 $movimiento->sucursal_id = $this->sucursal;
+                $movimiento->estado = 'entregado';
                 $movimiento->save();
             }
             else{
@@ -252,14 +250,9 @@ class VentaFacturacion extends Component
             //REGISTRANDO VENTA EN TABLAS DE SUCURSAL AÑADIENDO SALDO
             $caja_final->update([
                 'saldo' => $saldo_caja_final + $this->pago_cliente,
-            ]);
-
-           
-        
+            ]);  
             $sucursales1 = Sucursal::all();
-           
             foreach (Cart::content() as $item) {
-           
                 //generando producto_por_serial_venta
                 $venta->producto_ventas()->create([
                     'venta_id' => $venta->id,
@@ -415,13 +408,10 @@ class VentaFacturacion extends Component
                                 ->subject($data_m["title"])
                                 ->attachData($pdf, "Comprobante.pdf");
                         });
-            
                     }
                 }
             }
- 
-  
-       
+
         cart::destroy();
         $this->siguiente_venta = '1';
         $this->reset(['cliente_select','pago_cliente','descuento','descuento_total','tipo_comprobante','send_mail']);
@@ -444,25 +434,16 @@ class VentaFacturacion extends Component
                 $this->emit('alert','Venta registrada');
                 return redirect()->route('ventas.ventas.index');
             }
-         
         }
-       
-         
     }
 
     public function canjear($producto_id){
         $this->puntos_canjeo = "1";
         $this->canjeo = true;
-    
         $this->porcentaje_descuento_puntos = $this->empresa->porcentaje_puntos;
         $product_canje = ProductoSerialSucursal::where('id',$producto_id)->first();
-        
-
         $this->puntos_canjeados = $product_canje->producto->puntos;
-        $this->descuento_total = Cart::subtotal() * (($this->descuento / 100) + ($this->porcentaje_descuento_puntos / 100));
-
-       
-       
+        $this->descuento_total = Cart::subtotal() * (($this->descuento / 100) + ($this->porcentaje_descuento_puntos / 100));  
     }
 
     public function nueva_venta(){

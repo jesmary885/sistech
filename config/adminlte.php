@@ -333,8 +333,19 @@ return [
         [
             'text'    => 'MOVIMIENTOS EN CAJA',
             'icon'    => 'fas fa-cash-register',
-            'route'  => 'movimiento.caja.index',
-            'can' => 'movimientos_caja.index'           
+            'submenu' => [
+                [
+                    'text' => 'Registro y movimientos recibidos',
+                    'route'  => 'movimiento.caja.index',
+                    'can' => 'movimientos_caja.index'          
+                ],
+                [
+                    'text'    => 'Movimientos por recibir',
+                    'route'     => 'movimientos.caja.index.pendiente',
+                    'can' => 'movimientos_caja_pendiente.index'     
+                ],
+
+            ],
         ],
 
         [

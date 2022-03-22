@@ -4,7 +4,16 @@
 
 @section('content_header')
 
+<div class="flex justify-between">
+
+
+
     <h1 class="text-lg ml-2"><i class="fas fa-shopping-bag"></i> Listado de compras</h1>
+
+    <div class="justify-end">
+        @livewire('admin.compras.compra-import')
+    </div>
+</div>
 @stop
 
 @section('content')

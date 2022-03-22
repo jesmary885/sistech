@@ -19,6 +19,7 @@ class CreateMovimientoCajasTable extends Migration
             $table->date('fecha');
             $table->string('tipo_movimiento');
             $table->float('cantidad');
+            $table->string('estado');
             $table->string('observacion');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

@@ -76,6 +76,7 @@ class VentasCreditoAbono extends Component
             $movimiento->observacion = 'Abono de venta a credito';
             $movimiento->user_id = $user_auth;
             $movimiento->sucursal_id = $caja_final->id;
+            $movimiento->estado = 'entregado';
             $movimiento->save();
 
                 $this->reset(['isopen']);

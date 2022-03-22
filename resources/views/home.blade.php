@@ -54,7 +54,27 @@
     </div>
     @endcan
     <!-- ./col -->
-    @can('admin.clientes.index')
+
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      @if( $total_movimientos_pendientes == 0)
+      <div class="small-box bg-info">
+      @else
+        <div class="small-box bg-danger">
+      @endif
+      
+        <div class="inner">
+          <h3>{{$total_movimientos_pendientes}}</h3>
+          <p>Tranferencia pendiente por recibir</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-filing"></i>
+        </div>
+        <a href="{{route('movimientos.caja.index.pendiente')}}"  class="small-box-footer">Recibir movimiento en caja<i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+
+    {{-- @can('admin.clientes.index')
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-info">
@@ -70,7 +90,7 @@
       </div>
     </div>
   
-    @endcan
+    @endcan --}}
     {{-- @can('reportes.productos')
     <div class="col-lg-3 col-6">
       <!-- small box -->
