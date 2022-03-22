@@ -6,6 +6,7 @@ use App\Models\Ciudad;
 use App\Models\Cliente;
 use App\Models\Estado;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ClientesCreate extends Component

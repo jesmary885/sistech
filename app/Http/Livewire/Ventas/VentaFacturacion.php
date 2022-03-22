@@ -224,6 +224,8 @@ class VentaFacturacion extends Component
                 $movimiento->sucursal_id = $this->sucursal;
                 $movimiento->estado = 'entregado';
                 $movimiento->save();
+
+                $total_recibido = $this->pago_cliente;
             }
             else{
                 $venta->total_pagado_cliente = $total_venta;
@@ -236,7 +238,10 @@ class VentaFacturacion extends Component
                 $movimiento->observacion = 'Venta a contado';
                 $movimiento->user_id = $user_auth;
                 $movimiento->sucursal_id = $this->sucursal;
+                $movimiento->estado = 'entregado';
                 $movimiento->save();
+
+                $total_recibido = $total_venta;
             }
             $venta->subtotal = Cart::subtotal();
             $venta->total = $total_venta;
@@ -249,7 +254,7 @@ class VentaFacturacion extends Component
 
             //REGISTRANDO VENTA EN TABLAS DE SUCURSAL AÑADIENDO SALDO
             $caja_final->update([
-                'saldo' => $saldo_caja_final + $this->pago_cliente,
+                'saldo' => $saldo_caja_final + $total_recibido,
             ]);  
             $sucursales1 = Sucursal::all();
             foreach (Cart::content() as $item) {
