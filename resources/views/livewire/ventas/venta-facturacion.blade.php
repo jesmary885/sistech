@@ -141,12 +141,12 @@
                         Subtotal menos descuento
                         <span class="font-semibold">S/ {{Cart::subtotal() - $descuento_total}}</span>
                     </p>
-                    <p class="flex justify-between items-center">
+                    {{-- <p class="flex justify-between items-center">
                         IVA {{$iva*100}} %
                         <span class="font-semibold">
                         S/ {{Cart::subtotal() * $this->iva}}
                         </span>
-                    </p>
+                    </p> --}}
     
     
                     <div class="hidden" :class="{'hidden': tipo_pago != 2}">
@@ -160,7 +160,7 @@
                         <p class="flex justify-between items-center">
                             Pendiente por pagar
                             <span class="font-semibold">
-                            S/ {{((Cart::subtotal() - $descuento_total) + ((Cart::subtotal() - $descuento_total) * ($iva))) - ((int)$pago_cliente)}}
+                            S/ {{((Cart::subtotal() - $descuento_total) + ((Cart::subtotal() - $descuento_total))) - ((int)$pago_cliente)}}
                             </span>
                         </p>
                     </div>
@@ -168,7 +168,7 @@
                     <hr class="mt-4 mb-3">
                     <p class="flex justify-between items-center font-semibold">
                         <span class="text-lg">Total a pagar</span>
-                        S/ {{( (Cart::subtotal() * $this->iva) + Cart::subtotal() ) - ($descuento_total)}}
+                        S/ {{( (Cart::subtotal()) + Cart::subtotal() ) - ($descuento_total)}}
                     </p>
                 </div>
             </div>
@@ -200,6 +200,8 @@
                         <option value="1">Efectivo</option>
                         <option value="2">Tarjeta Credito</option>
                         <option value="3">Tarjeta Debito </option>
+                        <option value="4">Efectivo y Tarjeta Debito</option>
+                        <option value="5">Efectivo y Tarjeta Credito</option>
                     </select>
                     <x-input-error for="metodo_pago" />
                 </div>

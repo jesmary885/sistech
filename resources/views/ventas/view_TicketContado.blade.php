@@ -136,7 +136,7 @@ $medidaTicket = 180;
                     <p>S/ {{$descuento}}</p>
                 </td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <td class="cantidad"></td>
                 <td class="producto">
                     <strong>IMPUESTO</strong>
@@ -144,7 +144,7 @@ $medidaTicket = 180;
                 <td class="precio">
                     <p>S/ {{$impuesto}}</p>
                 </td>
-            </tr>
+            </tr> --}}
             <tr>
                 <td class="cantidad"></td>
                 <td class="producto">

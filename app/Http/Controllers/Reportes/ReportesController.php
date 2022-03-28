@@ -33,6 +33,11 @@ class ReportesController extends Controller
         return view('reportes.index-traslados',compact('vista'));
     }
 
+    public function index_desactivados(){
+    
+        return view('reportes.index-desactivados');
+    }
+
 
     public function productos($sucursal_id,$fecha_inicio,$fecha_fin)
     {

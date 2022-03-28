@@ -94,12 +94,15 @@
                         <hr>
                         <div class="flex mt-3">
                             <i class="fas fa-luggage-cart mr-2"></i>
-                            <h2 class="text-md">Valor en puntos</h2>
+                            <h2 class="text-md">Valor en puntos y cantidad mínima</h2>
                         </div>
                         <div class="w-1/4">
-                            <input title="Puntos" wire:model="puntos" type="number" min="0" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Tiempo de garantia">
+                            <input title="Puntos" wire:model="puntos" type="number" min="0" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Puntos">
                             <x-input-error for="puntos" />
-
+                        </div>
+                        <div class="w-1/4">
+                            <input title="Cantidad mínima" wire:model="inv_min" type="number" min="0" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cantidad mínima">
+                            <x-input-error for="inv_min" />
                         </div>
                         <hr>
                             

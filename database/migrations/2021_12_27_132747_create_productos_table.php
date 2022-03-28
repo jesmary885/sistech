@@ -25,6 +25,7 @@ class CreateProductosTable extends Migration
             $table->string('estado');
            // $table->string('presentacion');
             $table->integer('puntos');
+            $table->integer('inv_min');
             //$table->string('percepcion');
             $table->string('observaciones')->nullable();
             $table->unsignedBigInteger('categoria_id');

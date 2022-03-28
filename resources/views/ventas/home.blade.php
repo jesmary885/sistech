@@ -212,7 +212,8 @@
                     <tr id="fa">
                         <th class="text-center">Ventas a contado</th>
                         <th class="text-center">Ventas a credito</th>
-                        <th class="text-center">Total</th>
+                        <th class="text-center">Compras</th>
+                        <th class="text-center">Total de ganancias</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -220,7 +221,8 @@
                     <tr>
                         <td class="text-center">{{$total_contado}} </td>
                         <td class="text-center">{{$total_credito}}</td>
-                        <td class="text-center">{{$total_contado + $total_credito}}</td>
+                        <td class="text-center">{{$total_compras}} </td>
+                        <td class="text-center">{{($total_contado + $total_credito) - $total_compras}}</td>
                     </tr>
        
                 </tbody>

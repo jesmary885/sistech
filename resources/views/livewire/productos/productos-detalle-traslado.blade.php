@@ -14,14 +14,25 @@
                     <x-input-error for="sucursal_id" />
                 </div>
             </div>
-
-            
-            
-            
                 <div class="card-body">
                     <div class="flex items-center justify-between">
                         <div class="flex-1">
-                            <input wire:model="search" placeholder="Ingrese el serial del producto a buscar" class="form-control mb-2">
+                            <div class=flex>
+                                <div class="w-1/4">
+                           
+                                    <select wire:model="buscador" id="buscador" class="form-control text-m" name="buscador">
+                                        <option value="0">Modelo</option>
+                                        <option value="1">Categoria</option>
+                                        <option value="2">Código de barra</option>
+                                        <option value="3">Serial</option>
+                                    </select>
+                
+                                    <x-input-error for="buscador" />
+            
+                                </div>
+                                <input wire:model="search" placeholder="Ingrese {{$item_buscar}}" class="form-control mb-2">
+        
+                            </div>
                         </div>
                         <div class="ml-2">
                             <button

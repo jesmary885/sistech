@@ -122,6 +122,11 @@ Route::get('ventas_clientes/{sucursal}',[VentasViewController::class,'view'])->n
 //reporte de traslados
 Route::get('reporte_traslados',[ReportesController::class,'index_traslados'])->name('reportes.index.traslados'); 
 Route::get('reportes_traslados/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'traslados'])->name('traslados.reportes');
+
+//reporte de productos desactivados
+Route::get('reporte_desactivados',[ReportesController::class,'index_desactivados'])->name('reportes.index.desactivados'); 
+
+
 //reporte movimientos en caja
 Route::get('reporte_caja',[ReportesController::class,'index_caja'])->name('reportes.index.caja');
 Route::get('reportes_caja/{sucursal_id}/{fecha_inicio}/{fecha_fin}',[ReportesController::class,'cajas'])->name('cajas.reportes');

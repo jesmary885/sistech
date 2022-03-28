@@ -31,7 +31,7 @@ class ProductosIndex extends Component
 
         $sucursales = Sucursal::all();
 
-        if($this->buscador == 0){
+        if($this->buscador == 3){
             $productos = Producto::where('nombre', 'LIKE', '%' . $this->search . '%')
             ->where('cod_barra', 'LIKE', '%' . $this->search . '%')
             ->where('estado','1')
@@ -61,7 +61,7 @@ class ProductosIndex extends Component
             $this->item_buscar = "la marca del producto a buscar";
         }
 
-        if($this->buscador == 3){
+        if($this->buscador == 0){
 
             $productos = Producto::whereHas('modelo',function(Builder $query){
                 $query->where('nombre','LIKE', '%' . $this->search . '%')

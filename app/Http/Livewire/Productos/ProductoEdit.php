@@ -20,7 +20,7 @@ class ProductoEdit extends Component
 {
     use WithFileUploads;
     public $isopen = false;
-    public $pivot, $nombre, $p, $puntos, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $modelos, $proveedores, $sucursales,$producto;
+    public $pivot, $nombre, $p, $puntos, $fecha_actual, $inv_min, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $modelos, $proveedores, $sucursales,$producto;
     public $marca_id = "", $sucursal_id = "" ,$modelo_id = "", $categoria_id = "", $proveedor_id ="";
     public $limitacion_sucursal = true;
 
@@ -29,6 +29,7 @@ class ProductoEdit extends Component
         'precio_mayor' => 'required',
         'categoria_id' => 'required',
         'marca_id' => 'required',
+        'inv_min' => 'required',
         'modelo_id' => 'required',
         'sucursal_id' => 'required',
         'estado' => 'required',
@@ -64,6 +65,7 @@ class ProductoEdit extends Component
       //   $this->inventario_min = $this->producto->inventario_min;
          $this->modelo_id = $this->producto->modelo_id;
          $this->categoria_id = $this->producto->categoria_id;
+         $this->inv_min = $this->producto->inv_min;
      //    $this->tipo_garantia = $this->producto->tipo_garantia;
     //     $this->garantia = $this->producto->garantia;
         $this->marca_id = $this->producto->marca_id;
@@ -123,6 +125,7 @@ class ProductoEdit extends Component
                 'modelo_id' => $this->modelo_id,
                 'categoria_id' => $this->categoria_id,
                 'puntos' => $this->puntos,
+                'inv_min' => $this->inv_min,
                 'marca_id' => $this->marca_id,
                 'observaciones' => $this->observaciones,
                 'estado' => $this->estado

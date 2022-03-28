@@ -223,14 +223,14 @@
                             <p align="center">S/ {{$descuento}}</p>
                         </td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <th colspan="3">
                             <p align="right">IMPUESTO ({{$iva * 100}} %): </p>
                         </th>
                         <td>
                             <p align="center">S/  {{$impuesto}}</p>
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <th colspan="3">
                             <p align="right">TOTAL A PAGAR: </p>

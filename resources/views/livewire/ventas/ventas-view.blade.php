@@ -70,13 +70,6 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td>Impuesto</td>
-                                                <td>{{$impuesto}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
                                                 <td>Total a pagar</td>
                                                 <td>{{$total}}</td>
                                             </tr>

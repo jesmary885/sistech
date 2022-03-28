@@ -110,6 +110,9 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'reportes.ventas',
         'description' => 'Generar reportes de ventas'])->syncRoles([$role1]);
 
+        Permission::create(['name' => 'reportes.desactivados',
+        'description' => 'Administrar productos desactivados por traslado'])->syncRoles([$role1]);
+
         Permission::create(['name' => 'reportes.movimientos_caja',
         'description' => 'Generar reportes de movimientos en cajas'])->syncRoles([$role1]);
 

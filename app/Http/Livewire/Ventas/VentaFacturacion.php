@@ -122,16 +122,16 @@ class VentaFacturacion extends Component
         }
  
         $user_auth =  auth()->user()->id;
-        $impuesto= Cart::subtotal() * $this->iva;
+       // $impuesto= Cart::subtotal() * $this->iva;
 
         //PROFORMA
         if($this->proforma == 'proforma'){
             if($this->canjeo==false){
                 $descuento_total = Cart::subtotal() * ($this->descuento / 100);
-                $total_venta = ($impuesto + Cart::subtotal()) - $descuento_total;
+                $total_venta = (Cart::subtotal()) - $descuento_total;
             }else{
                 $descuento_total = Cart::subtotal() * (($this->descuento / 100) + ($this->porcentaje_descuento_puntos / 100));
-                $total_venta = ($impuesto + Cart::subtotal()) - $descuento_total;
+                $total_venta = (Cart::subtotal()) - $descuento_total;
             } 
             
             if($this->estado_entrega == "1") $entrega = 'Entregado'; else
@@ -156,7 +156,7 @@ class VentaFacturacion extends Component
             $proform->sucursal_id = $this->sucursal;
             $proform->estado_entrega = $entrega;
             $proform->descuento = $descuento_total;
-            $proform->impuesto=$impuesto;
+           // $proform->impuesto=$impuesto;
             $proform->estado='activa';
             $proform->save();
 
@@ -181,7 +181,7 @@ class VentaFacturacion extends Component
 
             if($this->canjeo==false){
                 $descuento_total = Cart::subtotal() * ($this->descuento / 100);
-                $total_venta = ($impuesto + Cart::subtotal()) - $descuento_total;
+                $total_venta = (Cart::subtotal()) - $descuento_total;
                 $nuevos_puntos = $this->client->puntos + round($total_venta,0);
 
                 $this->client->update([
@@ -190,7 +190,7 @@ class VentaFacturacion extends Component
             }
             else{
                 $descuento_total = Cart::subtotal() * (($this->descuento / 100) + ($this->porcentaje_descuento_puntos / 100));
-                $total_venta = ($impuesto + Cart::subtotal()) - $descuento_total;
+                $total_venta = (Cart::subtotal()) - $descuento_total;
                 //verifica si es porque debes colocar entero el total velo con dd a ver que te trae
                 
                 $nuevos_puntos = ($this->client->puntos - $this->puntos_canjeados) + round($total_venta,0);
@@ -248,7 +248,7 @@ class VentaFacturacion extends Component
             $venta->sucursal_id = $this->sucursal;
             $venta->estado_entrega = $entrega;
             $venta->descuento = $descuento_total;
-            $venta->impuesto=$impuesto;
+            //$venta->impuesto=$impuesto;
             $venta->estado='activa';
             $venta->save();
 
@@ -320,7 +320,6 @@ class VentaFacturacion extends Component
                     'descuento' => $descuento_total,
                     'subtotal' => Cart::subtotal(),
                     'subtotal_menos_descuento' => Cart::subtotal() - ($descuento_total),
-                    'impuesto' => $impuesto,
                     'total' => $total_venta,
                     'proforma' =>$this->proforma,
                     'iva' => $this->iva,];
@@ -376,7 +375,6 @@ class VentaFacturacion extends Component
                     'proforma' => $this->proforma,
                     'pagado' => $this->pago_cliente,
                     'deuda' => $total_venta - $this->pago_cliente,
-                    'impuesto' => $impuesto,
                     'subtotal' => Cart::subtotal(),
                     'total' => $total_venta,
                     'iva' => $this->iva,

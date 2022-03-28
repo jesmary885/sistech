@@ -7,10 +7,10 @@
                         <div class="w-1/4">
                    
                             <select wire:model="buscador" id="buscador" class="form-control text-m" name="buscador">
-                                <option value="0">Código de barra</option>
+                                <option value="0">Modelo</option>
                                 <option value="1">Categoria</option>
                                 <option value="2">Marca</option>
-                                <option value="3">Modelo</option>
+                                <option value="3">Código de barra</option>
                             </select>
         
                             <x-input-error for="buscador" />
@@ -47,7 +47,17 @@
                         </thead>
                         <tbody>
                             @foreach ($productos as $producto)
-                                <tr>
+                            <?php
+                                        $cant = 0;
+                                        foreach($sucursales as $sucursal){
+                                            $cant = $cant + $producto->sucursals->find($sucursal)->pivot->cantidad;
+                                        }
+
+                                        if($cant < $producto->inv_min) $inv_bg = 'bg-red-400';
+                                        else $estado_bg = 'white';
+                                    ?>
+                                    
+                                <tr class="{{$estado_bg}}">
                                     <td align="center">
                                         @if ($producto->imagen)
                                             <img class="img-rounded m-0" width="90" height="90"  src="{{Storage::url($producto->imagen->url)}}" alt="">
@@ -57,12 +67,7 @@
                                     </td>
                                     <td class="text-center">{{$producto->cod_barra}}</td>
                                     <td class="text-justify">{{$producto->categoria->nombre}} {{$producto->marca->nombre}} {{$producto->modelo->nombre}}</td>
-                                    <?php
-                                        $cant = 0;
-                                        foreach($sucursales as $sucursal){
-                                            $cant = $cant + $producto->sucursals->find($sucursal)->pivot->cantidad;
-                                        }
-                                    ?>
+                                    
                                     <td class="text-center">@livewire('productos.productos-stock-sucursal', ['producto' => $producto, 'cant' => $cant],key(0.,'$producto->id')) </td>
                                         {{-- <b>{{$sucursal->nombre}}</b> = {{$producto->sucursals->find($sucursal)->pivot->cantidad}}, --}}
                                     <td class="text-center">{{$producto->precio_letal}}</td>

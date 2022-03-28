@@ -16,7 +16,6 @@ class CreateProductosTrasladosTable extends Migration
         Schema::create('productos_traslados', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
             $table->unsignedBigInteger('sucursal_id');
             $table->foreign('sucursal_id')->references('id')->on('sucursals');
             $table->unsignedBigInteger('producto_serial_sucursal_id');

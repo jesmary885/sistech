@@ -11,6 +11,7 @@ use App\Models\Producto_sucursal as Pivot;
 use App\Models\ProductoSerialSucursal;
 use App\Models\ProductosTraslado;
 use App\Models\Traslado;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\WithPagination;
 
 class ProductosDetalleTraslado extends Component
@@ -46,10 +47,51 @@ class ProductosDetalleTraslado extends Component
     {
       
        
-        $productos = ProductoSerialSucursal::where('serial', 'LIKE', '%' . $this->search . '%')
+       /* $productos = ProductoSerialSucursal::where('serial', 'LIKE', '%' . $this->search . '%')
+            ->where('sucursal_id',$this->sucursal)
+            ->where('estado','activo')
+            ->paginate(5);*/
+
+
+            if($this->buscador == 0){
+                $productos = ProductoSerialSucursal::whereHas('modelo',function(Builder $query){
+                    $query->where('nombre','LIKE', '%' . $this->search . '%')
+                    ->where('sucursal_id',$this->sucursal)
+                    ->where('estado','activo');
+                })->paginate(5);
+    
+                $this->item_buscar = "el modelo del producto a buscar ";
+            }
+            if($this->buscador == 1){
+                $productos = ProductoSerialSucursal::whereHas('categoria',function(Builder $query){
+                    $query->where('nombre','LIKE', '%' . $this->search . '%')
+                    ->where('sucursal_id',$this->sucursal)
+                    ->where('estado','activo');
+                })->paginate(5);
+    
+                $this->item_buscar = "la categoria del producto a buscar ";
+            }
+
+            if($this->buscador == 2){
+                $productos = ProductoSerialSucursal::where('cod_barra', 'LIKE', '%' . $this->search . '%')
             ->where('sucursal_id',$this->sucursal)
             ->where('estado','activo')
             ->paginate(5);
+    
+                $this->item_buscar = "el código de barra del producto a buscar ";
+            }
+
+            if($this->buscador == 3){
+                $productos = ProductoSerialSucursal::where('serial', 'LIKE', '%' . $this->search . '%')
+            ->where('sucursal_id',$this->sucursal)
+            ->where('estado','activo')
+            ->paginate(5);
+    
+                $this->item_buscar = "el serial del producto a buscar ";
+            }
+
+
+            
 
         return view('livewire.productos.productos-detalle-traslado',compact('productos'));
     }

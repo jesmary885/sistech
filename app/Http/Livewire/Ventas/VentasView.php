@@ -39,7 +39,7 @@ class VentasView extends Component
         $this->sucursal = $this->venta->sucursal->nombre;
         $this->subtotal = $this->venta->subtotal;
         $this->descuento = $this->venta->descuento;
-        $this->impuesto = $this->venta->impuesto;
+      //  $this->impuesto = $this->venta->impuesto;
         $this->total = $this->venta->total;
         $this->tipo_pago = $this->venta->tipo_pago;
         $this->telefono_cliente = $this->venta->cliente->telefono;
@@ -68,7 +68,6 @@ class VentasView extends Component
                 'estado_entrega' => $this->estado_entrega,
                 'descuento' => $this->descuento,
                 'subtotal' => $this->subtotal,
-                'impuesto' => $this->impuesto,
                 'total' => $this->total,
                 'productos' => $productos,
                 'iva' => $this->iva,
@@ -90,7 +89,6 @@ class VentasView extends Component
                 'descuento' => $this->descuento,
                 'subtotal' => $this->subtotal,
                 'pagado' => $this->pago_cliente,
-                'impuesto' => $this->impuesto,
                 'total' => $this->total,
                 'productos' => $productos,
                 'deuda' => $this->deuda_cliente,

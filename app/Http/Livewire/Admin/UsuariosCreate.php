@@ -18,7 +18,7 @@ class UsuariosCreate extends Component
 
     public $estado_id ="",$ciudad_id ="", $roles_id, $sucursales_id = "";
     public $ciudades = [];
-    public $name, $apellido, $sucursales, $limitacion, $roles, $tipo_documento, $nro_documento, $telefono, $email, $estado, $password, $direccion, $password_confirm, $estados;
+    public $name, $apellido, $changePrice, $sucursales, $limitacion, $roles, $tipo_documento, $nro_documento, $telefono, $email, $estado, $password, $direccion, $password_confirm, $estados;
     
     protected $rules = [
         'estado_id' => 'required',
@@ -88,10 +88,12 @@ class UsuariosCreate extends Component
             $usuario->estado = $this->estado;
             $usuario->sucursal_id = $this->sucursales_id;
             $usuario->limitacion = $this->limitacion;
+            if($this->changePrice == "1")   $usuario->changePrice = 'si';
+            else $usuario->changePrice = 'no';
             $usuario->save();
             $usuario->roles()->sync($this->roles_id);
 
-            $this->reset(['name','apellido','email','telefono','sucursales_id','limitacion','password','password_confirm','nro_documento','tipo_documento','direccion','estado','ciudad_id','estado_id','roles_id']);
+            $this->reset(['name','apellido','email','changePrice' ,'telefono','sucursales_id','limitacion','password','password_confirm','nro_documento','tipo_documento','direccion','estado','ciudad_id','estado_id','roles_id']);
             $this->emit('alert','usuario creado correctamente');
         } else{
             $rul_password_conf = $this->rul_password_confirm;

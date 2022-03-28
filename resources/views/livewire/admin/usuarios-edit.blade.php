@@ -160,6 +160,13 @@
                     </select>
                     <x-input-error for="sucursales_id" />
                 </div>
+                <hr class="mb-0 pb-0" >
+
+            <div class="flex w-full h-full mt-1 ml-4">
+                <input type="checkbox" class="ml-1 mt-1" wire:model="changePrice" value="1">
+                <p class="text-sm font-semibold text-gray-500 ml-2">Permitir cambiar precios en venta</p>
+            </div>
+            
             </div>
         </div>
             <div class="modal-footer">

@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Admin\Clientes;
 
+use App\Http\Jne\DniFactory;
 use App\Models\Ciudad;
 use App\Models\Cliente;
 use App\Models\Estado;
+use App\reniec\Reniec;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -18,29 +20,29 @@ class ClientesCreate extends Component
     public $vista, $accion, $cliente;
       
     protected $rules_create = [
-        'estado_id' => 'required',
-        'ciudad_id' => 'required',
+        /*'estado_id' => 'required',
+        'ciudad_id' => 'required',*/
         'nombre' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
         'apellido' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
-        'direccion' => 'required|max:50',
+        'direccion' => 'max:50',
         'nro_documento' => 'required|min:5|unique:clientes',
         'tipo_documento' => 'required',
-        'telefono' => 'required|numeric|min:9',
-        'email' => 'required|max:50|email|unique:clientes'
+       // 'telefono' => 'min:9',
+        'email' => 'max:50|unique:clientes'
     ];
     
     protected $rules_mail_edit = [
-        'email' => 'required|max:50|unique:clientes->ignore($this->cliente->id, )',
+        'email' => 'max:50|unique:clientes->ignore($this->cliente->id, )',
     ];
 
     protected $rules_edit = [
-        'estado_id' => 'required',
-        'ciudad_id' => 'required',
+       /* 'estado_id' => 'required',
+        'ciudad_id' => 'required',*/
         'nombre' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
         'apellido' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
-        'direccion' => 'required|max:50',
+        'direccion' => 'max:50',
         'tipo_documento' => 'required',
-        'telefono' => 'required|numeric|min:9',
+      //  'telefono' => 'numeric|min:9',
 
     ];
 
@@ -90,6 +92,31 @@ class ClientesCreate extends Component
         $this->isopen = false;  
     }
 
+    public function buscar_dni(){
+     
+            $dni=$this->nro_documento;
+
+           
+            
+            $factory = new DniFactory();
+            $cs = $factory->create();
+            $person = $cs->get($dni);
+
+            
+          //  dd($person);
+
+            if (!$person) {
+               return $this->emit('errorSize','El dni ingresado no se encuentra en los registros del Reniec');
+            }
+
+            $persona_reniec = json_encode($person);
+            $persona_dni = json_decode($persona_reniec, true);
+
+            $this->nombre = $persona_dni['nombres'];
+            $this->apellido = $persona_dni['apellidoPaterno'];
+
+    }
+
     public function save(){
            
 
@@ -102,13 +129,13 @@ class ClientesCreate extends Component
                 $cliente = new Cliente();
                 $cliente->nombre = $this->nombre;
                 $cliente->apellido = $this->apellido;
-                $cliente->email = $this->email;
+                if($this->email) $cliente->email = $this->email;
                 $cliente->nro_documento = $this->nro_documento;
                 $cliente->tipo_documento = $this->tipo_documento;
-                $cliente->direccion= $this->direccion;
-                $cliente->telefono = $this->telefono;
-                $cliente->ciudad_id = $this->ciudad_id;
-                $cliente->estado_id = $this->estado_id;
+                if($this->direccion) $cliente->direccion= $this->direccion;
+                if($this->telefono) $cliente->telefono = $this->telefono;
+                if($this->ciudad_id) $cliente->ciudad_id = $this->ciudad_id;
+                if($this->estado_id) $cliente->estado_id = $this->estado_id;
                 $cliente->user_id = $usuario_auth;
                 $cliente->puntos = '0';
 
@@ -125,15 +152,19 @@ class ClientesCreate extends Component
                 $rules_edit = $this->rules_edit;
                 $this->validate($rules_edit);
 
-                $rule_email = [
-                    'email' => 'required|max:50|email|unique:clientes,email,' .$this->cliente->id,
-                ];
+                if($this->email){
+                    $rule_email = [
+                        'email' => 'required|max:50|email|unique:clientes,email,' .$this->cliente->id,
+                    ];
+
+                    $this->validate($rule_email);
+                }
+
 
                 $rule_documento = [
                     'nro_documento' => 'required|min:5|unique:clientes,nro_documento,' .$this->cliente->id,
                 ];
 
-                $this->validate($rule_email);
                 $this->validate($rule_documento);
 
              //   $validate_email = [Rule$table->dropUnique('users_email_unique');('clientes')->ignore($this->cliente->id, 'id' )];

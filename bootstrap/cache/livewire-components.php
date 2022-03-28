@@ -49,6 +49,7 @@
   'proformas.proforma-detalle' => 'App\\Http\\Livewire\\Proformas\\ProformaDetalle',
   'proformas.proformas-view' => 'App\\Http\\Livewire\\Proformas\\ProformasView',
   'reportes.reporte-caja' => 'App\\Http\\Livewire\\Reportes\\ReporteCaja',
+  'reportes.reporte-desactivados' => 'App\\Http\\Livewire\\Reportes\\ReporteDesactivados',
   'reportes.reporte-index' => 'App\\Http\\Livewire\\Reportes\\ReporteIndex',
   'reportes.reporte-index-traslados' => 'App\\Http\\Livewire\\Reportes\\ReporteIndexTraslados',
   'reportes.reporte-producto' => 'App\\Http\\Livewire\\Reportes\\ReporteProducto',

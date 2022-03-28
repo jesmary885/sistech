@@ -395,6 +395,11 @@ return [
                     'can' => 'reportes.traslados'
                 ],
                 [
+                    'text' => 'Productos desactivados',
+                    'route' => 'reportes.index.desactivados',
+                    'can' => 'reportes.desactivados'
+                ],
+                [
                     'text'    => 'Ventas',
                     'route'     => 'reportes.index.ventas',
                     'can' => 'reportes.ventas'

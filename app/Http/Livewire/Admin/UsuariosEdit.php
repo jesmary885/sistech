@@ -16,7 +16,7 @@ class UsuariosEdit extends Component
 
     public $estado_id ="",$ciudad_id ="", $roles_id, $sucursales_id = "";
     public $estados, $usuario;
-    public $name, $apellido, $sucursales, $limitacion, $roles, $tipo_documento, $nro_documento, $telefono, $email, $ciudades, $estado, $password, $direccion, $password_confirm;
+    public $name, $apellido, $sucursales, $changePrice, $limitacion, $roles, $tipo_documento, $nro_documento, $telefono, $email, $ciudades, $estado, $password, $direccion, $password_confirm;
 
     public $isopen = false;
 
@@ -68,6 +68,8 @@ class UsuariosEdit extends Component
         $this->password_confirm = $this->password;
         $this->estado = $this->usuario->estado;
         $this->limitacion = $this->usuario->limitacion;
+        if($this->usuario->changePrice == 'no') $this->changePrice = 0;
+        elseif($this->usuario->changePrice == 'si') $this->changePrice = 1;
         $this->sucursales_id = $this->usuario->sucursal_id;
         $this->roles_id = $this->usuario->roles->first()->id;
         $this->estados=Estado::all();
@@ -104,6 +106,9 @@ class UsuariosEdit extends Component
 
         $this->validate($rule_email);
         $this->validate($rule_documento);
+
+        if($this->changePrice == "1") $changePrice= "si";
+        elseif($this->changePrice == "0") $changePrice= "no";
  
         if($this->password == $this->password_confirm){
             $this->usuario->update([
@@ -120,7 +125,8 @@ class UsuariosEdit extends Component
                 'ciudad_id' => $this->ciudad_id,
                 'estado_id' => $this->estado_id,
                 'sucursal_id' => $this->sucursales_id,
-                'limitacion' => $this->limitacion
+                'limitacion' => $this->limitacion,
+                'changePrice' => $changePrice,
             ]);
             $this->usuario->roles()->sync($this->roles_id);
 
