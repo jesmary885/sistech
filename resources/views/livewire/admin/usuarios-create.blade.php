@@ -7,7 +7,8 @@
            <div class="card-body w-full m-0">
             <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Complete todos los campos y presiona Guardar</h2> 
             <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> El campo Email debe registrarlo completo, ejemplo: maria@gmail.com </h2> 
-            <h2 class="text-sm ml-2 m-0 p-0 mb-2 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> La contraseña debe contener mínimo 6 y máximo 12 caracteres</h2> 
+            <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> La contraseña debe contener mínimo 6 y máximo 12 caracteres</h2> 
+            <h2 class="text-sm ml-2 m-0 p-0 mb-2 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Haga click en el check al lado de la frase "Permitir cambiar precios en venta" si desea que el usuario tenga este privilegio</h2> 
             <hr class="m-0 p-0">
                <div class="flex">
                      <i class="far fa-address-card mt-3 mr-1"></i>
@@ -120,6 +121,11 @@
                         </select>
                         <x-input-error for="roles_id" />
                     </div>
+
+                    <div class="flex w-full h-full ml-2 mt-2">
+                        <input type="checkbox" class="ml-1 mt-1" wire:model="changePrice" value="1">
+                        <p class="text-sm font-semibold text-gray-500 ml-2">Permitir cambiar precios en venta</p>
+                    </div>
                    
                 </div>
                 
@@ -152,12 +158,9 @@
                     <x-input-error for="sucursales_id" />
                 </div>
             </div>
-            <hr class="mb-0 pb-0" >
+            
 
-            <div class="flex w-full h-full mt-1 ml-4">
-                <input type="checkbox" class="ml-1 mt-1" wire:model="changePrice" value="1">
-                <p class="text-sm font-semibold text-gray-500 ml-2">Permitir cambiar precios en venta</p>
-            </div>
+           
 
             <hr class="mb-0 pb-0">
 

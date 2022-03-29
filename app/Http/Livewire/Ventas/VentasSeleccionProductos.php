@@ -34,13 +34,13 @@ class VentasSeleccionProductos extends Component
     public function render()
     {
         $sucursal = $this->sucursal;
+        $usuario =  auth()->user()->id;
 
         $sucursales = Sucursal::all();
 
         $proforma = $this->proforma;
 
-       
-        if($this->buscador == '1'){
+        if($this->buscador == '4'){
             $this->tipo = 0;
             $productos = ProductoSerialSucursal::where('serial', 'LIKE', '%' . $this->search . '%')
             ->where('sucursal_id',$this->sucursal)
@@ -48,46 +48,53 @@ class VentasSeleccionProductos extends Component
             ->paginate(5);
             
             $this->item_buscar = "el serial del producto a buscar";
-        }
-        elseif($this->buscador == '2'){
+       }
+
+       elseif($this->buscador == '3'){
+        $productos = ProductoSerialSucursal::where('cod_barra', 'LIKE', '%' . $this->search . '%')
+        ->where('sucursal_id',$this->sucursal)
+        ->where('estado','activo')
+        ->paginate(5);
+        $this->item_buscar = "el código de barra del producto a buscar";
+    }
+
+    elseif($this->buscador == '2'){
+        $productos = ProductoSerialSucursal::whereHas('categoria',function(Builder $query){
+            $query->where('nombre','LIKE', '%' . $this->search . '%')
+            ->where('sucursal_id',$this->sucursal)
+            ->where('estado','activo');
+        })->paginate(5);
+
+        $this->item_buscar = "la categoria del producto a buscar";
+    }
+
+       elseif($this->buscador == '1'){
             $productos = ProductoSerialSucursal::whereHas('marca',function(Builder $query){
                 $query->where('nombre','LIKE', '%' . $this->search . '%')
                 ->where('sucursal_id',$this->sucursal)
                 ->where('estado','activo');
-             })->paginate(5);
+            })->paginate(5);
 
-             $this->item_buscar = "la marca del producto a buscar";
+            $this->item_buscar = "la marca del producto a buscar";
         }
 
-        elseif($this->buscador == '3'){
-             $productos = ProductoSerialSucursal::whereHas('modelo',function(Builder $query){
-                $query->where('nombre','LIKE', '%' . $this->search . '%')
-                ->where('sucursal_id',$this->sucursal)
-                ->where('estado','activo');
-             })->paginate(5);
-
-             $this->item_buscar = "el nombre del producto a buscar";
-        }
-
-        elseif($this->buscador == '4'){
-            $productos = ProductoSerialSucursal::whereHas('categoria',function(Builder $query){
-                $query->where('nombre','LIKE', '%' . $this->search . '%')
-                ->where('sucursal_id',$this->sucursal)
-                ->where('estado','activo');
-             })->paginate(5);
-
-             $this->item_buscar = "la categoria del producto a buscar";
-        }
-       
         else{
-            $productos = ProductoSerialSucursal::where('cod_barra', 'LIKE', '%' . $this->search . '%')
-            ->where('sucursal_id',$this->sucursal)
-            ->where('estado','activo')
-            ->paginate(5);
-            $this->item_buscar = "el código de barra del producto a buscar";
-        }
 
-        return view('livewire.ventas.ventas-seleccion-productos',compact('productos','sucursal','sucursales','proforma'));
+            $productos = ProductoSerialSucursal::whereHas('modelo',function(Builder $query){
+                $query->where('nombre','LIKE', '%' . $this->search . '%')
+                ->where('sucursal_id',$this->sucursal)
+                ->where('estado','activo');
+             })->paginate(5);
+ 
+             $this->item_buscar = "el modelo del producto a buscar";
+
+            
+        }
+        
+
+
+
+        return view('livewire.ventas.ventas-seleccion-productos',compact('productos','sucursal','sucursales','proforma','usuario'));
     }
 
     public function ayuda(){

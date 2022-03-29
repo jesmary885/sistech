@@ -32,7 +32,16 @@ class ProductosSerialIndex extends Component
 
     public function render()
     {
-        if($this->buscador == 0){
+        if($this->buscador == 4){
+            $productos = ProductoSerialSucursal::where('sucursal_id',$this->sucursal)
+            ->where('estado','activo')
+            ->where('serial', 'LIKE', '%' . $this->search . '%')
+            ->paginate(5);
+
+            $this->item_buscar = "el serial del producto a buscar";
+        }
+
+        if($this->buscador == 3){
             $productos = ProductoSerialSucursal::where('sucursal_id',$this->sucursal)
             ->where('estado','activo')
             ->where('cod_barra', 'LIKE', '%' . $this->search . '%')
@@ -63,7 +72,7 @@ class ProductosSerialIndex extends Component
             $this->item_buscar = "la marca del producto a buscar";
         }
 
-        if($this->buscador == 3){
+        if($this->buscador == 0){
 
             $productos = ProductoSerialSucursal::whereHas('modelo',function(Builder $query){
                 $query->where('nombre','LIKE', '%' . $this->search . '%')

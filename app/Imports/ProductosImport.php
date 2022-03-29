@@ -42,7 +42,6 @@ class ProductosImport implements ToModel, WithHeadingRow, WithBatchInserts, With
             'cod_barra'    => $row['codigo_de_barras'],
             'estado'    => 1,
             'puntos'    => $row['puntos'],
-            'inv_min'    => $row['cantidad_minima'],
             'observaciones'    => $row['observaciones'],
             'categoria_id' => $this->categories[$row['categoria']],
             'modelo_id' => $this->modelos[$row['modelo']],

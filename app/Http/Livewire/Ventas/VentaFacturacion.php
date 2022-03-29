@@ -200,6 +200,8 @@ class VentaFacturacion extends Component
                 ]);
             }   
 
+      
+
 
             if($this->estado_entrega == "1") $entrega = 'Entregado'; else
             $entrega = 'Por entregar';
@@ -301,13 +303,10 @@ class VentaFacturacion extends Component
         }
 
         if($this->proforma == 'proforma') $venta_nro_p = '1';
-        else $venta_nro_p = $venta_nro_p = $venta->id;
+        else $venta_nro_p = $venta->id;
 
     
             if ($this->tipo_pago == "1"){
-
-                
-
                 $data = [
                     'cliente_nombre' => $this->client->nombre." ".$this->client->apellido,
                     'cliente_documento' =>$this->client->nro_documento,

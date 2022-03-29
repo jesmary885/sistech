@@ -21,7 +21,7 @@ class ProductosDetalleTraslado extends Component
     protected $paginationTheme = "bootstrap";
 
     public $isopen = false;
-    public $sucursal, $cantidad, $sucursal_id = "", $sucursales,$prod, $prodr;
+    public $sucursal, $cantidad, $sucursal_id = "", $sucursales,$prod, $prodr,$buscador;
 
     protected $listeners = ['render' => 'render'];
     

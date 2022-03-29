@@ -33,7 +33,7 @@
                     <x-input-error for="precio_entrada" />
                 </div>
                 <div class="w-full mr-2">
-                    <input wire:model="precio_letal" type="number" min="0" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio de venta al detal">
+                    <input wire:model="precio_letal" type="number" min="0" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio de venta unitario">
                     <x-input-error for="precio_letal" />
                 </div>
                 <div class="w-full">
@@ -89,11 +89,6 @@
                 <div class="w-1/4 mr-2">
                     <input wire:model="cantidad" type="number" min="0" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cantidad">
                     <x-input-error for="cantidad" />
-                </div>
-
-                <div class="w-1/4 mr-2">
-                    <input wire:model="inv_min" type="number" min="0" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cantidad mínima">
-                    <x-input-error for="inv_min" />
                 </div>
 
                 {{-- <div class="w-full mr-2">

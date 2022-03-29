@@ -48,7 +48,7 @@ class ProductosCreate extends Component
          'proveedor_id' => 'required',
          'sucursal_id' => 'required',
          'estado' => 'required',
-         'inv_min' => 'required',
+
          'file' => 'max:1024',
       ];
 
@@ -116,7 +116,7 @@ class ProductosCreate extends Component
             $producto->precio_mayor = $this->precio_mayor;
             $producto->modelo_id = $this->modelo_id;
             $producto->marca_id = $this->marca_id;
-            $producto->inv_min = $this->inv_min;
+   
             $producto->categoria_id = $this->categoria_id;
             $producto->observaciones = $this->observaciones;
             $producto->estado = $this->estado;
@@ -203,7 +203,7 @@ class ProductosCreate extends Component
                 }
             }
 
-            $this->reset(['nombre','puntos','cantidad','cod_barra','inv_min','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','marca_id','file']);
+            $this->reset(['nombre','puntos','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','marca_id','file']);
             $this->emit('alert','Producto creado correctamente');
             $this->emitTo('productos.productos-index','render');
         }

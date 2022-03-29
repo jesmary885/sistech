@@ -129,17 +129,22 @@
                     <p class="flex justify-between items-center">
                         Descuento
                         @if ($canjeo == false)
-                            <span class="font-semibold">S/ {{Cart::subtotal() * ((int)($this->descuento) / 100)}}</span>
+                            <span class="font-semibold">S/ {{Cart::subtotal() * ($this->descuento / 100)}}</span>
                         @else
-                            <span class="font-semibold">S/ {{$descuento_total}}</span>
+                            <span class="font-semibold">S/ {{$this->descuento_total}}</span>
                         @endif
                        
-                        
+    
                         {{-- <span class="font-semibold">S/ {{$descuento_total = Cart::subtotal() * ($this->descuento / 100)}}</span> --}}
                     </p>
+                  
                     <p class="flex justify-between items-center">
                         Subtotal menos descuento
-                        <span class="font-semibold">S/ {{Cart::subtotal() - $descuento_total}}</span>
+                        @if ($canjeo == false)
+                        <span class="font-semibold">S/ {{Cart::subtotal() - (Cart::subtotal() * ($this->descuento / 100))}}</span>
+                        @else
+                        <span class="font-semibold">S/ {{Cart::subtotal() - $this->descuento_total}}</span>
+                    @endif
                     </p>
                     {{-- <p class="flex justify-between items-center">
                         IVA {{$iva*100}} %
@@ -160,15 +165,23 @@
                         <p class="flex justify-between items-center">
                             Pendiente por pagar
                             <span class="font-semibold">
-                            S/ {{((Cart::subtotal() - $descuento_total) + ((Cart::subtotal() - $descuento_total))) - ((int)$pago_cliente)}}
-                            </span>
+                                @if ($canjeo == false)
+                                S/ {{(Cart::subtotal() - (Cart::subtotal() * ($this->descuento / 100))) - ($pago_cliente)}}
+                                @else
+                            S/ {{(Cart::subtotal() - ($this->descuento_total)) - ($pago_cliente)}}
+                            @endif
+                        </span>
                         </p>
                     </div>
                     
                     <hr class="mt-4 mb-3">
                     <p class="flex justify-between items-center font-semibold">
                         <span class="text-lg">Total a pagar</span>
-                        S/ {{( (Cart::subtotal()) + Cart::subtotal() ) - ($descuento_total)}}
+                        @if ($canjeo == false)
+                        S/ {{Cart::subtotal() - (Cart::subtotal() * ($this->descuento / 100))}}
+                        @else
+                        S/ {{Cart::subtotal() - ($this->descuento_total)}}
+                        @endif
                     </p>
                 </div>
             </div>

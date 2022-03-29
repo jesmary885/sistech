@@ -37,10 +37,11 @@
                             <tr>
                                 <th class="text-center">Imagen</th>
                                 <th class="text-center">Código</th>
-                                <th class="text-center">Producto</th>
+                                <th class="text-center">Prod/Cat</th>
+                                <th class="text-center">Marc/Mod</th>
                                 <th class="text-center">Stock</th>
-                                <th class="text-center">letal</th>
-                                <th class="text-center">mayor</th>
+                                <th class="text-center">Unitario</th>
+                                <th class="text-center">Mayor</th>
                                 <th class="text-center">Puntos</th>
                                 <th colspan="4"></th>
                             </tr>
@@ -52,12 +53,12 @@
                                         foreach($sucursales as $sucursal){
                                             $cant = $cant + $producto->sucursals->find($sucursal)->pivot->cantidad;
                                         }
-
-                                        if($cant < $producto->inv_min) $inv_bg = 'bg-red-400';
-                                        else $estado_bg = 'white';
+                                        if($cant <= 10) $estado_bg = 'bg-red-600';
+                                        elseif($cant > 10 && $cant <= 50) $estado_bg = 'bg-yellow-600';
+                                        elseif($cant > 50) $estado_bg = 'bg-green-600';
                                     ?>
                                     
-                                <tr class="{{$estado_bg}}">
+                                <tr >
                                     <td align="center">
                                         @if ($producto->imagen)
                                             <img class="img-rounded m-0" width="90" height="90"  src="{{Storage::url($producto->imagen->url)}}" alt="">
@@ -66,9 +67,10 @@
                                         @endif
                                     </td>
                                     <td class="text-center">{{$producto->cod_barra}}</td>
-                                    <td class="text-justify">{{$producto->categoria->nombre}} {{$producto->marca->nombre}} {{$producto->modelo->nombre}}</td>
+                                    <td class="text-justify">{{$producto->marca->nombre}}/{{$producto->categoria->nombre}}</td>
+                                    <td class="text-justify">{{$producto->marca->nombre}}/{{$producto->modelo->nombre}}</td>
                                     
-                                    <td class="text-center">@livewire('productos.productos-stock-sucursal', ['producto' => $producto, 'cant' => $cant],key(0.,'$producto->id')) </td>
+                                    <td class="text-center {{$estado_bg}}">@livewire('productos.productos-stock-sucursal', ['producto' => $producto, 'cant' => $cant],key(0.,'$producto->id')) </td>
                                         {{-- <b>{{$sucursal->nombre}}</b> = {{$producto->sucursals->find($sucursal)->pivot->cantidad}}, --}}
                                     <td class="text-center">{{$producto->precio_letal}}</td>
                                     <td class="text-center">{{$producto->precio_mayor}}</td>

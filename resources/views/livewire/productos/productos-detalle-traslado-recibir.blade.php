@@ -37,7 +37,7 @@
                             <tr>
                             <td>{{$p->productoSerialSucursal->producto->nombre}} {{$p->productoSerialSucursal->producto->marca->nombre}} {{$p->productoSerialSucursal->producto->modelo->nombre}}</td>
                             <td>{{$p->productoSerialSucursal->serial}}</td>
-                            <td width="10px"><input type="checkbox" wire:model="prodr.{{$p->id}}" value="{{$p->productoSerialSucursal->serial}}"></td>
+                            <td width="10px"><input type="checkbox" wire:model="prodr.{{$p->id}}" value="{{$p->productoSerialSucursal->id}}"></td>
                             </tr>
                         @endforeach
                     </tbody>

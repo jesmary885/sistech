@@ -6,11 +6,11 @@
                     <div class=flex>
                         <div class="w-1/4">
                             <select wire:model="buscador" id="buscador" class="form-control text-m" name="buscador">
-                                <option value="0">Código de barra</option>
-                                <option value="1">serial</option>
-                                <option value="2">Marca</option>
-                                <option value="3">Modelo</option>
-                                <option value="4">Categoría</option>
+                                <option value="0">Modelo</option>
+                                <option value="1">Marca</option>
+                                <option value="2">Categoria</option>
+                                <option value="3">Código de barra</option>
+                                <option value="4">serial</option>
                             </select>
         
                             <x-input-error for="buscador" />
@@ -36,10 +36,11 @@
                     <table class="table table-bordered table-responsive-md table-responsive-sm">
                         <thead class="thead-dark">
                             <tr>
-                                <th class="text-center">Producto (Nombre/Cat/Marc/Mod)</th>
-                                <th class="text-center">Cód</th>
+                                <th class="text-center">Producto/Categoria</th>
+                                <th class="text-center">Modelo/Marca</th>
+                                <th class="text-center">Stock</th>
                                 <th class="text-center">Serial</th>
-                                <th class="text-center">Letal</th>
+                                <th class="text-center">Unitario</th>
                                 <th class="text-center">Mayor</th>
                                 <th colspan="1"></th>
                             </tr>
@@ -54,8 +55,9 @@
                                         }
                                     ?>
                                   
-                                    <td class="text-center">{{$producto->producto->nombre}} {{$producto->producto->categoria->nombre}}  {{$producto->producto->marca->nombre}} {{$producto->producto->modelo->nombre}} @livewire('productos.productos-stock-sucursal', ['producto' => $producto->producto, 'cant' => $cant],key(0.,'$producto->producto->id'))</td>
-                                    <td class="text-center">{{ $producto->cod_barra }}</td>
+                                    <td class="text-center">{{$producto->producto->nombre}} / {{$producto->producto->categoria->nombre}}   </td>
+                                    <td class="text-center">{{$producto->producto->modelo->nombre}} / {{$producto->producto->marca->nombre}}</td>
+                                    <td class="text-center">@livewire('productos.productos-stock-sucursal', ['producto' => $producto->producto, 'cant' => $cant],key(0.,'$producto->producto->id'))</td>
                                     <td class="text-center">{{ $producto->serial }}</td>
                                     <td class="text-center">{{ $producto->producto->precio_letal}}</td>
                                     <td class="text-center">{{ $producto->producto->precio_mayor}}</td>
@@ -63,7 +65,7 @@
                                     
                                     
                                     <td width="10px">
-                                        @livewire('ventas.ventas-seleccion-cantidades', ['producto' => $producto,'sucursal' => $sucursal],key($producto->id))
+                                        @livewire('ventas.ventas-seleccion-cantidades', ['producto' => $producto,'sucursal' => $sucursal, 'usuario' => $usuario],key($producto->id))
                                         {{-- <a href="#" class="btn btn-info btn-sm {{$estado}}"><i class="fas fa-check"></i></a> --}}
                                     </td>
                                 </tr>

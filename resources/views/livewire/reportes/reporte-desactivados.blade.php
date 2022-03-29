@@ -31,14 +31,16 @@
             </div>
             @if ($productos->count())
                 <div class="card-body">
-                    <div class="mt-2">
-                        <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Complete el campo de observaciones y haga click en <i class="fas fa-info-circle"></i> encontrado al lado del producto a regresar a inventario</h2>
+                    <div class="m-0 p-0">
+                        <h2 class="text-sm ml-2 m-0 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Complete el campo de observaciones y haga click en <i class="fas fa-check-circle"></i> encontrado al lado del producto a regresar a inventario</h2>
                      </div>
 
-                     <div class="mt-2">
-                        <input wire:model="observaciones" type="text" class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Observaciones">
-                        <x-input-error for="observaciones" />
+                     <div class="mt-4 mb-2">
+                        <textarea wire:model="observaciones" class="resize-none rounded-md outline-none w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="observaciones" cols="80" rows="2" required placeholder="Observaciones"></textarea>
+                <x-input-error for="observaciones" />
                     </div>
+
+                    <hr>
 
                     <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                         <thead class="thead-dark">

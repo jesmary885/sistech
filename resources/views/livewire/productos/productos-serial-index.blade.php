@@ -7,10 +7,11 @@
                         <div class="w-1/4">
                    
                             <select wire:model="buscador" id="buscador" class="form-control text-m" name="buscador">
-                                <option value="0">Código de barra</option>
+                                <option value="0">Modelo</option>
                                 <option value="1">Categoria</option>
                                 <option value="2">Marca</option>
-                                <option value="3">Modelo</option>
+                                <option value="3">Código de barra</option>
+                                <option value="4">Serial</option>
                             </select>
         
                             <x-input-error for="buscador" />
@@ -37,7 +38,8 @@
                             <tr>
                                 <th class="text-center">Fecha de compra
                                 <th class="text-center">Compra Nro</th>
-                                <th class="text-center">Producto</th>
+                                <th class="text-center">Prod/Cat</th>
+                                <th class="text-center">Marc/Mod</th>
                                 <th class="text-center">Código de Barra</th>
                                 <th class="text-center">Serial</th>
                                 <th colspan="2"></th>
@@ -48,7 +50,8 @@
                                 <tr>
                                     <td class="text-center">{{$producto->fecha_compra}}</td>
                                     <td class="text-center">{{$producto->compra_id}}</td>
-                                    <td class="text-center">{{$producto->producto->nombre}} {{$producto->categoria->nombre}} {{$producto->marca->nombre}} {{$producto->modelo->nombre}}</td>
+                                    <td class="text-center">{{$producto->producto->nombre}}/{{$producto->categoria->nombre}} </td>
+                                    <td class="text-center">{{$producto->marca->nombre}}/{{$producto->modelo->nombre}}</td>
                                     <td class="text-center">{{$producto->producto->cod_barra}}</td>
                                     <td class="text-center">{{$producto->serial}}</td>
 

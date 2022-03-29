@@ -27,9 +27,9 @@ class ProductosDetalleTrasladoRecibir extends Component
         $this->resetPage();
     }
 
-    public function updatingProdr(){
+   /* public function updatingProdr(){
         $this->resetPage();
-    }
+    }*/
 
     protected $rules = [
 
@@ -78,7 +78,7 @@ class ProductosDetalleTrasladoRecibir extends Component
        foreach($this->prodr as $pp){
            
             if($pp){
-                $producr=ProductoSerialSucursal::where('serial',$pp)->first();
+                $producr=ProductoSerialSucursal::where('id',$pp)->first();
                 $sucursal = Sucursal::where('id',$this->sucursal)->first();
                 $product_destroy = ProductosTraslado::where('producto_serial_sucursal_id',$producr->id)->first();
                 $product_destroy->delete();

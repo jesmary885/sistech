@@ -8,6 +8,7 @@
                         <tr>
                             <th class="text-center">Producto</th>
                             <th class="text-center">Cód de barra</th>
+                            <th class="text-center">Modelo</th>
                             <th class="text-center">Cantidad vendidos</th>
                         </tr>
                     </thead>
@@ -17,6 +18,7 @@
                         <tr>
                             <td class="text-center">{{$value['nombre']}}</td>
                             <td class="text-center">{{$value['cod_barra']}}</td>
+                            <td class="text-center">{{$value['modelo_nombre']}}</td>
                             <td class="text-center">{{$value['quantity']}}</td>
                         </tr>
                     @endforeach    

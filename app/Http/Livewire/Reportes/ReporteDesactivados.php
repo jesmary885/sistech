@@ -40,7 +40,7 @@ class ReporteDesactivados extends Component
             $this->item_buscar = "el código de barra del producto a buscar ";
         }
 
-        if($this->buscador == 0){
+        else{
             $productos = ProductosTraslado::whereHas('productoSerialSucursal',function(Builder $query){
                 $query->where('serial','LIKE', '%' . $this->search . '%');
             })->paginate(5);
@@ -56,18 +56,22 @@ class ReporteDesactivados extends Component
     }
 
     public function regresar($productoId){
-        $this->producto = $productoId;
+
+        $rules = $this->rules;
+        $this->validate($rules);
+
+
+        $producto_selec = ProductosTraslado::where('id',$productoId)->first();
+        $this->producto = $producto_selec->producto_serial_sucursal_id;
 
         $producto_sucursal = ProductoSerialSucursal::where('id',$this->producto)->first();
         
        
-        $this->emit('confirm', 'Esta seguro de regresar este producto a inventario de la sucursal '.$producto_sucursal->sucursal_id->nombre.' ?','reportes.reporte-desactivados','confirmacion','Se ha reintegrado el producto a inventario.');
+        $this->emit('confirm', 'Esta seguro de regresar este producto a inventario de la sucursal '.$producto_sucursal->sucursal->nombre.' ?','reportes.reporte-desactivados','confirmacion','Se ha reintegrado el producto a inventario.');
     }
 
     public function confirmacion(){
-        $rules = $this->rules;
-        $this->validate($rules);
-
+      
         $fecha_actual = date('Y-m-d');
         $user_auth =  auth()->user()->id;
         $user_auth_nombre =  auth()->user()->name;
@@ -75,10 +79,13 @@ class ReporteDesactivados extends Component
 
 
         $producto_sucursal = ProductoSerialSucursal::where('id',$this->producto)->first();
+        
 
         //eliminar traslado de ese producto en tabla productos_traslados
 
-        $product_destroy = ProductosTraslado::where('producto_serial_sucursal_id',$producto_sucursal->id)->first();
+     
+
+        $product_destroy = ProductosTraslado::where('producto_serial_sucursal_id',$this->producto)->first();
         $product_destroy->delete();
 
         //modificar en la tabla traslados que la sucursal destino es la misma de la inicial y guardar observacion final

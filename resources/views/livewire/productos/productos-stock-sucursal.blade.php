@@ -1,7 +1,7 @@
-<div class="m-0 p-0 font-semibold text-blue-600">
+<div class="m-0 p-0 font-semibold text-gray-800 text-sm">
   
 
-  {{$cant}}  <a href="#" wire:click="open">  <i class="fas fa-warehouse"></i></a>
+  {{$cant}}  <a href="#" class="text-gray-800" wire:click="open">  <i class="fas fa-warehouse"></i></a>
    
 
    @if($isopen)

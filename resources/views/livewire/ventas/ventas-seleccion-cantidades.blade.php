@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ change_price: @entangle('change_price') , precios: @entangle('precios')}">
     <button type="submit" class="btn btn-primary btn-sm" wire:click="open">
         <i class="fas fa-check"></i>
    </button> 
@@ -35,15 +35,38 @@
                                     </x-secondary-button>
                                 </div> --}}
 
-                                <div class="w-1/2">
+                                <div class="w-1/2" :class="{'hidden': change_price == 'si'}">
                                     <select id="precios" wire:model="precios" class="block bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
                                          <option value="" selected>Precio de venta</option>
-                                        <option value="1">Precio letal</option>
+                                        <option value="1">Precio unitario</option>
                                         <option value="2">Precio al mayor</option>
                                     </select>
                                     <x-input-error for="precios" />
+                                </div>
+
+        
+
+                                <div class="flex w-1/2" :class="{'hidden': change_price == 'no'}">
+                                    <div>
+                                        <select id="precios" wire:model="precios" class="block bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
+                                            <option value="" selected>Precio de venta</option>
+                                           <option value="1">Precio unitario</option>
+                                           <option value="2">Precio al mayor</option>
+                                           <option value="3">Precio manual</option>
+                                       </select>
+                                       <x-input-error for="precios" />
+
+                                    </div>
+                                    
+
+                                    <div class="w-3/4 ml-2" :class="{'hidden': precios != '3'}">
+                                        <input wire:model="precio_manual" type="number" min="0" class="px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Precio">
+                                        <x-input-error for="precio_manual" />
+                                    </div>
 
                                 </div>
+
+                               
 
            
                         </div>

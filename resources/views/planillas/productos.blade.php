@@ -10,7 +10,6 @@
             <th class="text-center">MINORISTA</th>
             <th class="text-center">COMPRA</th>
             <th class="text-center">PUNTOS</th>
-            <th class="text-center">CANTIDAD MINIMA</th>
             <th class="text-center">OBSERVACIONES</th>
             <th class="text-center">CASA MATRIZ</th>
             <th class="text-center">TIENDA LIMA 1</th>
@@ -28,7 +27,6 @@
                 <td class="text-center">11</td>
                 <td class="text-center">9</td>
                 <td class="text-center">58</td>
-                <td class="text-center">2</td>
                 <td class="text-center">SIN OBSERVACIONES</td>
                 <td class="text-center">1</td>
                 <td class="text-center">1</td>

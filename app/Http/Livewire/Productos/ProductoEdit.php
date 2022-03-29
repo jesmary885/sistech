@@ -20,7 +20,7 @@ class ProductoEdit extends Component
 {
     use WithFileUploads;
     public $isopen = false;
-    public $pivot, $nombre, $p, $puntos, $fecha_actual, $inv_min, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $modelos, $proveedores, $sucursales,$producto;
+    public $pivot, $nombre, $p, $puntos, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $modelos, $proveedores, $sucursales,$producto;
     public $marca_id = "", $sucursal_id = "" ,$modelo_id = "", $categoria_id = "", $proveedor_id ="";
     public $limitacion_sucursal = true;
 
@@ -29,11 +29,11 @@ class ProductoEdit extends Component
         'precio_mayor' => 'required',
         'categoria_id' => 'required',
         'marca_id' => 'required',
-        'inv_min' => 'required',
         'modelo_id' => 'required',
         'sucursal_id' => 'required',
         'estado' => 'required',
         'puntos' => 'required',
+        'nombre' => 'required',
      ];
 
 
@@ -65,7 +65,7 @@ class ProductoEdit extends Component
       //   $this->inventario_min = $this->producto->inventario_min;
          $this->modelo_id = $this->producto->modelo_id;
          $this->categoria_id = $this->producto->categoria_id;
-         $this->inv_min = $this->producto->inv_min;
+
      //    $this->tipo_garantia = $this->producto->tipo_garantia;
     //     $this->garantia = $this->producto->garantia;
         $this->marca_id = $this->producto->marca_id;
@@ -97,15 +97,13 @@ class ProductoEdit extends Component
         $rules = $this->rules;
         $this->validate($rules);
 
-        $rule_nombre = [
-            'nombre' => 'required|min:3|unique:productos,nombre,' .$this->producto->id
-        ];
+     
 
         $rule_cod_barra = [
             'cod_barra'=>'required|unique:productos,cod_barra,' .$this->producto->id,
         ];
 
-        $this->validate($rule_nombre);
+        //$this->validate($rule_nombre);
         $this->validate($rule_cod_barra);
         $this->fecha_actual = date('Y-m-d');
 
@@ -125,7 +123,6 @@ class ProductoEdit extends Component
                 'modelo_id' => $this->modelo_id,
                 'categoria_id' => $this->categoria_id,
                 'puntos' => $this->puntos,
-                'inv_min' => $this->inv_min,
                 'marca_id' => $this->marca_id,
                 'observaciones' => $this->observaciones,
                 'estado' => $this->estado
@@ -147,14 +144,7 @@ class ProductoEdit extends Component
                 else $this->producto->imagen()->create(['url' => $url]);
              }
     
-            $this->producto->movimientos()->create([
-                'fecha' => $this->fecha_actual,
-                'tipo_movimiento' => 'Modificación de información de producto',
-                'cantidad' => $this->cantidad,
-                'precio' => $this->precio_letal,
-                'observacion' => 'Modificación de datos',
-                'user_id' => $usuario_auth
-            ]);
+          
             $this->reset(['isopen']);
             $this->emitTo('productos.productos-index','render');
             $this->emit('alert','Producto modificado correctamente');
