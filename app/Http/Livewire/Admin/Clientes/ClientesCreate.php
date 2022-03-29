@@ -28,7 +28,7 @@ class ClientesCreate extends Component
         'nro_documento' => 'required|min:5|unique:clientes',
         'tipo_documento' => 'required',
        // 'telefono' => 'min:9',
-        'email' => 'max:50|unique:clientes'
+
     ];
     
     protected $rules_mail_edit = [
@@ -124,12 +124,20 @@ class ClientesCreate extends Component
             {
                 $rules_create = $this->rules_create;
                 $this->validate($rules_create);
+                if($this->email){
+                $rule_email = [
+                    'email' => 'required|max:50|email|unique:clientes,email,' .$this->cliente->id,
+                ];
+                $this->validate($rule_email);
+                }
+
                 $usuario_auth = Auth::id();
 
                 $cliente = new Cliente();
                 $cliente->nombre = $this->nombre;
                 $cliente->apellido = $this->apellido;
                 if($this->email) $cliente->email = $this->email;
+                
                 $cliente->nro_documento = $this->nro_documento;
                 $cliente->tipo_documento = $this->tipo_documento;
                 if($this->direccion) $cliente->direccion= $this->direccion;
