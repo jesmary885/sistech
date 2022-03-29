@@ -6,8 +6,8 @@
                 <div class="flex">
                     <div class="w-1/4">
                         <select wire:model="buscador" id="buscador" class="form-control text-m" name="buscador">
-                            <option value="0">Fecha</option>
-                            <option value="1">Usuario</option>
+                            <option value="0">Usuario</option>
+                            <option value="1">Fecha</option>
                         </select>
     
                         <x-input-error for="buscador" />
@@ -38,7 +38,7 @@
                 <table class="table table-bordered ">
                     <thead class="thead-dark">
                         <tr>
-                            <th class="text-center">Fecha y hora</th>
+                            <th class="text-center">Fecha</th>
                             <th class="text-center">Tipo de movimiento</th>
                             <th class="text-center">Cantidad</th>
                             <th class="text-center">Detalle</th>

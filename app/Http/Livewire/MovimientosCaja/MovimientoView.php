@@ -23,15 +23,13 @@ class MovimientoView extends Component
 
     public function render()
     {
-        if($this->buscador == 0){
-            $movimientos = MovimientoCaja::where('sucursal_id', $this->sucursal)
-            ->where('fecha', 'LIKE', '%' . $this->search . '%')
-            ->latest('id')
-            ->paginate(5);
+        $fecha_actual = date('Y-m-d');
 
-        }
-        elseif ($this->buscador == 1){
+        if($this->buscador == 0){
+          
+
             $movimientos = MovimientoCaja::where('sucursal_id', $this->sucursal)
+            ->where('fecha', $fecha_actual)
             ->whereHas('user',function(Builder $query){
                 $query->where('name','LIKE','%' . $this->search . '%');
             })
@@ -39,12 +37,14 @@ class MovimientoView extends Component
             ->paginate(5);
 
         }
+        else{
+            $movimientos = MovimientoCaja::where('sucursal_id', $this->sucursal)
+            ->where('fecha', 'LIKE', '%' . $this->search . '%')
+            ->latest('id')
+            ->paginate(5);
+           
+        }
        
-
-                 
-
-
-        
 
         return view('livewire.movimientos-caja.movimiento-view',compact('movimientos'));
     }
