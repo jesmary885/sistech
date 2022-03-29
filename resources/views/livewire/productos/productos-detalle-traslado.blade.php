@@ -50,7 +50,8 @@
                     <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm" >
                         <thead class="thead-dark">
                             <tr>
-                            <th>Producto</th>
+                            <th>Prod/Cat</th>
+                            <th>Marc/Mod</th>
                             <th>Serial</th>
                             <th colspan="1"></th>
                             </tr>
@@ -58,7 +59,8 @@
                         <tbody>
                             @foreach ($productos as $producto)
                                 <tr>
-                                <td>{{$producto->producto->nombre}} {{$producto->producto->marca->nombre}} {{$producto->producto->modelo->nombre}}</td>
+                                <td>{{$producto->producto->nombre}}/{{$producto->producto->categoria->nombre}} </td>
+                                <td>{{$producto->producto->marca->nombre}}/{{$producto->producto->modelo->nombre}}</td>
                                 <td>{{$producto->serial}}</td>
                                 <td width="10px"><input type="checkbox" wire:model="prod.{{$producto->id}}" value="{{$producto->id}}"></td>
                                 </tr>

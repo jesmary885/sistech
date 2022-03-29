@@ -21,7 +21,7 @@ class ProductosDetalleTrasladoRecibir extends Component
     protected $listeners = ['render' => 'render'];
 
     public $isopen = false;
-    public $sucursal, $cantidad, $sucursal_id = "", $sucursales,$prod, $prodr, $search2;
+    public $sucursal, $cantidad, $sucursal_id = "", $sucursales,$prod, $prodr, $search2,$buscador,$item_buscar;
 
     public function updatingSearch2(){
         $this->resetPage();
@@ -44,11 +44,33 @@ class ProductosDetalleTrasladoRecibir extends Component
         ->Paginate(5);*/
 
 
-        $trasl = ProductosTraslado::where('sucursal_id',$this->sucursal)
+        /*$trasl = ProductosTraslado::where('sucursal_id',$this->sucursal)
                     ->whereHas('productoSerialSucursal',function(Builder $query){
                         $query->where('serial','LIKE', '%' . $this->search2 . '%');       
                         })
-                        ->paginate(5);
+                        ->paginate(5);*/
+
+                        if($this->buscador==0){
+                            $trasl = ProductosTraslado::where('sucursal_id',$this->sucursal)
+                            ->whereHas('productoSerialSucursal',function(Builder $query){
+                                $query->where('cod_barra','LIKE', '%' . $this->search2 . '%');       
+                                })
+                                ->paginate(5);
+
+                            $this->item_buscar = "el código de barra del producto a buscar ";
+
+                        }
+                        else{
+                            $trasl = ProductosTraslado::where('sucursal_id',$this->sucursal)
+                            ->whereHas('productoSerialSucursal',function(Builder $query){
+                                $query->where('serial','LIKE', '%' . $this->search2 . '%');       
+                                })
+                                ->paginate(5);
+
+                            $this->item_buscar = "el serial del producto a buscar ";
+
+                        }
+                      
 
         
 

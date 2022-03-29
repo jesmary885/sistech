@@ -10,7 +10,21 @@
             <div class="card-body">
                 <div class="flex items-center justify-between">
                     <div class="flex-1">
-                        <input wire:model="search2" placeholder="Ingrese el serial del producto a buscar" class="form-control mb-2">
+                        <div class=flex>
+                            <div class="w-1/4">
+                       
+                                <select wire:model="buscador" id="buscador" class="form-control text-m" name="buscador">
+                            
+                                    <option value="0">Código de barra</option>
+                                    <option value="1">Serial</option>
+                                </select>
+            
+                                <x-input-error for="buscador" />
+        
+                            </div>
+                            <input wire:model="search" placeholder="Ingrese {{$item_buscar}}" class="form-control mb-2">
+    
+                        </div>
                      </div>
                     <div class="ml-2">
                         <button
@@ -27,7 +41,8 @@
                 <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm" >
                     <thead class="thead-dark">
                         <tr>
-                            <th>Producto</th>
+                            <th>Prod/Cat</th>
+                            <th>Marc/Mod</th>
                             <th>Serial</th>
                             <th colspan="1"></th>
                         </tr>
@@ -35,7 +50,8 @@
                     <tbody>
                         @foreach ($trasl as $p)
                             <tr>
-                            <td>{{$p->productoSerialSucursal->producto->nombre}} {{$p->productoSerialSucursal->producto->marca->nombre}} {{$p->productoSerialSucursal->producto->modelo->nombre}}</td>
+                            <td>{{$p->productoSerialSucursal->producto->nombre}}/{{$p->productoSerialSucursal->producto->categoria->nombre}}</td>
+                            <td>{{$p->productoSerialSucursal->producto->marca->nombre}}/{{$p->productoSerialSucursal->producto->modelo->nombre}}</td>
                             <td>{{$p->productoSerialSucursal->serial}}</td>
                             <td width="10px"><input type="checkbox" wire:model="prodr.{{$p->id}}" value="{{$p->productoSerialSucursal->id}}"></td>
                             </tr>
