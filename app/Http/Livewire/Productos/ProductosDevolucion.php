@@ -18,7 +18,7 @@ class ProductosDevolucion extends Component
     use WithPagination;
     protected $paginationTheme = "bootstrap";
     protected $listeners = ['render' => 'render','confirmacion' => 'confirmacion'];
-    public $search,$product_select,$devolucion_id,$venta_id,$producto_id, $sucursal_id;
+    public $search,$product_select,$devolucion_id,$venta_id,$producto_id, $sucursal_id, $producto_serial_id;
 
     public function updatingSearch(){
         $this->resetPage();
@@ -37,7 +37,9 @@ class ProductosDevolucion extends Component
         $this->sucursal_id = $busqueda_sucursal->sucursal_id;
         //$this->venta_id = $ventaId;
         $this->devolucion_id = $devolucionId;
-        $this->producto_id = $DevolucionProductoId;
+        $product = ProductoSerialSucursal::where('id',$DevolucionProductoId)->first();
+        $this->producto_serial_id = $product->id;
+        $this->producto_id = $product->producto->id;
         $this->emit('confirm', 'Esta seguro de enviar el producto a inventario?','productos.productos-devolucion','confirmacion','El producto ha sido registrado en inventario.');
        
     }
@@ -45,6 +47,8 @@ class ProductosDevolucion extends Component
     public function confirmacion(){
         $user_auth = auth()->user()->id;  
         $fecha_actual = date('Y-m-d');      
+
+       // dd($this->producto_id);
         $devolucion_eliminar = Devolucion::where('id',$this->devolucion_id)->first();
         $devolucion_eliminar->delete();
 
@@ -61,25 +65,26 @@ class ProductosDevolucion extends Component
               $stock_antiguo = $producto_barra->sucursals->find($sucursalx)->pivot->cantidad + $stock_antiguo;
           }
   
-          $stock_nuevo = $stock_antiguo + $this->cantidad;
+          $stock_nuevo = $stock_antiguo + 1;
           $producto_barra->movimientos()->create([
-              'fecha' => $this->fecha_actual,
+              'fecha' => $fecha_actual,
               'cantidad_entrada' => 1,
               'cantidad_salida' => 0,
               'stock_antiguo' => $stock_antiguo,
               'stock_nuevo' => $stock_antiguo + 1,
-              'precio_entrada' => $this->precio_compra * $this->cantidad,
+              'precio_entrada' => 0,
               'precio_salida' => 0,
-              'Detalle' => 'Integro a deposito de equipo como estado "activo" luego de devolución',
+              'detalle' => 'Integro a deposito de equipo como estado "activo" luego de devolución',
               'user_id' => $user_auth 
           ]);
 
         $cantidad_nueva_producto = $producto_sucursal->cantidad + 1;
+   
         $producto_sucursal->update([
             'cantidad' => $cantidad_nueva_producto
         ]);
 
-        $producto_serial = ProductoSerialSucursal::where('id',$this->producto_id)->first();
+        $producto_serial = ProductoSerialSucursal::where('id',$this->producto_serial_id)->first();
         $producto_serial->update([
             'estado' => 'activo'
         ]);

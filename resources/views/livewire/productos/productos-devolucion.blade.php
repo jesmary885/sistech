@@ -31,14 +31,14 @@
                             @foreach ($devoluciones as $devolucion)
                                 <tr>
                                     <td class="text-center">{{$devolucion->fecha}}</td>
-                                    <td class="text-center">{{$devolucion->producto->nombre}}</td>
+                                    <td class="text-center">{{$devolucion->productoSerialSucursal->producto->nombre}} {{$devolucion->productoSerialSucursal->producto->marca->nombre}} {{$devolucion->productoSerialSucursal->producto->modelo->nombre}} - S/N: {{$devolucion->productoSerialSucursal->serial}}</td>
                                     <td class="text-center">{{$devolucion->venta->id}}</td>
                                     <td class="text-center">{{$devolucion->user->name}} {{$devolucion->user->apellido}}</td>
                                     <td class="text-center"><p>Cantidad devuelto:</p> {{$devolucion->cantidad}} {{$devolucion->observaciones}}</td>
                                     <td width="10px">
                                         <button title="Regresar equipo a inventario"
                                             class="btn btn-primary btn-sm" 
-                                            wire:click="inventariar('{{$devolucion->producto_id}}','{{ $devolucion->id}}','{{$devolucion->venta->id}}')">
+                                            wire:click="inventariar('{{$devolucion->producto_serial_sucursal_id}}','{{ $devolucion->id}}','{{$devolucion->venta->id}}')">
                                             <i class="fas fa-exchange-alt"></i>
                                         </button> 
                                     </td>

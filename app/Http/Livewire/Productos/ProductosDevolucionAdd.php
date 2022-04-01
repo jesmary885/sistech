@@ -70,12 +70,12 @@ class ProductosDevolucionAdd extends Component
         $devolucion->fecha = $fecha_actual;
         $devolucion->user_id = $user_auth;
         $devolucion->venta_id = $this->nro_factura;
-        $devolucion->producto_id = $producto_venta->productoSerialSucursal->producto->id;
+        $devolucion->producto_serial_sucursal_id = $producto_venta->productoSerialSucursal->id;
         $devolucion->cantidad = '1';
         $devolucion->observaciones = $this->observaciones;
         $devolucion->save();
 
-        $movimiento = new Movimiento();
+        /*$movimiento = new Movimiento();
         $movimiento->fecha = $fecha_actual;
         $movimiento->tipo_movimiento = 'Devolución de producto';
         $movimiento->cantidad = '1';
@@ -83,7 +83,7 @@ class ProductosDevolucionAdd extends Component
         $movimiento->producto_id = $producto_venta->productoSerialSucursal->producto->id;
         $movimiento->user_id = $user_auth;
         $movimiento->observacion = $this->observaciones;
-        $movimiento->save();
+        $movimiento->save();*/
 
 
         //Guardando movimiento de producto para kardex
@@ -97,14 +97,14 @@ class ProductosDevolucionAdd extends Component
 
         $stock_nuevo = $stock_antiguo + $this->cantidad;
         $producto_barra->movimientos()->create([
-            'fecha' => $this->fecha_actual,
+            'fecha' => $fecha_actual,
             'cantidad_entrada' => 0,
             'cantidad_salida' => 0,
             'stock_antiguo' => $stock_antiguo,
             'stock_nuevo' => $stock_antiguo,
             'precio_entrada' => 0,
             'precio_salida' => 0,
-            'Detalle' => 'Devolución de equipo',
+            'detalle' => $this->observaciones. 'Devolución de equipo',
             'user_id' => $user_auth 
         ]);
 

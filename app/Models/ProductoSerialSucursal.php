@@ -55,4 +55,9 @@ class ProductoSerialSucursal extends Model
         return $this->hasMany(ProductosTraslado::class);
     }
 
+    
+    public function devolucions(){
+        return $this->hasMany(Devolucion::class);
+    }
+
 }
