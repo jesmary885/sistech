@@ -9,15 +9,27 @@ use Illuminate\Support\Facades\Auth;
 
 class MovimientosController extends Controller
 {
-    public function index()
+    public function index_recibir()
     {
-        $vista = 'productos';
-        $proforma = 'traslado';
+        $vista = 'productos_recibir';
+        $proforma = 'traslado_recibir';
         $usuario_auth = User::where('id',Auth::id())->first();
         $sucursal = $usuario_auth->sucursal_id;
 
         if($usuario_auth->limitacion == '1')  return view('ventas.seleccion_sucursal',compact('vista','proforma'));
         else return view('productos.traslado_select_serial',compact('sucursal'));
+
+    }
+
+    public function index_enviar()
+    {
+        $vista = 'productos_enviar';
+        $proforma = 'traslado_enviar';
+        $usuario_auth = User::where('id',Auth::id())->first();
+        $sucursal = $usuario_auth->sucursal_id;
+
+        if($usuario_auth->limitacion == '1')  return view('ventas.seleccion_sucursal',compact('vista','proforma'));
+        else return view('productos.traslado_select_serial_enviar',compact('sucursal'));
 
     }
 
@@ -83,6 +95,12 @@ class MovimientosController extends Controller
         return view('productos.traslado_select_serial',compact('sucursal'));
     }
 
+    public function select_enviar($sucursal)
+    {
+       // return view('productos.traslado',compact('sucursal'));
+        return view('productos.traslado_select_serial_enviar',compact('sucursal'));
+    }
+
     public function select_serial($sucursal,$producto)
     {
         return view('productos.traslado_select_serial',compact('sucursal','producto'));
@@ -94,6 +112,8 @@ class MovimientosController extends Controller
     {
         return view('ventas.index',compact('sucursal','tipo'));
     }
+
+
 
     
 }

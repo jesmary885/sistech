@@ -74,8 +74,10 @@ Route::post('compras_import',[ComprasController::class,'store'])->name('admin.co
 
 Route::get('facturacion/{sucursal}/{proforma}',[FacturacionController::class,'facturacion'])->name('facturacion');
 
-Route::get('traslado',[MovimientosController::class,'index'])->name('traslado.index');
-Route::get('traslado/{sucursal}',[MovimientosController::class,'select'])->name('productos.traslado.select');
+Route::get('recibir_productos',[MovimientosController::class,'index_recibir'])->name('traslado_recibir.index');
+Route::get('enviar_productos',[MovimientosController::class,'index_enviar'])->name('traslado_enviar.index');
+Route::get('recibir_productos/{sucursal}',[MovimientosController::class,'select'])->name('productos.traslado.select');
+Route::get('enviar_productos/{sucursal}',[MovimientosController::class,'select_enviar'])->name('productos.traslado.select.enviar');
 Route::get('traslado/{sucursal}/{producto}',[MovimientosController::class,'select_serial'])->name('productos.traslado.serial');
 
 //Mostrar ventas al contado y a credito

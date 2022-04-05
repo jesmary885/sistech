@@ -367,9 +367,21 @@ return [
                     'route'     => 'devolucion.index',
                     'can' => 'productos.devolucion'
                 ],
+            ],
+            
+        ],
+        [
+            'text'    => 'TRASLADOS',
+            'icon'    => 'fas fa-truck-loading',
+            'submenu' => [
                 [
-                    'text'    => 'Traslado',
-                    'route'     => 'traslado.index',
+                    'text'    => 'Envio',
+                    'route'     => 'traslado_enviar.index',
+                    'can' => 'productos.traslado'
+                ],
+                [
+                    'text'    => 'Recepción',
+                    'route'     => 'traslado_recibir.index',
                     'can' => 'productos.traslado'
                 ],
             ],

@@ -3,8 +3,10 @@
         <div class="card-heade bg-gray-700">
             @if ($vista == 'ventas')
                 <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal en donde realizara la venta</h2>
-            @elseif($vista == 'productos')
+            @elseif($vista == 'productos_enviar')
             <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal donde esta el equipo a trasladar</h2>
+            @elseif($vista == 'productos_recibir')
+            <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal donde estan los equipos a recibir</h2>
             @elseif($vista == 'ver_ventas')
             <h2 class="text-lg text-white text-center bg-gray-700">Seleccione la sucursal en donde desea ver las ventas</h2>
             @elseif($vista == 'cajas')
@@ -36,8 +38,10 @@
                                         @if ($vista == 'ventas')
                                         <a class="text-gray-600" href="{{route('ventas.seleccio',['sucursal'=>$sucursal,'proforma'=>$proforma])}}">{{$sucursal->nombre}}</a>
                                         {{-- <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a> --}}
-                                        @elseif($vista == 'productos')
+                                        @elseif($vista == 'productos_recibir')
                                         <a class="text-gray-600" href="{{route('productos.traslado.select',$sucursal)}}">{{$sucursal->nombre}}</a>
+                                        @elseif($vista == 'productos_enviar')
+                                        <a class="text-gray-600" href="{{route('productos.traslado.select.enviar',$sucursal)}}">{{$sucursal->nombre}}</a>
                                         @elseif($vista == 'cajas')
                                         <a class="text-gray-600" href="{{route('movimiento.caja.view',$sucursal)}}">{{$sucursal->nombre}}</a>
                                         {{-- <a href="{{route('productos.traslado.select',$sucursal)}}" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a> --}}

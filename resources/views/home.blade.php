@@ -124,7 +124,7 @@
         <div class="icon">
           <i class="ion ion-filing"></i>
         </div>
-        <a href="{{route('traslado.index')}}"  class="small-box-footer">Recibir traslado<i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{route('traslado_recibir.index')}}"  class="small-box-footer">Recibir traslado<i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     {{-- @endcan --}}

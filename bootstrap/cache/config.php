@@ -228,15 +228,29 @@
             'route' => 'devolucion.index',
             'can' => 'productos.devolucion',
           ),
-          3 => 
+        ),
+      ),
+      5 => 
+      array (
+        'text' => 'TRASLADOS',
+        'icon' => 'fas fa-truck-loading',
+        'submenu' => 
+        array (
+          0 => 
           array (
-            'text' => 'Traslado',
-            'route' => 'traslado.index',
+            'text' => 'Envio',
+            'route' => 'traslado_enviar.index',
+            'can' => 'productos.traslado',
+          ),
+          1 => 
+          array (
+            'text' => 'Recepción',
+            'route' => 'traslado_recibir.index',
             'can' => 'productos.traslado',
           ),
         ),
       ),
-      5 => 
+      6 => 
       array (
         'text' => 'REPORTES',
         'icon' => 'fas fa-chart-bar fa-fw',
@@ -280,7 +294,7 @@
           ),
         ),
       ),
-      6 => 
+      7 => 
       array (
         'text' => 'AJUSTES',
         'icon' => 'fas fa-cogs fa-fw',
@@ -439,7 +453,7 @@
     'locale' => 'es',
     'fallback_locale' => 'es',
     'faker_locale' => 'en_US',
-    'key' => 'base64:8Bp5uv+7wBkDTSybgLzv7+ubml4gHyZ/ZESp0m97fcI=',
+    'key' => 'base64:i3c4le45GVJhAslARv8PEaNTwbpvGf9hloTJrfclfrw=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
