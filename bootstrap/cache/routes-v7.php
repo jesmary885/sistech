@@ -43,7 +43,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::FyeY2av1Wkh58WWy',
+            '_route' => 'generated::ZJpzN7dJvfnbKZlE',
           ),
           1 => NULL,
           2 => 
@@ -82,7 +82,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::sjqe3WQwjVD5kw5y',
+            '_route' => 'generated::VtgcrQX0W87DRzke',
           ),
           1 => NULL,
           2 => 
@@ -102,7 +102,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::A9SNeKaNj6bmUyiS',
+            '_route' => 'generated::fSXKuffCQePHjBie',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::bMj0x6GRuIsuBonn',
+            '_route' => 'generated::YdL7Mo7wA5i0YnRD',
           ),
           1 => NULL,
           2 => 
@@ -142,7 +142,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::0tpThE8shL3wNPm9',
+            '_route' => 'generated::fgOMt0us5QDs9eAm',
           ),
           1 => NULL,
           2 => 
@@ -199,7 +199,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::dZ91P7bLXch6qjmy',
+            '_route' => 'generated::r0ZH5smW0XH9Qq9f',
           ),
           1 => NULL,
           2 => 
@@ -254,7 +254,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::ZPAoieSUkuYsqTt7',
+            '_route' => 'generated::zmldhqc1w9hZOIhv',
           ),
           1 => NULL,
           2 => 
@@ -345,7 +345,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::iRdJD7IzFZP3sEBr',
+            '_route' => 'generated::eQWWjfcJT38qbZQB',
           ),
           1 => NULL,
           2 => 
@@ -1252,7 +1252,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/livewire/(?|message/([^/]++)(*:36)|preview\\-file/([^/]++)(*:65))|/p(?|assword/reset/([^/]++)(*:100)|roductos(?|/([^/]++)/(?|edit(*:136)|files(*:149))|_serial/([^/]++)(*:174)))|/r(?|oles/([^/]++)(?|/edit(*:210)|(*:218))|e(?|cibir_productos/([^/]++)(*:255)|portes_(?|productos/([^/]++)/([^/]++)/([^/]++)(*:309)|ventas/([^/]++)/([^/]++)/([^/]++)(*:350)|traslados/([^/]++)/([^/]++)(*:385)|caja/([^/]++)/([^/]++)/([^/]++)(*:424)|kardex/([^/]++)/([^/]++)(*:456))))|/Ventas/([^/]++)(?|(*:486)|/(?|edit(*:502)|([^/]++)(*:518))|(*:527))|/Mostrar_ventas/([^/]++)(?|(*:563)|/(?|edit(*:579)|([^/]++)(*:595))|(*:604))|/facturacion/([^/]++)/([^/]++)(*:643)|/enviar_productos/([^/]++)(*:677)|/traslado/([^/]++)/([^/]++)(*:712)|/Nuevo_movimiento_(?|caja/([^/]++)(*:754)|pendiente_caja/([^/]++)(*:785))|/historial_modalidad/([^/]++)/([^/]++)/([^/]++)/([^/]++)(*:850)|/ventas_clientes/([^/]++)(*:883))/?$}sDu',
+      0 => '{^(?|/livewire/(?|message/([^/]++)(*:36)|preview\\-file/([^/]++)(*:65))|/p(?|assword/reset/([^/]++)(*:100)|roductos(?|/([^/]++)/(?|edit(*:136)|files(*:149))|_serial/([^/]++)(*:174)))|/r(?|oles/([^/]++)(?|/edit(*:210)|(*:218))|e(?|cibir_productos/([^/]++)(*:255)|portes_(?|productos/([^/]++)/([^/]++)/([^/]++)(*:309)|ventas/([^/]++)/([^/]++)/([^/]++)(*:350)|traslados/([^/]++)/([^/]++)(*:385)|caja/([^/]++)/([^/]++)/([^/]++)(*:424)|kardex/([^/]++)/([^/]++)(*:456))))|/Ventas/([^/]++)(?|(*:486)|/([^/]++)(*:503))|/Mostrar_ventas/([^/]++)(?|(*:539)|/(?|edit(*:555)|([^/]++)(*:571))|(*:580))|/ventas(?|/([^/]++)/([^/]++)(*:617)|_clientes/([^/]++)(*:643))|/facturacion/([^/]++)/([^/]++)(*:682)|/enviar_productos/([^/]++)(*:716)|/traslado/([^/]++)/([^/]++)(*:751)|/Nuevo_movimiento_(?|caja/([^/]++)(*:793)|pendiente_caja/([^/]++)(*:824))|/historial_modalidad/([^/]++)/([^/]++)/([^/]++)/([^/]++)(*:889))/?$}sDu',
     ),
     3 => 
     array (
@@ -1625,14 +1625,11 @@ app('router')->setCompiledRoutes(
           5 => true,
           6 => NULL,
         ),
-      ),
-      502 => 
-      array (
-        0 => 
+        1 => 
         array (
           0 => 
           array (
-            '_route' => 'ventas.ventas.edit',
+            '_route' => 'ventas.ventas.update',
           ),
           1 => 
           array (
@@ -1640,16 +1637,16 @@ app('router')->setCompiledRoutes(
           ),
           2 => 
           array (
-            'GET' => 0,
-            'HEAD' => 1,
+            'PUT' => 0,
+            'PATCH' => 1,
           ),
           3 => NULL,
           4 => false,
-          5 => false,
+          5 => true,
           6 => NULL,
         ),
       ),
-      518 => 
+      503 => 
       array (
         0 => 
         array (
@@ -1673,30 +1670,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      527 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'ventas.ventas.update',
-          ),
-          1 => 
-          array (
-            0 => 'Venta',
-          ),
-          2 => 
-          array (
-            'PUT' => 0,
-            'PATCH' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      563 => 
+      539 => 
       array (
         0 => 
         array (
@@ -1719,7 +1693,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      579 => 
+      555 => 
       array (
         0 => 
         array (
@@ -1742,7 +1716,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      595 => 
+      571 => 
       array (
         0 => 
         array (
@@ -1766,7 +1740,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      604 => 
+      580 => 
       array (
         0 => 
         array (
@@ -1789,7 +1763,54 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      617 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'ventas.ventas.edits',
+          ),
+          1 => 
+          array (
+            0 => 'sucursal',
+            1 => 'proforma',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
       643 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'ventas.clientes.view',
+          ),
+          1 => 
+          array (
+            0 => 'sucursal',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      682 => 
       array (
         0 => 
         array (
@@ -1813,7 +1834,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      677 => 
+      716 => 
       array (
         0 => 
         array (
@@ -1836,7 +1857,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      712 => 
+      751 => 
       array (
         0 => 
         array (
@@ -1860,7 +1881,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      754 => 
+      793 => 
       array (
         0 => 
         array (
@@ -1883,7 +1904,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      785 => 
+      824 => 
       array (
         0 => 
         array (
@@ -1906,7 +1927,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      850 => 
+      889 => 
       array (
         0 => 
         array (
@@ -1920,29 +1941,6 @@ app('router')->setCompiledRoutes(
             1 => 'producto',
             2 => 'fecha_inicio',
             3 => 'fecha_fin',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      883 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'ventas.clientes.view',
-          ),
-          1 => 
-          array (
-            0 => 'sucursal',
           ),
           2 => 
           array (
@@ -2006,7 +2004,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::FyeY2av1Wkh58WWy' => 
+    'generated::ZJpzN7dJvfnbKZlE' => 
     array (
       'methods' => 
       array (
@@ -2027,7 +2025,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'as' => 'generated::FyeY2av1Wkh58WWy',
+        'as' => 'generated::ZJpzN7dJvfnbKZlE',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2137,7 +2135,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::sjqe3WQwjVD5kw5y' => 
+    'generated::VtgcrQX0W87DRzke' => 
     array (
       'methods' => 
       array (
@@ -2149,7 +2147,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@source',
         'controller' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@source',
-        'as' => 'generated::sjqe3WQwjVD5kw5y',
+        'as' => 'generated::VtgcrQX0W87DRzke',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2165,7 +2163,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::A9SNeKaNj6bmUyiS' => 
+    'generated::fSXKuffCQePHjBie' => 
     array (
       'methods' => 
       array (
@@ -2177,7 +2175,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@maps',
         'controller' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@maps',
-        'as' => 'generated::A9SNeKaNj6bmUyiS',
+        'as' => 'generated::fSXKuffCQePHjBie',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2193,7 +2191,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::bMj0x6GRuIsuBonn' => 
+    'generated::YdL7Mo7wA5i0YnRD' => 
     array (
       'methods' => 
       array (
@@ -2216,7 +2214,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::bMj0x6GRuIsuBonn',
+        'as' => 'generated::YdL7Mo7wA5i0YnRD',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2232,7 +2230,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::0tpThE8shL3wNPm9' => 
+    'generated::fgOMt0us5QDs9eAm' => 
     array (
       'methods' => 
       array (
@@ -2254,7 +2252,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::0tpThE8shL3wNPm9',
+        'as' => 'generated::fgOMt0us5QDs9eAm',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2344,7 +2342,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::dZ91P7bLXch6qjmy' => 
+    'generated::r0ZH5smW0XH9Qq9f' => 
     array (
       'methods' => 
       array (
@@ -2364,7 +2362,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::dZ91P7bLXch6qjmy',
+        'as' => 'generated::r0ZH5smW0XH9Qq9f',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2453,7 +2451,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::ZPAoieSUkuYsqTt7' => 
+    'generated::zmldhqc1w9hZOIhv' => 
     array (
       'methods' => 
       array (
@@ -2473,7 +2471,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::ZPAoieSUkuYsqTt7',
+        'as' => 'generated::zmldhqc1w9hZOIhv',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2672,7 +2670,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::iRdJD7IzFZP3sEBr' => 
+    'generated::eQWWjfcJT38qbZQB' => 
     array (
       'methods' => 
       array (
@@ -2692,7 +2690,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::iRdJD7IzFZP3sEBr',
+        'as' => 'generated::eQWWjfcJT38qbZQB',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3538,44 +3536,6 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'ventas.ventas.edit' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'Ventas/{Venta}/edit',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-        ),
-        'as' => 'ventas.ventas.edit',
-        'uses' => 'App\\Http\\Controllers\\Ventas\\VentasController@edit',
-        'controller' => 'App\\Http\\Controllers\\Ventas\\VentasController@edit',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
     'ventas.ventas.update' => 
     array (
       'methods' => 
@@ -3827,6 +3787,44 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'admin.compras.index',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'ventas.ventas.edits' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'ventas/{sucursal}/{proforma}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Ventas\\VentasController@edit',
+        'controller' => 'App\\Http\\Controllers\\Ventas\\VentasController@edit',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'ventas.ventas.edits',
       ),
       'fallback' => false,
       'defaults' => 

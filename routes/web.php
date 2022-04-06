@@ -67,9 +67,10 @@ Route::resource('marcas', MarcasController::class)->only('index','store')->names
 Route::resource('modelos', ModelosController::class)->only('index','store')->names('admin.modelos');
 
 Route::resource('productos', ProductosController::class)->only('index','create','edit','store')->names('productos.productos');
-Route::resource('Ventas', VentasController::class)->only('create','index','edit','update','show')->names('ventas.ventas');
+Route::resource('Ventas', VentasController::class)->only('create','index','update','show')->names('ventas.ventas');
 Route::resource('Mostrar_ventas', MostrarVentasController::class)->only('create','index','edit','update','show')->names('ventas.mostrar_ventas');
 Route::get('compras',[ComprasController::class,'index'])->name('admin.compras.index');
+Route::get('ventas/{sucursal}/{proforma}',[VentasController::class,'edit'])->name('ventas.ventas.edits');
 Route::post('compras_import',[ComprasController::class,'store'])->name('admin.compras.store');
 
 Route::get('facturacion/{sucursal}/{proforma}',[FacturacionController::class,'facturacion'])->name('facturacion');

@@ -23,7 +23,7 @@ class ClientesCreate extends Component
         /*'estado_id' => 'required',
         'ciudad_id' => 'required',*/
         'nombre' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
-        'apellido' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
+        'apellido' => 'max:30',
         'direccion' => 'max:50',
         'nro_documento' => 'required|min:5|unique:clientes',
         'tipo_documento' => 'required',
@@ -39,7 +39,7 @@ class ClientesCreate extends Component
        /* 'estado_id' => 'required',
         'ciudad_id' => 'required',*/
         'nombre' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
-        'apellido' => 'required|max:30|regex:/^[\pL\s\-]+$/u',
+        'apellido' => 'max:30',
         'direccion' => 'max:50',
         'tipo_documento' => 'required',
       //  'telefono' => 'numeric|min:9',

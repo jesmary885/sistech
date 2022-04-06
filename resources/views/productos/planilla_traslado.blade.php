@@ -67,7 +67,8 @@
 
         #fact,
         #fv,
-        #fa {
+        #fa
+        #f {
             color: #ffffff;
             font-size: 15px;            
         }
@@ -117,8 +118,16 @@
             padding: 20px;
             background: #33afff;
             text-align: center;
-            border-bottom: 1px solid #ffffff;
+            border-bottom: 1px solid #000;
         }
+
+        #f{
+            padding: 20px;
+            background: #33afff;
+            text-align: center;
+            border-bottom: 1px solid #000;
+        }
+
         #facproducto th, td{
             border: 1px solid;
         }
@@ -149,6 +158,8 @@
                                 av. argentina n 428   galeria mesa redonda stand g112 <br>
                                 Telefono: 015017327 <br>
                                 Email:  techperu@gmail.com <br><br>
+                                Fecha de emisión: {{$fecha_actual}} <br>
+                                Usuario emisor: {{$usuario}}
                             </p>
                         </th>
                     </tr>
@@ -167,7 +178,7 @@
 
     <section>
         <div>
-            <p class="fechas">Traslado desde {{$sucursal_inicial}} hasta {{$sucursal_destino}} - Fecha de envio: {{$fecha_actual}}</p>
+            <p class="fechas">Traslado desde {{$sucursal_inicial}} hasta {{$sucursal_destino}}</p>
         </div>
         <div>
             <table id="facproducto">
@@ -188,9 +199,19 @@
                         @endfor
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr id="f" >
+                         <th colspan="1">
+                            <p align="center">{{$total_registros}}</p>
+                        </th>
+                        <td>
+                            <p align="center"></p>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
-        <p class="fechas">CANTIDAD DE PRODUCTOS TRASLADADOS: {{$total_registros}}</p>
+    
     </section>
     <br>
     <br>

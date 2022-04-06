@@ -292,7 +292,7 @@
 
             <div class="flex mt-6 ml-4" :class="{'hidden': carrito == ''}">
                 <div class="mr-2">
-                    <a href="{{route('ventas.ventas.edit',$sucursal)}}" class="btn mt-6 mb-4 btn-primary"><< Regresar</a>
+                    <a href="{{route('ventas.ventas.edits',['sucursal'=>$sucursal,'proforma'=>$proforma])}}" class="btn mt-6 mb-4 btn-primary"><< Regresar</a>
                 </div>
                 
                 <x-button

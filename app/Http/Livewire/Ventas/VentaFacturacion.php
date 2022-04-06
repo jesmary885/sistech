@@ -74,6 +74,7 @@ class VentaFacturacion extends Component
     public function render()
     {
         $this->carrito = Cart::content();
+
         
         $this->empresa = Empresa::first();
         $this->iva = ($this->empresa->impuesto)/100;
