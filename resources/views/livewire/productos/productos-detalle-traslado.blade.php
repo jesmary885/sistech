@@ -101,64 +101,34 @@
         <h5 class="modal-title ml-4 mt-2 text-md text-gray-800"> <i class="fas fa-dolly"></i> Equipos seleccionados
         </h5>
         <hr class="m-0 ">
-        <div class="card-body">
-
-
-
-
-            <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Cant.</th>
-                        <th>Prod/Modelo</th>
-
-
+        <div class="card-body p-0 m-0 ">
+            <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm p-0 m-0 ">
+                <thead class="thead-dark p-0 m-0 ">
+                    <tr class="text-sm">
+                        <th class="text-center">Cant.</th>
+                        <th class="text-center">Prod/Modelo</th>
                     </tr>
                 </thead>
                 <tbody>
-                     {{-- @foreach ($this->producto_s as $cb)
-                        <td>{{ $cb->modelo->nombre }}
-                    @endforeach  --}}
-
-                    {{-- @for ($i=0; $i<$this->cant_registros; $i++) --}}
-                               
-                    {{-- @foreach ($this->cant_cod_barra as $value)
-                    <tr>
-                        <td>{{$value}}</td>
-                    </tr>
-                    @endforeach --}}
-
-           
-                    {{-- @foreac ($this->prod as $producto)
-                            <tr>
-                                <td>{{ $producto->producto->nombre }}/{{ $producto->producto->categoria->nombre }}
-                                </td>
-                                <td>{{ $producto->producto->marca->nombre }}/{{ $producto->producto->modelo->nombre }}
-                                </td>
-                                <td>{{ $producto->serial }}</td>
-                                <td width="10px"><input type="checkbox" wire:model="prod.{{ $producto->id }}"
-                                        value="{{ $producto->id }}"></td>
-                            </tr> --}}
-                     
-                            @foreach ($this->cant_cod_barra as $pr)
-                            @for ($i=0; $i<$this->cant_total; $i++)
-                            <tr>
-                            <td class="text-center">{{$pr[$this->producto_s[$i]]}}</td>
-                            <td class="text-center">{{$this->producto_s[$i]}}</td>
-                            </tr>
-                            @endfor
-                            @endforeach
-                           
-
-
-
                    
-
+                    @foreach ($this->cant_cod_barra as $pr)
+                        @for ($i = 0; $i < $this->cant_total; $i++)
+                            <tr>
+                                <td class="text-center text-xs m-0 p-0">{{ $pr[$this->produ_s_r[$i]] }}</td>
+                                <td class="text-center text-xs m-0 p-0">{{ $this->produ_s_r[$i] }}</td>
+                            </tr>
+                        @endfor
+                    @endforeach
                 </tbody>
             </table>
+            <div class=" text-white bg-gray-800">
+                <h5 class="text-sm font-semibold">Total de equipo: {{$this->cant_registros }}</h5>
+            </div>
+         
         </div>
         <div class="card-footer">
-     
+            
+           
         </div>
 
 

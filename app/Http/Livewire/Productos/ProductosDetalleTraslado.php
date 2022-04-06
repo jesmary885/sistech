@@ -11,6 +11,7 @@ use App\Models\Producto_sucursal as Pivot;
 use App\Models\ProductoSerialSucursal;
 use App\Models\ProductosTraslado;
 use App\Models\Traslado;
+use PDF;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\WithPagination;
 
@@ -21,7 +22,7 @@ class ProductosDetalleTraslado extends Component
     protected $paginationTheme = "bootstrap";
 
     public $isopen = false;
-    public $sucursal, $cant_total = 0, $cantidad, $sucursal_id = "", $sucursales, $prod, $prodr, $buscador, $product_cod_barra,$cant_cod_barra = [],$producto_s =[],$cant_registros = 0,$array_productos;
+    public $sucursal,$produ_s_r, $cant_total, $cantidad, $sucursal_id = "", $sucursales, $prod, $prodr, $buscador, $product_cod_barra,$cant_cod_barra = [],$producto_s =[],$cant_registros = 0,$array_productos;
 
     protected $listeners = ['render' => 'render', 'actualizar' => 'actualizar'];
 
@@ -45,9 +46,7 @@ class ProductosDetalleTraslado extends Component
             $this->emitTo('productos.productos-detalle-traslado', 'actualizar');
         } 
     }
-
     public function actualizar(){
-
         $ii=0;
         foreach ($this->prod as $p) {
             if ($p !=false){
@@ -57,8 +56,10 @@ class ProductosDetalleTraslado extends Component
             }
        }
        $this->cant_cod_barra[] = array_count_values( $this->producto_s);
-       $produ_s_r = array_unique($this->producto_s);
-        $this->cant_total=count($produ_s_r);
+       $this->produ_s_r = array_values(array_unique($this->producto_s));
+       $this->cant_total=count($this->produ_s_r);
+      // dd($this->produ_s_r);
+       
     }
 
     protected $rules = [
@@ -133,6 +134,7 @@ class ProductosDetalleTraslado extends Component
         $this->validate($rules);
         $cant = 0;
         $fecha_actual = date('Y-m-d');
+        $fecha_actual_mostrar = date('d-m-Y');
         $user_auth =  auth()->user()->id;
         $user_auth_nombre =  auth()->user()->name;
         $user_auth_apellido =  auth()->user()->apellido;
@@ -169,8 +171,31 @@ class ProductosDetalleTraslado extends Component
         }
 
         $this->resetPage();
-        $this->emitTo('productos.productos-traslado', 'render');
-        $this->emit('alert', 'Datos registrados correctamente');
+        
+       /* $this->emitTo('productos.productos-traslado', 'render');
+        $this->emit('alert', 'Datos registrados correctamente');*/
+
+        $data = [       
+            'usuario' => $user_auth_nombre." ".$user_auth_apellido,
+            'fecha_actual' => $fecha_actual_mostrar,
+            'cant_cod_barra' => $this->cant_cod_barra,
+            'cant_total' => $this->cant_total,
+            'sucursal_inicial' => $sucursal_inicial,
+            'sucursal_destino' => $sucursal_final,
+            'total_registros' => $this->cant_registros,
+            'produ_s_r' => $this->produ_s_r,
+        ];
+
+        
+        $this->reset(['cant_registros','produ_s_r','cant_cod_barra','cant_total']);
+        $pdf = PDF::loadView('productos.planilla_traslado',$data)->output();
+        return response()->streamDownload(
+            fn () => print($pdf),
+           "Traslado.pdf"
+            );
+
+          
+       
     }
 
 
