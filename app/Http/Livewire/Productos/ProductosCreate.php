@@ -10,6 +10,7 @@ use App\Models\Movimiento;
 use App\Models\Producto;
 use App\Models\Producto_cod_barra_serial;
 use App\Models\Producto_sucursal;
+use App\Models\ProductoSerialSucursal;
 use App\Models\Proveedor;
 use App\Models\Sucursal;
 use App\Models\User;
@@ -26,7 +27,7 @@ class ProductosCreate extends Component
 
     use WithFileUploads;
 
-    public $nombre, $puntos, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $inv_min, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores, $sucursales;
+    public $nombre, $puntos, $generar_serial, $fecha_actual, $sucursal_nombre, $cantidad, $observaciones, $inv_min, $cod_barra, $inventario_min, $presentacion, $precio_entrada, $precio_letal, $precio_mayor, $tipo_garantia, $garantia, $estado, $file, $marcas, $categorias, $proveedores, $sucursales;
     public $modelos = [];
     public $marca_id = "", $sucursal_id = "" ,$modelo_id = "", $categoria_id = "", $proveedor_id ="";
     public $limitacion_sucursal = true;
@@ -156,7 +157,7 @@ class ProductosCreate extends Component
 
             //agregando productos si contienen serial en tabla producto_cod_barra_serials
     
-                for ($i=0; $i < $this->cantidad; $i++) {
+               /* for ($i=0; $i < $this->cantidad; $i++) {
                     $producto->productoSerialSucursals()->create([
                         'serial' => 'S/S',
                         'sucursal_id' => $this->sucursal_id,
@@ -168,7 +169,28 @@ class ProductosCreate extends Component
                         'estado' => 'activo',
                         'fecha_compra' => $compra->fecha
                     ]);
-                }
+                }*/
+
+                
+            for ($i=0; $i < $this->cantidad; $i++) {
+                $producto_serial = new ProductoSerialSucursal();
+                $producto_serial->sucursal_id = $this->sucursal_id;
+                $producto_serial->cod_barra = $producto->cod_barra;
+                $producto_serial->compra_id = $compra->id;
+                $producto_serial->estado = 'activo';
+                $producto_serial->modelo_id = $this->modelo_id;
+                $producto_serial->categoria_id = $this->categoria_id;
+                $producto_serial->marca_id = $this->marca_id;
+                $producto_serial->fecha_compra = $compra->fecha;
+                $producto_serial->producto_id = $producto->id;
+                $producto_serial->save();
+
+                if($this->generar_serial == "1"){
+                    $producto_serial->update([
+                        'serial' => 'SN'."-".$producto_serial->id,
+                    ]);
+                }  
+            }
 
             //registrando moviemientos en tabla movimientos
             $producto->movimientos()->create([
@@ -203,7 +225,7 @@ class ProductosCreate extends Component
                 }
             }
 
-            $this->reset(['nombre','puntos','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','marca_id','file']);
+            $this->reset(['nombre','generar_serial','puntos','cantidad','cod_barra','inventario_min','presentacion','precio_entrada','precio_letal','precio_mayor','modelo_id','categoria_id','observaciones','tipo_garantia','garantia','estado','proveedor_id','marca_id','file']);
             $this->emit('alert','Producto creado correctamente');
             $this->emitTo('productos.productos-index','render');
         }

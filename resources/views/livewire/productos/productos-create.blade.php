@@ -115,6 +115,11 @@
                 <x-input-error for="puntos" />
                 </div>
 
+                <div class="flex w-full h-full ml-2">
+                    <input type="checkbox" class="ml-1 mt-1" wire:model="generar_serial" value="1">
+                    <p class="text-md font-semibold text-gray-700 ml-2">Generar seriales automáticamente</p>
+                </div>
+
             </div>
 
             <hr class="mb-2">

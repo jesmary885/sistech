@@ -9,6 +9,7 @@ use App\Models\Sucursal;
 use App\Models\User;
 
 use App\Models\Producto_sucursal as Pivot;
+use App\Models\ProductoSerialSucursal;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -16,7 +17,7 @@ class ProductosAdd extends Component
 {
 
     public $isopen = false;
-    public $producto, $pivot, $precio_compra, $proveedores, $cantidad, $sucursal_nombre, $sucursal_id = "", $sucursales, $proveedor_id = "";
+    public $producto, $generar_serial, $pivot, $precio_compra, $proveedores, $cantidad, $sucursal_nombre, $sucursal_id = "", $sucursales, $proveedor_id = "";
     public $limitacion_sucursal = true;
 
     protected $listeners = ['render' => 'render'];
@@ -135,8 +136,25 @@ class ProductosAdd extends Component
             //agregando productos a la tabla productosSerialSucursal
 
             for ($i=0; $i < $this->cantidad; $i++) {
-                $producto_select->productoSerialSucursals()->create([
-                    'serial' => 'S/S',
+                $producto_serial = new ProductoSerialSucursal();
+                $producto_serial->sucursal_id = $this->sucursal_id;
+                $producto_serial->cod_barra = $producto_select->cod_barra;
+                $producto_serial->compra_id = $compra->id;
+                $producto_serial->estado = 'activo';
+                $producto_serial->modelo_id = $producto_select->modelo_id;
+                $producto_serial->categoria_id = $producto_select->categoria_id;
+                $producto_serial->marca_id = $producto_select->marca_id;
+                $producto_serial->fecha_compra = $compra->fecha;
+                $producto_serial->producto_id = $producto_select->id;
+                $producto_serial->save();
+
+                if($this->generar_serial == "1"){
+                    $producto_serial->update([
+                        'serial' => 'SN'."-".$producto_serial->id,
+                    ]);
+                }  
+
+            /*    $producto_select->productoSerialSucursals()->create([
                     'sucursal_id' => $this->sucursal_id,
                     'cod_barra' => $producto_select->cod_barra,
                     'compra_id' => $compra->id,
@@ -145,7 +163,9 @@ class ProductosAdd extends Component
                     'categoria_id' => $producto_select->categoria_id,
                     'marca_id' => $producto_select->marca_id,
                     'fecha_compra' => $compra->fecha
-                ]);
+                ]);*/
+             /*   $producto_select->productoSerialSucursals()->create([
+                    'serial' => 'S/S',*/
             }
 
             //registrando moviemientos en tabla movimientos

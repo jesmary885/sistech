@@ -29,7 +29,7 @@ class CreateProductoSerialSucursalsTable extends Migration
             $table->foreign('marca_id')->references('id')->on('marcas');
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias');
-            $table->string('serial');
+            $table->string('serial')->unique()->nullable();
             $table->string('cod_barra');
             $table->string('estado');
         });
