@@ -36,7 +36,7 @@
                 <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm" >
                     <thead class="thead-dark">
                         <tr>
-                            <th>Cantidad</th>
+                            <th>Cantidd</th>
                             <th>Prod/Cat</th>
                             <th>Marc/Mod</th>
                             <th colspan="2"></th>
