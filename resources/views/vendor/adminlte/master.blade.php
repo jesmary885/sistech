@@ -107,6 +107,8 @@
     {{-- Body Content --}}
     @yield('body')
 
+    @yield('footer')
+
     {{-- Base Scripts --}}
     <script src="{{ mix('js/app.js') }}" defer></script>
     @if(!config('adminlte.enabled_laravel_mix'))

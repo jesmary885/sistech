@@ -1,13 +1,13 @@
 <?php return array (
   'adminlte' => 
   array (
-    'title' => 'AdminLTE 3',
+    'title' => 'TuNegocio',
     'title_prefix' => '',
     'title_postfix' => '',
     'use_ico_only' => false,
     'use_full_favicon' => false,
     'logo' => NULL,
-    'logo_img' => 'vendor/adminlte/dist/img/logotech_2.jpg',
+    'logo_img' => 'storage/logo/logo.png',
     'logo_img_class' => 'img-circle w-50 m-auto',
     'logo_img_xl' => NULL,
     'logo_img_xl_class' => NULL,
@@ -218,12 +218,6 @@
           ),
           1 => 
           array (
-            'text' => 'Productos por serial',
-            'route' => 'productos.serial.index',
-            'can' => 'productos.index_serial',
-          ),
-          2 => 
-          array (
             'text' => 'Devolucion',
             'route' => 'devolucion.index',
             'can' => 'productos.devolucion',
@@ -276,17 +270,11 @@
           ),
           3 => 
           array (
-            'text' => 'Productos desactivados',
-            'route' => 'reportes.index.desactivados',
-            'can' => 'reportes.desactivados',
-          ),
-          4 => 
-          array (
             'text' => 'Ventas',
             'route' => 'reportes.index.ventas',
             'can' => 'reportes.ventas',
           ),
-          5 => 
+          4 => 
           array (
             'text' => 'Movimientos en caja',
             'route' => 'reportes.index.caja',
@@ -444,16 +432,16 @@
   ),
   'app' => 
   array (
-    'name' => 'sistech',
+    'name' => 'sisvnt',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://sistech.test/',
+    'url' => 'http://sistvnt.test/',
     'asset_url' => NULL,
     'timezone' => 'America/Lima',
     'locale' => 'es',
     'fallback_locale' => 'es',
     'faker_locale' => 'en_US',
-    'key' => 'base64:i3c4le45GVJhAslARv8PEaNTwbpvGf9hloTJrfclfrw=',
+    'key' => 'base64:zV0cZyT/TLTRHaYwgDr7uFZjPXpQmuQH1OLDVmQl5TY=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -634,7 +622,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp\\htdocs\\sistech\\storage\\framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -678,7 +666,7 @@
         'driver' => 'octane',
       ),
     ),
-    'prefix' => 'sistech_cache',
+    'prefix' => 'sisvnt_cache',
   ),
   'cart' => 
   array (
@@ -734,7 +722,7 @@
       array (
         'driver' => 'sqlite',
         'url' => NULL,
-        'database' => 'sistech',
+        'database' => 'sis_vnt',
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
@@ -744,7 +732,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'sistech',
+        'database' => 'sis_vnt',
         'username' => 'root',
         'password' => '',
         'unix_socket' => '',
@@ -764,7 +752,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'sistech',
+        'database' => 'sis_vnt',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -779,7 +767,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'sistech',
+        'database' => 'sis_vnt',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -794,7 +782,7 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'sistech_database_',
+        'prefix' => 'sisvnt_database_',
       ),
       'default' => 
       array (
@@ -820,10 +808,10 @@
     'orientation' => 'portrait',
     'defines' => 
     array (
-      'font_dir' => 'C:\\xampp\\htdocs\\sistech\\storage\\fonts/',
-      'font_cache' => 'C:\\xampp\\htdocs\\sistech\\storage\\fonts/',
+      'font_dir' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\fonts/',
+      'font_cache' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\fonts/',
       'temp_dir' => 'C:\\Users\\Erik\\AppData\\Local\\Temp',
-      'chroot' => 'C:\\xampp\\htdocs\\sistech',
+      'chroot' => 'C:\\xampp\\htdocs\\sist_vnt',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
@@ -845,13 +833,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\sistech\\storage\\app',
+        'root' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\sistech\\storage\\app/public',
-        'url' => 'http://sistech.test//storage',
+        'root' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\app/public',
+        'url' => 'http://sistvnt.test//storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -868,7 +856,7 @@
     ),
     'links' => 
     array (
-      'C:\\xampp\\htdocs\\sistech\\public\\storage' => 'C:\\xampp\\htdocs\\sistech\\storage\\app/public',
+      'C:\\xampp\\htdocs\\sist_vnt\\public\\storage' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\app/public',
     ),
   ),
   'hashing' => 
@@ -903,13 +891,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\xampp\\htdocs\\sistech\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\xampp\\htdocs\\sistech\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -960,7 +948,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'C:\\xampp\\htdocs\\sistech\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -1019,14 +1007,14 @@
     'from' => 
     array (
       'address' => 'jesmary885@gmail.com',
-      'name' => 'sistech',
+      'name' => 'sisvnt',
     ),
     'markdown' => 
     array (
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\xampp\\htdocs\\sistech\\resources\\views/vendor/mail',
+        0 => 'C:\\xampp\\htdocs\\sist_vnt\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -1145,7 +1133,7 @@
       2 => '127.0.0.1',
       3 => '127.0.0.1:8000',
       4 => '::1',
-      5 => 'sistech.test',
+      5 => 'sistvnt.test',
     ),
     'guard' => 
     array (
@@ -1183,7 +1171,7 @@
     'lifetime' => '120',
     'expire_on_close' => true,
     'encrypt' => false,
-    'files' => 'C:\\xampp\\htdocs\\sistech\\storage\\framework/sessions',
+    'files' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -1192,7 +1180,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'sistech_session',
+    'cookie' => 'sisvnt_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => NULL,
@@ -1203,9 +1191,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\sistech\\resources\\views',
+      0 => 'C:\\xampp\\htdocs\\sist_vnt\\resources\\views',
     ),
-    'compiled' => 'C:\\xampp\\htdocs\\sistech\\storage\\framework\\views',
+    'compiled' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\framework\\views',
   ),
   'flare' => 
   array (
@@ -1250,7 +1238,7 @@
   'livewire' => 
   array (
     'class_namespace' => 'App\\Http\\Livewire',
-    'view_path' => 'C:\\xampp\\htdocs\\sistech\\resources\\views/livewire',
+    'view_path' => 'C:\\xampp\\htdocs\\sist_vnt\\resources\\views/livewire',
     'layout' => 'layouts.app',
     'asset_url' => NULL,
     'app_url' => NULL,
@@ -1327,7 +1315,7 @@
       ),
       'csv' => 
       array (
-        'delimiter' => ',',
+        'delimiter' => NULL,
         'enclosure' => '"',
         'escape_character' => '\\',
         'contiguous' => false,
@@ -1391,7 +1379,7 @@
     ),
     'temporary_files' => 
     array (
-      'local_path' => 'C:\\xampp\\htdocs\\sistech\\storage\\framework/cache/laravel-excel',
+      'local_path' => 'C:\\xampp\\htdocs\\sist_vnt\\storage\\framework/cache/laravel-excel',
       'remote_disk' => NULL,
       'remote_prefix' => NULL,
       'force_resync_remote' => NULL,

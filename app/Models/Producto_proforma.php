@@ -15,7 +15,8 @@ class Producto_proforma extends Model
         return $this->belongsTo(Proforma::class);
     }
 
-    public function productoSerialSucursal(){
-        return $this->belongsTo(ProductoSerialSucursal::class);
+    public function producto(){
+        return $this->belongsTo(Producto::class);
     }
+
 }

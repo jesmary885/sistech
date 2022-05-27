@@ -1,7 +1,5 @@
 @extends('adminlte::page')
 
-@section('title', 'TechPeru')
-
 @section('content_header')
 
     <div class="flex justify-between">
@@ -10,9 +8,9 @@
             @livewire('productos.productos-export',['vista' => 'barra'])
         </div>
 
-        <div class=" justify-end ">
+         <div class=" justify-end ">
             @livewire('productos.productos-import',['vista' => 'barra'])
-        </div>
+        </div> 
 
         <div class="ml-2 justify-end">
             <a href="{{route('productos.productos.create')}}" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> Nuevo equipo</a>

@@ -17,7 +17,8 @@ class ProductosTraslado extends Model
         return $this->belongsTo(Sucursal::class);
     }
 
-    public function productoSerialSucursal(){
-        return $this->belongsTo(ProductoSerialSucursal::class);
+
+    public function producto(){
+        return $this->belongsTo(Producto::class);
     }
 }

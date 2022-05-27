@@ -1,12 +1,7 @@
 <div>
-    <h5 class="modal-title ml-4 mt-2 text-md text-gray-800"> <i class="fas fa-dolly"></i>  Pendientes por recibir</h5>
+    <h5 class="modal-title ml-4 mt-2 text-md text-gray-800"> <i class="fas fa-dolly"></i>  Equipos pendientes por recibir</h5>
         <hr class="m-0 ">
-        
-        <div class="card-header">
-            <div class="mt-10 w-3/4">     
-            </div>     
-        </div>
-      
+
             <div class="card-body">
                 <div class="flex items-center justify-between">
                     <div class="flex-1">
@@ -16,7 +11,7 @@
                                 <select wire:model="buscador" id="buscador" class="form-control text-m" name="buscador">
                             
                                     <option value="0">Código de barra</option>
-                                    <option value="1">Serial</option>
+                                    <option value="1">Nombre</option>
                                 </select>
             
                                 <x-input-error for="buscador" />
@@ -41,31 +36,38 @@
                 <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm" >
                     <thead class="thead-dark">
                         <tr>
+                            <th>Cantidad</th>
                             <th>Prod/Cat</th>
                             <th>Marc/Mod</th>
-                            <th>Serial</th>
-                            <th colspan="1"></th>
+                            <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($trasl as $p)
                             <tr>
-                            <td>{{$p->productoSerialSucursal->producto->nombre}}/{{$p->productoSerialSucursal->producto->categoria->nombre}}</td>
-                            <td>{{$p->productoSerialSucursal->producto->marca->nombre}}/{{$p->productoSerialSucursal->producto->modelo->nombre}}</td>
-                            <td>{{$p->productoSerialSucursal->serial}}</td>
-                            <td width="10px"><input type="checkbox" wire:model="prodr.{{$p->id}}" value="{{$p->productoSerialSucursal->id}}"></td>
+                            <td>{{$p->cantidad}}</td>
+                            <td>{{$p->producto->nombre}}/{{$p->producto->categoria->nombre}}</td>
+                            <td>{{$p->producto->marca->nombre}}/{{$p->producto->modelo->nombre}}</td>
+
+                            <td width="10px">
+                                <button
+                                class="btn btn-success btn-sm" 
+                                wire:click="recibir('{{$p->id}}')"
+                                title="Recibir todos los productos">
+                                <i class="fas fa-check-double"></i>
+                                </button>
+                            </td>
+                            <td width="10px">
+                                 @livewire('productos.productos-recibir-unidad', ['producto' => $p],key(01.,'$p->id'))
+                           </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                <x-input-error for="prodr" />
+              
             </div>
-            <div class="card-footer">
+            <div>
                 {{$trasl->links()}}
-            </div>
-
-            <div class="flex mt-2 mb-2 ml-4">
-                <button type="button" class="btn btn-primary disabled:opacity-25 mr-2" wire:loading.attr="disabled" wire:click="ingresar">Ingresar</button>
             </div>
 
         @else

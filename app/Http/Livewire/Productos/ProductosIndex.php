@@ -32,10 +32,11 @@ class ProductosIndex extends Component
         $sucursales = Sucursal::all();
 
         if($this->buscador == 3){
-            $productos = Producto::where('nombre', 'LIKE', '%' . $this->search . '%')
-            ->where('cod_barra', 'LIKE', '%' . $this->search . '%')
+            $productos = Producto::where('cod_barra', 'LIKE', '%' . $this->search . '%')
             ->where('estado','1')
             ->paginate(5);
+
+            //dd($productos);
             
             $this->item_buscar = "el código de barra o nombre del producto a buscar";
         }
@@ -64,9 +65,8 @@ class ProductosIndex extends Component
         if($this->buscador == 0){
 
             $productos = Producto::whereHas('modelo',function(Builder $query){
-                $query->where('nombre','LIKE', '%' . $this->search . '%')
-                ->where('estado',1);
-            })->paginate(5);
+                $query->where('nombre','LIKE', '%' . $this->search . '%');
+            })->where('estado',1)->paginate(5);
 
             $this->item_buscar = "el modelo del producto a buscar";
         }
@@ -78,12 +78,11 @@ class ProductosIndex extends Component
 
     public function delete($productoId){
         $this->producto = $productoId;
-       
-       // $busqueda = Producto_venta::where('producto_id',$productoId)->first();
+        $busqueda = Producto_venta::where('producto_id',$productoId)->first();
 
-        $busqueda = Producto_venta::whereHas('productoSerialSucursal',function(Builder $query){
+        /*$busqueda = Producto_venta::whereHas('producto',function(Builder $query){
             $query->where('producto_id',$this->producto);
-         })->first();
+         })->first();*/
 
         if($busqueda) $this->emit('errorSize', 'Este producto esta asociado a una venta, no puede eliminarlo');
         else $this->emit('confirm', 'Esta seguro de eliminar este producto?','productos.productos-index','confirmacion','El producto se ha eliminado.');
@@ -103,19 +102,11 @@ class ProductosIndex extends Component
             'estado' => 'inactivo por eliminación, por usuario'. $user_auth_nombre->nombre. ' ' . $user_auth_nombre->apellido. 'en fecha:' .$this->fecha_actual,
         ]);
 
-        //inactivando todos los productos por serial asociados al producto eliminado
-
-        $cant_prod_elim=0;
-        $productos_seriales = ProductoSerialSucursal::where('producto_id',$producto_destroy->id)->get();
-        foreach($productos_seriales as $ps){
-            $ps->update([
-                'estado' => 'inactivo por eliminación, por usuario'. $usuario_auth . 'en fecha:' .$this->fecha_actual,
-            ]);
-            $cant_prod_elim++;
-        }
+       
         //registrando movimiento de producto eliminado en kardex
         $stock_antiguo = 0;
         foreach($sucursales as $sucursalx){
+
             $stock_antiguo = $producto_destroy->sucursals->find($sucursalx)->pivot->cantidad + $stock_antiguo;
         }
 
@@ -125,7 +116,7 @@ class ProductosIndex extends Component
             'cantidad_entrada' => 0,
             'stock_antiguo' => $stock_antiguo,
             'stock_nuevo' => 0,
-            'cantidad_salida' => $cant_prod_elim,
+            'cantidad_salida' => $stock_antiguo,
             'precio_entrada' => 0,
             'precio_salida' => 0,
             'detalle' => 'Eliminación de producto, por usuario'. $user_auth_nombre->nombre. ' ' . $user_auth_nombre->apellido. 'en fecha:' .$this->fecha_actual,

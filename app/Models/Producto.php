@@ -25,10 +25,15 @@ class Producto extends Model
     }
 
     //Relacion uno a muchos
-   
-    public function productoSerialSucursals(){
-        return $this->hasMany(ProductoSerialSucursal::class);
+
+    public function producto_sucursals(){
+        return $this->hasMany(Producto_sucursal::class);
     }
+
+    public function producto_proformas(){
+        return $this->hasMany(Producto_proforma::class);
+    }
+   
     public function compras(){
         return $this->hasMany(Compra::class);
     }
@@ -45,6 +50,9 @@ class Producto extends Model
         return $this->hasMany(Devolucion::class);
     }
 
+    public function productos_traslados(){
+        return $this->hasMany(ProductosTraslado::class);
+    }
 
     //Relacion muchos a muchos
     public function sucursals(){

@@ -16,11 +16,14 @@ class CreateProductosTrasladosTable extends Migration
         Schema::create('productos_traslados', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('sucursal_origen');
+
             $table->unsignedBigInteger('sucursal_id');
             $table->foreign('sucursal_id')->references('id')->on('sucursals');
-            $table->unsignedBigInteger('producto_serial_sucursal_id');
-            $table->foreign('producto_serial_sucursal_id')->references('id')->on('producto_serial_sucursals')->onDelete('cascade');
-
+            
+            $table->unsignedBigInteger('producto_id');
+            $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');
+            $table->integer('cantidad');
         });
     }
 

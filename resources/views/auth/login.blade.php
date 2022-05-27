@@ -93,7 +93,8 @@
           <div class="form">
               <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <img src="vendor/adminlte/dist/img/logotech_2.jpg" class="mb-4" alt="">
+                <img class="mb-4" src="storage/logo/logo.png" alt="">
+  
               <input type="email" name="email"  id="email" placeholder="Email" required>
               <x-input-error for="email" />
               <input type="password" id="password" name="password" required placeholder="Contraseña">

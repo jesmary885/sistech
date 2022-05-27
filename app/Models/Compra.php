@@ -29,9 +29,4 @@ class Compra extends Model
         return $this->belongsTo(Sucursal::class);
     }
 
-    public function productoSerialSucursal(){
-        return $this->belongsTo(ProductoSerialSucursal::class);
-    }
-
-
 }

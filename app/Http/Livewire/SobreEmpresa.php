@@ -3,12 +3,16 @@
 namespace App\Http\Livewire;
 
 use App\Models\Empresa;
+
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class SobreEmpresa extends Component
 {
+    use WithFileUploads;
 
-    public $empresa,$nombre, $tipo_documento, $documento, $telefono, $email, $direccion, $tipo_impuesto, $impuesto;
+    public $logo,$empresa,$nombre, $tipo_documento, $documento, $telefono, $email, $direccion, $tipo_impuesto, $impuesto;
 
 
     protected $rules = [
@@ -46,9 +50,17 @@ class SobreEmpresa extends Component
     public function update(){
         $rules = $this->rules;
         $this->validate($rules);
- 
-        
-            $this->empresa->update([
+
+        $nombre_imagen = 'logo.png';
+        $imagen = 'logo/logo.png';
+
+       // vendor/adminlte/dist/img/logo.png
+
+        //dd($this->logo);
+
+        $this->logo->storeAs('public/logo',$nombre_imagen);
+
+        $this->empresa->update([
                 'nombre' => $this->nombre,
                 'email' => $this->email,
                 'nro_documento' => $this->documento,
@@ -58,8 +70,8 @@ class SobreEmpresa extends Component
                 'impuesto' => $this->impuesto,
                 'nombre_impuesto' => $this->nombre_impuesto,
                 'porcentaje_puntos' => $this->porcentaje_puntos,
-               
-            ]);
+                'logo' => $imagen
+        ]);
    
             $this->emit('alert','Los datos han sido modificados correctamente');
        

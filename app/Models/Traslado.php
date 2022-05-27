@@ -12,7 +12,11 @@ class Traslado extends Model
 
     //Relaion uno a muhos inversa
  
-    public function productoSerialSucursal(){
-        return $this->belongsTo(ProductoSerialSucursal::class);
+    public function sucursal(){
+        return $this->belongsTo(Sucursal::class);
+    }
+
+    public function producto(){
+        return $this->belongsTo(Producto::class);
     }
 }

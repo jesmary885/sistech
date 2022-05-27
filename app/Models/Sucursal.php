@@ -21,8 +21,13 @@ class Sucursal extends Model
     public function ventas(){
         return $this->hasMany(Venta::class);
     }
-    public function producto_cod_barra_serials(){
-        return $this->hasMany(Producto_cod_barra_serial::class);
+
+    public function productos_traslados(){
+        return $this->hasMany(ProductosTraslado::class);
+    }
+
+    public function traslados(){
+        return $this->hasMany(Traslado::class);
     }
 
     public function users(){

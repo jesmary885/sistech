@@ -1,6 +1,6 @@
-<div class="grid lg:grid-cols-4 gap-6">
-    <aside class="lg:col-span-3">
-        <div class="card overflow-y-scroll">
+<div class="grid lg:grid-cols-4 gap-6 p-0">
+    <aside class="lg:col-span-2">
+        <div class="card overflow-y-auto">
             <div class="card-header flex items-center justify-between">
                 <div class="flex-1">
                     <div class=flex>
@@ -10,7 +10,6 @@
                                 <option value="1">Marca</option>
                                 <option value="2">Categoria</option>
                                 <option value="3">Código de barra</option>
-                                <option value="4">serial</option>
                             </select>
         
                             <x-input-error for="buscador" />
@@ -39,7 +38,7 @@
                                 <th class="text-center">Producto/Categoria</th>
                                 <th class="text-center">Modelo/Marca</th>
                                 <th class="text-center">Stock</th>
-                                <th class="text-center">Serial</th>
+       
                                 <th class="text-center">Unitario</th>
                                 <th class="text-center">Mayor</th>
                                 <th colspan="1"></th>
@@ -48,24 +47,13 @@
                         <tbody>
                             @foreach ($productos as $producto)
                                 <tr>
-                                    <?php
-                                        $cant = 0;
-                                        foreach($sucursales as $sucursale){
-                                            $cant = $cant + $producto->producto->sucursals->find($sucursale)->pivot->cantidad;
-                                        }
-                                    ?>
-                                  
-                                    <td class="text-center">{{$producto->producto->nombre}} / {{$producto->producto->categoria->nombre}}   </td>
-                                    <td class="text-center">{{$producto->producto->modelo->nombre}} / {{$producto->producto->marca->nombre}}</td>
-                                    <td class="text-center">@livewire('productos.productos-stock-sucursal', ['producto' => $producto->producto, 'cant' => $cant],key(0.,'$producto->producto->id'))</td>
-                                    <td class="text-center">{{ $producto->serial }}</td>
-                                    <td class="text-center">{{ $producto->producto->precio_letal}}</td>
-                                    <td class="text-center">{{ $producto->producto->precio_mayor}}</td>
-                                
-                                    
-                                    
+                                    <td class="text-center">{{$producto->nombre}} / {{$producto->categoria->nombre}}   </td>
+                                    <td class="text-center">{{$producto->modelo->nombre}} / {{$producto->marca->nombre}}</td>
+                                    <td class="text-center">@livewire('productos.productos-stock-sucursal', ['producto' => $producto],key(0.,'$producto->id'))</td>
+                                    <td class="text-center">{{ $producto->precio_letal}}</td>
+                                    <td class="text-center">{{ $producto->precio_mayor}}</td>
                                     <td width="10px">
-                                        @livewire('ventas.ventas-seleccion-cantidades', ['producto' => $producto,'sucursal' => $sucursal, 'usuario' => $usuario],key($producto->id))
+                                     @livewire('ventas.ventas-seleccion-cantidades', ['producto' => $producto,'sucursal' => $sucursal, 'usuario' => $usuario],key($producto->id))
                                         {{-- <a href="#" class="btn btn-info btn-sm {{$estado}}"><i class="fas fa-check"></i></a> --}}
                                     </td>
                                 </tr>
@@ -73,12 +61,12 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="flex card-footer overflow-y-scroll">
+                <div class="flex card-footer overflow-y-auto">
                     <div class="d-flex justify-content-center">
                     {{ $productos->links()}}
                     </div>
     
-                    <div class="ml-2 flex justify-content-center">
+                    {{-- <div class="ml-2 flex justify-content-center">
                         <div>
                             <a href="{{route('ventas.ventas.index')}}" class="btn btn-primary">Regresar</a>
                            
@@ -88,16 +76,16 @@
                         </div>
                       
                         
-                    </div>
+                    </div> --}}
     
                 </div>
             @else
                 <div class="card-body">
                     <strong>No hay registros</strong>
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <a href="{{route('ventas.ventas.index')}}" class="btn btn-primary"><< Regresar</a>
     
-                    </div>
+                    </div> --}}
                     
                 </div>
             @endif
@@ -106,7 +94,7 @@
 
     </aside>
 
-    <div class="card lg:col-span-1">
+    <div class="card lg:col-span-2">
         @livewire('ventas.ventas-cart', ['sucursal' => $sucursal])
 
     </div>

@@ -1,21 +1,9 @@
 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-    <aside class="md:col-span-1 lg:col-span-3">
+    <aside class="md:col-span-1 lg:col-span-2">
         <div class="card">
             <h5 class="modal-title ml-4 mt-2 text-md text-gray-800"> <i class="fas fa-boxes"></i> Disponibles en almacen
             </h5>
-            <hr class="m-0 ">
-            <div class="card-header">
-                <div class="mt-2 w-3/4">
-                    <select wire:model="sucursal_id"
-                        class="block bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value="" selected>Sucursal destino</option>
-                        @foreach ($sucursales as $sucursale)
-                            <option value="{{ $sucursale->id }}">{{ $sucursale->nombre }}</option>
-                        @endforeach
-                    </select>
-                    <x-input-error for="sucursal_id" />
-                </div>
-            </div>
+            
             <div class="card-body">
                 <div class="flex items-center justify-between">
                     <div class="flex-1">
@@ -26,7 +14,7 @@
                                     <option value="0">Modelo</option>
                                     <option value="1">Categoria</option>
                                     <option value="2">Código de barra</option>
-                                    <option value="3">Serial</option>
+                              
                                 </select>
 
                                 <x-input-error for="buscador" />
@@ -51,87 +39,53 @@
                     <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm">
                         <thead class="thead-dark">
                             <tr>
+                                <th>Cantidad</th>
                                 <th>Prod/Cat</th>
                                 <th>Marc/Mod</th>
-                                <th>Serial</th>
+                             
                                 <th colspan="1"></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($productos as $producto)
                                 <tr>
-                                    <td>{{ $producto->producto->nombre }}/{{ $producto->producto->categoria->nombre }}
+                                    <td>{{$producto->sucursals->find($sucursal)->pivot->cantidad}}</td>
+                                    <td>{{ $producto->nombre }}/{{ $producto->categoria->nombre }}
                                     </td>
-                                    <td>{{ $producto->producto->marca->nombre }}/{{ $producto->producto->modelo->nombre }}
+                                    <td>{{ $producto->marca->nombre }}/{{ $producto->modelo->nombre }}
                                     </td>
-                                    <td>{{ $producto->serial }}</td>
-                                    <td width="10px"><input type="checkbox" value="{{ $producto->id }}"
-                                            wire:model="prod.{{ $producto->id }}"></td>
+                                    <td width="10px">
+                                 
+                                             @livewire('productos.productos-traslado-seleccion', ['producto' => $producto,'sucursal' => $sucursal],key($producto->id))
+                                    
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
             </div>
             <div class="card-footer">
-                <div class="d-flex justify-content-center">
+         
                     {{ $productos->links() }}
 
-                </div>
+          
 
             </div>
 
-            <div class="flex mt-2 mb-2 ml-4">
-                <button type="button" class="btn btn-primary disabled:opacity-25 mr-2" wire:loading.attr="disabled"
-                    wire:click="save">Enviar</button>
-                <a href="{{ route('productos.traslado.select', $sucursal) }}" class="btn btn-primary"><i
-                        class="fas fa-undo-alt"></i> Regresar</a>
-            </div>
+            
         @else
             <div class="card-body">
                 <strong>No hay registros</strong> <br>
-                <hr>
-                <a href="{{ route('productos.traslado.select', $sucursal) }}" class="btn btn-primary mt-4"><i
-                        class="fas fa-undo-alt"></i> Regresar</a>
             </div>
             @endif
         </div>
     </aside>
 
-    <div class="card md:col-span-1 lg:col-span-1">
-        <h5 class="modal-title ml-4 mt-2 text-md text-gray-800"> <i class="fas fa-dolly"></i> Equipos seleccionados
-        </h5>
-        <hr class="m-0 ">
-        <div class="card-body p-0 m-0 ">
-            <table class="table table-bordered table-responsive-lg table-responsive-md table-responsive-sm p-0 m-0 ">
-                <thead class="thead-dark p-0 m-0 ">
-                    <tr class="text-sm">
-                        <th class="text-center">Cant.</th>
-                        <th class="text-center">Prod/Modelo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                   
-                    @foreach ($this->cant_cod_barra as $pr)
-                        @for ($i = 0; $i < $this->cant_total; $i++)
-                            <tr>
-                                <td class="text-center text-xs m-0 p-0">{{ $pr[$this->produ_s_r[$i]] }}</td>
-                                <td class="text-center text-xs m-0 p-0">{{ $this->produ_s_r[$i] }}</td>
-                            </tr>
-                        @endfor
-                    @endforeach
-                </tbody>
-            </table>
-            <div class=" text-white bg-gray-800">
-                <h5 class="text-sm font-semibold">Total de equipo: {{$this->cant_registros }}</h5>
-            </div>
-         
-        </div>
-        <div class="card-footer">
-            
-           
-        </div>
+    <div class="card md:col-span-1 lg:col-span-2">
 
 
+        @livewire('productos.productos-traslado-pendientes', ['sucursal' => $sucursal])
+      
 
     </div>
 </div>

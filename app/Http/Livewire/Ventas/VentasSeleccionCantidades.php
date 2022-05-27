@@ -11,12 +11,13 @@ class VentasSeleccionCantidades extends Component
 {
 
     public $isopen = false;
-    public $producto, $sucursal, $precios, $usuario, $change_price, $precio_manual;
+    public $quantity,$producto, $sucursal, $precios = 1, $usuario, $change_price, $precio_manual;
     public $qty = 1;
 
     public $options = [
         'puntos' => null,
-        'serial' => null,
+        'modelo' => null,
+  
     ];
 
 
@@ -30,51 +31,36 @@ class VentasSeleccionCantidades extends Component
     }
 
     public function mount(){
-
+     $product=$this->producto->id;
+     $sucur=$this->sucursal;
+    $this->quantity = qty_available($product,$sucur);
+    
 
     }
 
 
     public function addItem(){
 
-        
-
-        $exist = 0;
-
-        foreach(Cart::content() as $item){
-            if($item->id == $this->producto->id){
-                $exist = 1;
-            }
-        }
-
-        if($exist == 0){
-            if($this->precios == 1) $precio_venta = $this->producto->producto->precio_letal;
-            elseif($this->precios == 2) $precio_venta = $this->producto->producto->precio_mayor;
+            if($this->precios == 1) $precio_venta = $this->producto->precio_letal;
+            elseif($this->precios == 2) $precio_venta = $this->producto->precio_mayor;
             elseif($this->precios == 3) $precio_venta = $this->precio_manual;
             
-            $this->options['puntos'] = $this->producto->producto->puntos;
-            $this->options['serial'] = $this->producto->serial;
+            $this->options['puntos'] = $this->producto->puntos;
+            $this->options['modelo'] = $this->producto->modelo->nombre;
+
 
             Cart::add([ 'id' => $this->producto->id, 
-                        'name' => $this->producto->producto->nombre, 
-                        'qty' => 1, 
+                        'name' => $this->producto->nombre, 
+                        'qty' => $this->qty, 
                         'price' => $precio_venta, 
                         'weight' => 0,
                         'options' => $this->options,
                     ]);
 
-      //   $this->cantidad = qty_available($this->producto->id,$this->sucursal);
-
-        $this->reset('precios');
+        $this->quantity = qty_available($this->producto->id,$this->sucursal);
+        $this->reset('precios','qty');
         $this->isopen = false;
         $this->emitTo('ventas.ventas-cart','render');
-
-        }
-        else{
-            $this->emit('errorSize', 'Ya agregaste este producto al carrito');
-        }
-       
-
     
     }
 

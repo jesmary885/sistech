@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Empresa;
 use App\Models\MovimientoCaja;
 use App\Models\Producto;
 use App\Models\Sucursal;
 use App\Models\Venta;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator; 
@@ -33,6 +35,8 @@ class HomeController extends Controller
     {
       
         $usuario_auth = auth()->user();
+        $logo = Empresa::first()->logo;
+        //dd($logo);
         $usuario_ac = $usuario_auth->sucursal->nombre;
         $sucursal_act = $usuario_auth->sucursal->id;
 
@@ -84,7 +88,7 @@ class HomeController extends Controller
             $total_ganancias_dia=$total_venta[0]->quantity;
             $total_traslados_pendientes =$traslado_pendient[0]->cantidad;
 
-            return view('home',compact('ventas','movimientos','total_movimientos_pendientes','usuario_ac','productos_cant','clientes_cant','ventas_totales_dia','total_ganancias_dia','total_traslados_pendientes'));
+            return view('home',compact('ventas','movimientos','total_movimientos_pendientes','usuario_ac','productos_cant','clientes_cant','ventas_totales_dia','total_ganancias_dia','total_traslados_pendientes','logo'));
 
     }
 }

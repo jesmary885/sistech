@@ -8,15 +8,18 @@ use Livewire\Component;
 class ProductosStockSucursal extends Component
 {
 
-    public $producto,$cant;
+    public $producto;
     public $isopen = false;
+
+    protected $listeners = ['render' => 'render'];
 
     public function render()
     {
 
         $sucursales = Sucursal::all();
+        $producto = $this->producto;
 
-        return view('livewire.productos.productos-stock-sucursal',compact('sucursales'));
+        return view('livewire.productos.productos-stock-sucursal',compact('sucursales','producto'));
     }
 
     public function open()

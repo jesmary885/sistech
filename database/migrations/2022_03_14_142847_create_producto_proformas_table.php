@@ -18,8 +18,8 @@ class CreateProductoProformasTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('proforma_id');
             $table->foreign('proforma_id')->references('id')->on('proformas');
-            $table->unsignedBigInteger('producto_serial_sucursal_id');
-            $table->foreign('producto_serial_sucursal_id')->references('id')->on('producto_serial_sucursals');
+            $table->unsignedBigInteger('producto_id');
+            $table->foreign('producto_id')->references('id')->on('productos');
             $table->float('precio');
             $table->string('cantidad');
         });

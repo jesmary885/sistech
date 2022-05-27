@@ -114,7 +114,7 @@ $medidaTicket = 180;
                 @foreach ($collection as $item)
                         <tr>
                             <td class="cant">{{$item->qty}}</td>
-                            <td>{{$item->name}} - {{$item->options['serial']}}</td>
+                            <td>{{$item->name}} - {{$item->options['modelo']}}</td>
                             <td>S/ {{$item->price}}</td>
                         </tr>
                     @endforeach

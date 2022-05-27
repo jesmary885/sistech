@@ -80,6 +80,11 @@ class ProductosAdd extends Component
             }
 
             $stock_nuevo = $stock_antiguo + $this->cantidad;
+            
+            $producto_select->update([
+                'cantidad' => $stock_nuevo,
+            ]);
+
             $producto_select->movimientos()->create([
                 'fecha' => $this->fecha_actual,
                 'cantidad_entrada' => $this->cantidad,
@@ -134,44 +139,6 @@ class ProductosAdd extends Component
             }*/
 
             //agregando productos a la tabla productosSerialSucursal
-
-            for ($i=0; $i < $this->cantidad; $i++) {
-                $producto_serial = new ProductoSerialSucursal();
-                $producto_serial->sucursal_id = $this->sucursal_id;
-                $producto_serial->cod_barra = $producto_select->cod_barra;
-                $producto_serial->compra_id = $compra->id;
-                $producto_serial->estado = 'activo';
-                $producto_serial->modelo_id = $producto_select->modelo_id;
-                $producto_serial->categoria_id = $producto_select->categoria_id;
-                $producto_serial->marca_id = $producto_select->marca_id;
-                $producto_serial->fecha_compra = $compra->fecha;
-                $producto_serial->producto_id = $producto_select->id;
-                $producto_serial->save();
-
-                if($this->generar_serial == "1"){
-                    $producto_serial->update([
-                        'serial' => 'SN'."-".$producto_serial->id,
-                    ]);
-                }  
-
-            /*    $producto_select->productoSerialSucursals()->create([
-                    'sucursal_id' => $this->sucursal_id,
-                    'cod_barra' => $producto_select->cod_barra,
-                    'compra_id' => $compra->id,
-                    'estado' => 'activo',
-                    'modelo_id' => $producto_select->modelo_id,
-                    'categoria_id' => $producto_select->categoria_id,
-                    'marca_id' => $producto_select->marca_id,
-                    'fecha_compra' => $compra->fecha
-                ]);*/
-             /*   $producto_select->productoSerialSucursals()->create([
-                    'serial' => 'S/S',*/
-            }
-
-            //registrando moviemientos en tabla movimientos
-
-        
-
 
             $this->reset(['isopen','precio_compra','sucursal_id','proveedor_id','cantidad']);
             $this->emitTo('productos.productos-index','render');

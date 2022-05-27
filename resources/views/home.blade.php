@@ -1,11 +1,5 @@
 @extends('adminlte::page')
 
-@section('title', 'Tech Peru')
-
-@section('content_header')
-    
-@stop
-
 @section('content')
 
 {{-- <div class="flex bg-indigo-500 ">

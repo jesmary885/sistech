@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'TuNegocio',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -48,7 +48,7 @@ return [
     
 
     'logo' => null,
-    'logo_img' => 'vendor/adminlte/dist/img/logotech_2.jpg',
+    'logo_img' => 'storage/logo/logo.png',
     'logo_img_class' => 'img-circle w-50 m-auto',
     'logo_img_xl' => null,
     'logo_img_xl_class' => null,
@@ -358,11 +358,6 @@ return [
                     'can' => 'productos.productos.index'
                 ],
                 [
-                    'text' => 'Productos por serial',
-                    'route'  => 'productos.serial.index',
-                    'can' => 'productos.index_serial'
-                ],
-                [
                     'text'    => 'Devolucion',
                     'route'     => 'devolucion.index',
                     'can' => 'productos.devolucion'
@@ -405,11 +400,6 @@ return [
                     'text' => 'Traslados',
                     'route' => 'reportes.index.traslados',
                     'can' => 'reportes.traslados'
-                ],
-                [
-                    'text' => 'Productos desactivados',
-                    'route' => 'reportes.index.desactivados',
-                    'can' => 'reportes.desactivados'
                 ],
                 [
                     'text'    => 'Ventas',

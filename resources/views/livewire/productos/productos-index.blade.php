@@ -48,16 +48,11 @@
                         </thead>
                         <tbody>
                             @foreach ($productos as $producto)
-                            <?php
-                                        $cant = 0;
-                                        foreach($sucursales as $sucursal){
-                                            $cant = $cant + $producto->sucursals->find($sucursal)->pivot->cantidad;
-                                        }
-                                        if($cant <= 10) $estado_bg = 'bg-red-600';
-                                        elseif($cant > 10 && $cant <= 50) $estado_bg = 'bg-yellow-600';
-                                        elseif($cant > 50) $estado_bg = 'bg-green-600';
-                                    ?>
-                                    
+                              <?php
+                                        if($producto->cantidad <= 10) $estado_bg = 'bg-red-600';
+                                        elseif($producto->cantidad > 10 && $producto->cantidad <= 50) $estado_bg = 'bg-yellow-600';
+                                        elseif($producto->cantidad > 50) $estado_bg = 'bg-green-600';
+                                    ?>  
                                 <tr >
                                     <td align="center">
                                         @if ($producto->imagen)
@@ -70,7 +65,7 @@
                                     <td class="text-justify">{{$producto->marca->nombre}}/{{$producto->categoria->nombre}}</td>
                                     <td class="text-justify">{{$producto->marca->nombre}}/{{$producto->modelo->nombre}}</td>
                                     
-                                    <td class="text-center {{$estado_bg}}">@livewire('productos.productos-stock-sucursal', ['producto' => $producto, 'cant' => $cant],key(0.,'$producto->id')) </td>
+                                    <td class="text-center {{$estado_bg}}">@livewire('productos.productos-stock-sucursal', ['producto' => $producto],key(0.,'$producto->id')) </td>
                                         {{-- <b>{{$sucursal->nombre}}</b> = {{$producto->sucursals->find($sucursal)->pivot->cantidad}}, --}}
                                     <td class="text-center">{{$producto->precio_letal}}</td>
                                     <td class="text-center">{{$producto->precio_mayor}}</td>

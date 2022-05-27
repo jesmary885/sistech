@@ -49,149 +49,37 @@ class ProductosDetalleTraslado extends Component
     {
 
         if ($this->buscador == 0) {
-            $productos = ProductoSerialSucursal::whereHas('modelo', function (Builder $query) {
+            $productos = Producto::whereHas('modelo', function (Builder $query) {
                 $query->where('nombre', 'LIKE', '%' . $this->search . '%')
-                    ->where('sucursal_id', $this->sucursal)
-                    ->where('estado', 'activo');
-            })->paginate(5);
+                    ->where('estado', '1');
+            })->paginate(10);
 
             $this->item_buscar = "el modelo del producto a buscar ";
         }
         if ($this->buscador == 1) {
-            $productos = ProductoSerialSucursal::whereHas('categoria', function (Builder $query) {
+            $productos = Producto::whereHas('categoria', function (Builder $query) {
                 $query->where('nombre', 'LIKE', '%' . $this->search . '%')
-                    ->where('sucursal_id', $this->sucursal)
-                    ->where('estado', 'activo');
-            })->paginate(5);
+                    ->where('estado', '1');
+            })->paginate(10);
 
             $this->item_buscar = "la categoria del producto a buscar ";
         }
 
         if ($this->buscador == 2) {
-            $productos = ProductoSerialSucursal::where('cod_barra', 'LIKE', '%' . $this->search . '%')
-                ->where('sucursal_id', $this->sucursal)
-                ->where('estado', 'activo')
-                ->paginate(5);
+            $productos = Producto::where('cod_barra', 'LIKE', '%' . $this->search . '%')
+                ->where('estado', '1')
+                ->paginate(10);
 
             $this->item_buscar = "el código de barra del producto a buscar ";
         }
 
-        if ($this->buscador == 3) {
-            $productos = ProductoSerialSucursal::where('serial', 'LIKE', '%' . $this->search . '%')
-                ->where('sucursal_id', $this->sucursal)
-                ->where('estado', 'activo')
-                ->paginate(5);
-
-            $this->item_buscar = "el serial del producto a buscar ";
-        }
+    
 
         return view('livewire.productos.productos-detalle-traslado', compact('productos'));
     }
 
-    public function updatingProd($valor)
-    {
-        if($valor != false){ 
-            $this->cant_registros = $this->cant_registros + 1;
-            $this->reset(['producto_s','cant_cod_barra','produ_s_r']);
-            $this->emitTo('productos.productos-detalle-traslado', 'actualizar');
-        }
-        else{
-            $this->cant_registros = $this->cant_registros - 1;
-            $this->reset(['producto_s','cant_cod_barra','produ_s_r']);
-            $this->emitTo('productos.productos-detalle-traslado', 'actualizar');
-        } 
-    }
-
-    public function actualizar()
-    {
-        $ii=0;
-        foreach ($this->prod as $p) {
-            if ($p !=false){
-                $produc = ProductoSerialSucursal::where('id', $p)->first()->producto_id;
-                $this->producto_s[$ii] = Producto::where('id',$produc)->first()->modelo->nombre;
-                $ii++;
-            }
-       }
-       $this->cant_cod_barra[] = array_count_values( $this->producto_s);
-       $this->produ_s_r = array_values(array_unique($this->producto_s));
-       $this->cant_total=count($this->produ_s_r);
-      // dd($this->cant_total);
-       
-    }
-
-    public  function save()
-    {
 
 
-        $rules = $this->rules;
-        $this->validate($rules);
-        $cant = 0;
-        $fecha_actual = date('Y-m-d');
-        $fecha_actual_mostrar = date('d-m-Y');
-        $user_auth =  auth()->user()->id;
-        $user_auth_nombre =  auth()->user()->name;
-        $user_auth_apellido =  auth()->user()->apellido;
-
-        $sucursal_inicial = Sucursal::where('id', $this->sucursal)->first()->nombre;
-        $sucursal_final = Sucursal::where('id', $this->sucursal_id)->first()->nombre;
-
-        foreach ($this->prod as $p) {
-            $produc = ProductoSerialSucursal::where('id', $p)->first();
-
-            $produc->update([
-                'estado' => 'inactivo',
-                'sucursal_id' => $this->sucursal,
-            ]);
-
-            $producto_traslado = new ProductosTraslado();
-            $producto_traslado->producto_serial_sucursal_id = $p;
-            $producto_traslado->sucursal_id = $this->sucursal_id;
-            $producto_traslado->save();
-
-            $traslado = new Traslado();
-            $traslado->fecha = $fecha_actual;
-            $traslado->observacion_inicial = 'Traslado desde almacen ' . $sucursal_inicial . ' hasta almacen ' . $sucursal_final . ', por usuario ' . $user_auth_nombre . ' ' . $user_auth_apellido . ' Fecha del registro del tradado: ' . $fecha_actual;
-            $traslado->producto_serial_sucursal_id = $p;
-            $traslado->observacion_final = 'SIN RECIBIR EN SUCURSAL DESTINO';
-            $traslado->estado = 'PENDIENTE';
-            $traslado->save();
-
-            $pivot_decrement = Pivot::where('sucursal_id', $this->sucursal)->where('producto_id', $produc->producto_id)->first();
-            $pivot_decrement->cantidad = $pivot_decrement->cantidad - 1;
-            $pivot_decrement->save();
-
-            $cant++;
-        }
-
-        $data = [       
-            'usuario' => $user_auth_nombre." ".$user_auth_apellido,
-            'fecha_actual' => $fecha_actual_mostrar,
-            'cant_cod_barra' => $this->cant_cod_barra,
-            'cant_total' => $this->cant_total,
-            'sucursal_inicial' => $sucursal_inicial,
-            'sucursal_destino' => $sucursal_final,
-            'total_registros' => $this->cant_registros,
-            'produ_s_r' => $this->produ_s_r,
-        ];
-
-       
-       $this->reset(['cant_registros','produ_s_r','cant_cod_barra','cant_total','prod']);
-       
-       unset($this->produ_s_r);
-       unset($this->cant_cod_barra);
-       unset($this->producto_s);
-       $this->produ_s_r = array();
-       $this->cant_cod_barra = array();
-       $this->producto_s = array();
-       $this->resetPage();
-
-        $this->emitTo('productos.productos-detalle-traslado', 'render');
-        $pdf = PDF::loadView('productos.planilla_traslado',$data)->output();
-        return response()->streamDownload(
-            fn () => print($pdf),
-           "Traslado.pdf"
-            );
-    }
 
 
 

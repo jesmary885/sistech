@@ -128,13 +128,6 @@ class ProductoEdit extends Component
                 'estado' => $this->estado
             ]);
 
-
-                $this->producto->productoSerialSucursals()->update([
-                    'cod_barra' => $this->cod_barra,
-                    'modelo_id' => $this->modelo_id,
-                    'categoria_id' => $this->categoria_id,
-                    'marca_id' => $this->marca_id,
-                ]);
             
     
             if ($this->file){

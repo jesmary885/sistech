@@ -117,7 +117,7 @@ class ProductosCreate extends Component
             $producto->precio_mayor = $this->precio_mayor;
             $producto->modelo_id = $this->modelo_id;
             $producto->marca_id = $this->marca_id;
-   
+            $producto->cantidad= $this->cantidad;
             $producto->categoria_id = $this->categoria_id;
             $producto->observaciones = $this->observaciones;
             $producto->estado = $this->estado;
@@ -171,26 +171,6 @@ class ProductosCreate extends Component
                     ]);
                 }*/
 
-                
-            for ($i=0; $i < $this->cantidad; $i++) {
-                $producto_serial = new ProductoSerialSucursal();
-                $producto_serial->sucursal_id = $this->sucursal_id;
-                $producto_serial->cod_barra = $producto->cod_barra;
-                $producto_serial->compra_id = $compra->id;
-                $producto_serial->estado = 'activo';
-                $producto_serial->modelo_id = $this->modelo_id;
-                $producto_serial->categoria_id = $this->categoria_id;
-                $producto_serial->marca_id = $this->marca_id;
-                $producto_serial->fecha_compra = $compra->fecha;
-                $producto_serial->producto_id = $producto->id;
-                $producto_serial->save();
-
-                if($this->generar_serial == "1"){
-                    $producto_serial->update([
-                        'serial' => 'SN'."-".$producto_serial->id,
-                    ]);
-                }  
-            }
 
             //registrando moviemientos en tabla movimientos
             $producto->movimientos()->create([
@@ -206,8 +186,6 @@ class ProductosCreate extends Component
             ]);
 
          
-        
-
             //guardando cantidades en tabla pivote entre sucursal y productos
             foreach($sucursales as $sucursal){
                 if($sucursal->id == $this->sucursal_id){

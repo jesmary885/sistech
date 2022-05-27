@@ -40,6 +40,7 @@ class ProductosImport implements ToModel, WithHeadingRow, WithBatchInserts, With
             'precio_letal'    => $row['minorista'],
             'precio_mayor'    => $row['mayorista'],
             'cod_barra'    => $row['codigo_de_barras'],
+            'cantidad'    => $row['cantidad'],
             'estado'    => 1,
             'puntos'    => $row['puntos'],
             'observaciones'    => $row['observaciones'],

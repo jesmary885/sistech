@@ -18,8 +18,8 @@ class CreateProductoVentasTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('venta_id');
             $table->foreign('venta_id')->references('id')->on('ventas');
-            $table->unsignedBigInteger('producto_serial_sucursal_id');
-            $table->foreign('producto_serial_sucursal_id')->references('id')->on('producto_serial_sucursals');
+            $table->unsignedBigInteger('producto_id');
+            $table->foreign('producto_id')->references('id')->on('productos');
             $table->float('precio');
             $table->string('cantidad');
          //   $table->string('status');

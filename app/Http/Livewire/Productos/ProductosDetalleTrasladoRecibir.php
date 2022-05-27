@@ -20,21 +20,12 @@ class ProductosDetalleTrasladoRecibir extends Component
 
     protected $listeners = ['render' => 'render'];
 
-    public $isopen = false;
+
     public $sucursal, $cantidad, $sucursal_id = "", $sucursales,$prod, $prodr, $search2,$buscador,$item_buscar;
 
     public function updatingSearch2(){
         $this->resetPage();
     }
-
-   /* public function updatingProdr(){
-        $this->resetPage();
-    }*/
-
-    protected $rules = [
-
-        'prodr' => 'required',
-    ];
 
     public function render()
     {
@@ -52,22 +43,22 @@ class ProductosDetalleTrasladoRecibir extends Component
 
                         if($this->buscador==0){
                             $trasl = ProductosTraslado::where('sucursal_id',$this->sucursal)
-                            ->whereHas('productoSerialSucursal',function(Builder $query){
+                            ->whereHas('producto',function(Builder $query){
                                 $query->where('cod_barra','LIKE', '%' . $this->search2 . '%');       
                                 })
-                                ->paginate(5);
+                                ->paginate(10);
 
                             $this->item_buscar = "el código de barra del producto a buscar ";
 
                         }
                         else{
                             $trasl = ProductosTraslado::where('sucursal_id',$this->sucursal)
-                            ->whereHas('productoSerialSucursal',function(Builder $query){
-                                $query->where('serial','LIKE', '%' . $this->search2 . '%');       
+                            ->whereHas('producto',function(Builder $query){
+                                $query->where('nombre','LIKE', '%' . $this->search2 . '%');       
                                 })
-                                ->paginate(5);
+                                ->paginate(10);
 
-                            $this->item_buscar = "el serial del producto a buscar ";
+                            $this->item_buscar = "el nombre del producto a buscar ";
 
                         }
                       
@@ -85,63 +76,42 @@ class ProductosDetalleTrasladoRecibir extends Component
         return view('livewire.productos.productos-detalle-traslado-recibir',compact('trasl'));
     }
 
-    public  function ingresar()
+    public  function recibir($producto)
     {
 
-        $rules = $this->rules;
-        $this->validate($rules);
-     
-        $cant = 0;
         $fecha_actual = date('Y-m-d');
-        $user_auth =  auth()->user()->id;
         $user_auth_nombre =  auth()->user()->name;
         $user_auth_apellido =  auth()->user()->apellido;
 
-       foreach($this->prodr as $pp){
-           
-            if($pp){
-                $producr=ProductoSerialSucursal::where('id',$pp)->first();
-                $sucursal = Sucursal::where('id',$this->sucursal)->first();
-                $product_destroy = ProductosTraslado::where('producto_serial_sucursal_id',$producr->id)->first();
-                $product_destroy->delete();
 
-                $producr->update([
-                    'estado' => 'activo',
-                    'sucursal_id' => $this->sucursal
-                ]);
-/*
-                $movimiento_serial = Movimiento_product_serial:: where('producto_serial_sucursal_id',$producr->id)->first();
-                $movimiento_serial = new Movimiento_product_serial();
-                $movimiento_serial->fecha = $fecha_actual;
-                $movimiento_serial->tipo_movimiento = 'Traslado';
-                $movimiento_serial->precio =  $producr->producto->precio_letal;
-                $movimiento_serial->observacion = 'Traslado (recibido) en almacen '. $sucursal->nombre;
-                $movimiento_serial->producto_serial_sucursal_id = $producr->id;
-                $movimiento_serial->user_id = $user_auth;
-                $movimiento_serial->save();*/
+        
+        $producto_delete = ProductosTraslado::where('id',$producto)
+                                            ->first();
 
-                $traslado = Traslado::where('producto_serial_sucursal_id',$producr->id)
-                                    ->where('estado','PENDIENTE')
-                                    ->first();
-                $traslado->update([
-                    'observacion_final' => 'Recibido en almacen '. $sucursal->nombre .', por usuario '. $user_auth_nombre .' '. $user_auth_apellido. ' Fecha del registro: '. $fecha_actual,
-                    'estado' => 'RECIBIDO'
-                ]);
+        $sucursal = Sucursal::where('id',$producto_delete->sucursal_id)->first();
+
+            $pivot_increment = Pivot::where('sucursal_id', $producto_delete->sucursal_id)->where('producto_id', $producto_delete->producto_id)->first();
+            $pivot_increment->cantidad = $pivot_increment->cantidad + $producto_delete->cantidad;
+            $pivot_increment->save();
+
+
+
+            $traslado_pendiente_delete = Traslado::where('sucursal_origen',$producto_delete->sucursal_origen)
+                                            ->where('sucursal_id',$producto_delete->sucursal_id)
+                                            ->where('producto_id',$producto_delete->producto_id)
+                                            ->first(); 
+
+            $traslado_pendiente_delete->update([
+                        'cantidad_recibida' => $producto_delete->cantidad,
+                        'estado' => 'RECIBIDO',
+                        'observacion_final' => 'Recibido en almacen '. $sucursal->nombre .', por usuario '. $user_auth_nombre .' '. $user_auth_apellido. ' Fecha del registro: '. $fecha_actual
+            ]);
+
+            $producto_delete->delete();
             
-                $traslado->save();
+            $this->emitTo('productos.productos-traslado-recibir','render');
 
-                $pivot_increment = Pivot::where('sucursal_id',$this->sucursal)->where('producto_id',$producr->producto_id)->first(); 
-                $pivot_increment->cantidad = $pivot_increment->cantidad + 1;
-                $pivot_increment->save();
 
-                $cant++;
-            }
-        }
-
-        $this->reset(['prod','prodr']);
-        $this->emitTo('productos.productos-detalle-traslado','render');
-        $this->resetPage();
-        if($cant > 0) $this->emit('alert','Datos registrados correctamente');
     }
 
 

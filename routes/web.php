@@ -67,7 +67,7 @@ Route::resource('marcas', MarcasController::class)->only('index','store')->names
 Route::resource('modelos', ModelosController::class)->only('index','store')->names('admin.modelos');
 
 Route::resource('productos', ProductosController::class)->only('index','create','edit','store')->names('productos.productos');
-Route::resource('Ventas', VentasController::class)->only('create','index','update','show')->names('ventas.ventas');
+Route::resource('Ventas', VentasController::class)->only('create','index','update','show','edit')->names('ventas.ventas');
 Route::resource('Mostrar_ventas', MostrarVentasController::class)->only('create','index','edit','update','show')->names('ventas.mostrar_ventas');
 Route::get('compras',[ComprasController::class,'index'])->name('admin.compras.index');
 Route::get('ventas/{sucursal}/{proforma}',[VentasController::class,'edit'])->name('ventas.ventas.edits');
@@ -148,9 +148,9 @@ Route::post('productos/{product}/files', [FilesController::class, 'files'])->nam
 
 //productos por serial
 
-Route::get('productos_serial',[ProductosSerialController::class,'index'])->name('productos.serial.index');
-Route::post('productos_serial',[ProductosSerialController::class,'store'])->name('productos.serial.store');
-Route::get('productos_serial/{sucursal}',[ProductosSerialController::class,'view'])->name('productos.serial.view');
+// Route::get('productos_serial',[ProductosSerialController::class,'index'])->name('productos.serial.index');
+// Route::post('productos_serial',[ProductosSerialController::class,'store'])->name('productos.serial.store');
+// Route::get('productos_serial/{sucursal}',[ProductosSerialController::class,'view'])->name('productos.serial.view');
 
 //Ajustes
 

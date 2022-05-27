@@ -20,9 +20,19 @@ class CreateTrasladosTable extends Migration
             $table->string('observacion_inicial');
             $table->string('observacion_final');
             $table->string('estado');
-            $table->unsignedBigInteger('producto_serial_sucursal_id');
-            $table->foreign('producto_serial_sucursal_id')->references('id')->on('producto_serial_sucursals')->onDelete('cascade');        });
-    }
+            $table->integer('cantidad_enviada');
+            $table->integer('cantidad_recibida');
+            $table->unsignedBigInteger('producto_id');
+            $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');  
+
+            $table->integer('sucursal_origen');
+
+            $table->unsignedBigInteger('sucursal_id');
+            $table->foreign('sucursal_id')->references('id')->on('sucursals');
+        });
+    
+    
+        }
 
     /**
      * Reverse the migrations.

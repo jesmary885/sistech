@@ -7,7 +7,7 @@
         <div class="card-body w-full pt-0 mt-0">
             <div class="flex">
                   <i class="far fa-address-card mt-3 mr-1"></i>
-                <h2 class="text-lg inline mt-2"> Datos de la empresa</h2>
+                <h2 class="text-lg inline mt-2"> Documento de registro, nombre y dirección</h2>
             </div>
 
             <div class="flex mt-2 justify-between w-full">
@@ -35,10 +35,39 @@
               
             </div>
 
+         
+
             <div class="w-full mr-2 mt-2">
                 <input wire:model="direccion" title="Dirección de la empresa" type="text" class="w-full px-2 appearance-none block bg-gray-100 text-gray-400 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Dirección">
                 <x-input-error for="direccion" />
             </div>
+
+            <hr>
+
+            <div class="flex">
+                <i class="far fa-image mt-3 mr-1"></i>
+              <h2 class="text-lg inline mt-2"> Logo de la empresa</h2>
+          </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="w-50 h-50">         
+                        @if ($logo)
+                        <img src="{{ $logo->temporaryUrl() }}" width="75%" height="75%">
+                        @endif
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <input type="file" name="logo" wire:model="logo" id="logo" class="block w-full py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" accept="image/*">
+                        @error('logo')
+                        <small class="text-danger">{{$message}}</small>
+                        @enderror
+                        <p>Tamaño máximo 3MB. Resolución recomendada 300px X 300px o superior.</p>
+                    </div>
+                </div>
+            </div>   
 
             <hr>
 
