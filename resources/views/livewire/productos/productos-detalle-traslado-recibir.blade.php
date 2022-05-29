@@ -9,15 +9,18 @@
                             <div class="w-1/4">
                        
                                 <select wire:model="buscador" id="buscador" class="form-control text-m" name="buscador">
-                            
-                                    <option value="0">Código de barra</option>
-                                    <option value="1">Nombre</option>
+                                    <option value="0">Modelo</option>
+                                    <option value="1">Marca</option>
+                                    <option value="2">Categoria</option>
+                                    <option value="3">Código de barra</option>
+                              
                                 </select>
-            
+        
                                 <x-input-error for="buscador" />
         
                             </div>
-                            <input wire:model="search" placeholder="Ingrese {{$item_buscar}}" class="form-control mb-2">
+                            <input wire:model="search" placeholder="Ingrese {{ $item_buscar }}"
+                                class="form-control mb-2">
     
                         </div>
                      </div>

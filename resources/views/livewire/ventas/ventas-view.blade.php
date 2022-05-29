@@ -37,7 +37,7 @@
                                             <tr>
                                                 <th>Cant</th>
                                                 <th>Producto</th>
-                                                <th>Serial</th>
+                                                <th>Cod barra</th>
                                                 <th>Precio</th>
                                                 <th>Subtotal</th>
                                             </tr>
@@ -45,9 +45,9 @@
                                         <tbody>
                                             @foreach ($productos as $producto)
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>{{$producto->productoSerialSucursal->producto->nombre}}</td>
-                                                    <td>{{$producto->productoSerialSucursal->serial}}</td>
+                                                    <td>{{$producto->cantidad}}</td>
+                                                    <td>{{$producto->producto->nombre}}</td>
+                                                    <td>{{$producto->producto->cod_barra}}</td>
                                                     <td>{{$producto->precio}}</td>
                                                     <td>{{$producto->precio}}</td>
                                                 </tr>

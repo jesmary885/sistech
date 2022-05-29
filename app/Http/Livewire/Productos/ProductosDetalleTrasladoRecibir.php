@@ -21,8 +21,9 @@ class ProductosDetalleTrasladoRecibir extends Component
     protected $listeners = ['render' => 'render'];
 
 
-    public $sucursal, $cantidad, $sucursal_id = "", $sucursales,$prod, $prodr, $search2,$buscador,$item_buscar;
-
+    public $sucursal, $cantidad, $sucursal_id = "", $sucursales,$prod, $prodr, $search2,$buscador=0,$item_buscar;
+    public $search;
+    
     public function updatingSearch2(){
         $this->resetPage();
     }
@@ -30,48 +31,48 @@ class ProductosDetalleTrasladoRecibir extends Component
     public function render()
     {
 
-      /*  $trasl = ProductosTraslado:://where('serial', 'LIKE', '%' . $this->search2 . '%')
-        where('sucursal_id',$this->sucursal)
-        ->Paginate(5);*/
+        if($this->buscador == '0'){
+            $trasl=ProductosTraslado::where('sucursal_id',$this->sucursal)
+            ->whereHas('producto',function(Builder $query){
+                $query->whereHas('modelo',function(Builder $query){
+                    $query->where('nombre', 'LIKE', '%' . $this->search . '%');
+                 });
+             })->paginate(10);
+
+            $this->item_buscar = "el modelo del producto a buscar";
+        }
+
+        elseif($this->buscador == '1'){
+            $trasl=ProductosTraslado::where('sucursal_id',$this->sucursal)
+            ->whereHas('producto',function(Builder $query){
+                $query->whereHas('marca',function(Builder $query){
+                    $query->where('nombre', 'LIKE', '%' . $this->search . '%');
+                 });
+             })->paginate(10);
+
+            $this->item_buscar = "la marca del producto a buscar";
+        }
 
 
-        /*$trasl = ProductosTraslado::where('sucursal_id',$this->sucursal)
-                    ->whereHas('productoSerialSucursal',function(Builder $query){
-                        $query->where('serial','LIKE', '%' . $this->search2 . '%');       
-                        })
-                        ->paginate(5);*/
+        elseif($this->buscador == '2'){
+            $trasl=ProductosTraslado::where('sucursal_id',$this->sucursal)
+            ->whereHas('producto',function(Builder $query){
+                $query->whereHas('categoria',function(Builder $query){
+                    $query->where('nombre', 'LIKE', '%' . $this->search . '%');
+                 });
+             })->paginate(10);
 
-                        if($this->buscador==0){
-                            $trasl = ProductosTraslado::where('sucursal_id',$this->sucursal)
-                            ->whereHas('producto',function(Builder $query){
-                                $query->where('cod_barra','LIKE', '%' . $this->search2 . '%');       
-                                })
-                                ->paginate(10);
+            $this->item_buscar = "la categoria del producto a buscar";
+        }
 
-                            $this->item_buscar = "el código de barra del producto a buscar ";
+        elseif($this->buscador == '3'){
+            $trasl=ProductosTraslado::where('sucursal_id',$this->sucursal)
+            ->whereHas('producto',function(Builder $query){
+                $query->where('cod_barra', 'LIKE', '%' . $this->search . '%');
+             })->paginate(10);
 
-                        }
-                        else{
-                            $trasl = ProductosTraslado::where('sucursal_id',$this->sucursal)
-                            ->whereHas('producto',function(Builder $query){
-                                $query->where('nombre','LIKE', '%' . $this->search2 . '%');       
-                                })
-                                ->paginate(10);
-
-                            $this->item_buscar = "el nombre del producto a buscar ";
-
-                        }
-                      
-
-        
-
-
-     /*   $productos = ProductoSerialSucursal::whereHas('modelo',function(Builder $query){
-            $query->where('nombre','LIKE', '%' . $this->search . '%')
-            ->where('sucursal_id',$this->sucursal)
-            ->where('estado','activo');
-         })->paginate(5);*/
-
+            $this->item_buscar = "el código de barra del producto a buscar";
+        }
 
         return view('livewire.productos.productos-detalle-traslado-recibir',compact('trasl'));
     }

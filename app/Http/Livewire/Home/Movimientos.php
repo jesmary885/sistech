@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Home;
 
+use App\Models\Empresa;
 use App\Models\MovimientoCaja;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -39,6 +40,7 @@ class Movimientos extends Component
         $usuario_auth = auth()->user();
         $fecha_actual = date('Y-m-d');
         $fecha = date('d-m-Y');
+        $empresa = Empresa::first();
 
         $usuario_ac = $usuario_auth->sucursal->nombre;
         $sucursal_act = $usuario_auth->sucursal->id;
@@ -52,6 +54,7 @@ class Movimientos extends Component
             'movimientos' => $movimientos,
             'sucursal' =>$usuario_ac,
             'fecha' =>$fecha,
+            'empresa' => $empresa,
         ];
 
         $pdf = PDF::loadView('Movimientos_caja.home',$data)->output();

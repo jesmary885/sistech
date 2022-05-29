@@ -14,6 +14,7 @@ class SobreEmpresa extends Component
 
     public $logo,$empresa,$nombre, $tipo_documento, $documento, $telefono, $email, $direccion, $tipo_impuesto, $impuesto;
 
+    protected $listeners = ['render' => 'render'];
 
     protected $rules = [
         'nombre_impuesto' => 'required',
@@ -73,7 +74,10 @@ class SobreEmpresa extends Component
                 'logo' => $imagen
         ]);
    
-            $this->emit('alert','Los datos han sido modificados correctamente');
+            $this->emit('alert','Los datos han sido modificados correctamente'); 
+            return redirect()->route('home');
+           // $this->resetPage();
+
        
     }
 }

@@ -18,7 +18,7 @@ class ReporteTraslado extends Component
     public function render()
     {
          $traslados = Traslado::whereBetween('fecha',[$this->fecha_inicio,$this->fecha_fin])
-        ->paginate(5);
+        ->paginate(10);
 
 
         return view('livewire.reportes.reporte-traslado',compact('traslados'));

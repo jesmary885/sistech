@@ -8,6 +8,8 @@
                         <tr>
                             <th class="text-center">Fecha</th>
                             <th class="text-center">Producto</th>
+                            <th class="text-center">Cantidad enviada</th>
+                            <th class="text-center">Cantidad recibida</th>
                             <th class="text-center">Detalle inicial</th>
                             <th class="text-center">Detalle final</th>
 
@@ -22,7 +24,11 @@
                             <tr class="{{$estado_bg}}">
                             
                                 <td class="text-center">{{$traslado->fecha}}</td>
-                                <td class="text-center">{{$traslado->productoSerialSucursal->producto->nombre}} {{$traslado->productoSerialSucursal->producto->marca->nombre}} {{$traslado->productoSerialSucursal->producto->modelo->nombre}} S/N: {{$traslado->productoSerialSucursal->serial}}</td>
+                                <td class="text-center">{{$traslado->producto->nombre}}
+                                     {{$traslado->producto->marca->nombre}}
+                                      {{$traslado->producto->modelo->nombre}}</td>
+                                <td class="text-center">{{$traslado->cantidad_enviada}}</td>
+                                <td class="text-center">{{$traslado->cantidad_recibida}}</td>
                                 <td class="text-justify ">{{$traslado->observacion_inicial}}</td>
                                 <td class="text-justify">{{$traslado->observacion_final}}</td>
                             </tr>

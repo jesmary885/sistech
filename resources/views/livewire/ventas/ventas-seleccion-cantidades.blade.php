@@ -13,27 +13,32 @@
                         </div>
                         <div class="modal-body">
                             <h2 class="text-sm ml-2 mb-4 p-0 text-gray-500 font-semibold"><i class="fas fa-info-circle"></i> Seleccione cantidad y tipo de precio a utilizar, luego haga click en "Agregar a la venta"</h2> 
-                                <div class="flex justify-between">
-                                    <div class="mr-4">
-                                        <x-secondary-button 
-                                            disabled
-                                            x-bind:disabled="$wire.qty <= 1"
-                                            wire:loading.attr="disabled"
-                                            wire:target="decrement"
-                                            wire:click="decrement">
-                                            -
-                                        </x-secondary-button>
-                            
-                                        <span class="mx-2 text-gray-700">{{$qty}}</span>
-                            
-                                        <x-secondary-button 
-                                            x-bind:disabled="$wire.qty >= $wire.quantity"
-                                            wire:loading.attr="disabled"
-                                            wire:target="increment"
-                                            wire:click="increment">
-                                            +
-                                        </x-secondary-button>
+                                <div class="flex justify-between w-full">
+                                    <div class="mr-4 flex justify-between">
+                                        <x-secondary-button class="ml-2"
+                                        disabled
+                                        x-bind:disabled="$wire.qty <= 1"
+                                        wire:loading.attr="disabled"
+                                        wire:target="decrement"
+                                        wire:click="decrement">
+                                        -
+                                    </x-secondary-button>
+                                    <input wire:model="qty" type="number" min="1" max="{{$quantity}}" class="inputNumber text-center appearance-none block text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="{{$qty}}">
+                        
+                                    {{-- <span class="mx-2 text-gray-700">{{$qty}}</span> --}}
+                        
+                                    <x-secondary-button class="mr-2" 
+                                        x-bind:disabled="$wire.qty >= $wire.quantity"
+                                        wire:loading.attr="disabled"
+                                        wire:target="increment"
+                                        wire:click="increment">
+                                        +
+                                    </x-secondary-button>
+
                                     </div>
+                               
+                                       
+                                 
 
                                     <div>
                                         <div class="w-1/2" :class="{'hidden': change_price == 'si'}">

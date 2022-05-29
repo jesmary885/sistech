@@ -115,7 +115,10 @@
        
 
             <div class="mt-4">
-                <button type="submit" class="btn btn-primary" wire:click="update">
+                <button type="submit"
+                 class="btn btn-primary"
+                  wire:click="update"
+                  wire:loading.attr="disabled">
                     <i class="fas fa-file-download"></i> Actualizar
                 </button>
             </div>

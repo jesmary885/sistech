@@ -22,7 +22,7 @@ class ProductosDetalleTraslado extends Component
     protected $paginationTheme = "bootstrap";
 
     public $isopen = false;
-    public $sucursal,$produ_s_r, $cant_total, $cantidad, $sucursal_id = "", $sucursales, $prod, $prodr, $buscador, $product_cod_barra,$cant_cod_barra = [],$producto_s =[],$cant_registros = 0,$array_productos;
+    public $sucursal,$produ_s_r, $cant_total, $cantidad, $sucursal_id = "", $sucursales, $prod, $prodr, $buscador=0, $product_cod_barra,$cant_cod_barra = [],$producto_s =[],$cant_registros = 0,$array_productos;
 
     protected $listeners = ['render' => 'render', 'actualizar' => 'actualizar'];
 
@@ -47,31 +47,51 @@ class ProductosDetalleTraslado extends Component
     }
     public function render()
     {
+        if($this->buscador == '0'){
 
-        if ($this->buscador == 0) {
-            $productos = Producto::whereHas('modelo', function (Builder $query) {
-                $query->where('nombre', 'LIKE', '%' . $this->search . '%')
-                    ->where('estado', '1');
-            })->paginate(10);
 
-            $this->item_buscar = "el modelo del producto a buscar ";
-        }
-        if ($this->buscador == 1) {
-            $productos = Producto::whereHas('categoria', function (Builder $query) {
-                $query->where('nombre', 'LIKE', '%' . $this->search . '%')
-                    ->where('estado', '1');
-            })->paginate(10);
-
-            $this->item_buscar = "la categoria del producto a buscar ";
-        }
-
-        if ($this->buscador == 2) {
-            $productos = Producto::where('cod_barra', 'LIKE', '%' . $this->search . '%')
-                ->where('estado', '1')
-                ->paginate(10);
-
-            $this->item_buscar = "el código de barra del producto a buscar ";
-        }
+            $productos = Producto::where('estado', 1)
+            ->whereHas('modelo',function(Builder $query){
+                $query->where('nombre', 'LIKE', '%' . $this->search . '%');
+             })->latest('id')
+             ->paginate(10);
+    
+             $this->item_buscar = "el modelo del producto a buscar";
+            }
+    
+            elseif($this->buscador == '1'){
+    
+    
+                $productos = Producto::where('estado', 1)
+                ->whereHas('marca',function(Builder $query){
+                    $query->where('nombre', 'LIKE', '%' . $this->search . '%');
+                 })->latest('id')
+                 ->paginate(10);
+        
+                 $this->item_buscar = "la marca del producto a buscar";
+            }
+    
+            elseif($this->buscador == '2'){
+    
+    
+                $productos = Producto::where('estado', 1)
+                ->whereHas('categoria',function(Builder $query){
+                    $query->where('nombre', 'LIKE', '%' . $this->search . '%');
+                 })->latest('id')
+                 ->paginate(10);
+        
+                 $this->item_buscar = "la categoria del producto a buscar";
+            }
+    
+            elseif($this->buscador == '3'){
+                $productos = Producto::where('estado', 1)
+                ->where('cod_barra', 'LIKE', '%' . $this->search . '%')
+                ->latest('id')
+                 ->paginate(10);
+        
+                 $this->item_buscar = "el código de barra del producto a buscar";
+            }
+        
 
     
 

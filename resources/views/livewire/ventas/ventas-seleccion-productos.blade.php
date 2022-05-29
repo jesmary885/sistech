@@ -95,7 +95,7 @@
     </aside>
 
     <div class="card lg:col-span-2">
-        @livewire('ventas.ventas-cart', ['sucursal' => $sucursal])
+        @livewire('ventas.ventas-cart', ['sucursal' => $sucursal,'proforma' => $proforma])
 
     </div>
     

@@ -36,14 +36,14 @@ class VentasCart extends Component
         'tipo_pago' => 'required',
         'metodo_pago' => 'required',
         'estado_entrega' => 'required',
-        'descuento' => 'required',
+  
         'cliente_select' => 'required',
     ];
     public $rule_credito = [
         'tipo_pago' => 'required',
         'metodo_pago' => 'required',
         'estado_entrega' => 'required',
-        'descuento' => 'required',
+
         'pago_cliente' => 'required',
         'cliente_select' => 'required',
         
@@ -118,6 +118,8 @@ class VentasCart extends Component
     }
 
     public function canjear($producto_id){
+        if($this->descuento != null)  $this->descuento = $this->descuento;
+        else $this->decuento = (int) $this->descuento;     
         $this->puntos_canjeo = "1";
         $this->canjeo = true;
         $this->porcentaje_descuento_puntos = $this->empresa->porcentaje_puntos;
@@ -140,6 +142,8 @@ class VentasCart extends Component
  
         $user_auth =  auth()->user()->id;
        // $impuesto= Cart::subtotal() * $this->iva;
+
+       $empresa = Empresa::first();
 
         //PROFORMA
         if($this->proforma == 'proforma'){
@@ -334,6 +338,7 @@ class VentasCart extends Component
                     'usuario' => auth()->user()->name." ".auth()->user()->apellido,
                     'fecha_actual' => date('Y-m-d'),
                     'venta_nro' => $venta_nro_p,
+                    'empresa' => $empresa,
                     'collection' => Cart::content(),
                     'estado_entrega' => $entrega,
                     'descuento' => $descuento_total,
@@ -389,6 +394,7 @@ class VentasCart extends Component
                     'fecha_actual' => date('Y-m-d'),
                     'venta_nro' => $venta_nro_p,
                     'collection' => Cart::content(),
+                    'empresa' => $empresa,
                     'estado_entrega' => $entrega,
                     'descuento' => $descuento_total,
                     'proforma' => $this->proforma,

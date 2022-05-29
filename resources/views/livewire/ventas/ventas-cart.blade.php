@@ -1,5 +1,6 @@
 <div x-data="{ tipo_pago: @entangle('tipo_pago'),siguiente_venta: @entangle('siguiente_venta'), imprimir: @entangle('imprimir'),send_email: @entangle('send_email'),tipo_comprobante: @entangle('tipo_comprobante'),carrito: @entangle('carrito')}">
     <section class="text-gray-700">
+       
         <h2 class=" modal-title font-bold text-md text-gray-800 text-center bg-gray-300"> Productos incluidos en venta</h2>
         @if (Cart::count())
         <div class="w-full overflow-auto h-48 bg-white">
@@ -151,7 +152,7 @@
                         </div>
                         <div class="mr-2 w-full">
                             <div class="w-full mr-2">
-                                <input wire:model="descuento" type="number" min="0" title="Descuento en venta" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="*Descuento en venta %">
+                                <input wire:model="descuento" type="number" min="0" title="Descuento en venta" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Descuento en venta %">
                                 <x-input-error for="descuento" />
                             </div>
                         </div>

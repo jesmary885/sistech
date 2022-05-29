@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Home;
 
 use App\Models\Compra;
+use App\Models\Empresa;
 use App\Models\Venta;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -40,6 +41,7 @@ class Ventas extends Component
         $usuario_auth = auth()->user();
         $fecha_actual = date('Y-m-d');
         $fecha = date('d-m-Y');
+        $empresa = Empresa::first();
 
         $usuario_ac = $usuario_auth->sucursal->nombre;
         $sucursal_act = $usuario_auth->sucursal->id;
@@ -63,6 +65,7 @@ class Ventas extends Component
             'sucursal' =>$usuario_ac,
             'total_compras' => $compras_total,
             'fecha' =>$fecha,
+            'empresa' => $empresa,
         ];
 
         $pdf = PDF::loadView('ventas.home',$data)->output();

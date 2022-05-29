@@ -1,7 +1,5 @@
 @extends('adminlte::page')
 
-@section('title', 'TechPeru')
-
 @section('content_header')
 <div class="flex  justify-between ">
     <h1 class="text-lg ml-2"> <i class="fas fa-clipboard-list"></i> Listado de devoluciones</h1>

@@ -1,7 +1,5 @@
 @extends('adminlte::page')
 
-@section('title', 'TechPeru')
-
 @section('content_header')
     <h1 class="text-lg ml-2"><i class="fas fa-list-ul"></i> Listado de ventas</h1>
 @stop

@@ -62,84 +62,71 @@ class ProductosDevolucionAdd extends Component
         $user_auth = auth()->user()->id;
         $fecha_actual = date('Y-m-d');
 
-        $producto_venta = Producto_venta::where('producto_serial_sucursal_id',$this->producto_id)
-                                    ->where('venta_id',$this->nro_factura)               
-                                    ->first();
+        $producto_venta = Producto_venta::where('producto_id',$this->producto_id)
+        ->where('venta_id',$this->nro_factura)               
+        ->first();
 
-        $devolucion = new Devolucion();
-        $devolucion->fecha = $fecha_actual;
-        $devolucion->user_id = $user_auth;
-        $devolucion->venta_id = $this->nro_factura;
-        $devolucion->producto_serial_sucursal_id = $producto_venta->productoSerialSucursal->id;
-        $devolucion->cantidad = '1';
-        $devolucion->observaciones = $this->observaciones;
-        $devolucion->save();
-
-        /*$movimiento = new Movimiento();
-        $movimiento->fecha = $fecha_actual;
-        $movimiento->tipo_movimiento = 'Devolución de producto';
-        $movimiento->cantidad = '1';
-        $movimiento->precio = $producto_venta->precio;
-        $movimiento->producto_id = $producto_venta->productoSerialSucursal->producto->id;
-        $movimiento->user_id = $user_auth;
-        $movimiento->observacion = $this->observaciones;
-        $movimiento->save();*/
-
-
-        //Guardando movimiento de producto para kardex
-        $sucursales = Sucursal::all();
-        $producto_barra = Producto::where('id',$producto_venta->productoSerialSucursal->producto->id)->first();
-
-        $stock_antiguo = 0;
-        foreach($sucursales as $sucursalx){
-            $stock_antiguo = $producto_barra->sucursals->find($sucursalx)->pivot->cantidad + $stock_antiguo;
+        if($this->cantidad < 0){
+            $this->emit('errorSize','Ha ingresado un valor negativo, intentelo de nuevo');
         }
+        else{
+            if($this->cantidad > $producto_venta->cantidad){
+                $this->emit('errorSize','La cantidad ingresada supera la registrada en la venta');
+            }
+            else{
+                $devolucion = new Devolucion();
+                $devolucion->fecha = $fecha_actual;
+                $devolucion->user_id = $user_auth;
+                $devolucion->venta_id = $this->nro_factura;
+                $devolucion->producto_id = $this->producto_id;
+                $devolucion->cantidad = $this->cantidad;
+                $devolucion->observaciones = $this->observaciones;
+                $devolucion->save();
 
-        $stock_nuevo = $stock_antiguo + $this->cantidad;
-        $producto_barra->movimientos()->create([
-            'fecha' => $fecha_actual,
-            'cantidad_entrada' => 0,
-            'cantidad_salida' => 0,
-            'stock_antiguo' => $stock_antiguo,
-            'stock_nuevo' => $stock_antiguo,
-            'precio_entrada' => 0,
-            'precio_salida' => 0,
-            'detalle' => $this->observaciones. 'Devolución de equipo',
-            'user_id' => $user_auth 
-        ]);
-
-     /*   $movimiento_serial = new Movimiento_product_serial();
-        $movimiento_serial->fecha = $fecha_actual;
-        $movimiento_serial->tipo_movimiento = 'Devolución de producto';
-        $movimiento_serial->precio = $producto_venta->precio;
-        $movimiento_serial->producto_serial_sucursal_id = $producto_venta->productoSerialSucursal->producto->id;
-        $movimiento_serial->user_id = $user_auth;
-        $movimiento_serial->observacion = $this->observaciones;
-        $movimiento_serial->save();*/
+                //Guardando movimiento de producto para kardex
+                $producto_barra = Producto::where('id',$this->producto_id)->first();
+                $stock_antiguo = $producto_barra->cantidad;
         
-        if($this->accion == '1' || $this->accion == '3'){ //Reintegro del dinero o entrega de otro producto distinto
-            $venta= Venta::where('id',$this->nro_factura)->first(); 
-            $nueva_subtotal_venta = $venta->subtotal - ($producto_venta->precio);
-            $nueva_total_venta = $venta->total - ($producto_venta->precio);
-            
-            if($venta->tipo_pago == 1) $nueva_total_paga_cliente = $venta->total_pagado_cliente - ($producto_venta->precio);
-            else $nueva_total_paga_cliente = $venta->total_pagado_cliente;
-            
-            $venta->update([
-                'subtotal' => $nueva_subtotal_venta,
-                'total' => $nueva_total_venta,
-                'total_pagado_cliente' => $nueva_total_paga_cliente
-            ]);
-
-            //$cantidad_nueva_producto_venta = $producto_venta->cantidad - 1;
-            $producto_venta->update([
-                 'cantidad' => 0
-             ]);
-          //   $movimiento->observacion = $this->observaciones .' '. 'Se ha realizado reintegro del dinero al cliente por el monto de '.$producto_venta->precio;
+                $producto_barra->movimientos()->create([
+                    'fecha' => $fecha_actual,
+                    'cantidad_entrada' => $this->cantidad,
+                    'cantidad_salida' => 0,
+                    'stock_antiguo' => $stock_antiguo,
+                    'stock_nuevo' => $stock_antiguo,
+                    'precio_entrada' => 0,
+                    'precio_salida' => 0,
+                    'detalle' => $this->observaciones. 'Devolución de equipo',
+                    'user_id' => $user_auth 
+                ]);
+        
+                
+                if($this->accion == '1' || $this->accion == '3'){ //Reintegro del dinero o entrega de otro producto distinto
+                    $venta= Venta::where('id',$this->nro_factura)->first(); 
+                    $nueva_subtotal_venta = $venta->subtotal - ($producto_venta->precio * $this->cantidad);
+                    
+                    $nueva_total_venta = $venta->total - ($producto_venta->precio  * $this->cantidad);
+                    
+                    if($venta->tipo_pago == 1) $nueva_total_paga_cliente = $venta->total_pagado_cliente - ($producto_venta->precio * $this->cantidad);
+                    else $nueva_total_paga_cliente = $venta->total_pagado_cliente;
+                    
+                    $venta->update([
+                        'subtotal' => $nueva_subtotal_venta,
+                        'total' => $nueva_total_venta,
+                        'total_pagado_cliente' => $nueva_total_paga_cliente
+                    ]);
+        
+                   // $cantidad_nueva_producto_venta = $producto_venta->cantidad - $this->cantidad;
+                    $producto_venta->update([
+                         'cantidad' => $producto_venta->cantidad - $this->cantidad
+                     ]);
+                  //   $movimiento->observacion = $this->observaciones .' '. 'Se ha realizado reintegro del dinero al cliente por el monto de '.$producto_venta->precio;
+                }
+         
+                $this->reset(['factura','nro_factura','producto_id','cantidad','observaciones','isopen','accion']);
+                $this->emitTo('productos.productos-devolucion','render');
+                $this->emit('alert','Datos registrados correctamente');
+               
+            }
         }
- 
-        $this->reset(['factura','nro_factura','producto_id','cantidad','observaciones','isopen','accion']);
-        $this->emitTo('productos.productos-devolucion','render');
-        $this->emit('alert','Datos registrados correctamente');
     }
 }

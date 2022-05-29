@@ -98,10 +98,19 @@ class ProductosExport extends Component
             }
             else{//SI SON TODOS LOS ESTADOS Y UNA SUCURSAL EN PARTICULAR
                 if($this->vista == 'barra'){
-                    $productos_sucursal = Pivot::where('sucursal_id',$this->sucursal_id)->get();
+                  //  $productos_sucursal = Pivot::where('sucursal_id',$this->sucursal_id)->get();
+
+                  $productos_sucursal = Producto::whereHas('sucursals',function(Builder $query) {
+                    $query->where('sucursal_id',$this->sucursal_id);
+                })->get();
+                
                     $array = $productos_sucursal;
                     $relacion ='eloquent';
                     $sucursal = $this->sucursal_id;
+
+                   
+
+                   //dd('hola');
                 }
                 else{
                     $array = ProductoSerialSucursal::where('sucursal_id',$this->sucursal_id)
@@ -147,10 +156,13 @@ class ProductosExport extends Component
                                                 ->whereHas('sucursals',function(Builder $query) {
                                                     $query->where('sucursal_id',$this->sucursal_id);
                                                 })->get();
+                    //dd($productos_sucursal);
 
                     $array = $productos_sucursal;
                     $relacion ='eloquent';
                     $sucursal = $this->sucursal_id;
+
+                  
                 }
                 else{
                     if($this->estado == 2) $estado = 'activo';

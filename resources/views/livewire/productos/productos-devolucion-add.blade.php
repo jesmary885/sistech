@@ -22,10 +22,14 @@
                                     <select wire:model="producto_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                         <option value="" selected>Seleccione el producto</option>
                                         @foreach ($productos as $producto)
-                                            <option value="{{$producto->productoSerialSucursal->id}}">{{$producto->productoSerialSucursal->producto->nombre}} - S/N: {{$producto->productoSerialSucursal->serial}}</option>
+                                            <option value="{{$producto->producto->id}}">{{$producto->producto->nombre}} {{$producto->producto->modelo->nombre}}</option>
                                         @endforeach
                                     </select>
                                     <x-input-error for="producto_id" />
+                                </div>
+                                <div class="w-full ml-2">
+                                    <input wire:model.defer="cantidad" type="number" min="0" class="px-2 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Cantidad">
+                                    <x-input-error for="cantidad" />
                                 </div>
                                 <div class="w-full ml-2">
                                     <select id="accion" wire:model="accion" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="accion">

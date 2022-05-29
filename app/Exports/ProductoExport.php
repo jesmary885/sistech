@@ -18,6 +18,10 @@ class ProductoExport implements FromView
          $this->sucursal = $sucursal;
          $this->vista = $vista;
          $this->fecha_actual = date('d-m-Y');
+
+         
+
+        // dd($this->sucursal);
      }
 
     public function view(): View

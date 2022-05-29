@@ -90,11 +90,11 @@ $medidaTicket = 180;
 
 <body>
     <div class="ticket centrado">
-        <h1>Tech Perú</h1>
-        <p>RUC: 20603739176 <br>
-            av. argentina n 428   galeria mesa redonda stand g112 <br>
-            Telefono: 015017327 <br>
-            Email:  techperu@gmail.com <br><br>
+        <h1>{{$empresa->nombre}}</h1>
+        <p>RU: {{$empresa->nro_documento}} <br>
+        {{$empresa->direccion}} <br>
+        Telefono: {{$empresa->telefono}} <br>
+        Email:  {{$empresa->email}}<br><br>
             <hr>
             Fecha: {{$fecha_actual}} <br>
             Cajero: {{$usuario}}

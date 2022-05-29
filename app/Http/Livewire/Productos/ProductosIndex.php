@@ -28,39 +28,7 @@ class ProductosIndex extends Component
     public function render()
     {
 
-
         $sucursales = Sucursal::all();
-
-        if($this->buscador == 3){
-            $productos = Producto::where('cod_barra', 'LIKE', '%' . $this->search . '%')
-            ->where('estado','1')
-            ->paginate(5);
-
-            //dd($productos);
-            
-            $this->item_buscar = "el código de barra o nombre del producto a buscar";
-        }
-
-        if($this->buscador == 1){
-
-            $productos = Producto::whereHas('categoria',function(Builder $query){
-                $query->where('nombre','LIKE', '%' . $this->search . '%')
-                ->where('estado',1);
-            })->paginate(5);
-
-            $this->item_buscar = "la categoria del producto a buscar";
-        }
-
-        
-        if($this->buscador == 2){
-
-            $productos = Producto::whereHas('marca',function(Builder $query){
-                $query->where('nombre','LIKE', '%' . $this->search . '%')
-                ->where('estado',1);
-            })->paginate(5);
-
-            $this->item_buscar = "la marca del producto a buscar";
-        }
 
         if($this->buscador == 0){
 
@@ -70,8 +38,33 @@ class ProductosIndex extends Component
 
             $this->item_buscar = "el modelo del producto a buscar";
         }
+        elseif($this->buscador == 1){
 
-        
+            $productos = Producto::whereHas('categoria',function(Builder $query){
+                $query->where('nombre','LIKE', '%' . $this->search . '%')
+                ->where('estado',1);
+            })->paginate(5);
+
+            $this->item_buscar = "la categoria del producto a buscar";
+        }
+        elseif($this->buscador == 2){
+
+            $productos = Producto::whereHas('marca',function(Builder $query){
+                $query->where('nombre','LIKE', '%' . $this->search . '%')
+                ->where('estado',1);
+            })->paginate(5);
+
+            $this->item_buscar = "la marca del producto a buscar";
+        }
+
+        elseif($this->buscador == 3){
+            $productos = Producto::where('cod_barra', 'LIKE', '%' . $this->search . '%')
+            ->where('estado','1')
+            ->paginate(5);
+            
+            $this->item_buscar = "el código de barra o nombre del producto a buscar";
+        }
+
         return view('livewire.productos.productos-index',compact('productos','sucursales'));
 
     }
@@ -79,11 +72,6 @@ class ProductosIndex extends Component
     public function delete($productoId){
         $this->producto = $productoId;
         $busqueda = Producto_venta::where('producto_id',$productoId)->first();
-
-        /*$busqueda = Producto_venta::whereHas('producto',function(Builder $query){
-            $query->where('producto_id',$this->producto);
-         })->first();*/
-
         if($busqueda) $this->emit('errorSize', 'Este producto esta asociado a una venta, no puede eliminarlo');
         else $this->emit('confirm', 'Esta seguro de eliminar este producto?','productos.productos-index','confirmacion','El producto se ha eliminado.');
     }
@@ -131,9 +119,6 @@ class ProductosIndex extends Component
                 'cantidad' => 0,
             ]);
         }
-        
-
-        
 
         $this->resetPage();
     }

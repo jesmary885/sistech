@@ -142,10 +142,10 @@
                 <tbody>
                     <tr>
                         <th>
-                            <p>RUC: 20603739176 <br>
-                                av. argentina n 428   galeria mesa redonda stand g112 <br>
-                                Telefono: 015017327 <br>
-                                Email:  techperu@gmail.com <br><br>
+                            <p>RU: {{$empresa->nro_documento}} <br>
+                                {{$empresa->direccion}} <br>
+                                Telefono: {{$empresa->telefono}} <br>
+                                Email:  {{$empresa->email}}<br><br>
                                 Fecha de emision: {{$fecha_actual}} <br>
                                 Cajero: {{$usuario}}
                             </p>
@@ -198,10 +198,10 @@
                 <tbody>
                     @foreach ($productos as $producto)
                         <tr>
-                            <td>1</td>
-                            <td>{{$producto->productoSerialSucursal->producto->nombre}} - S/N: {{$producto->productoSerialSucursal->serial}}</td>
+                            <td>{{$producto->cantidad}}</td>
+                            <td>{{$producto->producto->nombre}} - {{$producto->producto->modelo->nombre}}</td>
                             <td>S/ {{$producto->precio}}</td>
-                            <td>S/ {{$producto->precio}}</td>
+                            <td>S/ {{$producto->precio * $producto->cantidad}} </td>
                         </tr>
                     @endforeach
                 </tbody>

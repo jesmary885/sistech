@@ -92,10 +92,11 @@ $medidaTicket = 180;
 <body>
     <div class="ticket centrado">
         <h1>Tech Perú</h1>
-        <p>RUC: 20603739176 <br>
-            av. argentina n 428   galeria mesa redonda stand g112 <br>
-            Telefono: 015017327 <br>
-            Email:  techperu@gmail.com <br><br>
+        <h1>{{$empresa->nombre}}</h1>
+        <p>RU: {{$empresa->nro_documento}} <br>
+        {{$empresa->direccion}} <br>
+        Telefono: {{$empresa->telefono}} <br>
+        Email:  {{$empresa->email}}<br><br>
             <hr>
             Fecha: {{$fecha_actual}} <br>
             Cajero: {{$usuario}}
@@ -114,9 +115,9 @@ $medidaTicket = 180;
             <tbody>
                 @foreach ($productos as $producto)
                         <tr>
-                            <td class="cant">  1</td>
-                            <td>{{$producto->productoSerialSucursal->producto->nombre}} - {{$producto->productoSerialSucursal->serial}}</td>
-                            <td>S/ {{$producto->precio}}</td>
+                            <td class="cant">{{$producto->cantidad}}</td>
+                            <td>{{$producto->producto->nombre}} - {{$producto->producto->modelo->nombre}}</td>
+                            <td>S/ {{$producto->precio * $producto->cantidad}}</td>
                         </tr>
                     @endforeach
             </tbody>

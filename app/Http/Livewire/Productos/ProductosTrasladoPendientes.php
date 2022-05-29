@@ -7,6 +7,7 @@ use App\Models\Traslado;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Producto_sucursal as Pivot;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductosTrasladoPendientes extends Component
 {
@@ -14,7 +15,7 @@ class ProductosTrasladoPendientes extends Component
     protected $paginationTheme = "bootstrap";
 
    
-    public $sucursal;
+    public $sucursal,$buscador=0;
 
     protected $listeners = ['render' => 'render'];
 
@@ -28,10 +29,51 @@ class ProductosTrasladoPendientes extends Component
 
     public function render()
     {
-        $productos_pendientes=ProductosTraslado::where('sucursal_origen',$this->sucursal)
-                                                ->paginate(10);
+       
+        if($this->buscador == '0'){
+            $productos_pendientes=ProductosTraslado::where('sucursal_origen',$this->sucursal)
+            ->whereHas('producto',function(Builder $query){
+                $query->whereHas('modelo',function(Builder $query){
+                    $query->where('nombre', 'LIKE', '%' . $this->search . '%');
+                 });
+             })->paginate(10);
 
-       // dd($productos_pendientes);
+            $this->item_buscar = "el modelo del producto a buscar";
+        }
+
+        elseif($this->buscador == '1'){
+            $productos_pendientes=ProductosTraslado::where('sucursal_origen',$this->sucursal)
+            ->whereHas('producto',function(Builder $query){
+                $query->whereHas('marca',function(Builder $query){
+                    $query->where('nombre', 'LIKE', '%' . $this->search . '%');
+                 });
+             })->paginate(10);
+
+            $this->item_buscar = "la marca del producto a buscar";
+        }
+
+
+        elseif($this->buscador == '2'){
+            $productos_pendientes=ProductosTraslado::where('sucursal_origen',$this->sucursal)
+            ->whereHas('producto',function(Builder $query){
+                $query->whereHas('categoria',function(Builder $query){
+                    $query->where('nombre', 'LIKE', '%' . $this->search . '%');
+                 });
+             })->paginate(10);
+
+            $this->item_buscar = "la categoria del producto a buscar";
+        }
+
+        elseif($this->buscador == '3'){
+            $productos_pendientes=ProductosTraslado::where('sucursal_origen',$this->sucursal)
+            ->whereHas('producto',function(Builder $query){
+                $query->where('cod_barra', 'LIKE', '%' . $this->search . '%');
+             })->paginate(10);
+
+            $this->item_buscar = "el código de barra del producto a buscar";
+        }
+
+      
 
         return view('livewire.productos.productos-traslado-pendientes',compact('productos_pendientes'));
     }
