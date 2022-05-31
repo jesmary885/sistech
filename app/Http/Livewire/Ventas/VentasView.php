@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Ventas;
 
+use App\Models\Empresa;
 use App\Models\Producto_venta;
 use Livewire\Component;
 use PDF;
@@ -55,6 +56,7 @@ class VentasView extends Component
     public function export_pdf($comprobante){
 
         $productos = Producto_venta::where('venta_id',$this->venta->id)->get();
+        $this->empresa = Empresa::first();
         
         if ($this->tipo_pago == "1"){
             $data = [
@@ -65,6 +67,7 @@ class VentasView extends Component
                 'fecha_actual' => $this->fecha_creacion,
                 'venta_nro' => $this->factura_nro,
                 'collection' => $productos,
+                'empresa' => $this->empresa,
                 'estado_entrega' => $this->estado_entrega,
                 'descuento' => $this->descuento,
                 'subtotal' => $this->subtotal,
@@ -85,6 +88,7 @@ class VentasView extends Component
                 'fecha_actual' => $this->fecha_creacion,
                 'venta_nro' => $this->factura_nro,
                 'collection' => $productos,
+                'empresa' => $this->empresa,
                 'estado_entrega' => $this->estado_entrega,
                 'descuento' => $this->descuento,
                 'subtotal' => $this->subtotal,

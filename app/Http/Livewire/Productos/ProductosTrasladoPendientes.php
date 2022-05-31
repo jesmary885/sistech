@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire\Productos;
 
+use App\Models\Empresa;
+use App\Models\Producto;
 use App\Models\ProductosTraslado;
 use App\Models\Traslado;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Producto_sucursal as Pivot;
+use App\Models\Sucursal;
 use Illuminate\Database\Eloquent\Builder;
+use PDF;
 
 class ProductosTrasladoPendientes extends Component
 {
@@ -86,11 +90,14 @@ class ProductosTrasladoPendientes extends Component
 
         $producto_less = ProductosTraslado::where('id',$producto)
                                             ->first();
-        //dd($producto_less);
-  
-        
-        
+
+        $product = Producto::where('id',$producto_less->producto_id)->first();
+       
         if($producto_less->cantidad == '1'){
+
+            $product->update([
+                'cantidad' => $product->cantidad + $producto_less->cantidad,
+            ]);
 
             $pivot_increment = Pivot::where('sucursal_id', $producto_less->sucursal_origen)->where('producto_id', $producto_less->producto_id)->first();
             $pivot_increment->cantidad = $pivot_increment->cantidad + $producto_less->cantidad;
@@ -115,6 +122,11 @@ class ProductosTrasladoPendientes extends Component
             $producto_less->update([
                 'cantidad' => $producto_less->cantidad - 1
             ]);
+
+            $product->update([
+                'cantidad' => $product->cantidad + 1,
+            ]);
+
             $traslado_pendiente_less = Traslado::where('sucursal_origen',$producto_less->sucursal_origen)
                                             ->where('sucursal_id',$producto_less->sucursal_id)
                                             ->where('producto_id',$producto_less->producto_id)
@@ -141,10 +153,14 @@ class ProductosTrasladoPendientes extends Component
         $user_auth_nombre =  auth()->user()->name;
         $user_auth_apellido =  auth()->user()->apellido;
 
-
-        
         $producto_delete = ProductosTraslado::where('id',$producto)
                                             ->first();
+
+        $product = Producto::where('id',$producto_delete->producto_id)->first();
+
+        $product->update([
+                'cantidad' => $product->cantidad + $producto_delete->cantidad,
+                ]);
 
             $pivot_increment = Pivot::where('sucursal_id', $producto_delete->sucursal_origen)->where('producto_id', $producto_delete->producto_id)->first();
             $pivot_increment->cantidad = $pivot_increment->cantidad + $producto_delete->cantidad;
@@ -166,8 +182,42 @@ class ProductosTrasladoPendientes extends Component
 
     $this->emitTo('productos.productos-detalle-traslado','render');
     $this->emitTo('productos.productos-traslado-pendientes','render');
-     
-                                     
+
+    }
+
+    public function Export_pdf(){
+
+        $fecha_actual_mostrar = date('d-m-Y');
+        $user_auth =  auth()->user()->id;
+        $user_auth_nombre =  auth()->user()->name;
+        $user_auth_apellido =  auth()->user()->apellido;
+        $empresa = Empresa::first();
+        $cant=0;
+
+        $sucursal_inicial = Sucursal::where('id', $this->sucursal)->first()->nombre;
+
+
+        $productos_pendientes=ProductosTraslado::where('sucursal_origen',$this->sucursal)
+                                                ->get();
+        foreach($productos_pendientes as $productos){
+            $cant = $cant + $productos->cantidad;
+        }
+
+        $data = [       
+            'usuario' => $user_auth_nombre." ".$user_auth_apellido,
+            'fecha_actual' => $fecha_actual_mostrar,
+            'total_registros' => $cant,
+            'sucursal_inicial' => $sucursal_inicial,
+            'total_registros' => $cant,
+            'productos' => $productos_pendientes,
+            'empresa' => $empresa,
+        ];
+
+        $pdf = PDF::loadView('productos.planilla_traslado',$data)->output();
+        return response()->streamDownload(
+            fn () => print($pdf),
+           "Traslado.pdf"
+            );
 
     }
 

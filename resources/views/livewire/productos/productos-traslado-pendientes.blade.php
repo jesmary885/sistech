@@ -78,12 +78,14 @@
                 </tbody>
             </table>
     </div>
-    <div class="card-footer">
+    <div class="card-footer flex">
 
             {{ $productos_pendientes->links() }}
 
-      
-
+            <x-button class="ml-2"
+            wire:click="Export_pdf" title="Descargar planilla de traslado" >
+            <i class="fas fa-download mr-2"></i> Descargar planilla
+            </x-button>
     </div>
 
     

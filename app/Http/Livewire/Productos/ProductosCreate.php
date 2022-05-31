@@ -144,32 +144,7 @@ class ProductosCreate extends Component
             $compra->sucursal_id = $this->sucursal_id;
             $compra->producto_id = $producto->id;
             $compra->save();
-            
-            /*  $producto->compras()->create([
-                'fecha' => $this->fecha_actual,
-                'total' => $total_compra,
-                'cantidad' => $this->cantidad,
-                'precio_compra' => $this->precio_entrada,
-                'proveedor_id' => $this->proveedor_id,
-                'user_id' => $usuario_auth,
-                'sucursal_id' => $this->sucursal_id
-            ]);*/
-
-            //agregando productos si contienen serial en tabla producto_cod_barra_serials
-    
-               /* for ($i=0; $i < $this->cantidad; $i++) {
-                    $producto->productoSerialSucursals()->create([
-                        'serial' => 'S/S',
-                        'sucursal_id' => $this->sucursal_id,
-                        'cod_barra' => $producto->cod_barra,
-                        'compra_id' => $compra->id,
-                        'modelo_id' => $this->modelo_id,
-                        'categoria_id' => $this->categoria_id,
-                        'marca_id' => $this->marca_id,
-                        'estado' => 'activo',
-                        'fecha_compra' => $compra->fecha
-                    ]);
-                }*/
+           
 
 
             //registrando moviemientos en tabla movimientos

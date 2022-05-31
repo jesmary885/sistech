@@ -178,25 +178,27 @@
 
     <section>
         <div>
-            <p class="fechas">Traslado desde {{$sucursal_inicial}} hasta {{$sucursal_destino}}</p>
+            <p class="fechas">Traslados pendientes desde {{$sucursal_inicial}}</p>
         </div>
         <div>
             <table id="facproducto">
                 <thead>
                     <tr id="fa">
                         <th>CANTIDAD</th>
-                        <th>PRODUCTO (MODELO)</th>
+                        <th>PRODUCTO</th>
+                        <th>SUCURSAL DESTINO</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     
-                    @foreach ($cant_cod_barra as $pr)
-                        @for ($i = 0; $i < $cant_total; $i++)
-                            <tr>
-                                <td class="text-center text-xs m-0 p-0">{{ $pr[$produ_s_r[$i]] }}</td>
-                                <td class="text-center text-xs m-0 p-0">{{ $produ_s_r[$i] }}</td>
-                            </tr>
-                        @endfor
+                    @foreach ($productos as $producto)
+                        <tr>
+                            <td>{{$producto->cantidad}}</td>
+                            <td>{{$producto->producto->nombre}} - {{$producto->producto->modelo->nombre}}</td>
+                            <td>{{$producto->sucursal->nombre}}</td>
+                       
+                        </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
@@ -204,6 +206,9 @@
                          <th colspan="1">
                             <p align="center">{{$total_registros}}</p>
                         </th>
+                        <td>
+                            <p align="center"></p>
+                        </td>
                         <td>
                             <p align="center"></p>
                         </td>

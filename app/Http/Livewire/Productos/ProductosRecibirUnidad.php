@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Productos;
 
+use App\Models\Producto;
 use Livewire\Component;
 
 use App\Models\Producto_sucursal as Pivot;
@@ -50,13 +51,14 @@ class ProductosRecibirUnidad extends Component
         $fecha_actual = date('Y-m-d');
         $user_auth_nombre =  auth()->user()->name;
         $user_auth_apellido =  auth()->user()->apellido;
-
-      
-
         $producto_delete = ProductosTraslado::where('id',$this->producto->id)
         ->first();
 
-        //dd($producto_delete);
+        $product = Producto::where('id',$producto_delete->producto_id)->first();
+
+        $product->update([
+                'cantidad' => $product->cantidad + $this->qty,
+        ]);
 
         $sucursal = Sucursal::where('id',$producto_delete->sucursal_id)->first();
 

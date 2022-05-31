@@ -44,11 +44,7 @@
 
             <div class="flex justify-between w-full mt-3">
                 <div class="w-full mr-2">
-                    {{-- <select id="serial" wire:model="serial" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="serial">
-                        <option value="1" selected>Con seriales</option>
-                        <option value="2">Sin seriales</option>
-                    </select>
-                    <x-input-error for="serial" /> --}}
+              
 
                     <select wire:model.lazy="categoria_id" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                         <option value="" selected>Seleccione la categoría</option>
@@ -115,10 +111,7 @@
                 <x-input-error for="puntos" />
                 </div>
 
-                <div class="flex w-full h-full ml-2">
-                    <input type="checkbox" class="ml-1 mt-1" wire:model="generar_serial" value="1">
-                    <p class="text-md font-semibold text-gray-700 ml-2">Generar seriales automáticamente</p>
-                </div>
+           
 
             </div>
 

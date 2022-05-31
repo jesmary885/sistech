@@ -1,7 +1,8 @@
-<div x-data="{ tipo_pago: @entangle('tipo_pago'),siguiente_venta: @entangle('siguiente_venta'), imprimir: @entangle('imprimir'),send_email: @entangle('send_email'),tipo_comprobante: @entangle('tipo_comprobante'),carrito: @entangle('carrito')}">
+<div x-data="{ tipo_pago: @entangle('tipo_pago'),metodo_pago: @entangle('metodo_pago'),siguiente_venta: @entangle('siguiente_venta'), imprimir: @entangle('imprimir'),send_email: @entangle('send_email'),tipo_comprobante: @entangle('tipo_comprobante'),carrito: @entangle('carrito')}">
     <section class="text-gray-700">
-       
+
         <h2 class=" modal-title font-bold text-md text-gray-800 text-center bg-gray-300"> Productos incluidos en venta</h2>
+        
         @if (Cart::count())
         <div class="w-full overflow-auto h-48 bg-white">
         <table class="table table-bordered table-responsive-sm">
@@ -21,7 +22,7 @@
                                 <span> {{ $item->qty }}</span>
                             </td>
                             <td class="flex text-center text-sm bg-white">
-                                <h3 class="mr-4 text-md text-gray-600">{{$item->name}}</h3>
+                                <h3 class="mr-4 text-md text-gray-600">{{$item->name}} {{$item->options['modelo']}}</h3>
                                 @if ($puntos_canjeo >  $item->options['puntos'])
                                             <a class="font-bold text-xl" href="#"
                                             wire:loading.attr="disabled"
@@ -119,6 +120,15 @@
             <aside class="md:col-span-1 ">
                 <div class="bg-white rounded-lg shadow w-full">
                     <div class="flex justify-between w-full h-full mt-2">
+                        <div class=" w-full ml-2">
+                      
+                            <select id="tipo_pago" wire:model="tipo_pago" title="Tipo de pago" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_pago">
+                                <option value="" selected>*Tipo de pago</option>
+                                <option value="1">Contado</option>
+                                <option value="2">Crédito</option>
+                            </select>
+                            <x-input-error for="tipo_pago" />
+                        </div>
                         <div class="ml-2 mr-2 w-full">
                             <select id="metodo_pago" wire:model="metodo_pago" title="Método de pago" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_garantia">
                                 <option value="" selected>*Método de pago</option>
@@ -130,15 +140,7 @@
                             </select>
                             <x-input-error for="metodo_pago" />
                         </div>
-                        <div class="mr-2 w-full">
-                      
-                            <select id="tipo_pago" wire:model="tipo_pago" title="Tipo de pago" class="block w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="tipo_pago">
-                                <option value="" selected>*Tipo de pago</option>
-                                <option value="1">Contado</option>
-                                <option value="2">Crédito</option>
-                            </select>
-                            <x-input-error for="tipo_pago" />
-                        </div>
+                        
                     </div>
             
                     <div class="flex justify-between w-full h-full mt-2">
@@ -165,6 +167,20 @@
                                 <x-input-error for="pago_cliente" />
                             </div>
                     </div>
+
+                    <div class="flex justify-between w-full" :class="{'hidden': (metodo_pago != 1)}">
+                        <div class="mt-2 mr-1 ml-2 w-full">
+                            <input wire:model="cash_received" type="number" title="Efectivo recibido" min="0" class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Efectivo recibido">
+                            <x-input-error for="cash_received" />
+                        </div>
+                     
+                        <div class="mr-2 ml-2 py-1 mt-2 w-full">
+                            <span class="text-green-700 font-bold"><i class="far fa-money-bill-alt"></i> Cambio {{ $cambio}}</span>
+                        </div>
+
+                </div>
+
+                   
             
                     <hr>
                     
@@ -239,11 +255,11 @@
                         </p>
                         <p class="flex justify-between items-center">
                             Descuento
-                            @if ($canjeo == false)
+                            {{-- @if ($canjeo == false)
                                 <span class="font-semibold">S/ {{Cart::subtotal() * ($this->descuento / 100)}}</span>
-                            @else
-                                <span class="font-semibold">S/ {{$this->descuento_total}}</span>
-                            @endif
+                            @else --}}
+                                <span class="font-semibold">S/ {{$descuento_total}}</span>
+                            {{-- @endif --}}
                            
         
                             {{-- <span class="font-semibold">S/ {{$descuento_total = Cart::subtotal() * ($this->descuento / 100)}}</span> --}}
@@ -251,11 +267,11 @@
                       
                         <p class="flex justify-between items-center">
                             Subtotal menos descuento
-                            @if ($canjeo == false)
+                            {{-- @if ($canjeo == false)
                             <span class="font-semibold">S/ {{Cart::subtotal() - (Cart::subtotal() * ($this->descuento / 100))}}</span>
-                            @else
-                            <span class="font-semibold">S/ {{Cart::subtotal() - $this->descuento_total}}</span>
-                        @endif
+                            @else --}}
+                            <span class="font-semibold">S/ {{Cart::subtotal() - $descuento_total}}</span>
+                        {{-- @endif --}}
                         </p>
                         {{-- <p class="flex justify-between items-center">
                             IVA {{$iva*100}} %
@@ -276,11 +292,11 @@
                             <p class="flex justify-between items-center">
                                 Pendiente por pagar
                                 <span class="font-semibold">
-                                    @if ($canjeo == false)
+                                    {{-- @if ($canjeo == false)
                                     S/ {{(Cart::subtotal() - (Cart::subtotal() * ($this->descuento / 100))) - ($pago_cliente)}}
-                                    @else
-                                S/ {{(Cart::subtotal() - ($this->descuento_total)) - ($pago_cliente)}}
-                                @endif
+                                    @else --}}
+                                S/ {{$total_venta - $pago_cliente}}
+                                {{-- @endif --}}
                             </span>
                             </p>
                         </div>
@@ -288,11 +304,13 @@
                         <hr class="mt-4 mb-3">
                         <p class="flex justify-between items-center font-semibold">
                             <span class="text-lg">Total a pagar</span>
-                            @if ($canjeo == false)
-                            S/ {{Cart::subtotal() - (Cart::subtotal() * ($this->descuento / 100))}}
-                            @else
-                            S/ {{Cart::subtotal() - ($this->descuento_total)}}
-                            @endif
+                            {{-- @if ($canjeo == false) --}}
+                            {{-- S/ {{Cart::subtotal() - (Cart::subtotal() * ($this->descuento / 100))}} --}}
+                            S/ {{$total_venta}}
+                            {{-- @else --}}
+                            {{-- S/ {{Cart::subtotal() - ($this->descuento_total)}} --}}
+                            {{-- S/ {{Cart::subtotal() - ($this->descuento_total)}}
+                            @endif --}}
                         </p>
                     </div>
                 </div>

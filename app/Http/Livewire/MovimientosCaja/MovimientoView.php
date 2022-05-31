@@ -34,14 +34,14 @@ class MovimientoView extends Component
                 $query->where('name','LIKE','%' . $this->search . '%');
             })
             ->latest('id')
-            ->paginate(5);
+            ->paginate(10);
 
         }
         else{
             $movimientos = MovimientoCaja::where('sucursal_id', $this->sucursal)
             ->where('fecha', 'LIKE', '%' . $this->search . '%')
             ->latest('id')
-            ->paginate(5);
+            ->paginate(10);
            
         }
        

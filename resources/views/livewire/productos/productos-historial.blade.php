@@ -52,9 +52,9 @@
                         <tr>
                         <td class="text-center">{{$value->producto->nombre}} {{$value->producto->cod_barra}} {{$value->producto->categoria->nombre}} {{$value->producto->marca->nombre}} {{$value->producto->modelo->nombre}} </td>
                             <td class="text-center">{{$value->cantidad_entrada}}</td>
-                            <td class="text-center">{{$value->precio_entrada}}</td>
+                            <td class="text-center">{{$value->precio_entrada * $value->cantidad_entrada}}</td>
                             <td class="text-center">{{$value->cantidad_salida}}</td>
-                            <td class="text-center">{{$value->precio_salida}}</td>
+                            <td class="text-center">{{$value->precio_salida * $value->cantidad_salida}}</td>
                             <td class="text-center">{{$value->stock_antiguo}}</td>
                             <td class="text-center">{{$value->stock_nuevo}}</td>
                             <td class="text-center">{{$value->detalle}}</td>

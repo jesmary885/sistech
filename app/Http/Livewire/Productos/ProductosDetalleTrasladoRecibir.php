@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Productos;
 
 use App\Models\Movimiento_product_serial;
+use App\Models\Producto;
 use App\Models\ProductoSerialSucursal;
 use App\Models\Sucursal;
 use App\Models\Traslado;
@@ -88,6 +89,12 @@ class ProductosDetalleTrasladoRecibir extends Component
         
         $producto_delete = ProductosTraslado::where('id',$producto)
                                             ->first();
+
+        $product = Producto::where('id',$producto_delete->producto_id)->first();
+
+        $product->update([
+                'cantidad' => $product->cantidad + $producto_delete->cantidad,
+        ]);
 
         $sucursal = Sucursal::where('id',$producto_delete->sucursal_id)->first();
 

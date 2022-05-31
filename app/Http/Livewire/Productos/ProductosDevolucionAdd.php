@@ -22,7 +22,8 @@ class ProductosDevolucionAdd extends Component
     protected $rules = [
         'producto_id' => 'required',
         'observaciones' => 'required',
-        'accion' => 'required'
+        'accion' => 'required',
+        'cantidad' => 'required'
     ];
 
     protected $rule_factura = [

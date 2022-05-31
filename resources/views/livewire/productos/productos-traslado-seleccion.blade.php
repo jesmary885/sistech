@@ -46,8 +46,9 @@
                                                     <option value="{{ $sucursale->id }}">{{ $sucursale->nombre }}</option>
                                                 @endforeach
                                             </select>
-                                            <x-input-error for="sucursal_id" />
+                                            
                                         </div>
+                                        <x-input-error class="w-full" for="sucursal_id" />
                                     </div>
                                 </div>
                         </div>

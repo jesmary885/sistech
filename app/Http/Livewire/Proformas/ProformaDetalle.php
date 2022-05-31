@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Proformas;
 
+use App\Models\Empresa;
 use App\Models\Producto_proforma;
 use Livewire\Component;
 use PDF;
@@ -54,10 +55,8 @@ class ProformaDetalle extends Component
     public function export_pdf(){
 
         $productos = Producto_proforma::where('proforma_id',$this->proforma->id)->get();
+        $this->empresa = Empresa::first();
         
-
-
-   
             $data = [
                 'cliente_nombre' => $this->nombre_cliente." ".$this->apellido_cliente,
                 'cliente_documento' =>$this->doc_cliente,
@@ -70,6 +69,7 @@ class ProformaDetalle extends Component
                 'descuento' => $this->descuento,
                 'subtotal' => $this->subtotal,
                 'impuesto' => $this->impuesto,
+                'empresa' => $this->empresa,
                 'total' => $this->total,
                 'productos' => $productos,
                 'iva' => $this->iva,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Productos;
 
+use App\Models\Producto;
 use App\Models\ProductosTraslado;
 use App\Models\Sucursal;
 use App\Models\Traslado;
@@ -22,6 +23,11 @@ class ProductosTrasladoSeleccion extends Component
     protected $listeners = ['render' => 'render', 'actualizar' => 'actualizar'];
 
     public $search;
+
+    protected $rules = [
+
+        'sucursal_id' => 'required',
+    ];
 
     public function mount()
     {
@@ -69,11 +75,13 @@ class ProductosTrasladoSeleccion extends Component
     
     public function addItem(){
 
+        $rules = $this->rules;
+        $this->validate($rules);
+
         $fecha_actual = date('Y-m-d');
 
         $user_auth_nombre =  auth()->user()->name;
         $user_auth_apellido =  auth()->user()->apellido;
-
         $sucursal_inicial = Sucursal::where('id', $this->sucursal)->first()->nombre;
         $sucursal_final = Sucursal::where('id', $this->sucursal_id)->first()->nombre;
 
@@ -81,6 +89,11 @@ class ProductosTrasladoSeleccion extends Component
                                             ->where('sucursal_origen',$this->sucursal)
                                             ->where('sucursal_id',$this->sucursal_id)
                                             ->first();
+
+        $product = Producto::where('id',$this->producto->id)->first();
+        $product->update([
+            'cantidad' => $product->cantidad - $this->qty,
+        ]);
         
         //si ya hay un traslado pendiente igual 
         if($producto_add){
@@ -129,10 +142,6 @@ class ProductosTrasladoSeleccion extends Component
 
         }
         
-
-
-
-   // $this->quantity = qty_available($this->producto->id,$this->sucursal);
     $this->reset('sucursal_id','qty');
     $this->isopen = false;
     $this->emitTo('productos.productos-detalle-traslado','render');

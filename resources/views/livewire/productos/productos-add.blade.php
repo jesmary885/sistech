@@ -52,10 +52,7 @@
                                 <x-input-error for="proveedor_id" />
                             </div>
                         </div>
-                        <div class="flex w-full h-full ml-2 mt-4">
-                            <input type="checkbox" class="ml-1 mt-1" wire:model="generar_serial" value="1">
-                            <p class="text-sm font-semibold text-gray-500 ml-2">Generar seriales</p>
-                        </div>
+                      
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="close" >Cerrar</button>

@@ -79,7 +79,7 @@
                             <div class="w-full mr-2">
                                 <input wire:model="telefono" type="number"
                                     class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    placeholder="*Teléfono" title="Teléfono">
+                                    placeholder="Teléfono" title="Teléfono">
                                 <x-input-error for="telefono" />
                             </div>
 
@@ -97,7 +97,7 @@
                             <div class="w-full mr-2">
                                 <input wire:model="email" type="email"
                                     class="w-full px-2 appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    placeholder="*E-mail" title="E-mail">
+                                    placeholder="E-mail" title="E-mail">
                                 <x-input-error for="email" />
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                             <div class="w-full mr-2">
                                         <select title="Estado/provincia/region" wire:model="estado_id"
                                 class="w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                <option value="" selected>*Estado/provincia/region</option>
+                                <option value="" selected>Estado/provincia/region</option>
                                 @foreach ($estados as $estado)
                                     <option value="{{ $estado->id }}">{{ $estado->nombre }}</option>
                                 @endforeach
@@ -116,7 +116,7 @@
                             <div class="w-full mr-2">
                             <select title="Ciudad" wire:model="ciudad_id"
                                     class="w-full bg-gray-100 border border-gray-200 text-gray-400 py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                    <option value="" selected>*Seleccione la ciudad</option>
+                                    <option value="" selected>Seleccione la ciudad</option>
                                     @foreach ($ciudades as $ciudad)
                                         <option value="{{ $ciudad->id }}">{{ $ciudad->nombre }}</option>
                                     @endforeach

@@ -1,5 +1,5 @@
 <div>
-    <h5 class="modal-title ml-4 mt-2 text-md text-gray-800"> <i class="fas fa-dolly"></i>  Equipos pendientes por recibir</h5>
+    <h5 class="modal-title ml-4 mt-2 text-md text-gray-800"> <i class="fas fa-dolly"></i>  Equipos pendientes por recibir </h5>
         <hr class="m-0 ">
 
             <div class="card-body">

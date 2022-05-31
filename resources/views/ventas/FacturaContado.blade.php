@@ -155,7 +155,7 @@
                 <tbody>
                     <tr>
                         <th>
-                            <p>RU: {{$empresa->nro_documento}} <br>
+                            <p>RUC: {{$empresa->nro_documento}} <br>
                                 {{$empresa->direccion}} <br>
                                 Telefono: {{$empresa->telefono}} <br>
                                 Email:  {{$empresa->email}}<br><br>

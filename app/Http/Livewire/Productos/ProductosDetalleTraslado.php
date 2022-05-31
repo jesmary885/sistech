@@ -33,12 +33,6 @@ class ProductosDetalleTraslado extends Component
         $this->resetPage();
     }
 
-
-    protected $rules = [
-
-        'sucursal_id' => 'required',
-    ];
-
     public function mount()
     {
 
